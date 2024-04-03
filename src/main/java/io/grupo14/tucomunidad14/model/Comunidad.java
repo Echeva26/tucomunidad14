@@ -32,8 +32,6 @@ public class Comunidad {
     }
 
     //Getters y setters
-    
-
     public Long getId() {
         return id;
     }
