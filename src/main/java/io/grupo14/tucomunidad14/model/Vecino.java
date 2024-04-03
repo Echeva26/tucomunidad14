@@ -15,7 +15,7 @@ public class Vecino {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nombre;
-    private String Apellidos;
+    private String apellidos;
     private @Email String email;
     private Integer portal;
     private Integer piso;
@@ -33,10 +33,10 @@ public class Vecino {
         this.nombre = nombre;
     }
     public String getApellidos() {
-        return Apellidos;
+        return apellidos;
     }
     public void setApellidos(String apellidos) {
-        Apellidos = apellidos;
+        this.apellidos = apellidos;
     }
     public String getEmail() {
         return email;
