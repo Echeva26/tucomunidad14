@@ -41,7 +41,7 @@ public class Vecino {
     public String getEmail() {
         return email;
     }
-    public void setTutor(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
     public Integer getPortal() {
