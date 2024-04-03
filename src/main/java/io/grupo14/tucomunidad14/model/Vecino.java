@@ -5,11 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 
 @Entity
-@Table(name= "users")
+@Table(name= "vecinos")
 public class Vecino {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,7 +21,40 @@ public class Vecino {
     private Integer portal;
     private Integer piso;
     private Integer telefono;
+    private Boolean gestor;
+    @ManyToOne Comunidad comunidad;
 
+
+    
+
+   
+
+    public Vecino(Long id, String nombre, String apellidos, @Email String email, Integer portal, Integer piso,
+            Integer telefono, Comunidad comunidad) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.portal = portal;
+        this.piso = piso;
+        this.telefono = telefono;
+    }
+
+    public Boolean getGestor() {
+        return gestor;
+    }
+
+    public void setGestor(Boolean gestor) {
+        this.gestor = gestor;
+    }
+
+    public Comunidad getComunidad() {
+        return comunidad;
+    }
+
+    public void setComunidad(Comunidad comunidad) {
+        this.comunidad = comunidad;
+    }
 
     public Long getId() {
         return id;
