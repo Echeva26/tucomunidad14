@@ -27,7 +27,7 @@ public class Vecino {
     private Boolean gestor;
     @ManyToOne
     private Comunidad comunidad;
-    @OneToMany(mappedBy = "comunidad")
+    @OneToMany(mappedBy = "vecino")
     private ArrayList <Areacomun> area;
 
 
