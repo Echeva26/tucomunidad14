@@ -16,12 +16,12 @@ public class Vecino {
     private Long id;
     private String nombre;
     private String Apellidos;
-    private @Email String tutor;
+    private @Email String email;
     private Integer portal;
     private Integer piso;
     private Integer telefono;
 
-    
+
     public Long getId() {
         return id;
     }
@@ -38,11 +38,11 @@ public class Vecino {
     public void setApellidos(String apellidos) {
         Apellidos = apellidos;
     }
-    public String getTutor() {
-        return tutor;
+    public String getEmail() {
+        return email;
     }
-    public void setTutor(String tutor) {
-        this.tutor = tutor;
+    public void setTutor(String email) {
+        this.email = email;
     }
     public Integer getPortal() {
         return portal;
