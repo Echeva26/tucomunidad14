@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Tucomunidad14Application {
-//Carmen 
+//jorge
 	public static void main(String[] args) {
 		SpringApplication.run(Tucomunidad14Application.class, args);
 	}
