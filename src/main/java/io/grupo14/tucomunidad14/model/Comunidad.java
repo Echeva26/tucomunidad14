@@ -24,6 +24,8 @@ public class Comunidad {
     private Integer codpostal;
     @OneToMany(mappedBy = "comunidad")
     private ArrayList<Vecino> vecinos;
+    @OneToMany(mappedBy = "comunidad")
+    private ArrayList<Areacomun> area;
     
 
 

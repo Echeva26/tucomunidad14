@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 
@@ -22,12 +23,11 @@ public class Vecino {
     private Integer piso;
     private Integer telefono;
     private Boolean gestor;
-    @ManyToOne Comunidad comunidad;
+    @ManyToOne
+    private Comunidad comunidad;
+    @OneToMany 
+    private Areacomun area;
 
-
-    
-
-   
 
     public Vecino(Long id, String nombre, String apellidos, @Email String email, Integer portal, Integer piso,
             Integer telefono, Comunidad comunidad) {
@@ -38,6 +38,14 @@ public class Vecino {
         this.portal = portal;
         this.piso = piso;
         this.telefono = telefono;
+    }
+    
+    public Areacomun getArea() {
+        return area;
+    }
+
+    public void setArea(Areacomun area) {
+        this.area = area;
     }
 
     public Boolean getGestor() {
