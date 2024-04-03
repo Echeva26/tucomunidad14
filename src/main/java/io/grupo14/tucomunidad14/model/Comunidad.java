@@ -2,6 +2,8 @@ package io.grupo14.tucomunidad14.model;
 
 
 
+import java.util.ArrayList;
+
 import org.hibernate.mapping.List;
 
 import jakarta.persistence.Entity;
@@ -20,7 +22,8 @@ public class Comunidad {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Integer codpostal;
-    //@OneToMany(mappedBy = "comunidad")
+    @OneToMany(mappedBy = "comunidad")
+    private ArrayList<Vecino> vecinos;
     
 
 
