@@ -1,6 +1,8 @@
 package io.grupo14.tucomunidad14.model;
 
 
+import java.util.ArrayList;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,26 +27,19 @@ public class Vecino {
     private Boolean gestor;
     @ManyToOne
     private Comunidad comunidad;
-    @OneToMany 
-    private Areacomun area;
+    @OneToMany(mappedBy = "comunidad")
+    private ArrayList <Areacomun> area;
 
 
-    public Vecino(Long id, String nombre, String apellidos, @Email String email, Integer portal, Integer piso,
-            Integer telefono, Comunidad comunidad) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.email = email;
-        this.portal = portal;
-        this.piso = piso;
-        this.telefono = telefono;
+    public Vecino() {
+        
     }
     
-    public Areacomun getArea() {
+    public ArrayList<Areacomun> getArea() {
         return area;
     }
 
-    public void setArea(Areacomun area) {
+    public void setArea(ArrayList <Areacomun> area) {
         this.area = area;
     }
 
@@ -104,8 +99,4 @@ public class Vecino {
     public void setTelefono(Integer telefono) {
         this.telefono = telefono;
     }
-    
-    
-
-
 }

@@ -18,14 +18,14 @@ public class Areacomun {
     @ManyToOne
     private Vecino vecino;
 
+    
 
 
+    public Areacomun() {
 
+    }
     public Long getIdarea() {
         return idarea;
-    }
-    public void setIdarea(Long idarea) {
-        this.idarea = idarea;
     }
     public Date getFecha() {
         return fecha;

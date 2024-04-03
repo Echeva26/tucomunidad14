@@ -1,10 +1,6 @@
 package io.grupo14.tucomunidad14.model;
 
-
-
 import java.util.ArrayList;
-
-import org.hibernate.mapping.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,18 +27,24 @@ public class Comunidad {
 
 
     //Constructor
-    public Comunidad(Long id, Integer codpostal) {
-        this.id = id;
-        this.codpostal = codpostal;
+    public Comunidad() {
+        
     }
 
     //Getters y setters
+    
+
     public Long getId() {
         return id;
     }
-    public void setId(Long id) {
-        this.id = id;
+    public ArrayList<Vecino> getVecinos() {
+        return vecinos;
     }
+
+    public ArrayList<Areacomun> getArea() {
+        return area;
+    }
+
     public Integer getCodpostal() {
         return codpostal;
     }
