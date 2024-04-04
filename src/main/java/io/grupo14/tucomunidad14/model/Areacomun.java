@@ -30,10 +30,8 @@ public class Areacomun {
     @ManyTomany
     @JoinTable(
         name= "Reservas",
-        joinColumns = @JoinColumn(name= "comunidad_id"),
-        inverseJoinColumns = @JoinColumn(name = "vecino_id")
-        
-
+        joinColumns = @JoinColumn(name= "comunidad_id",referencedColumnName = "idarea"),
+        inverseJoinColumns = @JoinColumn(name = "vecino_id",referencedColumnName = "id")
     )
     private List<Vecino> vecinos;
 

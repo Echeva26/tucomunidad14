@@ -30,7 +30,7 @@ public class Vecino {
     @ManyToOne
     @JoinColumn(name = "comunidad_id")
     private Comunidad comunidad;
-    @ManyToMany(mappedBy = "Vecinos")
+    @ManyToMany(mappedBy = "vecinos")
     private ArrayList <Areacomun> areas;
 
 
