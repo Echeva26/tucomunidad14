@@ -32,6 +32,7 @@ public class Areacomun {
         name= "Reservas",
         joinColumns = @JoinColumn(name= "comunidad_id",referencedColumnName = "idarea"),
         inverseJoinColumns = @JoinColumn(name = "vecino_id",referencedColumnName = "id")
+        
     )
     private List<Vecino> vecinos;
 
