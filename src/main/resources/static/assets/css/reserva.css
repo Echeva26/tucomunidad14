@@ -1,817 +1,351 @@
-.reserva .rectangle-9 {
-  opacity: 0.49;
-  position: absolute;
-  left: 568px;
-  top: 483px;
-  width: 325px;
-  height: 246px;
-}
-.reserva .ellipse-6333 {
-  opacity: 0.2;
-  position: absolute;
-  top: 482.6px;
-  right: 680px;
-  width: 100px;
-  height: 105.2px;
-}
-.reserva .tu-comunidad-1 {
-  margin: 2px 23.5px 1px 0;
-  display: inline-block;
-  width: 1170.2px;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 36px;
-  color: #292525;
-}
-.reserva .pricing-faqs-freebies-contact-2 {
-  margin: 14px 11.5px 13px 0;
-  width: 92.2px;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 500;
-  font-size: 18px;
-  color: var(--secondary-1, #7BC0E3);
-}
-.pricing-faqs-freebies-contact-2-sub30 {
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 1.333;
-  color: #000000;
-}
-.reserva .our-works-1 {
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 1.5;
-  color: #FFFFFF;
-}
-.reserva .group-109371 {
-  border-radius: 1000px;
-  background: #7BC0E3;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 11.5px 0px 11.5px 0;
-  width: 188.5px;
-  box-sizing: border-box;
-}
-.reserva .group-110401 {
-  border-radius: 1000px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 292.1px;
-  height: fit-content;
-  box-sizing: border-box;
-}
-.reserva .navbar-1 {
-  background: #FFFFFF;
-  position: relative;
-  margin-bottom: 77px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 30px 0 30px 183.1px;
-  width: 1920px;
-  box-sizing: border-box;
-}
-.reserva .reserva-de-zonas-1 {
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 48px;
-  color: #292525;
-}
-.reserva .group-22 {
-  position: relative;
-  margin: 0 68px 185px 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  box-sizing: border-box;
-}
-.reserva .rectangle-22 {
-  box-shadow: 0px 97px 90px 0px rgba(7, 0, 59, 0.12);
-  border-radius: 12px;
-  position: absolute;
-  left: 50%;
-  top: 0px;
-  translate: -50% 0;
-  width: 359px;
-  height: 295px;
-}
-.reserva .rectangle-34 {
-  position: relative;
-  margin-bottom: 41.1px;
-  width: 359px;
-  height: 7.4px;
-}
-.reserva .ellipse-6332 {
-  opacity: 0.2;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 100px;
-  height: 105.2px;
-}
-.reserva .group-11085 {
-  position: relative;
-  margin: 0 0 57px 122px;
-  align-self: center;
-  width: 50px;
-  height: 50px;
-}
-.reserva .pista-de-padel-1 {
-  margin-bottom: 39px;
-  display: inline-block;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 20px;
-  color: #292525;
-}
-.reserva .reservar-4 {
-  margin-right: 18.3px;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--secondary-1, #7BC0E3);
-}
-.reserva .group-54 {
-  margin: 6.9px 0 2.8px 0;
-  width: 24.7px;
-  height: 8.3px;
-}
-.reserva .group-62 {
-  display: flex;
-  flex-direction: row;
-  align-self: flex-start;
-  width: fit-content;
-  box-sizing: border-box;
-}
-.reserva .group-72 {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  width: fit-content;
-  box-sizing: border-box;
-}
-.reserva .group-8 {
-  position: relative;
-  margin: 0 33px;
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  padding-top: 28.3px;
-  width: fit-content;
-  box-sizing: border-box;
-}
-.reserva .group-9 {
-  position: relative;
-  margin-right: 262.6px;
-  display: flex;
-  flex-direction: column;
-  padding: 0.2px 0 28px 0;
-  width: 359px;
-  box-sizing: border-box;
-}
-.reserva .icon-1 {
-  width: 34.8px;
-  height: 38.2px;
-}
-.reserva .outline-general-home-2 {
-  margin: 84.1px 0 172.7px 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 34.8px;
-  height: 38.2px;
-  box-sizing: border-box;
-}
-.reserva .container-1 {
-  position: relative;
-  margin: 0 161.6px 48px 0;
-  display: flex;
-  flex-direction: row;
-  width: fit-content;
-  box-sizing: border-box;
-}
-.reserva .acceder {
-  margin-right: 14.7px;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--secondary-1, #7BC0E3);
-}
-.reserva .container-5 {
-  margin: 10px 0 7px 0;
-  width: 24.2px;
-  height: 1px;
-}
-.reserva .group-11016 {
-  position: relative;
-  margin-right: 264.8px;
-  display: flex;
-  flex-direction: row;
-  width: fit-content;
-  box-sizing: border-box;
-}
-.reserva .mask-group {
-  opacity: 0.6;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  height: 100%;
-}
-.reserva .tu-comunidad {
-  margin: 2px 23.5px 1px 0;
-  display: inline-block;
-  width: 1170.2px;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 36px;
-  color: #292525;
-}
-.reserva .pricing-faqs-freebies-contact-1 {
-  margin: 14px 11.5px 13px 0;
-  width: 92.2px;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 500;
-  font-size: 18px;
-  color: var(--secondary-1, #7BC0E3);
-}
-.pricing-faqs-freebies-contact-1-sub30 {
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 1.333;
-  color: #000000;
-}
-.reserva .our-works {
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 1.5;
-  color: #FFFFFF;
-}
-.reserva .group-10937 {
-  border-radius: 1000px;
-  background: #7BC0E3;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 11.5px 0px 11.5px 0;
-  width: 188.5px;
-  box-sizing: border-box;
-}
-.reserva .group-11040 {
-  border-radius: 1000px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 292.1px;
-  height: fit-content;
-  box-sizing: border-box;
-}
-.reserva .pricing-faqs-freebies-contact {
-  margin: 14.9px 0 12.1px 0;
-  display: inline-block;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 18px;
-  color: #000000;
-}
-.reserva .navbar {
-  background: #FFFFFF;
-  position: relative;
-  margin-bottom: 77px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 30px 82.6px 30px 183.1px;
-  width: 1920px;
-  box-sizing: border-box;
-}
-.reserva .reserva-de-zonas {
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 48px;
-  color: #292525;
-}
-.reserva .group-11086 {
-  position: relative;
-  margin-right: 68px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  box-sizing: border-box;
-}
-.reserva .group-70 {
-  background: #60E1CB;
-  position: relative;
-  margin: 0px 0 144px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 41px;
-  width: 1920px;
-  box-sizing: border-box;
-}
-.reserva .rectangle-2 {
-  box-shadow: 0px 97px 90px 0px rgba(7, 0, 59, 0.12);
-  border-radius: 12px;
-  position: absolute;
-  left: 50%;
-  top: 0px;
-  translate: -50% 0;
-  width: 359px;
-  height: 295px;
-}
-.reserva .rectangle-3 {
-  position: absolute;
-  left: 50%;
-  top: 0.2px;
-  translate: -50% 0;
-  width: 359px;
-  height: 7.4px;
-}
-.reserva .group-5 {
-  position: absolute;
-  left: 111.2px;
-  top: 255.9px;
-  width: 24.7px;
-  height: 8.3px;
-}
-.reserva .ellipse-633 {
-  opacity: 0.2;
-  position: absolute;
-  left: 50%;
-  top: 48.7px;
-  translate: -50% 0;
-  width: 100px;
-  height: 105.2px;
-}
-.reserva .pista-de-padel {
-  position: relative;
-  margin-bottom: 39px;
-  display: inline-block;
-  align-self: flex-start;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 20px;
-  color: #292525;
-}
-.reserva .reservar {
-  position: relative;
-  align-self: flex-start;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--secondary-1, #7BC0E3);
-}
-.reserva .rectangle-21 {
-  box-shadow: 0px 97px 90px 0px rgba(7, 0, 59, 0.12);
-  border-radius: 12px;
-  position: absolute;
-  left: 50%;
-  top: 0px;
-  translate: -50% 0;
-  width: 359px;
-  height: 295px;
-}
-.reserva .rectangle-32 {
-  position: relative;
-  margin-bottom: 41.1px;
-  width: 359px;
-  height: 7.4px;
-}
-.reserva .container-2 {
-  position: relative;
-  margin-bottom: 30.1px;
-  align-self: center;
-  width: 100px;
-  height: 105.2px;
-}
-.reserva .pista-de-pdel {
-  position: relative;
-  margin: 0 33px 39px 33px;
-  display: inline-block;
-  align-self: flex-start;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 20px;
-  color: #292525;
-}
-.reserva .reservar-2 {
-  margin-right: 18.3px;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--secondary-1, #7BC0E3);
-}
-.reserva .group-52 {
-  margin: 6.9px 0 2.8px 0;
-  width: 24.7px;
-  height: 8.3px;
-}
-.reserva .container {
-  position: relative;
-  margin: 0 33px;
-  display: flex;
-  flex-direction: row;
-  align-self: flex-start;
-  width: fit-content;
-  box-sizing: border-box;
-}
-.reserva .group-11105 {
-  position: absolute;
-  left: 50%;
-  bottom: 0px;
-  translate: -50% 0;
-  display: flex;
-  flex-direction: column;
-  padding: 0.2px 0 28px 0;
-  box-sizing: border-box;
-}
-.reserva .group-11087 {
-  position: relative;
-  margin-right: 32px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 0 28px 33px;
-  width: 359px;
-  box-sizing: border-box;
-}
-.reserva .rectangle-188 {
-  box-shadow: 0px 97px 90px 0px rgba(7, 0, 59, 0.15);
-  border-radius: 12px;
-  position: absolute;
-  left: 50%;
-  top: 0px;
-  translate: -50% 0;
-  width: 359px;
-  height: 295px;
-}
-.reserva .rectangle-31 {
-  position: absolute;
-  left: 50%;
-  top: 0px;
-  translate: -50% 0;
-  width: 359px;
-  height: 7.4px;
-}
-.reserva .ellipse-635 {
-  opacity: 0.2;
-  position: relative;
-  margin-bottom: 30.2px;
-  align-self: flex-end;
-  width: 100px;
-  height: 105.2px;
-}
-.reserva .local {
-  margin-bottom: 37.9px;
-  display: inline-block;
-  align-self: flex-start;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 20px;
-  color: #292525;
-}
-.reserva .reservar-1 {
-  margin-right: 18.3px;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--secondary-1, #7BC0E3);
-}
-.reserva .group-51 {
-  margin: 5.1px 0 6.8px 0;
-  width: 24.7px;
-  height: 6.1px;
-}
-.reserva .group-6 {
-  margin-left: 1px;
-  display: flex;
-  flex-direction: row;
-  width: fit-content;
-  box-sizing: border-box;
-}
-.reserva .group-7 {
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  width: fit-content;
-  box-sizing: border-box;
-}
-.reserva .icon-2 {
-  width: 34.8px;
-  height: 38.2px;
-}
-.reserva .outline-general-home {
-  position: absolute;
-  top: 35.5px;
-  right: 32.6px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 34.8px;
-  height: 38.2px;
-  box-sizing: border-box;
-}
-.reserva .group-11089 {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-.reserva .rectangle-1881 {
-  box-shadow: 0px 97px 90px 0px rgba(7, 0, 59, 0.15);
-  border-radius: 12px;
-  position: absolute;
-  left: 50%;
-  top: 0px;
-  translate: -50% 0;
-  width: 359px;
-  height: 295px;
-}
-.reserva .rectangle-33 {
-  position: relative;
-  margin-bottom: 41.2px;
-  width: 359px;
-  height: 7.4px;
-}
-.reserva .ellipse-6351 {
-  opacity: 0.2;
-  position: relative;
-  margin-bottom: 30.2px;
-  align-self: flex-end;
-  width: 100px;
-  height: 105.2px;
-}
-.reserva .local-1 {
-  margin-bottom: 37.9px;
-  display: inline-block;
-  align-self: flex-start;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 20px;
-  color: #292525;
-}
-.reserva .reservar-3 {
-  margin-right: 18.3px;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--secondary-1, #7BC0E3);
-}
-.reserva .group-53 {
-  margin: 5.1px 0 6.8px 0;
-  width: 24.7px;
-  height: 6.1px;
-}
-.reserva .group-61 {
-  margin-left: 1px;
-  display: flex;
-  flex-direction: row;
-  width: fit-content;
-  box-sizing: border-box;
-}
-.reserva .group-71 {
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  width: fit-content;
-  box-sizing: border-box;
-}
-.reserva .icon-3 {
-  width: 34.8px;
-  height: 38.2px;
-}
-.reserva .outline-general-home-1 {
-  position: absolute;
-  top: 35.5px;
-  right: 32.6px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 34.8px;
-  height: 38.2px;
-  box-sizing: border-box;
-}
-.reserva .group-110891 {
-  position: relative;
-  margin: 0 35px;
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  width: fit-content;
-  box-sizing: border-box;
-}
-.reserva .group-11106 {
-  position: absolute;
-  left: 50%;
-  bottom: 0px;
-  translate: -50% 0;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 29.1px;
-  box-sizing: border-box;
-}
-.reserva .group-11104 {
-  position: relative;
-  padding: 48.6px 35px 29.1px 35px;
-  width: 359px;
-  box-sizing: border-box;
-}
-.reserva .container-3 {
-  margin: 0 68px 181px 0;
-  display: flex;
-  flex-direction: row;
-  width: fit-content;
-  box-sizing: border-box;
-}
-.reserva .group-11109 {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  height: 100%;
-}
-.reserva .icon-5 {
-  width: 23.8px;
-  height: 40.6px;
-}
-.reserva .outline-brands-facebook {
-  margin-top: 2.7px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 23.8px;
-  height: 40.6px;
-  box-sizing: border-box;
-}
-.reserva .icon-4 {
-  width: 39.3px;
-  height: 39.4px;
-}
-.reserva .outline-brands-instagram {
-  margin-bottom: 3.9px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 39.3px;
-  height: 39.4px;
-  box-sizing: border-box;
-}
-.reserva .icon {
-  margin: 1px 0 3.4px 0;
-  width: 44.8px;
-  height: 38.9px;
-}
-.reserva .language-1 {
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 19px;
-  color: var(--black, #292525);
-}
-.reserva .language {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  box-sizing: border-box;
-}
-.reserva .icon-color {
-  width: 14.6px;
-  height: 8.3px;
-}
-.reserva .round-navigation-chevron-right {
-  margin: 10.3px 0 6.5px 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 14.6px;
-  height: 8.3px;
-  box-sizing: border-box;
-}
-.reserva .container-6 {
-  margin: 4px 0 14.3px 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 108px;
-  height: fit-content;
-  box-sizing: border-box;
-}
-.reserva .container-7 {
-  position: relative;
-  margin: 0 0 2.7px 676.1px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 660px;
-  box-sizing: border-box;
-}
-.reserva .description {
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.875;
-  color: var(--black, #292525);
-}
-.reserva .group-11015 {
-  position: relative;
-  margin: 0 1065.1px 75.5px 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  box-sizing: border-box;
-}
-.reserva .line {
-  opacity: 0.6;
-  background: #FFFFFF;
-  position: relative;
-  margin-bottom: 32.1px;
-  width: 1420px;
-  height: 0.9px;
-}
-.reserva .paelory-2020 {
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 16px;
-  color: var(--black, #292525);
-}
-.reserva .group-11014 {
-  position: relative;
-  margin-right: 1244.7px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  box-sizing: border-box;
-}
-.reserva .image-2 {
-  background: url('../assets/images/image2.png') 50% / cover no-repeat;
-  position: absolute;
-  left: 268px;
-  top: 58px;
-  width: 155px;
-  height: 129px;
-}
-.reserva .group-11108 {
-  background: #60E1CB;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 120px 0 37.5px 0;
-  width: 1920px;
-  box-sizing: border-box;
-}
-.reserva .container-4 {
+.reservafront .fondo-de-pantalla {
   background: #E9FBF8;
   position: absolute;
   left: 0px;
   top: 0px;
   right: 0px;
   bottom: 0px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   height: 100%;
+}
+.reservafront .mask-group {
+  opacity: 0.6;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: 100%;
+}
+.reservafront .tu-comunidad {
+  margin: 1.2px 15.5px 0 0;
+  display: inline-block;
+  width: 807.8px;
+  overflow-wrap: break-word;
+  font-family: 'DM Sans';
+  font-weight: 700;
+  font-size: 24px;
+  color: #292525;
+}
+.reservafront .home {
+  margin: 4.7px 0 4.5px 0;
+  overflow-wrap: break-word;
+  font-family: 'DM Sans';
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--secondary-1, #7BC0E3);
+}
+.home-sub30 {
+  font-family: 'DM Sans';
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.333;
+  color: #000000;
+}
+.reservafront .our-works {
+  overflow-wrap: break-word;
+  font-family: 'DM Sans';
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #FFFFFF;
+}
+.reservafront .log-out {
+  border-radius: 1000px;
+  background: #7BC0E3;
+  position: relative;
+  margin-bottom: 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1.6px 0;
+  width: 134.1px;
+  height: fit-content;
   box-sizing: border-box;
 }
-.reserva {
+.reservafront .usuario {
+  margin: 5.7px 0 3.5px 0;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'DM Sans';
+  font-weight: 700;
+  font-size: 18px;
+  color: #000000;
+}
+.reservafront .container-1 {
+  background: #FFFFFF;
+  position: relative;
+  margin-bottom: 35.6px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 18.1px 57.3px 16.1px 135.8px;
+  width: 1366px;
+  box-sizing: border-box;
+}
+.reservafront .reserva-de-zonas {
+  position: relative;
+  margin-right: 46px;
+  overflow-wrap: break-word;
+  font-family: 'DM Sans';
+  font-weight: 700;
+  font-size: 32px;
+  color: #292525;
+}
+.reservafront .cabecera {
+  background: #60E1CB;
+  position: relative;
+  margin-bottom: 86.9px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0px 0 478px 0;
-  width: 1920px;
+  padding-bottom: 31px;
+  width: 1366px;
+  box-sizing: border-box;
+}
+.reservafront .rectangle-2 {
+  box-shadow: 0px 97px 90px 0px rgba(7, 0, 59, 0.12);
+  border-radius: 12px;
+  position: absolute;
+  left: 50%;
+  top: 0px;
+  translate: -50% 0;
+  width: 255.4px;
+  height: 178px;
+}
+.reservafront .rectangle-3 {
+  position: relative;
+  margin-bottom: 24.8px;
+  width: 255.4px;
+  height: 4.4px;
+}
+.reservafront .container {
+  position: relative;
+  margin: 0 0 18.3px 0px;
+  align-self: center;
+  width: 71.1px;
+  height: 63.5px;
+}
+.reservafront .pista-de-padel {
+  position: relative;
+  margin: 0 23px 13px 23px;
+  display: inline-block;
+  align-self: flex-start;
+  overflow-wrap: break-word;
+  font-family: 'DM Sans';
+  font-weight: 700;
+  font-size: 20px;
+  color: #292525;
+}
+.reservafront .reservar-1 {
+  margin-right: 9.2px;
+  overflow-wrap: break-word;
+  font-family: 'DM Sans';
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--secondary-1, #7BC0E3);
+}
+.reservafront .container-5 {
+  margin: 10.5px 0 6.5px 0;
+  width: 17.2px;
+  height: 1px;
+}
+.reservafront .reservar {
+  position: relative;
+  margin: 0 23px;
+  display: flex;
+  flex-direction: row;
+  align-self: flex-start;
+  width: fit-content;
+  box-sizing: border-box;
+}
+.reservafront .padel {
+  position: relative;
+  margin-right: 22.8px;
+  display: flex;
+  flex-direction: column;
+  padding: 0.1px 0 9.8px 0;
+  box-sizing: border-box;
+}
+.reservafront .rectangle-188 {
+  box-shadow: 0px 97px 90px 0px rgba(7, 0, 59, 0.15);
+  border-radius: 12px;
+  position: absolute;
+  left: 50%;
+  top: 0px;
+  translate: -50% 0;
+  width: 255.4px;
+  height: 178px;
+}
+.reservafront .rectangle-31 {
+  position: relative;
+  margin-bottom: 24.9px;
+  width: 255.4px;
+  height: 4.4px;
+}
+.reservafront .container-6 {
+  position: relative;
+  margin: 0 0 18.2px 5px;
+  align-self: center;
+  width: 71.1px;
+  height: 63.5px;
+}
+.reservafront .local-1 {
+  position: relative;
+  margin: 0 24.9px 12.2px 24.9px;
+  display: inline-block;
+  align-self: flex-start;
+  overflow-wrap: break-word;
+  font-family: 'DM Sans';
+  font-weight: 700;
+  font-size: 20px;
+  color: #292525;
+}
+.reservafront .reservar-3 {
+  margin-right: 9.2px;
+  overflow-wrap: break-word;
+  font-family: 'DM Sans';
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--secondary-1, #7BC0E3);
+}
+.reservafront .container-2 {
+  margin: 10.5px 0 6.5px 0;
+  width: 17.2px;
+  height: 1px;
+}
+.reservafront .reservar-2 {
+  position: relative;
+  margin: 0 24.8px;
+  display: flex;
+  flex-direction: row;
+  align-self: flex-start;
+  width: fit-content;
+  box-sizing: border-box;
+}
+.reservafront .local {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10.8px;
+  box-sizing: border-box;
+}
+.reservafront .container-7 {
+  position: relative;
+  margin: 0 48.4px 114.2px 0;
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  box-sizing: border-box;
+}
+.reservafront .group-11109 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: 100%;
+}
+.reservafront .image-2 {
+  background: url('../assets/images/image2.png') 50% / cover no-repeat;
+  width: 110.3px;
+  height: 76px;
+}
+.reservafront .icon-2 {
+  margin: 22.6px 0 29.5px 0;
+  width: 16.9px;
+  height: 23.9px;
+}
+.reservafront .icon-3 {
+  margin-bottom: 0.3px;
+  width: 28px;
+  height: 23.2px;
+}
+.reservafront .icon {
+  margin-top: 0.6px;
+  width: 31.9px;
+  height: 23px;
+}
+.reservafront .container-3 {
+  margin: 21px 0 31.5px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 129.3px;
+  height: fit-content;
+  box-sizing: border-box;
+}
+.reservafront .language {
+  margin-right: 7.6px;
+  overflow-wrap: break-word;
+  font-family: 'DM Sans';
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--black, #292525);
+}
+.reservafront .icon-color {
+  margin: 10px 0 10.1px 0;
+  width: 10.4px;
+  height: 4.9px;
+}
+.reservafront .idioma {
+  margin: 23.3px 0 27.8px 0;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+.reservafront .container-4 {
+  position: relative;
+  margin: 0 15.7px 0.2px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 975.4px;
+  box-sizing: border-box;
+}
+.reservafront .description {
+  position: relative;
+  margin: 0 723.9px 4px 0;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'DM Sans';
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 2.308;
+  color: var(--black, #292525);
+}
+.reservafront .line {
+  opacity: 0.6;
+  background: #FFFFFF;
+  position: relative;
+  margin-bottom: 16.2px;
+  width: 1010.3px;
+  height: 0.5px;
+}
+.reservafront .tucom {
+  position: relative;
+  margin-right: 842.9px;
+  overflow-wrap: break-word;
+  font-family: 'DM Sans';
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--black, #292525);
+}
+.reservafront .pie-de-pagina {
+  background: #60E1CB;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 49.8px 0 19.1px 0;
+  width: 1366px;
+  box-sizing: border-box;
+}
+.reservafront {
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 0px;
+  width: 1366px;
   box-sizing: border-box;
 }
