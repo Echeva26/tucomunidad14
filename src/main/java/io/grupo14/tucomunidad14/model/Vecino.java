@@ -1,8 +1,6 @@
 package io.grupo14.tucomunidad14.model;
 
 
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,7 +28,7 @@ public class Vecino {
     @JoinColumn(name = "comunidad_id")
     private Comunidad comunidad;
     @OneToOne
-    private List<Reserva> reserva;
+    private Reserva reserva;
 
 
     public Vecino(String nombre, String apellidos, @Email String email, Integer portal, Integer piso, Integer telefono,

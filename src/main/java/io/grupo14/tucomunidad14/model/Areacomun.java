@@ -2,7 +2,7 @@ package io.grupo14.tucomunidad14.model;
 
 
 
-import java.util.List;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +27,7 @@ public class Areacomun {
     @JoinColumn(name = "comunidad_id")
     private Comunidad comunidad;
     @OneToOne
-    private List<Reserva> reserva;
+    private Reserva reserva;
 
     
     

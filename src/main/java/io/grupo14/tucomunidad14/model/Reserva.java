@@ -10,23 +10,21 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name= "Reservs")
+@Table(name= "Reservas")
 public class Reserva {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idreserva;
-    @OneToOne(mappedBy = "Reserva")
+    @OneToOne(mappedBy = "reserva")
     private Vecino vecino;
-    @OneToOne(mappedBy = "Reserva")
+    @OneToOne(mappedBy = "reserva")
     private Areacomun areacomun;
     private Date horareserva;
     
-
-    public Reserva(Vecino vecino, Areacomun areacomun, Date horareserva) {
-        this.vecino = vecino;
-        this.areacomun = areacomun;
-        this.horareserva = horareserva;
+    
+    
+    public Reserva() {
     }
     public Long getIdreserva() {
         return idreserva;
