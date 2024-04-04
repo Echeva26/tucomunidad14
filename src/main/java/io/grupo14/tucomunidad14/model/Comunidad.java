@@ -1,6 +1,7 @@
 package io.grupo14.tucomunidad14.model;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,9 +20,9 @@ public class Comunidad {
     private Long id;
     private Integer codpostal;
     @OneToMany(mappedBy = "comunidad")
-    private ArrayList<Vecino> vecinos;
+    private List<Vecino> vecinos;
     @OneToMany(mappedBy = "comunidad")
-    private ArrayList<Areacomun> area;
+    private List<Areacomun> area;
     
 
 
@@ -35,12 +36,12 @@ public class Comunidad {
     public Long getId() {
         return id;
     }
-    public ArrayList<Vecino> getVecinos() {
+    public List<Vecino> getVecinos() {
         return vecinos;
     }
 
-    public ArrayList<Areacomun> getArea() {
-        return area;
+    public List<Areacomun> getArea() {
+        return  area;
     }
 
     public Integer getCodpostal() {

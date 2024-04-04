@@ -7,8 +7,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 
@@ -26,9 +28,10 @@ public class Vecino {
     private Integer telefono;
     private Boolean gestor;
     @ManyToOne
+    @JoinColumn(name = "comunidad_id")
     private Comunidad comunidad;
-    @OneToMany(mappedBy = "vecino")
-    private ArrayList <Areacomun> area;
+    @ManyToMany(mappedBy = "Vecinos")
+    private ArrayList <Areacomun> areas;
 
 
     public Vecino() {
@@ -36,11 +39,11 @@ public class Vecino {
     }
     
     public ArrayList<Areacomun> getArea() {
-        return area;
+        return areas;
     }
 
-    public void setArea(ArrayList <Areacomun> area) {
-        this.area = area;
+    public void setArea(ArrayList <Areacomun> areas) {
+        this.areas = areas;
     }
 
     public Boolean getGestor() {
