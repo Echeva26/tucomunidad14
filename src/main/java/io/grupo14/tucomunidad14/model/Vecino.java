@@ -33,11 +33,17 @@ public class Vecino {
     private List<Reserva> reserva;
 
 
-    public Vecino() {
-        
+    public Vecino(String nombre, String apellidos, @Email String email, Integer portal, Integer piso, Integer telefono,
+            Boolean gestor, Comunidad comunidad) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.portal = portal;
+        this.piso = piso;
+        this.telefono = telefono;
+        this.gestor = gestor;
+        this.comunidad = comunidad;
     }
-    
-    
 
     public Boolean getGestor() {
         return gestor;

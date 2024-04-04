@@ -29,10 +29,14 @@ public class Areacomun {
     @OneToOne
     private List<Reserva> reserva;
 
-    public Areacomun() {
-
-    }
     
+    
+    public Areacomun(String nombre, Tipodearea tipodearea, Comunidad comunidad) {
+        this.nombre = nombre;
+        this.tipodearea = tipodearea;
+        this.comunidad = comunidad;
+    }
+
     public String getNombre() {
         return nombre;
     }

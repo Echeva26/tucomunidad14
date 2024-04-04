@@ -28,13 +28,14 @@ public class Comunidad {
 
 
     //Constructor
-    public Comunidad() {
-        
-    }
+    
 
     //Getters y setters
     public Long getId() {
         return id;
+    }
+    public Comunidad(Integer codpostal) {
+        this.codpostal = codpostal;
     }
     public List<Vecino> getVecinos() {
         return vecinos;
