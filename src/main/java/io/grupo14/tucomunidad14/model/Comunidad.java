@@ -19,6 +19,7 @@ public class Comunidad {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Integer codpostal;
+    private String nombre;
     @OneToMany(mappedBy = "comunidad")
     private List<Vecino> vecinos;
     @OneToMany(mappedBy = "comunidad")
@@ -31,8 +32,22 @@ public class Comunidad {
     
 
     //Getters y setters
+
+    
     public Long getId() {
         return id;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public void setVecinos(List<Vecino> vecinos) {
+        this.vecinos = vecinos;
+    }
+    public void setArea(List<Areacomun> area) {
+        this.area = area;
     }
     public Comunidad(Integer codpostal) {
         this.codpostal = codpostal;
