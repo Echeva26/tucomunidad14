@@ -11,7 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.FutureOrPresent;
 
 
 @Entity
@@ -21,7 +21,7 @@ public class Areacomun {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idarea;
     private String nombre;
-    private @Future Date fecha;
+    private @FutureOrPresent Date horareserva;
     private Boolean Ocupado;
     private Tipodearea tipodearea;
     @ManyToOne
@@ -30,8 +30,12 @@ public class Areacomun {
     @ManyTomany
     @JoinTable(
         name= "Reservas",
-        joinColumns = @JoinColumn(name= "comunidad_id",referencedColumnName = "idarea"),
+        joinColumns = {
+            @JoinColumn(name= "comunidad_id",referencedColumnName = "idarea"),
+            @JoinColumn(name= "horareserva",referencedColumnName = "horareserva")
+    },
         inverseJoinColumns = @JoinColumn(name = "vecino_id",referencedColumnName = "id")
+        
     )
     private List<Vecino> vecinos;
 
@@ -51,13 +55,7 @@ public class Areacomun {
         return idarea;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
+    
 
     public Boolean getOcupado() {
         return Ocupado;
@@ -101,6 +99,14 @@ public class Areacomun {
 
     public void setVecinos(List<Vecino> vecinos) {
         this.vecinos = vecinos;
+    }
+
+    public Date getHorareserva() {
+        return horareserva;
+    }
+
+    public void setHorareserva(Date horareserva) {
+        this.horareserva = horareserva;
     }
 
     
