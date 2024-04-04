@@ -1,16 +1,15 @@
 package io.grupo14.tucomunidad14.model;
 
 
-import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 
@@ -30,21 +29,15 @@ public class Vecino {
     @ManyToOne
     @JoinColumn(name = "comunidad_id")
     private Comunidad comunidad;
-    @ManyToMany(mappedBy = "vecinos")
-    private ArrayList <Areacomun> areas;
+    @OneToOne
+    private List<Reserva> reserva;
 
 
     public Vecino() {
         
     }
     
-    public ArrayList<Areacomun> getArea() {
-        return areas;
-    }
-
-    public void setArea(ArrayList <Areacomun> areas) {
-        this.areas = areas;
-    }
+    
 
     public Boolean getGestor() {
         return gestor;
