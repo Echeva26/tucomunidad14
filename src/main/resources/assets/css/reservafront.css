@@ -246,31 +246,31 @@
   box-sizing: border-box;
 }
 .reservafront .image-2 {
-  background: url('../assets/images/image2.png') 50% / cover no-repeat;
+  background: url('../images/image2.png') 50% / cover no-repeat;
   width: 110.3px;
   height: 76px;
 }
-.reservafront .icon {
-  margin: 22.6px 0 29.5px 0;
-  width: 16.9px;
-  height: 23.9px;
-}
 .reservafront .icon-1 {
   margin-bottom: 0.3px;
-  width: 28px;
-  height: 23.2px;
+  width: 29px;
+  height: 23px;
 }
 .reservafront .icon-2 {
   margin-top: 0.6px;
-  width: 31.9px;
+  width: 32px;
+  height: 23px;
+}
+.reservafront .icon-3 {
+  margin-top: 0.6px;
+  width: 35px;
   height: 23px;
 }
 .reservafront .container-4 {
-  margin: 21px 0 31.5px 0;
+  margin: 21px 0 31.5px 500px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 129.3px;
+  width: 150px;
   height: fit-content;
   box-sizing: border-box;
 }
@@ -302,7 +302,7 @@
   box-sizing: border-box;
 }
 .reservafront .description {
-  margin: 0 723.9px 4px 0;
+  margin: 0 750px 4px 0;
   display: inline-block;
   overflow-wrap: break-word;
   font-family: 'DM Sans';
