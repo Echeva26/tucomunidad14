@@ -17,6 +17,7 @@ import jakarta.validation.constraints.Future;
 public class Areacomun {
      @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idarea;
+    private String nombre;
     private @Future Date fecha;
     private Boolean Ocupado;
     @ManyToOne 
@@ -30,6 +31,18 @@ public class Areacomun {
     public Areacomun() {
 
     }
+
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+
     public Long getIdarea() {
         return idarea;
     }

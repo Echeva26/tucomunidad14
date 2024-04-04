@@ -11,6 +11,4 @@ import io.grupo14.tucomunidad14.model.Vecino;
 public interface VecinoRepository extends CrudRepository<Vecino,Long> {
 
 
-    
-
 }
