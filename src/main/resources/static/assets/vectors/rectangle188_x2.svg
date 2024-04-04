@@ -1,9 +1,9 @@
-<svg width="718" height="590" viewBox="0 0 718 590" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g filter="url(#filter18_442)">
-<path d="M694,0L24,0C10.745,0 0,10.745 0,24L0,566C0,579.254 10.745,590 24,590L694,590C707.254,590 718,579.254 718,566L718,24C718,10.745 707.254,0 694,0Z" fill="#FDFDFF"/>
+<svg width="512" height="356" viewBox="0 0 512 356" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g filter="url(#filter1_50)">
+<path d="M487.215,-0.336L24.387,-0.336C11.133,-0.336 0.387,10.409 0.387,23.664L0.387,331.61C0.387,344.866 11.133,355.61 24.387,355.61L487.215,355.61C500.469,355.61 511.215,344.866 511.215,331.61L511.215,23.664C511.215,10.409 500.469,-0.336 487.215,-0.336Z" fill="#FDFDFF"/>
 </g>
 <defs>
-<filter id="filter18_442" x="-90" y="-90" width="539" height="482" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter1_50" x="-89.612549" y="-90.336304" width="435.413544" height="364.973297" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
 <feMorphology radius="0" operator="dilate" in="SourceAlpha" result="0dropshadow"/>

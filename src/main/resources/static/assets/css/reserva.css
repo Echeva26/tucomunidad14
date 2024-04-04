@@ -7,6 +7,14 @@
   bottom: 0px;
   height: 100%;
 }
+.reservafront .ellipse-6 {
+  opacity: 0.15;
+  position: absolute;
+  left: -120.2px;
+  bottom: -81.1px;
+  width: 285.3px;
+  height: 165px;
+}
 .reservafront .mask-group {
   opacity: 0.6;
   position: absolute;
@@ -15,6 +23,14 @@
   right: 0px;
   bottom: 0px;
   height: 100%;
+}
+.reservafront .reserva-de-zonas {
+  position: relative;
+  overflow-wrap: break-word;
+  font-family: 'DM Sans';
+  font-weight: 700;
+  font-size: 32px;
+  color: #292525;
 }
 .reservafront .tu-comunidad {
   margin: 1.2px 15.5px 0 0;
@@ -32,7 +48,7 @@
   font-family: 'DM Sans';
   font-weight: 500;
   font-size: 18px;
-  color: var(--secondary-1, #7BC0E3);
+  color: var(--secondary, #7BC0E3);
 }
 .home-sub30 {
   font-family: 'DM Sans';
@@ -57,7 +73,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 1.6px 0;
+  padding: 1.6px 0px 1.6px 0;
   width: 134.1px;
   height: fit-content;
   box-sizing: border-box;
@@ -71,34 +87,26 @@
   font-size: 18px;
   color: #000000;
 }
-.reservafront .container-1 {
+.reservafront .container {
   background: #FFFFFF;
-  position: relative;
-  margin-bottom: 35.6px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 18.1px 57.3px 16.1px 135.8px;
-  width: 1366px;
   box-sizing: border-box;
-}
-.reservafront .reserva-de-zonas {
-  position: relative;
-  margin-right: 46px;
-  overflow-wrap: break-word;
-  font-family: 'DM Sans';
-  font-weight: 700;
-  font-size: 32px;
-  color: #292525;
 }
 .reservafront .cabecera {
   background: #60E1CB;
   position: relative;
   margin-bottom: 86.9px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 31px;
+  flex-direction: row;
+  justify-content: center;
+  padding: 102px 46px 31px 0;
   width: 1366px;
   box-sizing: border-box;
 }
@@ -118,9 +126,9 @@
   width: 255.4px;
   height: 4.4px;
 }
-.reservafront .container {
+.reservafront .container-1 {
   position: relative;
-  margin: 0 0 18.3px 0px;
+  margin-bottom: 18.3px;
   align-self: center;
   width: 71.1px;
   height: 63.5px;
@@ -142,9 +150,9 @@
   font-family: 'DM Sans';
   font-weight: 700;
   font-size: 14px;
-  color: var(--secondary-1, #7BC0E3);
+  color: var(--secondary, #7BC0E3);
 }
-.reservafront .container-5 {
+.reservafront .container-3 {
   margin: 10.5px 0 6.5px 0;
   width: 17.2px;
   height: 1px;
@@ -182,7 +190,7 @@
   width: 255.4px;
   height: 4.4px;
 }
-.reservafront .container-6 {
+.reservafront .container-7 {
   position: relative;
   margin: 0 0 18.2px 5px;
   align-self: center;
@@ -206,7 +214,7 @@
   font-family: 'DM Sans';
   font-weight: 700;
   font-size: 14px;
-  color: var(--secondary-1, #7BC0E3);
+  color: var(--secondary, #7BC0E3);
 }
 .reservafront .container-2 {
   margin: 10.5px 0 6.5px 0;
@@ -229,7 +237,7 @@
   padding-bottom: 10.8px;
   box-sizing: border-box;
 }
-.reservafront .container-7 {
+.reservafront .container-6 {
   position: relative;
   margin: 0 48.4px 114.2px 0;
   display: flex;
@@ -237,35 +245,27 @@
   width: fit-content;
   box-sizing: border-box;
 }
-.reservafront .group-11109 {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  height: 100%;
-}
 .reservafront .image-2 {
   background: url('../assets/images/image2.png') 50% / cover no-repeat;
   width: 110.3px;
   height: 76px;
 }
-.reservafront .icon-2 {
+.reservafront .icon {
   margin: 22.6px 0 29.5px 0;
   width: 16.9px;
   height: 23.9px;
 }
-.reservafront .icon-3 {
+.reservafront .icon-1 {
   margin-bottom: 0.3px;
   width: 28px;
   height: 23.2px;
 }
-.reservafront .icon {
+.reservafront .icon-2 {
   margin-top: 0.6px;
   width: 31.9px;
   height: 23px;
 }
-.reservafront .container-3 {
+.reservafront .container-4 {
   margin: 21px 0 31.5px 0;
   display: flex;
   flex-direction: row;
@@ -293,8 +293,7 @@
   flex-direction: row;
   box-sizing: border-box;
 }
-.reservafront .container-4 {
-  position: relative;
+.reservafront .container-5 {
   margin: 0 15.7px 0.2px 0;
   display: flex;
   flex-direction: row;
@@ -303,7 +302,6 @@
   box-sizing: border-box;
 }
 .reservafront .description {
-  position: relative;
   margin: 0 723.9px 4px 0;
   display: inline-block;
   overflow-wrap: break-word;
@@ -316,13 +314,11 @@
 .reservafront .line {
   opacity: 0.6;
   background: #FFFFFF;
-  position: relative;
   margin-bottom: 16.2px;
   width: 1010.3px;
   height: 0.5px;
 }
 .reservafront .tucom {
-  position: relative;
   margin-right: 842.9px;
   overflow-wrap: break-word;
   font-family: 'DM Sans';
@@ -345,7 +341,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 0px;
+  padding: 0px 0;
   width: 1366px;
   box-sizing: border-box;
 }
