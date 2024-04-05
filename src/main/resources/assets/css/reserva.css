@@ -154,14 +154,6 @@ body {
 }
 
 /* CABECERA */
-.ellipse-6 {
-  opacity: 0.15;
-  position: absolute;
-  left: -120.2px;
-  bottom: -81.1px;
-  width: 285.3px;
-  height: 165px;
-}
 .mask-group {
   opacity: 0.6;
   position: absolute;
@@ -234,18 +226,6 @@ body {
   font-size: 18px;
   color: #000000;
 }
-.container {
-  background: #FFFFFF;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 18.1px 57.3px 16.1px 135.8px;
-  box-sizing: border-box;
-}
 .cabecera {
   background: #60E1CB;
   position: fixed;
@@ -264,6 +244,7 @@ body {
   background: url('../images/image2.png') 50% / cover no-repeat;
   width: 110.3px;
   height: 76px;
+  margin-bottom: 10px;
 }
 .icon-1 {
   margin-bottom: 0.3px;
@@ -311,7 +292,7 @@ body {
   color: var(--black, #292525);
 }
 .container-5 {
-  margin: 0 15.7px 0.2px 0;
+  margin: 0 15.7px -20px 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
