@@ -154,15 +154,7 @@ body {
 }
 
 /* CABECERA */
-.mask-group {
-  opacity: 0.6;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  height: 100%;
-}
+
 .reserva-de-zonas {
   position: relative;
   overflow-wrap: break-word;
@@ -236,6 +228,18 @@ body {
   justify-content: center;
   padding: 102px 46px 31px 0;
   width: 100%; 
+  box-sizing: border-box;
+}
+.container {
+  background: #FFFFFF;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 18.1px 57.3px 16.1px 135.8px;
   box-sizing: border-box;
 }
 
