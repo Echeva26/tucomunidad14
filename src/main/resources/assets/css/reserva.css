@@ -1,4 +1,4 @@
-.reservafront {
+.reserva {
   background: #E9FBF8;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@ body {
   background: #E9FBF8;
 }
 
-.reservafront .rectangle-2 {
+.reserva .rectangle-2 {
   box-shadow: 0px 97px 90px 0px rgba(7, 0, 59, 0.12);
   border-radius: 12px;
   position: absolute;
@@ -27,20 +27,20 @@ body {
   width: 255.4px;
   height: 178px;
 }
-.reservafront .rectangle-3 {
+.reserva .rectangle-3 {
   position: relative;
   margin-bottom: 24.8px;
   width: 255.4px;
   height: 4.4px;
 }
-.reservafront .container-1 {
+.reserva .container-1 {
   position: relative;
   margin-bottom: 18.3px;
   align-self: center;
   width: 71.1px;
   height: 63.5px;
 }
-.reservafront .pista-de-padel {
+.reserva .pista-de-padel {
   position: relative;
   margin: 0 23px 13px 23px;
   display: inline-block;
@@ -51,7 +51,7 @@ body {
   font-size: 20px;
   color: #292525;
 }
-.reservafront .reservar-1 {
+.reserva .reservar-1 {
   margin-right: 9.2px;
   overflow-wrap: break-word;
   font-family: 'Roboto', sans-serif;
@@ -59,12 +59,12 @@ body {
   font-size: 14px;
   color: var(--secondary, #7BC0E3);
 }
-.reservafront .container-3 {
+.reserva .container-3 {
   margin: 10.5px 0 6.5px 0;
   width: 17.2px;
   height: 1px;
 }
-.reservafront .reservar {
+.reserva .reservar {
   position: relative;
   margin: 0 23px;
   display: flex;
@@ -73,7 +73,7 @@ body {
   width: fit-content;
   box-sizing: border-box;
 }
-.reservafront .padel {
+.reserva .padel {
   position: relative;
   margin-right: 22.8px;
   display: flex;
@@ -81,7 +81,7 @@ body {
   padding: 0.1px 0 9.8px 0;
   box-sizing: border-box;
 }
-.reservafront .rectangle-188 {
+.reserva .rectangle-188 {
   box-shadow: 0px 97px 90px 0px rgba(7, 0, 59, 0.15);
   border-radius: 12px;
   position: absolute;
@@ -91,20 +91,20 @@ body {
   width: 255.4px;
   height: 178px;
 }
-.reservafront .rectangle-31 {
+.reserva .rectangle-31 {
   position: relative;
   margin-bottom: 24.9px;
   width: 255.4px;
   height: 4.4px;
 }
-.reservafront .container-7 {
+.reserva .container-7 {
   position: relative;
   margin: 0 0 18.2px 5px;
   align-self: center;
   width: 71.1px;
   height: 63.5px;
 }
-.reservafront .local-1 {
+.reserva .local-1 {
   position: relative;
   margin: 0 24.9px 12.2px 24.9px;
   display: inline-block;
@@ -115,7 +115,7 @@ body {
   font-size: 20px;
   color: #292525;
 }
-.reservafront .reservar-3 {
+.reserva .reservar-3 {
   margin-right: 9.2px;
   overflow-wrap: break-word;
   font-family: 'Roboto', sans-serif;
@@ -123,12 +123,12 @@ body {
   font-size: 14px;
   color: var(--secondary, #7BC0E3);
 }
-.reservafront .container-2 {
+.reserva .container-2 {
   margin: 10.5px 0 6.5px 0;
   width: 17.2px;
   height: 1px;
 }
-.reservafront .reservar-2 {
+.reserva .reservar-2 {
   position: relative;
   margin: 0 24.8px;
   display: flex;
@@ -137,14 +137,14 @@ body {
   width: fit-content;
   box-sizing: border-box;
 }
-.reservafront .local {
+.reserva .local {
   position: relative;
   display: flex;
   flex-direction: column;
   padding-bottom: 10.8px;
   box-sizing: border-box;
 }
-.reservafront .container-6 {
+.reserva .container-6 {
   position: relative;
   margin: 0 48.4px 114.2px 0;
   display: flex;
