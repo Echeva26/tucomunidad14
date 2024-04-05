@@ -29,7 +29,9 @@ public class Comunidad {
 
 
     //Constructor
-    
+    public Comunidad() {
+        
+    }
 
     //Getters y setters
 
@@ -49,9 +51,7 @@ public class Comunidad {
     public void setArea(List<Areacomun> area) {
         this.area = area;
     }
-    public Comunidad(Integer codpostal) {
-        this.codpostal = codpostal;
-    }
+    
     public List<Vecino> getVecinos() {
         return vecinos;
     }
