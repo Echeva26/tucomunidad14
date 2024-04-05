@@ -31,10 +31,8 @@ public class Areacomun {
 
     
     
-    public Areacomun(String nombre, Tipodearea tipodearea, Comunidad comunidad) {
-        this.nombre = nombre;
-        this.tipodearea = tipodearea;
-        this.comunidad = comunidad;
+    public Areacomun() {
+        
     }
 
     public String getNombre() {
