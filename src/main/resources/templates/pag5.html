@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿No tienes cuenta?</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="../assets/css/pag5.css" />
+</head>
+
+<div class="cabecera">
+
+  <div class="container-2">
+    <div class="tu-comunidad">
+      TuComunidad
+    </div>
+</div>
+
+<div class="container">
+    <h2>Autenticación Multifactor con Código QR</h2>
+    <form id="authForm" onsubmit="generarCodigoQR(); return false;">
+        <input type="submit" value="Generar Código QR">
+    </form>
+    <div id="qrcode">
+        <!-- Aquí se mostrará el código QR generado -->
+    </div>
+</div>
+
+<!-- Biblioteca para generar códigos QR -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@latest"></script>
+<script>
+    // Función para generar el código QR
+    function generarCodigoQR() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var datos = "Nombre de Usuario: " + username + ", Contraseña: " + password;
+        
+        // Eliminar el código QR anterior, si existe
+        document.getElementById("qrcode").innerHTML = "";
+        
+        // Generar el código QR con los datos proporcionados
+        new QRCode(document.getElementById("qrcode"), datos);
+    }
+</script>
+
+<!--PIE DE PAGINA-->
+<div class="pie-de-pagina">
+    <div class="container-5">
+      <div class="image-2">
+      </div>
+      <div class="container-4">
+        <img class="icon-1" src="../assets/vectors/intagram.svg" />
+        <img class="icon-2" src="../assets/vectors/facebook.svg" />
+        <img class="icon-3" src="../assets/vectors/twitter.svg" />
+      </div>
+      <div class="idioma">
+        <span class="language">
+          Idioma
+        </span>
+        <img class="icon-color" src="../assets/vectors/flecha.svg" />
+      </div>
+    </div>
+    <div class="description">
+      Facilitamos la convivencia en tu comunidad
+    </div>
+    <div class="line">
+    </div>
+    <span class="tucom">
+      ©TuComunidad 2024
+    </span>
+  </div>
+</div>
+
+</body>
+</html>
