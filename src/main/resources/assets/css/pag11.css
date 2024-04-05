@@ -1,0 +1,68 @@
+body {
+    background-color: #dbf4eb;
+    margin: 0;
+    padding: 0;
+    font-family: "Arial Rounded", Arial, sans-serif; /* Fuente con letras más redondeadas */
+}
+.title-section {
+    background-color: #75c5ad;
+    color: #000;
+    padding: 20px;
+    text-align: center;
+}
+.button-container {
+    background-color: #d4f0ea;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.button {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    padding: 20px;
+    font-size: 14px;
+    margin: 10px;
+    cursor: pointer;
+    border-top: 2px solid #75c5ad;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: top;
+}
+.house-icon {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 0;
+    overflow: hidden;
+}
+.button-text {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: calc(100% - 30px);
+    text-align: left;
+    color: #007bff;
+}
+.arrow {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #007bff;
+}
+.arrow-bottom {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: #007bff;
+}
