@@ -4,30 +4,31 @@ package io.grupo14.tucomunidad14.model;
 
 
 
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
+import java.util.List;
 
 
 @Entity
 @Table(name = "areacomuns")
 public class Areacomun {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id@GeneratedValue(strategy = GenerationType.AUTO)
     private Long idarea;
     private String nombre;
     private Tipodearea tipodearea;
     @ManyToOne
     @JoinColumn(name = "comunidad_id")
     private Comunidad comunidad;
-    @OneToOne
-    private Reserva reserva;
+    @OneToMany(mappedBy = "areacomun")
+    private List<Reserva> reserva;
 
     
     

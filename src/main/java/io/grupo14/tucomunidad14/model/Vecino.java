@@ -7,10 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-
+import java.util.List;
 @Entity
 @Table(name= "vecinos")
 public class Vecino {
@@ -27,8 +27,8 @@ public class Vecino {
     @ManyToOne
     @JoinColumn(name = "comunidad_id")
     private Comunidad comunidad;
-    @OneToOne
-    private Reserva reserva;
+    @OneToMany(mappedBy = "vecino")
+    private List<Reserva> reserva;
 
 
     public Vecino() {
