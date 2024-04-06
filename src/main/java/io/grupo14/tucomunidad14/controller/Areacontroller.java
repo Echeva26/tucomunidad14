@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+//hola
 @RestController
 public class Areacontroller {
     @Autowired
@@ -24,6 +24,7 @@ public class Areacontroller {
         Areacomun nuevaArea = new Areacomun();
         nuevaArea.setNombre(nombre);
         nuevaArea.setTipodearea(tipodearea);
+        nuevaArea.setComunidad(idComunidad); 
         areacomunRepository.save(nuevaArea);
         return "Area creada exitosamente";
     }
