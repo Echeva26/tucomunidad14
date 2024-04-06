@@ -11,6 +11,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import java.util.List;
+
+
 @Entity
 @Table(name= "VECINO")
 public class Vecino {
