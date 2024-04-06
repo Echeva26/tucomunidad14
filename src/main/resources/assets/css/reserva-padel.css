@@ -21,8 +21,60 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-top: 65px; /* Espacio con la cebecera */
+  padding-top: 40px; /* Espacio con la cebecera */
 }
+
+.container-botones {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 5px; /* Espacio con la cebecera */
+  gap: 50px; /* Espacio entre los elementos */
+  margin-right: 50px;
+}
+
+.boton-cancelar {
+  border-radius: 1000px;
+  background: #c52a1f;
+  position: relative;
+  margin-top: -10px; /* Cambia este valor según tus necesidades */
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center;
+  padding: 10px 20px; /* Ajusta el padding según tus necesidades */
+  width: auto; /* Ancho ajustado automáticamente según el contenido */
+  height: auto; /* Altura ajustada automáticamente según el contenido */
+  box-sizing: border-box;
+}
+
+.boton-reservar {
+  border-radius: 1000px;
+  background: #60E1CB;
+  position: relative;
+  margin-top: -10px; /* Cambia este valor según tus necesidades */
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center;
+  padding: 10px 20px; /* Ajusta el padding según tus necesidades */
+  width: auto; /* Ancho ajustado automáticamente según el contenido */
+  height: auto; /* Altura ajustada automáticamente según el contenido */
+  box-sizing: border-box;
+}
+
+.texto-boton {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: #FFFFFF;
+  white-space: nowrap; /* Esta propiedad asegura que el texto esté en una sola línea */
+  margin: 0; /* Elimina el margen por defecto */
+  padding: 0; /* Elimina el padding por defecto */
+  line-height: 1; /* Centra verticalmente el texto */
+}
+
+
 
 .elemento {
   position: relative;
@@ -36,7 +88,7 @@ body {
   background-color: #FFFFFF;
   border-radius: 10px; /* Bordes redondeados */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra abajo */
-  width: 250px; /* Ancho mayor */
+  width: 700px; /* Ancho mayor */
   height: 200px; /* Alto mayor */
 }
 
@@ -95,7 +147,7 @@ body {
   
 .titulo {
   position: relative;
-  margin: 120px 23px 13px 23px;
+  margin: 20px 23px 13px 23px;
   display: inline-block;
   align-self: flex-start;
   overflow-wrap: break-word;
