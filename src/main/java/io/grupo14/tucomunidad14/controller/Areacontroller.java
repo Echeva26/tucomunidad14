@@ -24,7 +24,6 @@ public class Areacontroller {
         Areacomun nuevaArea = new Areacomun();
         nuevaArea.setNombre(nombre);
         nuevaArea.setTipodearea(tipodearea);
-        nuevaArea.setComunidad(idComunidad); 
         areacomunRepository.save(nuevaArea);
         return "Area creada exitosamente";
     }
