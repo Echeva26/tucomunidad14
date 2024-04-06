@@ -7,16 +7,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-
+import java.util.List;
 @Entity
-@Table(name= "vecinos")
+@Table(name= "VECINO")
 public class Vecino {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long idvecino;
     private String nombre;
     private String apellidos;
     private @Email String email;
@@ -27,8 +27,8 @@ public class Vecino {
     @ManyToOne
     @JoinColumn(name = "comunidad_id")
     private Comunidad comunidad;
-    @OneToOne
-    private Reserva reserva;
+    @OneToMany(mappedBy = "vecino")
+    private List<Reserva> reserva;
 
 
     public Vecino() {
@@ -51,10 +51,24 @@ public class Vecino {
         this.comunidad = comunidad;
     }
 
-    public Long getId() {
-        return id;
-    }
     
+    
+    public Long getIdvecino() {
+        return idvecino;
+    }
+
+    public void setIdvecino(Long idvecino) {
+        this.idvecino = idvecino;
+    }
+
+    public List<Reserva> getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(List<Reserva> reserva) {
+        this.reserva = reserva;
+    }
+
     public String getNombre() {
         return nombre;
     }
