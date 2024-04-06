@@ -16,7 +16,7 @@ import java.util.List;
 public class Vecino {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long idvecino;
     private String nombre;
     private String apellidos;
     private @Email String email;
@@ -51,10 +51,24 @@ public class Vecino {
         this.comunidad = comunidad;
     }
 
-    public Long getId() {
-        return id;
-    }
     
+    
+    public Long getIdvecino() {
+        return idvecino;
+    }
+
+    public void setIdvecino(Long idvecino) {
+        this.idvecino = idvecino;
+    }
+
+    public List<Reserva> getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(List<Reserva> reserva) {
+        this.reserva = reserva;
+    }
+
     public String getNombre() {
         return nombre;
     }

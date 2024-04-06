@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
 public class Comunidad {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long idcomunidad;
     private Integer codpostal;
     private String nombre;
     @OneToMany(mappedBy = "comunidad")
@@ -36,9 +36,7 @@ public class Comunidad {
     //Getters y setters
 
     
-    public Long getId() {
-        return id;
-    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -65,6 +63,14 @@ public class Comunidad {
     }
     public void setCodpostal(Integer codpostal) {
         this.codpostal = codpostal;
+    }
+
+    public Long getIdcomunidad() {
+        return idcomunidad;
+    }
+
+    public void setIdcomunidad(Long idcomunidad) {
+        this.idcomunidad = idcomunidad;
     }
 
     
