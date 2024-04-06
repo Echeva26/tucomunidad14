@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name= "comunidads")
+@Table(name= "COMUNIDAD")
 public class Comunidad {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)

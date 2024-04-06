@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @EntityScan
-@Table(name= "Reservas")
+@Table(name= "RESERVA")
 public class Reserva {
 
     @Id

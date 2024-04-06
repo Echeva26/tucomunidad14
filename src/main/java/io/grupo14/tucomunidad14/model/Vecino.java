@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import java.util.List;
 @Entity
-@Table(name= "vecinos")
+@Table(name= "VECINO")
 public class Vecino {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)

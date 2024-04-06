@@ -14,13 +14,15 @@ import io.grupo14.tucomunidad14.model.Tipodearea;
 
 @Repository
 public interface ReservasRepository extends CrudRepository<Reserva,Long> {
- @Query("SELECT r FROM Reserva r " +
+        @Query("SELECT r FROM Reserva r " +
            "WHERE r.areacomun.comunidad.id = :comunidadId " +
            "AND r.areacomun.tipodearea = :tipo " +
            "AND DATE(r.horareserva) = :dia")
-    List<Reserva> buscarReservasDeHoyPorComunidadIdYTipo(
+        List<Reserva> buscarReservasDeHoyPorComunidadIdYTipo(
             @Param("comunidadId") Long comunidadId,
             @Param("tipo") Tipodearea tipo,
-            @Param("dia")  Date   dia); 
-    
+            @Param("dia")  Date   dia);
+
+        @Query("SELECT r FROM Reserva r WHERE r.areacomun.comunidad.id = :idcomunidad")
+        List<Reserva> buscarPorComunidadId(@Param("idcomunidad") Long idcomunidad);
 }

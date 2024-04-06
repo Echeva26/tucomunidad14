@@ -18,7 +18,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "areacomuns")
+@Table(name = "AREACOMUN")
 public class Areacomun {
     @Id@GeneratedValue(strategy = GenerationType.AUTO)
     private Long idarea;

@@ -9,7 +9,6 @@ import io.grupo14.tucomunidad14.repository.ReservasRepository;
 import java.util.List;
 
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,18 +30,12 @@ public class ReservasController {
         
     }
 
-    @GetMapping("/reservas")
-    List<Reserva> readAll() {
-
-        return (List<Reserva>) reservasRepository.findAll();
-  
+    @GetMapping("/reservas/comunidad")
+    public List<Reserva> obtenerReservasPorComunidad(@RequestParam("idcomunidad") Long idcomunidad) {
+        // Asumiendo que existe un método en ReservasRepository que puede buscar por comunidadId.
+        // Este método necesita ser implementado en ReservasRepository si aún no existe.
+        return reservasRepository.buscarPorComunidadId(idcomunidad);
     }
-
-   
-
-    @GetMapping("/reservas/local/{comunidad}")
-    public String getMethodName(@RequestParam String param) {
-        return new String();
-    }
+    
 
 }
