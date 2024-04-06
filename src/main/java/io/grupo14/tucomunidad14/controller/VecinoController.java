@@ -33,7 +33,7 @@ public class VecinoController {
 
     
     @PostMapping("/vecinos")
-    public Vecino createVecino(@RequestBody VecinoDTO vecinoDTO) {
+    public String createVecino(@RequestBody VecinoDTO vecinoDTO) {
         Comunidad comunidad = comunidadRepository.findById(vecinoDTO.getIdComunidad()).orElseThrow(
             () -> new RuntimeException("Comunidad no encontrada con id: " + vecinoDTO.getIdComunidad())
         );
@@ -47,8 +47,8 @@ public class VecinoController {
         vecino.setGestor(vecinoDTO.getGestor());
         vecino.setComunidad(comunidad);
         // Setear cualquier otro campo necesario
-
-        return vecinoRepository.save(vecino);
+        vecinoRepository.save(vecino);
+        return "Se ha creado correctamente el vecino";
     }
     }
 
