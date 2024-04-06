@@ -8,10 +8,6 @@ import io.grupo14.tucomunidad14.model.Comunidad;
 import io.grupo14.tucomunidad14.repository.ComunidadRepository;
 
 
-
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -32,10 +28,7 @@ public class Comunidadcontroller {
         Comunidad nuevaComunidad = new Comunidad();
         nuevaComunidad.setNombre(nombre);
         nuevaComunidad.setCodpostal(codpostal);
-         // Lista de áreas comunes inicialmente vacía
-
-        comunidadRepository.save(nuevaComunidad);
-
+        comunidadRepository.save(nuevaComunidad); 
         return "Comunidad creada exitosamente";
     }
 
