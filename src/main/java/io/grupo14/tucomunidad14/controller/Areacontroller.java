@@ -24,8 +24,6 @@ public class Areacontroller {
     @Autowired 
     private ComunidadRepository comunidadRepository;
     @PostMapping("/creararea")
-
-
     public String crearArea(@RequestBody AreacomunDTO areacomunDTO) {
     Comunidad comunidad = comunidadRepository.findById(areacomunDTO.getIdComunidad()).orElseThrow(
         () -> new RuntimeException("Comunidad no encontrada con id: " + areacomunDTO.getIdComunidad())
