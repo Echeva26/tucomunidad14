@@ -25,7 +25,7 @@ public class Vecino {
     private Integer telefono;
     private Boolean gestor;
     @ManyToOne
-    @JoinColumn(name = "comunidad_id")
+    @JoinColumn(name = "comunidad")
     private Comunidad comunidad;
     @OneToMany(mappedBy = "vecino")
     private List<Reserva> reserva;

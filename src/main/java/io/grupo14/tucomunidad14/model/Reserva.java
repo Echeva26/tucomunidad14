@@ -1,5 +1,6 @@
 package io.grupo14.tucomunidad14.model;
 
+import java.security.Timestamp;
 import java.sql.Date;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -22,12 +23,12 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idreserva;
     @ManyToOne
-    @JoinColumn(name = "vecino_id")
+    @JoinColumn(name = "vecino")
     private Vecino vecino;
     @ManyToOne
-    @JoinColumn(name = "area_id")
+    @JoinColumn(name = "area")
     private Areacomun areacomun;
-    private Date horareserva;
+    private Timestamp horareserva;
     
     
     
@@ -51,12 +52,13 @@ public class Reserva {
     public void setAreacomun(Areacomun areacomun) {
         this.areacomun = areacomun;
     }
-    public Date getHorareserva() {
+    public Timestamp getHorareserva() {
         return horareserva;
     }
-    public void setHorareserva(Date horareserva) {
+    public void setHorareserva(Timestamp horareserva) {
         this.horareserva = horareserva;
     }
+    
 
     
 
