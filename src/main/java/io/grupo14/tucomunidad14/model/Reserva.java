@@ -4,6 +4,7 @@ package io.grupo14.tucomunidad14.model;
 
 import java.sql.Timestamp;
 
+
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import jakarta.persistence.Entity;
@@ -30,9 +31,11 @@ public class Reserva {
     @JoinColumn(name = "area")
     private Areacomun areacomun;
     // Campo para el inicio de la reserva
+    
     private Timestamp inicioReserva;
 
     // Campo para el fin de la reserva
+    
     private Timestamp finReserva;
     
     
