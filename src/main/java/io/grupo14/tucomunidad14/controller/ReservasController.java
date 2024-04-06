@@ -30,11 +30,11 @@ public class ReservasController {
         
     }
 
-    @GetMapping("/reservas/comunidad")
-public ResponseEntity<List<ReservaSimpleDTO>> obtenerReservasPorComunidad(@RequestParam Long idcomunidad) {
-    List<ReservaSimpleDTO> reservas = obtenerReservasSimplificadas(idcomunidad);
-    return ResponseEntity.ok(reservas);
-}
+        @GetMapping("/reservas/comunidad")
+    public ResponseEntity<List<ReservaSimpleDTO>> obtenerReservasPorComunidad(@RequestParam Long idcomunidad) {
+        List<ReservaSimpleDTO> reservas = obtenerReservasSimplificadas(idcomunidad);
+        return ResponseEntity.ok(reservas);
+    }
 
     public List<ReservaSimpleDTO> obtenerReservasSimplificadas(Long idComunidad) {
         // Suponiendo que tienes un método que te devuelve las reservas por comunidad
@@ -44,10 +44,12 @@ public ResponseEntity<List<ReservaSimpleDTO>> obtenerReservasPorComunidad(@Reque
             dto.setIdreserva(reserva.getIdreserva());
             dto.setIdvecino(reserva.getVecino().getIdvecino());
             dto.setIdarea(reserva.getAreacomun().getIdarea());
-            dto.setHorareserva(reserva.getHorareserva());
+            dto.setInicioReserva(reserva.getInicioReserva());;
+            dto.setFinReserva(reserva.getFinReserva());
             return dto;
         }).collect(Collectors.toList());
     }
+
     
 
 }

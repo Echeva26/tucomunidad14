@@ -7,9 +7,26 @@ public class ReservaSimpleDTO {
     private Long idreserva;
     private Long idvecino;
     private Long idarea;
-    private Timestamp horareserva;
+    // Campo para el inicio de la reserva
+    private Timestamp inicioReserva;
+
+    // Campo para el fin de la reserva
+    private Timestamp finReserva;
+    
 
     
+    public Timestamp getInicioReserva() {
+        return inicioReserva;
+    }
+    public void setInicioReserva(Timestamp inicioReserva) {
+        this.inicioReserva = inicioReserva;
+    }
+    public Timestamp getFinReserva() {
+        return finReserva;
+    }
+    public void setFinReserva(Timestamp finReserva) {
+        this.finReserva = finReserva;
+    }
     public Long getIdreserva() {
         return idreserva;
     }
@@ -27,12 +44,6 @@ public class ReservaSimpleDTO {
     }
     public void setIdarea(Long idarea) {
         this.idarea = idarea;
-    }
-    public Timestamp getHorareserva() {
-        return horareserva;
-    }
-    public void setHorareserva(Timestamp horareserva) {
-        this.horareserva = horareserva;
     }
     
 
