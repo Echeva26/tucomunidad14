@@ -46,6 +46,7 @@ public class ReservaSimpleDTO {
         this.idarea = idarea;
     }
     
+    
 
     
 }
