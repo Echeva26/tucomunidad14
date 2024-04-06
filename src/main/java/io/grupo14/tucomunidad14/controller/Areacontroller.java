@@ -20,7 +20,7 @@ public class Areacontroller {
     @Autowired
     private AreacomunRepository areacomunRepository;
     @PostMapping("/creararea")
-    public String CrearArea (@RequestParam String nombre, @RequestParam Tipodearea tipodearea){
+    public String CrearArea (@RequestParam String nombre, @RequestParam Tipodearea tipodearea, @RequestParam Long idComunidad){
         Areacomun nuevaArea = new Areacomun();
         nuevaArea.setNombre(nombre);
         nuevaArea.setTipodearea(tipodearea);
