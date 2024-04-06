@@ -1,7 +1,8 @@
 package io.grupo14.tucomunidad14.model;
 
-import java.security.Timestamp;
-import java.sql.Date;
+
+
+import java.sql.Timestamp;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
