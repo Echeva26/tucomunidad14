@@ -18,4 +18,6 @@ public interface ReservasRepository extends CrudRepository<Reserva,Long> {
 
         @Query("SELECT r FROM Reserva r WHERE r.areacomun.comunidad.idcomunidad = :idcomunidad")
         List<Reserva> buscarPorComunidadId(@Param("idcomunidad") Long idcomunidad);
+
+        
 }
