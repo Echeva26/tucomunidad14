@@ -20,9 +20,8 @@ public class Vecino {
     private String nombre;
     private String apellidos;
     private @Email String email;
-    private Integer portal;
-    private Integer piso;
-    private Integer telefono;
+    private String nombredeusuario;
+    private String contraseña;
     private Boolean gestor;
     @ManyToOne
     @JoinColumn(name = "comunidad")
@@ -34,6 +33,32 @@ public class Vecino {
     public Vecino() {
        
     }
+
+
+    
+    public String getNombredeusuario() {
+        return nombredeusuario;
+    }
+
+
+
+    public void setNombredeusuario(String nombredeusuario) {
+        this.nombredeusuario = nombredeusuario;
+    }
+
+
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+
 
     public Boolean getGestor() {
         return gestor;
@@ -87,22 +112,5 @@ public class Vecino {
     public void setEmail(String email) {
         this.email = email;
     }
-    public Integer getPortal() {
-        return portal;
-    }
-    public void setPortal(Integer portal) {
-        this.portal = portal;
-    }
-    public Integer getPiso() {
-        return piso;
-    }
-    public void setPiso(Integer piso) {
-        this.piso = piso;
-    }
-    public Integer getTelefono() {
-        return telefono;
-    }
-    public void setTelefono(Integer telefono) {
-        this.telefono = telefono;
-    }
+    
 }
