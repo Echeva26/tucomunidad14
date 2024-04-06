@@ -9,6 +9,13 @@ body {
     justify-content: space-around;
     align-items: center;
     height: vh;
+    
+}
+.icon {
+  background: url('../images/image2.png') 50% / cover no-repeat;
+  width: 110.3px;
+  height: 45px;
+  margin-bottom: 0px;
 }
 .description {
     width: 45%;
@@ -60,7 +67,7 @@ input[type="submit"]:hover {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding: 102px 46px 31px 0;
+    padding: 90px 40px 31px 0;
     width: 100%; 
     box-sizing: border-box;
   }
@@ -73,7 +80,7 @@ input[type="submit"]:hover {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 18.1px 57.3px 16.1px 135.8px;
+    padding: 50.1px 57.3px 16.1px 135.8px;
     box-sizing: border-box;
   }
   .tu-comunidad {
