@@ -25,7 +25,7 @@ public class Areacomun {
     private String nombre;
     private Tipodearea tipodearea;
     @ManyToOne
-    @JoinColumn(name = "comunidad_id")
+    @JoinColumn(name = "comunidad")
     private Comunidad comunidad;
     @OneToMany(mappedBy = "areacomun")
     private List<Reserva> reserva;
