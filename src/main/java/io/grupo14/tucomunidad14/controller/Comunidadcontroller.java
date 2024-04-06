@@ -21,6 +21,22 @@ public class ComunidadController {
     @Autowired
     private ComunidadRepository comunidadRepository;
 
+//Cuando pulso el botón crear 
+   @PostMapping("/crear")
+   @ResponseBody
+    public String crearComunidad(@RequestParam String nombre, @RequestParam Integer codpostal) {
+        Comunidad nuevaComunidad = new Comunidad();
+        nuevaComunidad.setNombre(nombre);
+        nuevaComunidad.setCodpostal(codpostal);
+        nuevaComunidad.setVecinos(new ArrayList<>()); // Lista de vecinos inicialmente vacía
+        nuevaComunidad.setArea(new ArrayList<>()); // Lista de áreas comunes inicialmente vacía
+
+        comunidadRepository.save(nuevaComunidad);
+
+        return "Comunidad creada exitosamente";
+    }
+
+//Cuando pulso el botón unirse
     @PostMapping("/comunidad/unirse")
     @ResponseBody
     public String agregarVecinoAComunidad(@PathVariable Long comunidadId, @RequestBody Vecino nuevoVecino) {
@@ -34,5 +50,7 @@ public class ComunidadController {
             return "No se encontró la comunidad con ID " + comunidadId;
         }
     }
+
+
 
 }
