@@ -7,33 +7,58 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-
+import java.util.List;
 @Entity
-@Table(name= "vecinos")
+@Table(name= "VECINO")
 public class Vecino {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long idvecino;
     private String nombre;
     private String apellidos;
     private @Email String email;
-    private Integer portal;
-    private Integer piso;
-    private Integer telefono;
+    private String nombredeusuario;
+    private String contraseña;
     private Boolean gestor;
     @ManyToOne
-    @JoinColumn(name = "comunidad_id")
+    @JoinColumn(name = "comunidad")
     private Comunidad comunidad;
-    @OneToOne
-    private Reserva reserva;
+    @OneToMany(mappedBy = "vecino")
+    private List<Reserva> reserva;
 
 
     public Vecino() {
        
     }
+
+
+    
+    public String getNombredeusuario() {
+        return nombredeusuario;
+    }
+
+
+
+    public void setNombredeusuario(String nombredeusuario) {
+        this.nombredeusuario = nombredeusuario;
+    }
+
+
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+
 
     public Boolean getGestor() {
         return gestor;
@@ -51,10 +76,24 @@ public class Vecino {
         this.comunidad = comunidad;
     }
 
-    public Long getId() {
-        return id;
-    }
     
+    
+    public Long getIdvecino() {
+        return idvecino;
+    }
+
+    public void setIdvecino(Long idvecino) {
+        this.idvecino = idvecino;
+    }
+
+    public List<Reserva> getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(List<Reserva> reserva) {
+        this.reserva = reserva;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -73,22 +112,5 @@ public class Vecino {
     public void setEmail(String email) {
         this.email = email;
     }
-    public Integer getPortal() {
-        return portal;
-    }
-    public void setPortal(Integer portal) {
-        this.portal = portal;
-    }
-    public Integer getPiso() {
-        return piso;
-    }
-    public void setPiso(Integer piso) {
-        this.piso = piso;
-    }
-    public Integer getTelefono() {
-        return telefono;
-    }
-    public void setTelefono(Integer telefono) {
-        this.telefono = telefono;
-    }
+    
 }
