@@ -9,6 +9,6 @@ import io.grupo14.tucomunidad14.model.Areacomun;
 
 @Repository
 public interface AreacomunRepository extends CrudRepository<Areacomun,Long> {
-    @Query s
+    
 
 }
