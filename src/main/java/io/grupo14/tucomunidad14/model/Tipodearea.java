@@ -4,8 +4,6 @@ public enum Tipodearea {
 
     PISTADEPADEL,
     LOCAL,
-    PISTADETENIS,
-    GIMNASIO,
     OTRO;
 
 }
