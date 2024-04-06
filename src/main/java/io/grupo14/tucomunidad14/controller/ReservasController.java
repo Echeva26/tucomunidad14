@@ -89,6 +89,8 @@ public class ReservasController {
         // Paso 4: Devolver la reserva guardada y un estado HTTP adecuado
         return ResponseEntity.ok(reservaGuardada);
     }
+
+    //Acuerdate que tienes que sacar por tipo para las pantallas 
 }
     
 
