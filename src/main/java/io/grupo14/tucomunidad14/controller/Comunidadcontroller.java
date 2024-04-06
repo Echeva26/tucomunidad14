@@ -25,7 +25,7 @@ public class Comunidadcontroller {
     @Autowired
     private ComunidadRepository comunidadRepository;
 
-//Cuando pulso el botón crear 
+//Cuando hago un post para crear una comunidad
    @PostMapping("/crear")
    @ResponseBody
     public String crearComunidad(@RequestParam String nombre, @RequestParam Integer codpostal) {
@@ -39,7 +39,20 @@ public class Comunidadcontroller {
         return "Comunidad creada exitosamente";
     }
 
-//Cuando pulso el botón unirse
+//Cuando hago un post para unirme a una comunidad 
+    @PostMapping("/comunidad/unirse")
+    @ResponseBody
+    public String agregarVecinoAComunidad(@PathVariable Long comunidadId, @RequestBody Vecino nuevoVecino) {
+        Comunidad comunidad = comunidadRepository.findById(comunidadId).orElse(null);
+        if (comunidad != null) {
+            comunidad.getVecinos().add(nuevoVecino);
+            nuevoVecino.setComunidad(comunidad); // Asignamos la comunidad al vecino
+            comunidadRepository.save(comunidad);
+            return "Vecino añadido exitosamente a la comunidad con ID " + comunidadId;
+        } else {
+            return "No se encontró la comunidad con ID " + comunidadId;
+        }
+    }
     
 
 
