@@ -4,6 +4,7 @@ package io.grupo14.tucomunidad14.model;
 
 import java.sql.Timestamp;
 
+
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import jakarta.persistence.Entity;
@@ -29,10 +30,28 @@ public class Reserva {
     @ManyToOne
     @JoinColumn(name = "area")
     private Areacomun areacomun;
-    private Timestamp horareserva;
+    // Campo para el inicio de la reserva
+    
+    private Timestamp inicioReserva;
+
+    // Campo para el fin de la reserva
+    
+    private Timestamp finReserva;
     
     
     
+    public Timestamp getInicioReserva() {
+        return inicioReserva;
+    }
+    public void setInicioReserva(Timestamp inicioReserva) {
+        this.inicioReserva = inicioReserva;
+    }
+    public Timestamp getFinReserva() {
+        return finReserva;
+    }
+    public void setFinReserva(Timestamp finReserva) {
+        this.finReserva = finReserva;
+    }
     public Reserva() {
     }
     public Long getIdreserva() {
@@ -52,12 +71,6 @@ public class Reserva {
     }
     public void setAreacomun(Areacomun areacomun) {
         this.areacomun = areacomun;
-    }
-    public Timestamp getHorareserva() {
-        return horareserva;
-    }
-    public void setHorareserva(Timestamp horareserva) {
-        this.horareserva = horareserva;
     }
     
 
