@@ -2,6 +2,8 @@ package io.grupo14.tucomunidad14.model;
 
 import java.sql.Date;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,7 +12,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+
 @Entity
+@EntityScan
 @Table(name= "Reservas")
 public class Reserva {
 

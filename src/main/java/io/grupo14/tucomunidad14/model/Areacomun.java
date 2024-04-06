@@ -20,8 +20,7 @@ import java.util.List;
 @Entity
 @Table(name = "areacomuns")
 public class Areacomun {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id@GeneratedValue(strategy = GenerationType.AUTO)
     private Long idarea;
     private String nombre;
     private Tipodearea tipodearea;
