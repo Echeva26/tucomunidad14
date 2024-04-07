@@ -45,7 +45,7 @@ public class Areacontroller {
     @GetMapping("/tipodeareaporcomunidad")
     public List<Tipodearea> getMethodName(@RequestParam Long idcomunidad) {
         List <Tipodearea> areas  = areacomunRepository.getListadeAreas(idcomunidad);
-
+        
         return areas;
         
     }
