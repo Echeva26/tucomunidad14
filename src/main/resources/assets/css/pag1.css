@@ -1,14 +1,32 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #E9FBF8;
+}
+.pagina {
+  background: #E9FBF8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: px; /* Ajuste para dejar espacio para la cabecera */
+  padding-bottom: 50px; /* Ajuste para evitar que el contenido se superponga con el pie de página */
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
 }
 .container {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: vh;
+    
+    
+}
+.icon {
+  background: url('../images/image2.png') 50% / cover no-repeat;
+  width: 110.3px;
+  height: 45px;
+  margin-bottom: 0px;
 }
 .description {
     width: 45%;
@@ -18,11 +36,11 @@ body {
     box-shadow: 0 0 10px rgba(56, 196, 235, 0.1);
 }
 .description-1 {
-    width: 45%;
+    width: 95%;
     padding: 20px;
     background-color: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 14px;
@@ -35,8 +53,8 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 input[type="text"], input[type="password"], input[type="submit"] {
-    width: 100%;
-    padding: 10px;
+    width: 90%;
+    padding: 8px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
@@ -52,6 +70,8 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #60E1CB;
 }
+
+/* CABECERA */
 .cabecera {
     background: #ffffff;
     position: fixed;
@@ -60,7 +80,7 @@ input[type="submit"]:hover {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding: 102px 46px 31px 0;
+    padding: 90px 40px 31px 0;
     width: 100%; 
     box-sizing: border-box;
   }
@@ -73,7 +93,7 @@ input[type="submit"]:hover {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 18.1px 57.3px 16.1px 135.8px;
+    padding: 50.1px 57.3px 16.1px 135.8px;
     box-sizing: border-box;
   }
   .tu-comunidad {
@@ -183,7 +203,7 @@ input[type="submit"]:hover {
         flex-direction: column;
         align-items: center;
         justify-content: center; 
-        padding: px; 
+        padding: 10px; 
         width: 100%;
         box-sizing: border-box;
         margin: 0;

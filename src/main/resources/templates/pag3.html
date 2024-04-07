@@ -1,38 +1,53 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restablecer contraseña</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" href="../assets/css/pag3.css" />
+  <meta charset="UTF-8" />
+  <title>Restablecer contraseña</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="../assets/css/pag3.css" />
 </head>
 
-<div class="cabecera">
-
-  <div class="container-2">
-    <div class="tu-comunidad">
-      TuComunidad
+<body>
+  <!--CABECERA-->
+  <div class="cabecera">
+    <span class="reserva-de-zonas">
+      Restablecer contraseña
+    </span>
+    <div class="container">
+      <div class="tu-comunidad">
+        TuComunidad
+      </div>
+      <p class="home">
+        <span class="home-sub-30">Home</span><span></span>
+      </p>
+      
     </div>
-</div>
+  </div>
 
-  <div class="container">
-    <h2>Restablecer Contraseña</h2>
-    <p>Por favor, escriba su nueva contraseña e ingrese el código enviado a su correo electrónico:</p>
-    <form action="#" method="post">
-        <label for="new_password">Nueva Contraseña:</label>
-        <input type="password" id="new_password" name="new_password" required>
-        <label for="confirm_password">Confirmar Nueva Contraseña:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required>
-        <label for="verification_code">Código de Verificación:</label>
-        <input type="text" id="verification_code" name="verification_code" required>
-        <input type="submit" value="Cambiar Contraseña">
-        
-    </form>
-    <p>¿No te ha llegado el correo?<a href="#"> Volver a enviar</a>.</p>
-</div>
-<!--PIE DE PAGINA-->
-<div class="pie-de-pagina">
+  <!--PAGINA-->
+  <div class="pagina">
+    <div class="container-6">
+        <p>Por favor, escriba su nueva contraseña e ingrese el código enviado a su correo electrónico:</p>
+        <form action="#" method="post">
+            <label for="new_password">Nueva Contraseña:</label>
+            <input type="password" id="new_password" name="new_password" required>
+            <label for="confirm_password">Confirmar Nueva Contraseña:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+            <label for="verification_code">Código de Verificación:</label>
+            <input type="text" id="verification_code" name="verification_code" required>
+            <input type="submit" value="Cambiar Contraseña">
+            
+        </form>
+        <p>¿No te ha llegado el correo?<a href="#"> Volver a enviar</a>.</p>
+    
+    
+    </div>
+  </div>
+
+
+  <!--PIE DE PAGINA-->
+  <div class="pie-de-pagina">
     <div class="container-5">
       <div class="image-2">
       </div>
@@ -57,7 +72,6 @@
       ©TuComunidad 2024
     </span>
   </div>
-</div>
-
 </body>
+
 </html>

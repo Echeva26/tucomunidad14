@@ -2,17 +2,21 @@ package io.grupo14.tucomunidad14.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import io.grupo14.tucomunidad14.model.Areacomun;
 import io.grupo14.tucomunidad14.model.Comunidad;
 import io.grupo14.tucomunidad14.model.ComunidadDTO;
+import io.grupo14.tucomunidad14.model.Tipodearea;
+import io.grupo14.tucomunidad14.repository.AreacomunRepository;
 import io.grupo14.tucomunidad14.repository.ComunidadRepository;
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
@@ -20,10 +24,13 @@ public class Comunidadcontroller {
     @Autowired
     private ComunidadRepository comunidadRepository;
 
-//Cuando hago un post para crear una comunidad
-    @PostMapping("/crearcomunidad")
-    @ResponseBody
-    public String crearComunidad(@RequestBody ComunidadDTO comunidadDTO) {
+    @Autowired
+    private AreacomunRepository areacomunRepository;
+
+//Cuando hago un post para crear una comunidad este no porque es super complicado
+   @PostMapping("/crearcomunidad")
+   @ResponseBody
+    public String crearComunidad(@RequestParam ComunidadDTO comunidadDTO) {
         Comunidad nuevaComunidad = new Comunidad();
         nuevaComunidad.setNombre(comunidadDTO.getNombre());
         nuevaComunidad.setCodpostal(comunidadDTO.getCodpostal());
@@ -31,4 +38,26 @@ public class Comunidadcontroller {
         return "Comunidad creada exitosamente";
     }
 
+    @PostMapping("/crearcomunidad")
+    @ResponseBody
+    public String crearComunidad(@RequestBody ComunidadDTO comunidadDTO,@RequestParam("zonas_comunes") List<String> zonasComunes) {
+        Comunidad nuevaComunidad = new Comunidad();
+        nuevaComunidad.setNombre(comunidadDTO.getNombre());
+        nuevaComunidad.setCodpostal(comunidadDTO.getCodpostal());
+        comunidadRepository.save(nuevaComunidad);
+
+        // Crear las áreas comunes
+        for (String zonaComun : zonasComunes) {
+            Areacomun nuevaArea = new Areacomun();
+            nuevaArea.setNombre(zonaComun);
+            // Asumiendo que zonaComun es una variable de tipo String
+            Tipodearea tipoDeArea = Tipodearea.valueOf(zonaComun.toUpperCase());
+            nuevaArea.setTipodearea(tipoDeArea);
+            nuevaArea.setComunidad(nuevaComunidad);
+            areacomunRepository.save(nuevaArea);
+        }
+
+        return "Comunidad creada exitosamente";
+    }
 }
+
