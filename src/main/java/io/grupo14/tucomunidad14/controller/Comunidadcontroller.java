@@ -22,8 +22,6 @@ public class Comunidadcontroller {
     private ComunidadRepository comunidadRepository;
 
     
-
-    //Cuando hago un post para crear una comunidad este no porque es super complicado
    @PostMapping("/crearcomunidad")
    @ResponseBody
     public String crearComunidad(@RequestBody ComunidadDTO comunidadDTO) {
