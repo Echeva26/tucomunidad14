@@ -2,13 +2,16 @@ package io.grupo14.tucomunidad14.controller;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.grupo14.tucomunidad14.model.Comunidad;
+import io.grupo14.tucomunidad14.model.ComunidadDTO;
 import io.grupo14.tucomunidad14.model.Vecino;
 import io.grupo14.tucomunidad14.model.VecinoDTO;
 import io.grupo14.tucomunidad14.repository.ComunidadRepository;
@@ -19,24 +22,18 @@ import org.slf4j.Logger;
 @RequestMapping("/api")
 public class VecinoController {
 
-
-   
     @Autowired
     private VecinoRepository vecinoRepository;
 
     @Autowired
     private ComunidadRepository comunidadRepository;
-    
+
     public static final Logger log = LoggerFactory.getLogger(ReservasController.class);
 
-    
-
-    
     @PostMapping("/vecinos")
     public String createVecino(@RequestBody VecinoDTO vecinoDTO) {
         Comunidad comunidad = comunidadRepository.findById(vecinoDTO.getIdComunidad()).orElseThrow(
-            () -> new RuntimeException("Comunidad no encontrada con id: " + vecinoDTO.getIdComunidad())
-        );
+                () -> new RuntimeException("Comunidad no encontrada con id: " + vecinoDTO.getIdComunidad()));
 
         Vecino vecino = new Vecino();
         vecino.setNombre(vecinoDTO.getNombre());
@@ -50,5 +47,23 @@ public class VecinoController {
         vecinoRepository.save(vecino);
         return "Se ha creado correctamente el vecino";
     }
-    }
 
+    /**
+     * @param idVecino
+     * @return
+     */
+
+    @GetMapping("/vecino/comunidad")
+    public long obtenerComunidadDeVecino(VecinoDTO vecinoDTO) {
+
+        Long idVecino = vecinoDTO.getIdvecino();
+
+        Comunidad comunidad = comunidadRepository.findByVecinosContainsId(idVecino);
+        
+        long idComunidad = comunidad.getIdcomunidad();
+        
+        return idComunidad;
+
+
+    }
+}
