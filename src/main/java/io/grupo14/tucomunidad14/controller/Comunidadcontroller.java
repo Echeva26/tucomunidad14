@@ -27,7 +27,7 @@ public class Comunidadcontroller {
     @Autowired
     private AreacomunRepository areacomunRepository;
 
-//Cuando hago un post para crear una comunidad este no porque es super complicado
+    //Cuando hago un post para crear una comunidad este no porque es super complicado
    @PostMapping("/crearcomunidad")
    @ResponseBody
     public String crearComunidad(@RequestParam ComunidadDTO comunidadDTO) {
@@ -38,7 +38,7 @@ public class Comunidadcontroller {
         return "Comunidad creada exitosamente";
     }
 
-    @PostMapping("/crearcomunidad")
+    @PostMapping("/crearcomunidadconzona")
     @ResponseBody
     public String crearComunidad(@RequestBody ComunidadDTO comunidadDTO,@RequestParam("zonas_comunes") List<String> zonasComunes) {
         Comunidad nuevaComunidad = new Comunidad();
