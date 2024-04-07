@@ -23,11 +23,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 
 
 @RestController
-@RequestMapping("/api")
 public class ReservasController {
     @Autowired
     private ReservasRepository reservasRepository;
@@ -89,13 +88,13 @@ public class ReservasController {
     }
 
     @DeleteMapping("/reservas/{id}")
-    public ResponseEntity<Reserva> eliminarReserva(@PathVariable Long id) {
+    public String eliminarReserva(@PathVariable Long id) {
         if (!reservasRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            return "Reserva no encontrada";
         }
 
         reservasRepository.deleteById(id);
-        return ResponseEntity.ok().build();
+        return "Reserva borrada correctamente";
     }
 
     @DeleteMapping("/reservas/eliminarPorVecino/{vecinoId}")
@@ -116,8 +115,19 @@ public class ReservasController {
     }
 
     @GetMapping("/reservas/porAreaComun/{areaComunId}")
-    public List<Reserva> obtenerReservasPorAreaComun(@PathVariable Long areaComunId) {
-        return reservasRepository.findByAreacomunId(areaComunId);
+    public List<ReservaSimpleDTO> obtenerReservasPorAreaComun(@PathVariable Long areaComunId) {
+        List<Reserva> reservas = reservasRepository.findByAreacomunId(areaComunId);
+
+        
+        return reservas.stream().map(reserva -> {
+            ReservaSimpleDTO dto = new ReservaSimpleDTO();
+            dto.setIdreserva(reserva.getIdreserva());
+            dto.setIdvecino(reserva.getVecino().getIdvecino());
+            dto.setIdarea(reserva.getAreacomun().getIdarea());
+            dto.setInicioReserva(reserva.getInicioReserva());;
+            dto.setFinReserva(reserva.getFinReserva());
+            return dto;
+        }).collect(Collectors.toList());
     }
 
     
