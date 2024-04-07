@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api")
 public class ReservasController {
     @Autowired
-    private final ReservasRepository reservasRepository;
+    private ReservasRepository reservasRepository;
 
 
     // Suponiendo la existencia de servicios o repositorios para estas entidades
