@@ -98,6 +98,28 @@ public class ReservasController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/reservas/eliminarPorVecino/{vecinoId}")
+    public String eliminarReservasPorVecino(@PathVariable Long vecinoId) {
+        // Primero, verifica si el vecino existe
+        if (!vecinoRepository.existsById(vecinoId)) {
+            return "El vecino con ID " + vecinoId + " no existe.";
+        }
+        
+        // Encuentra y elimina las reservas asociadas al vecino
+        List<Reserva> reservas = reservasRepository.findByVecinoId(vecinoId);
+        if (reservas.isEmpty()) {
+            return "No se encontraron reservas para el vecino con ID " + vecinoId;
+        }
+
+        reservasRepository.deleteAll(reservas);
+        return "Reservas eliminadas correctamente para el vecino con ID " + vecinoId;
+    }
+
+    @GetMapping("/reservas/porAreaComun/{areaComunId}")
+    public List<Reserva> obtenerReservasPorAreaComun(@PathVariable Long areaComunId) {
+        return reservasRepository.findByAreacomunId(areaComunId);
+    }
+
     
 }
     
