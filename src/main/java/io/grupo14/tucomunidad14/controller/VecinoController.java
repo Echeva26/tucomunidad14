@@ -2,16 +2,14 @@ package io.grupo14.tucomunidad14.controller;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import io.grupo14.tucomunidad14.model.Comunidad;
-
+import io.grupo14.tucomunidad14.model.ComunidadDTO;
 import io.grupo14.tucomunidad14.model.Vecino;
 import io.grupo14.tucomunidad14.model.VecinoDTO;
 import io.grupo14.tucomunidad14.repository.ComunidadRepository;
@@ -53,17 +51,17 @@ public class VecinoController {
      * @return
      */
 
-    @GetMapping("/vecino/comunidad")
-    public long obtenerComunidadDeVecino(VecinoDTO vecinoDTO) {
-
-        Long idVecino = vecinoDTO.getIdvecino();
-
-        Comunidad comunidad = comunidadRepository.findByVecinosContainsId(idVecino);
-        
-        long idComunidad = comunidad.getIdcomunidad();
-        
-        return idComunidad;
-
-
-    }
+     @GetMapping("/vecino/comunidad")
+     public ComunidadDTO obtenerComunidadDeVecino(@RequestParam Long idVecino) {
+         Comunidad comunidad = comunidadRepository.findByVecinosContainsId(idVecino);
+         
+     
+         ComunidadDTO comunidadDTO = new ComunidadDTO();
+         comunidadDTO.setIdcomunidad(comunidad.getIdcomunidad());
+         comunidadDTO.setNombre(comunidad.getNombre());
+         comunidadDTO.setCodpostal(comunidad.getCodpostal());
+     
+         return comunidadDTO;
+     }
+     
 }
