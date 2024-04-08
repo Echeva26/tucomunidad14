@@ -54,20 +54,8 @@ public class VecinoController {
     }
 
 
-    /**@PostMapping("/api/login")
-    public ResponseEntity<String> iniciarSesion(@RequestBody Vecino vecino) {
-        // Obtener el vecino de la base de datos por nombre de usuario
-        Vecino vecinoExistente = vecinoRepository.findByNombredeusuario(vecino.getNombredeusuario());
-        
-        // Verificar si el vecino existe y si la contraseña coincide
-        if (vecinoExistente != null && vecinoExistente.getContraseña().equals(vecino.getContraseña())) {
-            // Si las credenciales son correctas, retornar un mensaje de éxito y código 200
-            return ResponseEntity.ok().body("Inicio de sesión exitoso");
-        } else {
-            // Si las credenciales son incorrectas, retornar un mensaje de error y código 401 (No autorizado)
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
-        }
-    }*/
+
+
     /**
      * @param idVecino
      * @return
