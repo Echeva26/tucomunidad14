@@ -12,7 +12,7 @@
   <!--CABECERA-->
   <div class="cabecera">
     <span class="reserva-de-zonas" >
-      Reserva de pista de padel
+      Reserva de gimnasio
     </span>
     <div class="container">
       <div class="tu-comunidad">
@@ -41,21 +41,7 @@
       <!--PADEL-->
       <div class="elemento">
         <div class="borde-azul"></div>
-        <div class="titulo" >Pista de pádel</div>
-        <!-- Agregar un campo de entrada para seleccionar el día -->
-<div class="container-select-dia">
-  <label for="input-dia">Seleccionar día:</label>
-  <input type="date" id="input-dia" onchange="cargarReservasPorDia()">
-</div>
-
-<!-- Elemento para mostrar el horario de reservas -->
-<div class="horario-reservas">
-  <!-- Generar cuadrados por cada hora desde las 10:00:00 hasta las 22:00:00 -->
-  <div th:each="hora : ${#numbers.sequence(10, 22)}" class="cuadrado-reserva">
-    <span th:text="${hora + ':00:00'}"></span>
-  </div>
-</div>
-
+        <div class="titulo" >Local</div>
       </div>
     </div>
 
