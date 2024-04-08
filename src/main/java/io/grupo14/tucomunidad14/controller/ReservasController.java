@@ -145,13 +145,7 @@ public class ReservasController {
         return reservasRepository.findReservasByAreaComunIdAndDay(areaComunId, inicio, fin);
     }
 
-    @PostMapping("/creararea")
-    public ResponseEntity<Areacomun> crearAreaComun(@RequestBody Areacomun nuevaAreaComun) {
-        // Guarda la nueva área común en la base de datos
-        Areacomun areaGuardada = areaComunRepository.save(nuevaAreaComun);
-        // Retorna una respuesta HTTP con el objeto de área común guardado
-        return ResponseEntity.ok(areaGuardada);
-    }
+    
     
 }
     
