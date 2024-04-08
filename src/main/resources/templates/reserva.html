@@ -1,15 +1,15 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <title>Reserva</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="../static/css/reserva.css" />
+  <link rel="stylesheet" th:href="@{/static/css/reserva.css}" />
 </head>
 
 <body>
-  <!--CABECERA-->
+  <!-- CABECERA -->
   <div class="cabecera">
     <span class="reserva-de-zonas">
       Reserva de zonas
@@ -32,34 +32,37 @@
     </div>
   </div>
 
-  <!--PAGINA-->
+  <!-- PAGINA -->
   <div class="pagina">
     <div class="container-6">
 
-      <!--PADEL-->
-      <div class="elemento">
-        <div class="borde-azul"></div>
-        <div class="elipse-icono">
+<!-- PADEL -->
+  <div class="elemento">
+      <div class="borde-azul"></div>
+      <div class="elipse-icono">
           <div class="circulo"></div>
-          <img class="icono" src="../static/vectors/pelotapadel.svg" />
-        </div>
-        <div class="titulo">
-          Pista de pádel
-        </div>
-        <div class="reservar">
-          <span class="reservar-1">
-            Reservar
-          </span>
-          <img class="flecha-reservar" src="../static/vectors/flecha-reservar.svg" />
-        </div>
+          <img class="icono" th:src="@{/static/vectors/pelotapadel.svg}" />
       </div>
+      <div class="titulo">
+          Pista de pádel
+      </div>
+      <div class="reservar">
+        <a th:href="@{/reserva-padel}" style="text-decoration: none;">
+          <span class="reservar-1">
+              Reservar
+          </span>
+          <img class="flecha-reservar" th:src="@{/static/vectors/flecha-reservar.svg}" />
+        </a>
+      </div>
+  </div>
 
-      <!--LOCAL-->
+
+      <!-- LOCAL -->
       <div class="elemento">
         <div class="borde-azul"></div>
         <div class="elipse-icono">
           <div class="circulo"></div>
-          <img class="icono" src="../static/vectors/casa.svg" />
+          <img class="icono" th:src="@{/static/vectors/casa.svg}" />
         </div>
         <div class="titulo">
           Local
@@ -68,16 +71,16 @@
           <span class="reservar-1">
             Reservar
           </span>
-          <img class="flecha-reservar" src="../static/vectors/flecha-reservar.svg" />
+          <img class="flecha-reservar" th:src="@{/static/vectors/flecha-reservar.svg}" />
         </div>
       </div>
 
-      <!--GIMNASIO-->
+      <!-- GIMNASIO -->
       <div class="elemento">
         <div class="borde-azul"></div>
         <div class="elipse-icono">
           <div class="circulo"></div>
-          <img class="icono" src="../static/vectors/casa.svg" />
+          <img class="icono" th:src="@{/static/vectors/gimnasio.svg}" />
         </div>
         <div class="titulo">
           Gimnasio
@@ -86,30 +89,30 @@
           <span class="reservar-1">
             Reservar
           </span>
-          <img class="flecha-reservar" src="../static/vectors/flecha-reservar.svg" />
+          <img class="flecha-reservar" th:src="@{/static/vectors/flecha-reservar.svg}" />
         </div>
       </div>
 
-      
+
     </div>
   </div>
 
 
-  <!--PIE DE PAGINA-->
+  <!-- PIE DE PAGINA -->
   <div class="pie-de-pagina">
     <div class="container-5">
       <div class="image-2">
       </div>
       <div class="container-4">
-        <img class="icon-1" src="../static/vectors/intagram.svg" />
-        <img class="icon-2" src="../static/vectors/facebook.svg" />
-        <img class="icon-3" src="../static/vectors/twitter.svg" />
+        <img class="icon-1" th:src="@{/static/vectors/intagram.svg}" />
+        <img class="icon-2" th:src="@{/static/vectors/facebook.svg}" />
+        <img class="icon-3" th:src="@{/static/vectors/twitter.svg}" />
       </div>
       <div class="idioma">
         <span class="language">
           Idioma
         </span>
-        <img class="icon-color" src="../static/vectors/flecha.svg" />
+        <img class="icon-color" th:src="@{/static/vectors/flecha.svg}" />
       </div>
     </div>
     <div class="description">
