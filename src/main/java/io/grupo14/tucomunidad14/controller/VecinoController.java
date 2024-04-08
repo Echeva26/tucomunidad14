@@ -97,7 +97,7 @@ public class VecinoController {
     @PostMapping("/cambioContrasena")
     public ResponseEntity<?> cambiarContrasena(@RequestBody CambioContrasenaRequest cambioContrasenaRequest) {
     String newPasswordEncoded = cambioContrasenaRequest.getContraseña();
-    int updatedCount = vecinoRepository.updateContraseñaByNombredeusuario(cambioContrasenaRequest.getNombredeusuario(),newPasswordEncoded);
+    int updatedCount = vecinoRepository.updateContraseñaByNombredeusuario(newPasswordEncoded,cambioContrasenaRequest.getNombredeusuario());
     
     if (updatedCount > 0) {
         return ResponseEntity.ok().body("Contraseña actualizada correctamente.");
