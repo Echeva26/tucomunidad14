@@ -34,10 +34,14 @@
         })
         .then(response => {
           if (!response.ok) {
-            throw new Error('La solicitud ha fallado');
+          throw new Error('La solicitud ha fallado');
           }
-          return response.json(); // Procesa la respuesta del servidor
-        })
+          const contentType = response.headers.get('content-type');
+          if (!contentType || !contentType.includes('application/json')) {
+          throw new TypeError("Oops, we haven't got JSON!");
+          }
+          return response.json();
+          })
         .then(data => {
           console.log(data);
           alert('Comunidad creada con éxito');
