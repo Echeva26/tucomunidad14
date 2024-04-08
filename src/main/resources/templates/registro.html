@@ -6,6 +6,39 @@
   <title>Registrarse</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="../static/css/pag4c.css" />
+  <script>
+    document.getElementById('registroForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var data = {
+        nombre: document.getElementById('full_name').value, //nombre + apellidos
+        apellidos: '', // Añadir campo en el formulario??? ya esta full name
+        email: document.getElementById('email').value,
+        nombredeusuario: document.getElementById('username').value,
+        contraseña: document.getElementById('password').value,
+        gestor: false, // ????????
+        idComunidad: document.getElementById('community_id').value
+        
+    };
+
+    fetch('/vecinos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      window.location.href = '/sesioniniciada';
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+});
+
+  </script>
 </head>
 
 <body>
