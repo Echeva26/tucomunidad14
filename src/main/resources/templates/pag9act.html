@@ -42,7 +42,8 @@
       .then(data => {
         console.log(data);
         alert('Comunidad creada con éxito.');
-        // Redirección o actualización de la interfaz aquí
+        window.location.href = "pag7act2.html";
+
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -120,34 +121,38 @@
     <div class="container-6">
 
         <div class="title-section">
-            <h1 class="bold-text">Crea una nueva comunidad de vecinos</h1>
+          
         </div>
 
         <div class="form-container">
-            <p class="bold-text"><span class="form-text">Para crear una nueva comunidad rellene los siguientes
-                    datos:</span></p>
+           
+          
+        
+
             <!-- FORMULARIO -->
+            
             <form id="crearComunidadForm">
-                <div class="form-field">
-                  <label for="nombre_comunidad" class="form-label">Nombre de la comunidad*:</label>
-                  <input type="text" id="nombre_comunidad" name="nombre" class="form-input" placeholder="Escriba el nombre"/>
-                </div>
-                <div class="form-field">
-                  <label for="codigo_postal" class="form-label">Código postal*:</label>
-                  <input type="text" id="codigo_postal" name="codpostal" class="form-input" placeholder="Escriba el código postal"/>
-                </div>
-                <div class="form-field">
-                  <label for="zonas_comunes" class="form-label">Zonas comunes:</label>
-                  <select id="zonas_comunes" name="zonasComunes" class="form-input" multiple>
-                    <option value="pistas_padel">Pistas de pádel</option>
-                    <option value="local">Local</option>
-                    <option value="gimnasio">Gimnasio</option>
-                  </select>
-                </div>
-                <button class="join-button" type="submit">Crear</button>
-                
-              </form>
-              
+              <h2>Para crear una nueva comunidad, rellene los siguientes datos:</h2>
+              <div style="display: inline-block; width: 100%;">
+                  <div class="form-field" style="width: 30%; display: inline-block;">
+                      <label for="nombre_comunidad" class="form-label">Nombre de la comunidad*:</label>
+                      <input type="text" id="nombre_comunidad" name="nombre" class="form-input" placeholder="Escriba el nombre"/>
+                  </div>
+                  <div class="form-field" style="width: 30%; display: inline-block;">
+                      <label for="codigo_postal" class="form-label">Código postal*:</label>
+                      <input type="text" id="codigo_postal" name="codpostal" class="form-input" placeholder="Escriba el código postal"/>
+                  </div>
+                  <div class="form-field" style="width: 30%; display: inline-block;">
+                      <label for="zonas_comunes" class="form-label">Zonas comunes:</label>
+                      <select id="zonas_comunes" name="zonasComunes" class="form-input" multiple style="width: 100%;">
+                          <option value="pistas_padel">Pistas de pádel</option>
+                          <option value="local">Local</option>
+                          <option value="gimnasio">Gimnasio</option>
+                      </select>
+                  </div>
+              </div>
+              <button class="join-button" type="submit" style="display: block; margin-top: 10px;">Crear</button>
+          </form>
             <!-- FIN DEL FORMULARIO -->
         </div>
 
