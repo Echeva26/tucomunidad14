@@ -31,13 +31,13 @@
   <div class="login-form">
       <h2>¡Bienvenido de nuevo!
         Inicia sesión aquí</h2>
-        <form id="loginForm" method="post">
-          <label for="username">Nombre de Usuario:</label>
-          <input type="text" id="username" name="username" required>
-          <label for="password">Contraseña:</label>
-          <input type="password" id="password" name="password" required>
-          <input type="submit" value="Iniciar Sesión">
-      </form>
+          <form action="/comunidad?id=33" >
+              <label for="username">Nombre de Usuario:</label>
+              <input type="text" id="username" name="username" required>
+              <label for="password">Contraseña:</label>
+              <input type="password" id="password" name="password" required>
+              <input type="submit" value="Iniciar Sesión">
+        </form>
       
       
           <div style="margin-top: 10px;">
@@ -76,7 +76,7 @@
     </span>
   </div>
 
-  <script>
+  <!--<script>
     document.addEventListener("DOMContentLoaded", function() {
 document.getElementById("loginForm").addEventListener("submit", function(e) {
 e.preventDefault();
@@ -84,7 +84,7 @@ var username = document.getElementById("username").value;
 var password = document.getElementById("password").value;
 
 // Realizar la solicitud fetch a la API
-fetch('http://localhost:8080/api/vecino', {
+fetch('http://localhost:8080/api/vecinos', {
 method: 'POST',
 headers: {
   'Content-Type': 'application/json'
@@ -95,6 +95,7 @@ body: JSON.stringify({ usuario: username, contraseña: password })
 .then(response => {
 if (!response.ok) {
   throw new Error('Network response was not ok');
+  window.location.href = '/comunidad?id=' + data.idComunidad;
 }
 return response.json();
 })
@@ -111,6 +112,7 @@ console.error('There has been a problem with your fetch operation:', error);
 
 
 </script>
+-->
 </body>
 
 </html>
