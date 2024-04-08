@@ -1,17 +1,17 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
   <meta charset="UTF-8" />
-  <title>Reserva pista de padel</title>
+  <title >Reserva pista de padel</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="../static/css/reserva-padel.css" />
+  <link rel="stylesheet" th:href="@{/static/css/reserva-padel.css}" />
 </head>
 
 <body>
   <!--CABECERA-->
   <div class="cabecera">
-    <span class="reserva-de-zonas">
+    <span class="reserva-de-zonas" >
       Reserva de pista de padel
     </span>
     <div class="container">
@@ -19,14 +19,14 @@
         TuComunidad
       </div>
       <p class="home">
-        <a href="pag7act2.html">
+        <a href="/comunidad" style="text-decoration: none;">
           <span class="home-sub-30">Home</span>
           <span></span>
-      </a>
-          </p>
+        </a>
+      </p>
       <div class="log-out">
         <span class="our-works">
-          <a href="pag1.html">Log out</a>
+          <a href="/" style="text-decoration: none;">Log out</a>
         </span>
       </div>
       <div class="usuario">
@@ -41,58 +41,60 @@
       <!--PADEL-->
       <div class="elemento">
         <div class="borde-azul"></div>
-        <div class="titulo">
-          Pista de pádel
-        </div>
+        <div class="titulo" >Pista de pádel</div>
+        <!-- Agregar un campo de entrada para seleccionar el día -->
+<div class="container-select-dia">
+  <label for="input-dia">Seleccionar día:</label>
+  <input type="date" id="input-dia" onchange="cargarReservasPorDia()">
+</div>
+
+<!-- Elemento para mostrar el horario de reservas -->
+<div class="horario-reservas">
+  <!-- Generar cuadrados por cada hora desde las 10:00:00 hasta las 22:00:00 -->
+  <div th:each="hora : ${#numbers.sequence(10, 22)}" class="cuadrado-reserva">
+    <span th:text="${hora + ':00:00'}"></span>
+  </div>
+</div>
+
       </div>
     </div>
 
     <div class="container-botones">
 
-    <!--BOTÓN CANCELAR RESERVA-->
-    <div class="boton-cancelar">
-      <span class="texto-boton">
-        Cancelar reserva
-      </span>
-    </div>
+      <!--BOTÓN CANCELAR RESERVA-->
+      <div class="boton-cancelar">
+        <span class="texto-boton" >Cancelar reserva</span>
+      </div>
 
       <!--BOTÓN RESERVAR-->
-    <div class="boton-reservar">
-      <span class="texto-boton">
-        Reservar
-      </span>
-
-    </div>
+      <div class="boton-reservar">
+        <span class="texto-boton" >Reservar</span>
+      </div>
     </div>
   </div>
-
 
   <!--PIE DE PAGINA-->
   <div class="pie-de-pagina">
     <div class="container-5">
-      <div class="image-2">
-      </div>
+      <div class="image-2"></div>
       <div class="container-4">
-        <img class="icon-1" src="../static/vectors/intagram.svg" />
-        <img class="icon-2" src="../static/vectors/facebook.svg" />
-        <img class="icon-3" src="../static/vectors/twitter.svg" />
+        <img class="icon-1" th:src="@{/static/vectors/intagram.svg}" />
+        <img class="icon-2" th:src="@{/static/vectors/facebook.svg}" />
+        <img class="icon-3" th:src="@{/static/vectors/twitter.svg}" />
       </div>
       <div class="idioma">
-        <span class="language">
-          Idioma
-        </span>
-        <img class="icon-color" src="../static/vectors/flecha.svg" />
+        <span class="language">Idioma</span>
+        <img class="icon-color" th:src="@{/static/vectors/flecha.svg}" />
       </div>
     </div>
-    <div class="description">
+    <div class="description" th:text="${descripcion}">
       Facilitamos la convivencia en tu comunidad
     </div>
-    <div class="line">
-    </div>
-    <span class="tucom">
-      ©TuComunidad 2024
-    </span>
+    <div class="line"></div>
+    <span class="tucom">©TuComunidad 2024</span>
   </div>
 </body>
+<script src="/js/reservas.js"></script>
+
 
 </html>

@@ -3,16 +3,16 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Reserva</title>
+  <title >Reserva pista de padel</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" th:href="@{/static/css/reserva.css}" />
+  <link rel="stylesheet" th:href="@{/static/css/reserva-padel.css}" />
 </head>
 
 <body>
-  <!-- CABECERA -->
+  <!--CABECERA-->
   <div class="cabecera">
-    <span class="reserva-de-zonas">
-      Reserva de zonas
+    <span class="reserva-de-zonas" >
+      Reserva de gimnasio
     </span>
     <div class="container">
       <div class="tu-comunidad">
@@ -22,8 +22,8 @@
         <a href="/comunidad" style="text-decoration: none;">
           <span class="home-sub-30">Home</span>
           <span></span>
-      </a>
-          </p>
+        </a>
+      </p>
       <div class="log-out">
         <span class="our-works">
           <a href="/" style="text-decoration: none;">Log out</a>
@@ -35,58 +35,52 @@
     </div>
   </div>
 
-  <!-- PAGINA -->
+  <!--PAGINA-->
   <div class="pagina">
     <div class="container-6">
-      <!-- Iterar sobre la lista de áreas comunes -->
-<div th:each="area : ${areas}" class="elemento">
-  <div class="borde-azul"></div>
-  <div class="elipse-icono">
-      <div class="circulo"></div>
-      <!-- Utilizar condiciones para mostrar el icono correspondiente -->
-      <img class="icono" th:switch="${area}" th:src="@{'/static/vectors/' + ${area.name().toUpperCase()} + '.svg'}" />
-  </div>
-  <!-- Utilizar condiciones para mostrar el título y enlace de reserva -->
-  <div class="titulo" th:text="${area.name()}"></div>
-  <div class="reservar">
-    <a th:href="@{${'/reserva-' + area.name().toLowerCase()}}" style="text-decoration: none;">
-      <span class="reservar-1">Reservar</span>
-      <img class="flecha-reservar" th:src="@{/static/vectors/flecha-reservar.svg}" />
-  </a>
-  
-  </div>
-</div>
+      <!--PADEL-->
+      <div class="elemento">
+        <div class="borde-azul"></div>
+        <div class="titulo" >Local</div>
+      </div>
+    </div>
 
-  </div>
-  
+    <div class="container-botones">
+
+      <!--BOTÓN CANCELAR RESERVA-->
+      <div class="boton-cancelar">
+        <span class="texto-boton" >Cancelar reserva</span>
+      </div>
+
+      <!--BOTÓN RESERVAR-->
+      <div class="boton-reservar">
+        <span class="texto-boton" >Reservar</span>
+      </div>
+    </div>
   </div>
 
-  <!-- PIE DE PAGINA -->
+  <!--PIE DE PAGINA-->
   <div class="pie-de-pagina">
     <div class="container-5">
-      <div class="image-2">
-      </div>
+      <div class="image-2"></div>
       <div class="container-4">
         <img class="icon-1" th:src="@{/static/vectors/intagram.svg}" />
         <img class="icon-2" th:src="@{/static/vectors/facebook.svg}" />
         <img class="icon-3" th:src="@{/static/vectors/twitter.svg}" />
       </div>
       <div class="idioma">
-        <span class="language">
-          Idioma
-        </span>
+        <span class="language">Idioma</span>
         <img class="icon-color" th:src="@{/static/vectors/flecha.svg}" />
       </div>
     </div>
-    <div class="description">
+    <div class="description" th:text="${descripcion}">
       Facilitamos la convivencia en tu comunidad
     </div>
-    <div class="line">
-    </div>
-    <span class="tucom">
-      ©TuComunidad 2024
-    </span>
+    <div class="line"></div>
+    <span class="tucom">©TuComunidad 2024</span>
   </div>
 </body>
+<script src="/js/reservas.js"></script>
+
 
 </html>
