@@ -2,6 +2,7 @@ package io.grupo14.tucomunidad14.controller;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +37,8 @@ public class VecinoController {
     public static final Logger log = LoggerFactory.getLogger(ReservasController.class);
 
     @PostMapping("/vecinos")
-    public String createVecino(@RequestBody VecinoDTO vecinoDTO) {
+public ResponseEntity<String> createVecino(@RequestBody VecinoDTO vecinoDTO) {
+    try {
         Comunidad comunidad = comunidadRepository.findById(vecinoDTO.getIdComunidad()).orElseThrow(
                 () -> new RuntimeException("Comunidad no encontrada con id: " + vecinoDTO.getIdComunidad()));
 
@@ -48,15 +50,16 @@ public class VecinoController {
         vecino.setContraseña(vecinoDTO.getContraseña());
         vecino.setGestor(vecinoDTO.getGestor());
         vecino.setComunidad(comunidad);
-        // Setear cualquier otro campo necesario
+        
         vecinoRepository.save(vecino);
-        return "Se ha creado correctamente el vecino";
+        
+        return ResponseEntity.ok().body("Se ha creado correctamente el vecino");
+    } catch (Exception e) {
+        log.error("Error al crear el vecino", e);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear el vecino: " + e.getMessage());
     }
+}
 
-    /**
-     * @param idVecino
-     * @return
-     */
 
      @GetMapping("/vecino/comunidad")
      public ComunidadDTO obtenerComunidadDeVecino(@RequestParam Long idVecino) {
