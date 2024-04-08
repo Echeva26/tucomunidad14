@@ -5,7 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TuComunidad</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" href="../assets/css/pag1.css" />
+    <link rel="stylesheet" href="../static/css/pag1.css" />
+    <script>
+          document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
+          e.preventDefault();
+          var username = document.getElementById("username").value;
+          var password = document.getElementById("password").value;
+          
+          // Realizar la solicitud fetch a la API
+          fetch(`http://localhost:8080/api/vecino?usuario=${username}&contraseña=${password}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+              // Si tu API requiere un token de autenticación, deberías añadirlo aquí también
+            }
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            console.log("ha hecho el get")
+            return response.json();
+          })
+          .then(data => {
+            console.log(data);
+            // Aquí manejas la respuesta. Por ejemplo, podrías redirigir al usuario o mostrar algún mensaje.
+            console.log("ha hecho el get")
+            window.location.href = '/sesioniniciada';
+          })
+          .catch((error) => {
+            console.error('There has been a problem with your fetch operation:', error);
+          });
+        });
+      });
+
+      
+    </script>
 </head>
 
 <div class="cabecera">
@@ -28,6 +64,7 @@
   </div>
 
   <div class="login-form">
+<<<<<<< HEAD
       <h2>¡Bienvenido de nuevo!
         Inicia sesión aquí</h2>
       <form action="#" method="post">
@@ -42,6 +79,16 @@
             
           </div>
       </form>
+=======
+    <h2>¡Bienvenido de nuevo! Inicia sesión aquí</h2>
+    <form id="loginForm">
+        <label for="username">Nombre de Usuario:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+        <input type="submit" value="Iniciar Sesión">
+    </form>
+>>>>>>> c40527f28d0b1439b548c226215beb02e4bf1ff9
       <p>¿No tienes cuenta? <a href="#">Regístrate aquí</a>.</p>
   </div>
 </div>
@@ -53,15 +100,15 @@
       <div class="image-2">
       </div>
       <div class="container-4">
-        <img class="icon-1" src="../assets/vectors/intagram.svg" />
-        <img class="icon-2" src="../assets/vectors/facebook.svg" />
-        <img class="icon-3" src="../assets/vectors/twitter.svg" />
+        <img class="icon-1" src="../static/vectors/intagram.svg" />
+        <img class="icon-2" src="../static/vectors/facebook.svg" />
+        <img class="icon-3" src="../static/vectors/twitter.svg" />
       </div>
       <div class="idioma">
         <span class="language">
           Idioma
         </span>
-        <img class="icon-color" src="../assets/vectors/flecha.svg" />
+        <img class="icon-color" src="../static/vectors/flecha.svg" />
       </div>
     </div>
     <div class="description-2">
