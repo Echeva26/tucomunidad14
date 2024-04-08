@@ -49,10 +49,11 @@
   <!-- Utilizar condiciones para mostrar el título y enlace de reserva -->
   <div class="titulo" th:text="${area.name()}"></div>
   <div class="reservar">
-      <a th:href="@{'/reserva-' + ${area.name().toLowerCase()}}" style="text-decoration: none;"> <!-- Ajustar el enlace según tu configuración -->
-          <span class="reservar-1">Reservar</span>
-          <img class="flecha-reservar" th:src="@{/static/vectors/flecha-reservar.svg}" />
-      </a>
+    <a th:href="@{${'/reserva-' + area.name().toLowerCase()}}" style="text-decoration: none;">
+      <span class="reservar-1">Reservar</span>
+      <img class="flecha-reservar" th:src="@{/static/vectors/flecha-reservar.svg}" />
+  </a>
+  
   </div>
 </div>
 
