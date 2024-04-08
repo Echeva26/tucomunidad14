@@ -7,6 +7,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="../static/css/ejemplo.css" />
 </head>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('crearComunidadBtn').addEventListener('click', function() {
+      window.location.href = '/crearcomunidad';
+    });
+  });
+</script>
+  
 
 <body>
   <!--CABECERA-->
@@ -63,7 +71,7 @@
         <div class="titulo">
           Crea una comunidad
         </div>
-        <div class="reservar">
+        <div class="reservar" id="crearComunidadBtn">
           <span class="reservar-1">
             Crear
           </span>
