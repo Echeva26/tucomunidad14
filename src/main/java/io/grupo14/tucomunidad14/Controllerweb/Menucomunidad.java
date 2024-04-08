@@ -4,12 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class Crearcomunidad {
+public class Menucomunidad {
+    
 
-
-    @GetMapping("/crearcomunidad")
-    public String index() {
-        return "pag9act"; 
-    }    
-
+    @GetMapping("/menucomunidad")
+    public String menucomunidad() {
+        return "pag11act"; 
+    }
 }

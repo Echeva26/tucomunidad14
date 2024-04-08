@@ -13,6 +13,12 @@
       window.location.href = '/crearcomunidad';
     });
   });
+
+  document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('menucomunidad').addEventListener('click', function() {
+      window.location.href = '/menucomunidad';
+    });
+  });
 </script>
   
 
@@ -53,7 +59,7 @@
         <div class="titulo">
           Tu comunidad actual
         </div>
-        <div class="reservar">
+        <div class="reservar"id="menucomunidad">
           <span class="reservar-1">
             Acceder
           </span>
