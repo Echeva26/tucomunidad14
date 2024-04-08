@@ -2,6 +2,7 @@ package io.grupo14.tucomunidad14.controller;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +29,9 @@ public class VecinoController {
 
     @Autowired
     private ComunidadRepository comunidadRepository;
+
+    
+
 
     public static final Logger log = LoggerFactory.getLogger(ReservasController.class);
 
@@ -84,6 +88,30 @@ public class VecinoController {
         } else {
             throw new RuntimeException("Vecino no encontrado");
         }
+
+
+    
      
     }
+
+    @PostMapping("/cambioContrasena")
+    public ResponseEntity<?> cambiarContrasena(@RequestBody CambioContrasenaRequest cambioContrasenaRequest) {
+    String newPasswordEncoded = cambioContrasenaRequest.getContraseña();
+    int updatedCount = vecinoRepository.updateContraseñaByNombredeusuario(newPasswordEncoded,cambioContrasenaRequest.getNombredeusuario());
+    
+    if (updatedCount > 0) {
+        return ResponseEntity.ok().body("Contraseña actualizada correctamente.");
+    } else {
+        return ResponseEntity.badRequest().body("Error: El nombre de usuario no existe.");
+    }
+}
+
+
+    //
+
+
+   
+
+
+
 }

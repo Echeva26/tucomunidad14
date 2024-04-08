@@ -12,7 +12,6 @@ import io.grupo14.tucomunidad14.repository.ComunidadRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,5 +48,6 @@ public class Areacontroller {
         return areas;
         
     }
+    
     
 }
