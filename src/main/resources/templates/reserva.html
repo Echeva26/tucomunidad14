@@ -36,22 +36,23 @@
   <div class="pagina">
     <div class="container-6">
       <!-- Iterar sobre la lista de áreas comunes -->
-      <div th:each="area : ${areas}" class="elemento">
-          <div class="borde-azul"></div>
-          <div class="elipse-icono">
-              <div class="circulo"></div>
-              <!-- Utilizar condiciones para mostrar el icono correspondiente -->
-              <img class="icono" th:switch="${area}" th:src="|@{/static/vectors/${area.name().toLowerCase()}.svg}|" />
-          </div>
-          <!-- Utilizar condiciones para mostrar el título y enlace de reserva -->
-          <div class="titulo" th:text="${area.name()}"></div>
-          <div class="reservar">
-              <a th:href="@{'/reserva-' + ${area.name().toLowerCase()}}"> <!-- Ajustar el enlace según tu configuración -->
-                  <span class="reservar-1">Reservar</span>
-                  <img class="flecha-reservar" th:src="@{/static/vectors/flecha-reservar.svg}" />
-              </a>
-          </div>
-      </div>
+<div th:each="area : ${areas}" class="elemento">
+  <div class="borde-azul"></div>
+  <div class="elipse-icono">
+      <div class="circulo"></div>
+      <!-- Utilizar condiciones para mostrar el icono correspondiente -->
+      <img class="icono" th:switch="${area}" th:src="@{'/static/vectors/' + ${area.name().toUpperCase()} + '.svg'}" />
+  </div>
+  <!-- Utilizar condiciones para mostrar el título y enlace de reserva -->
+  <div class="titulo" th:text="${area.name()}"></div>
+  <div class="reservar">
+      <a th:href="@{'/reserva-' + ${area.name().toLowerCase()}}" style="text-decoration: none;"> <!-- Ajustar el enlace según tu configuración -->
+          <span class="reservar-1">Reservar</span>
+          <img class="flecha-reservar" th:src="@{/static/vectors/flecha-reservar.svg}" />
+      </a>
+  </div>
+</div>
+
   </div>
   
   </div>
