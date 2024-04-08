@@ -13,8 +13,10 @@ public class ReservaSimpleDTO {
     // Campo para el fin de la reserva
     private Timestamp finReserva;
     
-
     
+    
+    public ReservaSimpleDTO() {
+    }
     public Timestamp getInicioReserva() {
         return inicioReserva;
     }

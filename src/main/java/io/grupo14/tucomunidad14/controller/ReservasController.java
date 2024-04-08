@@ -10,12 +10,17 @@ import io.grupo14.tucomunidad14.repository.AreacomunRepository;
 import io.grupo14.tucomunidad14.repository.ReservasRepository;
 import io.grupo14.tucomunidad14.repository.VecinoRepository;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -114,7 +119,7 @@ public class ReservasController {
         return "Reservas eliminadas correctamente para el vecino con ID " + vecinoId;
     }
 
-    @GetMapping("/reservas/porAreaComun/{areaComunId}")
+    @GetMapping("/reservas/porAreaComun2/{areaComunId}")
     public List<ReservaSimpleDTO> obtenerReservasPorAreaComun(@PathVariable Long areaComunId) {
         List<Reserva> reservas = reservasRepository.findByAreacomunId(areaComunId);
 
@@ -129,7 +134,16 @@ public class ReservasController {
             return dto;
         }).collect(Collectors.toList());
     }
-
+    @GetMapping("/reservas/porAreaComun/{areaComunId}")
+    public List<ReservaSimpleDTO> obtenerReservasPorAreaComunYDia(@PathVariable Long areaComunId,@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
+        LocalDateTime inicioDelDia = fecha.atStartOfDay(); // 00:00 del día
+        LocalDateTime finDelDia = fecha.atTime(23, 59, 59); // Fin del día
+        
+        Timestamp inicio = Timestamp.valueOf(inicioDelDia);
+        Timestamp fin = Timestamp.valueOf(finDelDia);
+    
+        return reservasRepository.findReservasByAreaComunIdAndDay(areaComunId, inicio, fin);
+    }
     
 }
     
