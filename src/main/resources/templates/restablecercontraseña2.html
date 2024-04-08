@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../static/css/pag3.css" />
 
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('resetPasswordForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -44,6 +45,7 @@
           console.error('Error:', error);
       });
   });
+})
   </script>
 </head>
 

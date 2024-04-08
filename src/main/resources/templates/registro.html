@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="../static/css/pag4c.css" />
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('registroForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -35,7 +36,7 @@
       console.log("POST hecho")
       return response.json();
     })
-    
+
     .then(data => {
       console.log(data);
       window.location.href = '/sesioniniciada';
@@ -43,8 +44,9 @@
     .catch((error) => {
         console.error('Error:', error);
     });
-});
-
+    });
+  })
+  
   </script>
 </head>
 
