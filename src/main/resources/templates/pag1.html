@@ -6,42 +6,7 @@
     <title>TuComunidad</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" href="../static/css/pag1.css" />
-    <script>
-          document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("loginForm").addEventListener("submit", function(e) {
-          e.preventDefault();
-          var username = document.getElementById("username").value;
-          var password = document.getElementById("password").value;
-          
-          // Realizar la solicitud fetch a la API
-          fetch(`http://localhost:8080/api/vecino?usuario=${username}&contraseña=${password}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-              // Si tu API requiere un token de autenticación, deberías añadirlo aquí también
-            }
-          })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            console.log("ha hecho el get")
-            return response.json();
-          })
-          .then(data => {
-            console.log(data);
-            // Aquí manejas la respuesta. Por ejemplo, podrías redirigir al usuario o mostrar algún mensaje.
-            console.log("ha hecho el get")
-            window.location.href = '/sesioniniciada';
-          })
-          .catch((error) => {
-            console.error('There has been a problem with your fetch operation:', error);
-          });
-        });
-      });
-
-      
-    </script>
+    
 </head>
 
 <div class="cabecera">
@@ -66,17 +31,19 @@
   <div class="login-form">
       <h2>¡Bienvenido de nuevo!
         Inicia sesión aquí</h2>
-      <form action="#" method="post">
+        <form id="loginForm" method="post">
           <label for="username">Nombre de Usuario:</label>
           <input type="text" id="username" name="username" required>
           <label for="password">Contraseña:</label>
           <input type="password" id="password" name="password" required>
           <input type="submit" value="Iniciar Sesión">
+      </form>
+      
+      
           <div style="margin-top: 10px;">
               <a href="/restablecercontrasena2">He olvidado mi contraseña</a>
             
           </div>
-    </form>
       <p>¿No tienes cuenta? <a href="/registro">Regístrate aquí</a>.</p>
   </div>
 </div>
@@ -109,5 +76,41 @@
     </span>
   </div>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+e.preventDefault();
+var username = document.getElementById("username").value;
+var password = document.getElementById("password").value;
+
+// Realizar la solicitud fetch a la API
+fetch('http://localhost:8080/api/vecino', {
+method: 'POST',
+headers: {
+  'Content-Type': 'application/json'
+  // Si tu API requiere un token de autenticación, deberías añadirlo aquí también
+},
+body: JSON.stringify({ usuario: username, contraseña: password })
+})
+.then(response => {
+if (!response.ok) {
+  throw new Error('Network response was not ok');
+}
+return response.json();
+})
+.then(data => {
+console.log(data);
+// Aquí manejas la respuesta. Por ejemplo, podrías redirigir al usuario o mostrar algún mensaje.
+window.location.href = '/comunidad?id=' + data.idComunidad;
+})
+.catch((error) => {
+console.error('There has been a problem with your fetch operation:', error);
+});
+});
+});
+
+
+</script>
 </body>
+
 </html>
