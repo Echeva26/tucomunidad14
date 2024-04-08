@@ -29,6 +29,9 @@ public class VecinoController {
     @Autowired
     private ComunidadRepository comunidadRepository;
 
+    
+
+
     public static final Logger log = LoggerFactory.getLogger(ReservasController.class);
 
     @PostMapping("/vecinos")

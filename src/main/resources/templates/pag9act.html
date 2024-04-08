@@ -50,6 +50,41 @@
       });
     });
   });
+
+  document.getElementById('crearComunidadForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const zonasComunesSeleccionadas = Array.from(document.getElementById('zonas_comunes').selectedOptions).map(option => option.value);
+
+  // Ejemplo: enviar cada área común seleccionada como una solicitud separada
+  zonasComunesSeleccionadas.forEach(zonaComun => {
+    const areaData = {
+        nombre: zonaComun, // Este será el valor seleccionado; adapta según tu modelo de datos
+        tipodearea: zonaComun,
+        idcomunidad:1 // Esto también, ajusta según necesidad
+    };
+
+    fetch('/creararea', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(areaData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('La solicitud ha fallado');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+  });
+});
   </script>
      
     

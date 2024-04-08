@@ -6,6 +6,45 @@
   <title>Restablecer contraseña</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="../static/css/pag3.css" />
+
+  <script>
+    document.getElementById('resetPasswordForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      var newPassword = document.getElementById('new_password').value;
+      var confirmPassword = document.getElementById('confirm_password').value;
+      //var verificationCode = document.getElementById('verification_code').value;
+
+      // Verificar si las contraseñas coinciden
+      if (newPassword !== confirmPassword) {
+          alert('Las contraseñas no coinciden.');
+          return;
+      }
+
+      // Aquí, debes enviar los datos al endpoint correcto en tu controlador
+      fetch('/cambioContrasena', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              newPassword: newPassword,
+              //verificationCode: verificationCode
+          }),
+      })
+      .then(response => {
+          // Manejar la respuesta
+          if(response.ok) {
+              alert('Contraseña restablecida con éxito');
+          } else {
+              alert('Error al restablecer la contraseña');
+          }
+      })
+      .catch((error) => {
+          console.error('Error:', error);
+      });
+  });
+  </script>
 </head>
 
 <body>
@@ -28,18 +67,18 @@
   <!--PAGINA-->
   <div class="pagina">
     <div class="container-6">
-        <p>Por favor, escriba su nueva contraseña e ingrese el código enviado a su correo electrónico:</p>
+        <p>Por favor, escriba su nueva contraseña:</p>
         <form action="#" method="post">
             <label for="new_password">Nueva Contraseña:</label>
             <input type="password" id="new_password" name="new_password" required>
             <label for="confirm_password">Confirmar Nueva Contraseña:</label>
             <input type="password" id="confirm_password" name="confirm_password" required>
-            <label for="verification_code">Código de Verificación:</label>
-            <input type="text" id="verification_code" name="verification_code" required>
+            <!--<label for="verification_code">Código de Verificación:</label>
+            <input type="text" id="verification_code" name="verification_code" >-->
             <input type="submit" value="Cambiar Contraseña">
             
         </form>
-        <p>¿No te ha llegado el correo?<a href="#"> Volver a enviar</a>.</p>
+        <!--<p>¿No te ha llegado el correo?<a href="#"> Volver a enviar</a>.</p>-->
     
     
     </div>
