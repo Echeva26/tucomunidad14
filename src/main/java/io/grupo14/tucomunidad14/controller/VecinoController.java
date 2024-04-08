@@ -14,6 +14,9 @@ import io.grupo14.tucomunidad14.model.Vecino;
 import io.grupo14.tucomunidad14.model.VecinoDTO;
 import io.grupo14.tucomunidad14.repository.ComunidadRepository;
 import io.grupo14.tucomunidad14.repository.VecinoRepository;
+
+import java.util.Optional;
+
 import org.slf4j.Logger;
 
 @RestController
@@ -63,5 +66,24 @@ public class VecinoController {
      
          return comunidadDTO;
      }
+     @GetMapping("/vecino")
+    public VecinoDTO obtenerVecinoPorUsuarioYContraseña(@RequestParam String usuario, @RequestParam String contraseña) {
+    Optional<Vecino> vecinoOpt = vecinoRepository.findByUsernameAndPassword(usuario, contraseña);
+    if (vecinoOpt.isPresent()) {
+        Vecino vecino = vecinoOpt.get();
+        VecinoDTO vecinoDTO = new VecinoDTO();
+        vecinoDTO.setIdvecino(vecino.getIdvecino());
+        vecinoDTO.setNombre(vecino.getNombre());
+        vecinoDTO.setApellidos(vecino.getApellidos());
+        vecinoDTO.setEmail(vecino.getEmail());
+        vecinoDTO.setNombredeusuario(vecino.getNombredeusuario());
+        vecinoDTO.setContraseña(vecino.getContraseña()); // Considera no retornar la contraseña
+        vecinoDTO.setGestor(vecino.getGestor());
+        vecinoDTO.setIdComunidad(vecino.getComunidad().getIdcomunidad()); // Asegúrate de que Comunidad tenga getIdcomunidad() o ajusta según tu modelo
+        return vecinoDTO;
+        } else {
+            throw new RuntimeException("Vecino no encontrado");
+        }
      
+    }
 }
