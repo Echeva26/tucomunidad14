@@ -36,28 +36,29 @@
   <div class="pagina">
     <div class="container-6">
 
-<!-- PADEL -->
-  <div class="elemento">
-      <div class="borde-azul"></div>
-      <div class="elipse-icono">
+      <!-- PADEL -->
+      <!--<div th:if="${areas.contains('PISTADEPADEL')}" class="elemento"></div>-->
+      <div class="elemento">
+        <div class="borde-azul"></div>
+        <div class="elipse-icono">
           <div class="circulo"></div>
           <img class="icono" th:src="@{/static/vectors/pelotapadel.svg}" />
-      </div>
-      <div class="titulo">
+        </div>
+        <div class="titulo">
           Pista de pádel
-      </div>
-      <div class="reservar">
-        <a th:href="@{/reserva-padel}" style="text-decoration: none;">
-          <span class="reservar-1">
+        </div>
+        <div class="reservar">
+          <a th:href="@{/reserva-padel}" style="text-decoration: none;">
+            <span class="reservar-1">
               Reservar
-          </span>
-          <img class="flecha-reservar" th:src="@{/static/vectors/flecha-reservar.svg}" />
-        </a>
+            </span>
+            <img class="flecha-reservar" th:src="@{/static/vectors/flecha-reservar.svg}" />
+          </a>
+        </div>
       </div>
-  </div>
-
 
       <!-- LOCAL -->
+      <!-- <div th:if="${areas.contains('LOCAL')}" class="elemento"> -->
       <div class="elemento">
         <div class="borde-azul"></div>
         <div class="elipse-icono">
@@ -76,6 +77,7 @@
       </div>
 
       <!-- GIMNASIO -->
+      <!-- <div th:if="${areas.contains('GIMNASIO')}" class="elemento"> -->
       <div class="elemento">
         <div class="borde-azul"></div>
         <div class="elipse-icono">
@@ -93,10 +95,8 @@
         </div>
       </div>
 
-
     </div>
   </div>
-
 
   <!-- PIE DE PAGINA -->
   <div class="pie-de-pagina">
