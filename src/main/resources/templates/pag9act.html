@@ -42,7 +42,7 @@
           console.log(data);
           alert('Comunidad creada con éxito');
           // Aquí puedes redirigir al usuario o mostrar un mensaje de éxito
-          <a href="pag9act.html">Crear</a>
+        window.location.href= "/menucomunidad";
         })
         .catch((error) => {
           console.error('Error:', error);
@@ -106,8 +106,11 @@
             TuComunidad
         </div>
         <p class="home">
-            <span class="home-sub-30">Home</span><span></span>
-        </p>
+          <a href="pag7act2.html">
+            <span class="home-sub-30">Home</span>
+            <span></span>
+        </a>        
+      </p>
         <div class="log-out">
         <span class="our-works">
           Log Out
