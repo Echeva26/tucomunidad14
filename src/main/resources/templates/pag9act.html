@@ -10,92 +10,49 @@
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('crearComunidadForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Evita el envío tradicional del formulario
-    
-        // Recolecta los valores ingresados por el usuario
-        const nombreComunidad = document.getElementById('nombre_comunidad').value;
-        const codigoPostal = document.getElementById('codigo_postal').value;
-    
-        // Prepara los datos para ser enviados
-        const data = {
-          nombre: nombreComunidad,
-          codpostal: codigoPostal
-        };
-    
-        // Realiza la solicitud POST
-        fetch('/crearcomunidad', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data) // Convierte los datos del formulario en una cadena JSON
-        })
-        .then(response => {
-          if (!response.ok) {
-          throw new Error('La solicitud ha fallado');
-          }
-          const contentType = response.headers.get('content-type');
-          if (!contentType || !contentType.includes('application/json')) {
-          throw new TypeError("Oops, we haven't got JSON!");
-          }
-          return response.json();
-          })
-        .then(data => {
-          console.log(data);
-          alert('Comunidad creada con éxito');
-          // Aquí puedes redirigir al usuario o mostrar un mensaje de éxito
-          <a href="pag9act.html">Crear</a>
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('crearComunidadForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Evita el envío tradicional del formulario
+  
+      // Recolecta los valores ingresados por el usuario
+      const nombreComunidad = document.getElementById('nombre_comunidad').value;
+      const codigoPostal = document.getElementById('codigo_postal').value;
+      const zonasComunesSeleccionadas = Array.from(document.getElementById('zonas_comunes').selectedOptions).map(option => option.value);
+  
+      // Prepara los datos para ser enviados
+      const data = {
+        nombre: nombreComunidad,
+        codpostal: codigoPostal,
+        zonasComunes: zonasComunesSeleccionadas.join(',') // Asume que el servidor puede manejar las zonas comunes como una cadena separada por comas
+      };
+  
+      // Realiza la solicitud POST a crearcomunidad
+      fetch('/crearcomunidad', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data) // Convierte los datos del formulario en una cadena JSON
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('La solicitud ha fallado con estado: ' + response.status);
+        }
+        return response.json(); // Asegura que la respuesta sea en formato JSON
+      })
+      .then(data => {
+        console.log(data);
+        alert('Comunidad creada con éxito.');
+        // Redirección o actualización de la interfaz aquí
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert('Error al crear la comunidad: ' + error.message);
       });
     });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('crearComunidadForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Evita el envío tradicional del formulario
-        
-            // Recolecta los valores ingresados por el usuario
-            const nombreComunidad = document.getElementById('nombre_comunidad').value;
-            const codigoPostal = document.getElementById('codigo_postal').value;
-            const zonasComunesSeleccionadas = Array.from(document.getElementById('zonas_comunes').selectedOptions).map(option => option.value);
-            
-            // Asignar el ID de la comunidad creada a estas variables de manera adecuada
-            const idComunidad = 1;
-            
-            // Supongamos que quieres enviar cada área común seleccionada como una petición separada
-            zonasComunesSeleccionadas.forEach(zonaComun => {
-                const areaData = {
-                    nombre: zonaComun, // O cualquier otra lógica para definir el nombre basado en el valor seleccionado
-                    tipodearea: zonaComun, // Asumiendo que el valor seleccionado puede ser usado como tipo de área
-                    idComunidad: idComunidad // Usar el ID de la comunidad correcto
-                };
-                
-                fetch('/creararea', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(areaData)
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('La solicitud ha fallado');
-                    }
-                    return response.json(); // O manejar de otra manera la respuesta satisfactoria
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-            });
-            
-            // Aquí el resto del código para crear la comunidad...
-        });
-    });
-</script>
+  });
+  </script>
+  
     
     
 
