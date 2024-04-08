@@ -19,11 +19,14 @@
         TuComunidad
       </div>
       <p class="home">
-        <span class="home-sub-30">Home</span><span></span>
-      </p>
+        <a href="pag7act2.html">
+          <span class="home-sub-30">Home</span>
+          <span></span>
+      </a>
+          </p>
       <div class="log-out">
         <span class="our-works">
-          Log Out
+          <a href="pag1.html">Log out</a>
         </span>
       </div>
       <div class="usuario">
@@ -46,10 +49,11 @@
   <!-- Utilizar condiciones para mostrar el título y enlace de reserva -->
   <div class="titulo" th:text="${area.name()}"></div>
   <div class="reservar">
-      <a th:href="@{'/reserva-' + ${area.name().toLowerCase()}}" style="text-decoration: none;"> <!-- Ajustar el enlace según tu configuración -->
-          <span class="reservar-1">Reservar</span>
-          <img class="flecha-reservar" th:src="@{/static/vectors/flecha-reservar.svg}" />
-      </a>
+    <a th:href="@{${'/reserva-' + area.name().toLowerCase()}}" style="text-decoration: none;">
+      <span class="reservar-1">Reservar</span>
+      <img class="flecha-reservar" th:src="@{/static/vectors/flecha-reservar.svg}" />
+  </a>
+  
   </div>
 </div>
 

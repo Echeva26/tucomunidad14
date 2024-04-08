@@ -144,6 +144,8 @@ public class ReservasController {
     
         return reservasRepository.findReservasByAreaComunIdAndDay(areaComunId, inicio, fin);
     }
+
+    
     
 }
     
