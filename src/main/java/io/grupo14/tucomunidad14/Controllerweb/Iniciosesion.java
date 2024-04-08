@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class Iniciosesion {
     
-
     @GetMapping("/sesioniniciada")
     public String sesioniniciada() {
         return "pag7act2"; 
