@@ -22,8 +22,7 @@
       // Prepara los datos para ser enviados
       const data = {
         nombre: nombreComunidad,
-        codpostal: codigoPostal,
-        zonasComunes: zonasComunesSeleccionadas.join(',') // Asume que el servidor puede manejar las zonas comunes como una cadena separada por comas
+        codpostal: codigoPostal, // Asume que el servidor puede manejar las zonas comunes como una cadena separada por comas
       };
   
       // Realiza la solicitud POST a crearcomunidad
