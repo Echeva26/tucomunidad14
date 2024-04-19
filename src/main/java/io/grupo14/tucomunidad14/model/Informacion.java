@@ -3,7 +3,7 @@ package io.grupo14.tucomunidad14.model;
 import java.sql.Date;
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +16,6 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@EntityScan
 @Table(name= "INFORMACION")
 public class Informacion {
 
@@ -30,8 +29,7 @@ public class Informacion {
     private String textocompleto;//Cambios?
     
     @ManyToMany(mappedBy = "informacions")
-    @JoinColumn(name = "vecino")
-    private List<Vecino> vecino;
+    private List<Vecino> vecinos;
     @ManyToOne
     @JoinColumn(name = "comunidad")
     private Comunidad comunidad;
@@ -78,10 +76,10 @@ public class Informacion {
         this.textocompleto = textocompleto;
     }
     public List<Vecino> getVecino() {
-        return vecino;
+        return vecinos;
     }
-    public void setVecino(List<Vecino> vecino) {
-        this.vecino = vecino;
+    public void setVecino(List<Vecino> vecinos) {
+        this.vecinos = vecinos;
     }
     public Comunidad getComunidad() {
         return comunidad;
