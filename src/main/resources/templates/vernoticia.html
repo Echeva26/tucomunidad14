@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Comunidad Etsit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="../static/css/ejemplo.css" />
+  <style>
+    .titulo {
+      font-size: larger; /* Tamaño de letra más grande para el título de la noticia */
+      pointer-events: none; /* Hacer que el título no sea clicable */
+    }
+
+    .descripcion {
+      font-size: 14px; /* Tamaño de letra para la descripción de la noticia */
+      color: #333; /* Color de letra para la descripción */
+    }
+
+    .elemento {
+      width: 90%; /* Anchura de la caja de la noticia */
+      margin: 0 auto; /* Centrar la caja horizontalmente */
+      padding: 30px; /* Espaciado interior de la caja */
+      background-color: #f7f7f7; /* Color de fondo de la caja */
+      border: 2px solid #ccc; /* Borde de la caja */
+      border-radius: 20px; /* Borde redondeado */
+      margin-top: 50px; /* Espaciado superior */
+      height: auto; /* Altura automática */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- CABECERA -->
+  <div class="cabecera">
+    <span class="reserva-de-zonas">
+      Noticias
+      
+    </span>
+    <div class="container">
+      <div class="tu-comunidad">
+        TuComunidad
+      </div>
+      <p class="home">
+        <a href="/comunidad" style="text-decoration: none;">
+          <span class="home-sub-30">Home</span>
+          <span></span>
+        </a>
+      </p>
+      <div class="log-out">
+        <span class="our-works">
+          <a href="/" style="text-decoration: none;">Log out</a>
+        </span>
+      </div>
+      <div class="usuario">
+        Vecino
+      </div>
+    </div>
+  </div>
+
+  <div class="pagina">
+    <div class="container-6">
+    
+      <!-- NOTICIA SELECCIONADA -->
+      <div class="elemento">
+        <div class="borde-azul"></div>
+        <div class="elipse-icono">
+          <div class="circulo"></div>
+          <img class="icono" src="../static/vectors/noticia1.svg" />
+        </div>
+        <div class="contenido">
+          <div class="titulo">
+            Limpieza de garaje 5 y 6 de mayo
+          </div>
+          <div class="descripcion">
+            Por razones de mantenimiento, se informa a todos los residentes que el garaje estará cerrado temporalmente los días 5 y 6 de mayo. Pedimos disculpas por cualquier inconveniente que esto pueda causar y agradecemos su comprensión.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PIE DE PAGINA -->
+  <div class="pie-de-pagina">
+    <div class="container-5">
+      <div class="image-2"></div>
+      <div class="container-4">
+        <img class="icon-1" src="../static/vectors/intagram.svg" />
+        <img class="icon-2" src="../static/vectors/facebook.svg" />
+        <img class="icon-3" src="../static/vectors/twitter.svg" />
+      </div>
+      <div class="idioma">
+        <span class="language">
+          Idioma
+        </span>
+        <img class="icon-color" src="../static/vectors/flecha.svg" />
+      </div>
+    </div>
+    <div class="description">
+      Facilitamos la convivencia en tu comunidad
+    </div>
+    <div class="line"></div>
+    <span class="tucom">
+      ©TuComunidad 2024
+    </span>
+  </div>
+</body>
+
+</html>
