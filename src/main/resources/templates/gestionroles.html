@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Comunidad Etsit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="../static/css/ejemplo.css" />
+  <style>
+    /* Estilos para los botones */
+    .btn-otorgar {
+      font-size: small;
+      padding: 3px 8px;
+      border-radius: 3px;
+      background-color: green; /* Color de fondo verde para el botón de otorgar permisos */
+      color: white; /* Texto en color blanco para mejor contraste */
+      border: none; /* Quitamos el borde para un aspecto más limpio */
+    }
+
+    .btn-eliminar {
+      font-size: small;
+      padding: 3px 8px;
+      border-radius: 3px;
+      background-color: red; /* Color de fondo rojo para el botón de eliminar */
+      color: white; /* Texto en color blanco para mejor contraste */
+      border: none; /* Quitamos el borde para un aspecto más limpio */
+    }
+
+    /* Estilos para el título "Vecinos" */
+    .titulo-vecinos {
+      text-align: center;
+      font-size: large;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- CABECERA -->
+  <div class="cabecera">
+    <span class="reserva-de-zonas">
+      Gestión de roles
+    </span>
+    <div class="container">
+      <div class="tu-comunidad">
+        TuComunidad
+      </div>
+      <p class="home">
+        <a href="/comunidad" style="text-decoration: none;">
+          <span class="home-sub-30">Home</span>
+          <span></span>
+        </a>
+      </p>
+      <div class="log-out">
+        <span class="our-works">
+          <a href="/" style="text-decoration: none;">Log out</a>
+        </span>
+      </div>
+      <div class="usuario">
+        Gestor de comunidad
+      </div>
+    </div>
+  </div>
+
+  <div class="pagina">
+    <div class="container-6">
+
+      
+
+      <!-- Caja 1 -->
+      <div class="elemento">
+        <div class="borde-azul"></div>
+        <div class="elipse-icono">
+          <div class="circulo"></div>
+          <img class="icono" src="../static/vectors/persona1.svg" /> <!-- Icono de persona -->
+        </div>
+        <div class="contenido">
+          <div class="titulo">
+            <span>María López</span> <!-- Nombre y Apellido -->
+          </div>
+
+          <div class="reservar">
+            <button class="btn-otorgar" onclick="otorgarPermisos()">Otorgar permisos</button> <!-- Botón otorgar permisos -->
+            <button class="btn-eliminar" onclick="eliminar()">Eliminar</button> <!-- Botón eliminar -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Caja 2 -->
+      <div class="elemento">
+        <div class="borde-azul"></div>
+        <div class="elipse-icono">
+          <div class="circulo"></div>
+          <img class="icono" src="../static/vectors/persona2.svg" /> <!-- Icono de persona -->
+        </div>
+        <div class="contenido">
+          <div class="titulo">
+            <span>Juan García</span> <!-- Nombre y Apellido -->
+          </div>
+
+          <div class="reservar">
+            <button class="btn-otorgar" onclick="otorgarPermisos()">Otorgar permisos</button> <!-- Botón otorgar permisos -->
+            <button class="btn-eliminar" onclick="eliminar()">Eliminar</button> <!-- Botón eliminar -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Caja 3 -->
+      <div class="elemento">
+        <div class="borde-azul"></div>
+        <div class="elipse-icono">
+          <div class="circulo"></div>
+          <img class="icono" src="../static/vectors/persona3.svg" /> <!-- Icono de persona -->
+        </div>
+        <div class="contenido">
+          <div class="titulo">
+            <span>Luisa Martínez</span> <!-- Nombre y Apellido -->
+          </div>
+
+          <div class="reservar">
+            <button class="btn-otorgar" onclick="otorgarPermisos()">Otorgar permisos</button> <!-- Botón otorgar permisos -->
+            <button class="btn-eliminar" onclick="eliminar()">Eliminar</button> <!-- Botón eliminar -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Caja 4 -->
+      <div class="elemento">
+        <div class="borde-azul"></div>
+        <div class="elipse-icono">
+          <div class="circulo"></div>
+          <img class="icono" src="../static/vectors/persona4.svg" /> <!-- Icono de persona -->
+        </div>
+        <div class="contenido">
+          <div class="titulo">
+            <span>Luis Sanz</span> <!-- Nombre y Apellido -->
+          </div>
+
+          <div class="reservar">
+            <button class="btn-otorgar" onclick="otorgarPermisos()">Otorgar permisos</button> <!-- Botón otorgar permisos -->
+            <button class="btn-eliminar" onclick="eliminar()">Eliminar</button> <!-- Botón eliminar -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Caja 5 -->
+      <div class="elemento">
+        <div class="borde-azul"></div>
+        <div class="elipse-icono">
+          <div class="circulo"></div>
+          <img class="icono" src="../static/vectors/persona5.svg" /> <!-- Icono de persona -->
+        </div>
+        <div class="contenido">
+          <div class="titulo">
+            <span>Paula Marín</span> <!-- Nombre y Apellido -->
+          </div>
+
+          <div class="reservar">
+            <button class="btn-otorgar" onclick="otorgarPermisos()">Otorgar permisos</button> <!-- Botón otorgar permisos -->
+            <button class="btn-eliminar" onclick="eliminar()">Eliminar</button> <!-- Botón eliminar -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Caja 6 -->
+      <div class="elemento">
+        <div class="borde-azul"></div>
+        <div class="elipse-icono">
+          <div class="circulo"></div>
+          <img class="icono" src="../static/vectors/persona6.svg" /> <!-- Icono de persona -->
+        </div>
+        <div class="contenido">
+          <div class="titulo">
+            <span>Leyre González</span> <!-- Nombre y Apellido -->
+          </div>
+
+          <div class="reservar">
+            <button class="btn-otorgar" onclick="otorgarPermisos()">Otorgar permisos</button> <!-- Botón otorgar permisos -->
+            <button class="btn-eliminar" onclick="eliminar()">Eliminar</button> <!-- Botón eliminar -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Caja 7 -->
+      <div class="elemento">
+        <div class="borde-azul"></div>
+        <div class="elipse-icono">
+          <div class="circulo"></div>
+          <img class="icono" src="../static/vectors/persona7.svg" /> <!-- Icono de persona -->
+        </div>
+        <div class="contenido">
+          <div class="titulo">
+            <span>Carlos Gómez</span> <!-- Nombre y Apellido -->
+          </div>
+
+          <div class="reservar">
+            <button class="btn-otorgar" onclick="otorgarPermisos()">Otorgar permisos</button> <!-- Botón otorgar permisos -->
+            <button class="btn-eliminar" onclick="eliminar()">Eliminar</button> <!-- Botón eliminar -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Caja 8 -->
+      <div class="elemento">
+        <div class="borde-azul"></div>
+        <div class="elipse-icono">
+          <div class="circulo"></div>
+          <img class="icono" src="../static/vectors/persona8.svg" /> <!-- Icono de persona -->
+        </div>
+        <div class="contenido">
+          <div class="titulo">
+            <span>Juan Cano</span> <!-- Nombre y Apellido -->
+          </div>
+
+          <div class="reservar">
+            <button class="btn-otorgar" onclick="otorgarPermisos()">Otorgar permisos</button> <!-- Botón otorgar permisos -->
+            <button class="btn-eliminar" onclick="eliminar()">Eliminar</button> <!-- Botón eliminar -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Caja 9 -->
+      <div class="elemento">
+        <div class="borde-azul"></div>
+        <div class="elipse-icono">
+          <div class="circulo"></div>
+          <img class="icono" src="../static/vectors/persona9.svg" /> <!-- Icono de persona -->
+        </div>
+        <div class="contenido">
+          <div class="titulo">
+            <span>Ramón Fernández</span> <!-- Nombre y Apellido -->
+          </div>
+
+          <div class="reservar">
+            <button class="btn-otorgar" onclick="otorgarPermisos()">Otorgar permisos</button> <!-- Botón otorgar permisos -->
+            <button class="btn-eliminar" onclick="eliminar()">Eliminar</button> <!-- Botón eliminar -->
+          </div>
+        </div>
+      </div>
+
+
+
+      
+
+    </div>
+
+
+
+  </div>
+
+
+
+
+  
+  <!-- PIE DE PAGINA -->
+  <div class="pie-de-pagina">
+    <div class="container-5">
+      <div class="image-2"></div>
+      <div class="container-4">
+        <img class="icon-1" src="../static/vectors/intagram.svg" />
+        <img class="icon-2" src="../static/vectors/facebook.svg" />
+        <img class="icon-3" src="../static/vectors/twitter.svg" />
+      </div>
+      <div class="idioma">
+        <span class="language">
+          Idioma
+        </span>
+        <img class="icon-color" src="../static/vectors/flecha.svg" />
+      </div>
+    </div>
+    <div class="description">
+      Facilitamos la convivencia en tu comunidad
+    </div>
+    <div class="line"></div>
+    <span class="tucom">
+      ©TuComunidad 2024
+    </span>
+  </div>
+
+  <script>
+    function otorgarPermisos() {
+      alert("Permisos otorgados");
+      // Aquí puedes agregar la lógica para otorgar permisos
+    }
+
+    function eliminar() {
+      alert("Elemento eliminado");
+      // Aquí puedes agregar la lógica para eliminar el elemento
+    }
+  </script>
+</body>
+
+</html>
