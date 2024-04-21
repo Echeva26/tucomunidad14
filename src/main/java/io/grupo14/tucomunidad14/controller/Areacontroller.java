@@ -10,8 +10,10 @@ import io.grupo14.tucomunidad14.repository.AreacomunRepository;
 import io.grupo14.tucomunidad14.repository.ComunidadRepository;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,18 +30,19 @@ public class Areacontroller {
     @Autowired 
     private ComunidadRepository comunidadRepository;
     @PostMapping("/creararea")
-    public String crearArea(@RequestBody AreacomunDTO areacomunDTO) {
+    public ResponseEntity<?> crearArea(@RequestBody AreacomunDTO areacomunDTO) {
     Comunidad comunidad = comunidadRepository.findById(areacomunDTO.getIdComunidad()).orElseThrow(
         () -> new RuntimeException("Comunidad no encontrada con id: " + areacomunDTO.getIdComunidad())
     );
 
     Areacomun nuevaArea = new Areacomun();
     nuevaArea.setNombre(areacomunDTO.getNombre());
-    nuevaArea.setTipodearea(areacomunDTO.getTipodearea());
+    // Convertir el valor entero a enum y obtener la descripción
+    nuevaArea.setTipodearea(Tipodearea.fromValue(areacomunDTO.getTipodearea()));
     nuevaArea.setComunidad(comunidad); // Asignar la comunidad encontrada
     areacomunRepository.save(nuevaArea);
-    return "Se ha creado correctamente el area";
-    }
+    return ResponseEntity.ok().body(Map.of("message", "Se ha creado correctamente el área"));
+}
 
     @GetMapping("/tipodeareaporcomunidad")
     public List<Tipodearea> getMethodName(@RequestParam Long idcomunidad) {
