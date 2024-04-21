@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import io.grupo14.tucomunidad14.model.Comunidad;
 import io.grupo14.tucomunidad14.model.ComunidadDTO;
-
 import io.grupo14.tucomunidad14.repository.ComunidadRepository;
 
 @RestController
