@@ -11,4 +11,6 @@ public class Iniciosesion {
     public String sesioniniciada() {
         return "pag7act2"; 
     }
+
+    
 }

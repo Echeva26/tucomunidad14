@@ -2,7 +2,7 @@ package io.grupo14.tucomunidad14.model;
 
 public class AreacomunDTO {
     private String nombre;
-    private Tipodearea tipodearea;
+    private String tipodearea;
     private Long idComunidad; // Utilizar este campo para recibir el ID de la comunidad
     public String getNombre() {
         return nombre;
@@ -10,10 +10,10 @@ public class AreacomunDTO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public Tipodearea getTipodearea() {
+    public String getTipodearea() {
         return tipodearea;
     }
-    public void setTipodearea(Tipodearea tipodearea) {
+    public void setTipodearea(String tipodearea) {
         this.tipodearea = tipodearea;
     }
     public Long getIdComunidad() {
