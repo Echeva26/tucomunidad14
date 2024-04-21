@@ -2,18 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8"/>
-    <title>Crea una nueva comunidad de vecinos</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="../static/css/ejemplo.css"/>
+  <meta charset="UTF-8" />
+  <title>Crea una nueva comunidad de vecinos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="../static/css/ejemplo.css" />
 </head>
 
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('crearComunidadForm').addEventListener('submit', function(e) {
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('crearComunidadForm').addEventListener('submit', function (e) {
       e.preventDefault(); // Evita el envío tradicional del formulario
-  
+
       // Recolecta los valores ingresados por el usuario
       const nombreComunidad = document.getElementById('nombre_comunidad').value;
       const codigoPostal = document.getElementById('codigo_postal').value;
@@ -22,7 +22,7 @@
         nombre: nombreComunidad,
         codpostal: codigoPostal, // Asume que el servidor puede manejar las zonas comunes como una cadena separada por comas
       };
-  
+
       // Realiza la solicitud POST a crearcomunidad
       fetch('/crearcomunidad', {
         method: 'POST',
@@ -31,125 +31,153 @@
         },
         body: JSON.stringify(data) // Convierte los datos del formulario en una cadena JSON
       })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('La solicitud ha fallado con estado: ' + response.status);
-        }
-        return response.json(); // Asegura que la respuesta sea en formato JSON
-      })
-      .then(data => {
-        console.log(data);
-        alert('Comunidad creada con éxito.');
-        <a href="pag7act2.html"></a>
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('La solicitud ha fallado con estado: ' + response.status);
+          }
+          return response.json(); // Asegura que la respuesta sea en formato JSON
+        })
+        .then(data1 => {
+          console.log(data1);
+          alert('Comunidad creada con éxito.');
+          enviarAreasComunes(data1);
+          
 
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        
-      });
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+
+        });
     });
   });
+  function enviarAreasComunes(idComunidad) {
+    const areasComunes = document.getElementById('zonas_comunes').selectedOptions;
+    const areas = Array.from(areasComunes).map(opt => ({
+      nombre: opt.text,
+      tipodearea: opt.value,
+      idComunidad: idComunidad
+    }));
 
-  
-  </script>
-     
-    
+    areas.forEach(area => {
+      fetch('/creararea', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(area)
+      })
+        .then(response => response.json())
+        .then(data2 => {
+          console.log(data2);
+        })
+        .catch(error => console.error('Error al crear área:', error));
+    });
+  }
+
+
+</script>
+
+
 
 <body>
-<!-- CABECERA -->
-<div class="cabecera">
+  <!-- CABECERA -->
+  <div class="cabecera">
     <span class="crea-una-comunidad">
       Crea una comunidad de vecinos
     </span>
     <div class="container">
-        <div class="tu-comunidad">
-            TuComunidad
-        </div>
-        <p class="home">
-          <a href="/comunidad" style="text-decoration: none;">
-            <span class="home-sub-30">Home</span>
-            <span></span>
-        </a>        
+      <div class="tu-comunidad">
+        TuComunidad
+      </div>
+      <p class="home">
+        <a href="/comunidad" style="text-decoration: none;">
+          <span class="home-sub-30">Home</span>
+          <span></span>
+        </a>
       </p>
-        <div class="log-out">
+      <div class="log-out">
         <span class="our-works">
           <a href="/" style="text-decoration: none;">Log out</a>
         </span>
-        </div>
-        <div class="usuario">
-            Vecino
-        </div>
+      </div>
+      <div class="usuario">
+        Vecino
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="pagina">
+  <div class="pagina">
     <div class="container-6">
 
-        <div class="title-section">
-          
-        </div>
+      <div class="title-section">
 
-        <div class="form-container">
-           
-          
-        
+      </div>
 
-            <!-- FORMULARIO -->
-            
-            <form id="crearComunidadForm">
-              <h2>Para crear una nueva comunidad, rellene los siguientes datos:</h2>
-              <div style="display: inline-block; width: 100%;">
-                  <div class="form-field" style="width: 30%; display: inline-block;">
-                      <label for="nombre_comunidad" class="form-label">Nombre de la comunidad*:</label>
-                      <input type="text" id="nombre_comunidad" name="nombre" class="form-input" placeholder="Escriba el nombre"/>
-                  </div>
-                  <div class="form-field" style="width: 30%; display: inline-block;">
-                      <label for="codigo_postal" class="form-label">Código postal*:</label>
-                      <input type="text" id="codigo_postal" name="codpostal" class="form-input" placeholder="Escriba el código postal"/>
-                  </div>
-                  <div class="form-field" style="width: 30%; display: inline-block;">
-                      <label for="zonas_comunes" class="form-label">Zonas comunes:</label>
-                      <select id="zonas_comunes" name="zonasComunes" class="form-input" multiple style="width: 100%;">
-                          <option value="pistas_padel">Pistas de pádel</option>
-                          <option value="local">Local</option>
-                          <option value="gimnasio">Gimnasio</option>
-                      </select>
-                  </div>
-              </div>
-              <button class="join-button" type="submit" style="display: block; margin-top: 10px;"><a href="pag7act2.html">Crear</a></button>
-          </form>
-            <!-- FIN DEL FORMULARIO -->
-        </div>
+      <div class="form-container">
+
+
+
+
+        <!-- FORMULARIO -->
+
+        <form id="crearComunidadForm">
+          <h2>Para crear una nueva comunidad, rellene los siguientes datos:</h2>
+          <div style="display: inline-block; width: 100%;">
+            <div class="form-field" style="width: 30%; display: inline-block;">
+              <label for="nombre_comunidad" class="form-label">Nombre de la comunidad*:</label>
+              <input type="text" id="nombre_comunidad" name="nombre" class="form-input"
+                placeholder="Escriba el nombre" />
+            </div>
+            <div class="form-field" style="width: 30%; display: inline-block;">
+              <label for="codigo_postal" class="form-label">Código postal*:</label>
+              <input type="text" id="codigo_postal" name="codpostal" class="form-input"
+                placeholder="Escriba el código postal" />
+            </div>
+            <div class="form-field" style="width: 30%; display: inline-block;">
+              <label for="zonas_comunes" class="form-label">Zonas comunes:</label>
+              <select id="zonas_comunes" name="zonasComunes" class="form-input" multiple style="width: 100%;">
+                <option value="0">Pistas de pádel</option>
+                <option value="1">Local</option>
+                <option value="2">Gimnasio</option>
+              </select>
+            </div>
+          </div>
+          <button class="join-button" type="submit" style="display: block; margin-top: 10px;">
+            Crear</button>
+        </form>
+        <!-- FIN DEL FORMULARIO -->
+      </div>
 
     </div>
-</div>
+  </div>
 
-<!-- PIE DE PAGINA -->
-<div class="pie-de-pagina">
+  <!-- PIE DE PAGINA -->
+  <div class="pie-de-pagina">
     <div class="container-5">
-        <div class="image-2">
-        </div>
-        <div class="container-4">
-            <img class="icon-1" src="../static/vectors/intagram.svg"/>
-            <img class="icon-2" src="../static/vectors/facebook.svg"/>
-            <img class="icon-3" src="../static/vectors/twitter.svg"/>
-        </div>
-        <div class="idioma">
+      <div class="image-2">
+      </div>
+      <div class="container-4">
+        <img class="icon-1" src="../static/vectors/intagram.svg" />
+        <img class="icon-2" src="../static/vectors/facebook.svg" />
+        <img class="icon-3" src="../static/vectors/twitter.svg" />
+      </div>
+      <div class="idioma">
         <span class="language">
           Idioma
         </span>
-            <img class="icon-color" src="../static/vectors/flecha.svg"/>
-        </div>
+        <img class="icon-color" src="../static/vectors/flecha.svg" />
+      </div>
     </div>
     <div class="description">
-        Facilitamos la convivencia en tu comunidad
+      Facilitamos la convivencia en tu comunidad
     </div>
     <div class="line">
     </div>
     <span class="tucom">
       ©TuComunidad 2024
     </span>
-</div>
+  </div>
 
 </body>
+
 </html>

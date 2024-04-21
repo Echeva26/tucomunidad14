@@ -22,14 +22,14 @@ public class Comunidadcontroller {
   
     @PostMapping("/crearcomunidad")
     @ResponseBody
-    public String crearComunidad(@RequestBody ComunidadDTO comunidadDTO) {
+    public Long crearComunidad(@RequestBody ComunidadDTO comunidadDTO) {
         Comunidad nuevaComunidad = new Comunidad();
         nuevaComunidad.setNombre(comunidadDTO.getNombre());
         nuevaComunidad.setCodpostal(comunidadDTO.getCodpostal());
         comunidadRepository.save(nuevaComunidad);
 
     
-        return "Comunidad creada exitosamente con id :"+nuevaComunidad.getIdcomunidad();
+        return nuevaComunidad.getIdcomunidad();
     }
 
 }
