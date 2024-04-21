@@ -20,12 +20,17 @@ public class Comunidadcontroller {
     @Autowired
     private ComunidadRepository comunidadRepository;
 
-    @Autowired
-    private AreacomunRepository areacomunRepository;
+  
     @PostMapping("/crearcomunidad")
     @ResponseBody
-    public String crearComunidad(@RequestBody ComunidadDTO comunidadDTO) {
-        return "hola";
+    public Long crearComunidad(@RequestBody ComunidadDTO comunidadDTO) {
+        Comunidad nuevaComunidad = new Comunidad();
+        nuevaComunidad.setNombre(comunidadDTO.getNombre());
+        nuevaComunidad.setCodpostal(comunidadDTO.getCodpostal());
+        comunidadRepository.save(nuevaComunidad);
+
+    
+        return nuevaComunidad.getIdcomunidad();
     }
 
 }
