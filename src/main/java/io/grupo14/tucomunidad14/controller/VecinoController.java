@@ -17,6 +17,8 @@ import io.grupo14.tucomunidad14.model.VecinoDTO;
 import io.grupo14.tucomunidad14.repository.ComunidadRepository;
 import io.grupo14.tucomunidad14.repository.VecinoRepository;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -31,97 +33,115 @@ public class VecinoController {
     @Autowired
     private ComunidadRepository comunidadRepository;
 
-    
-
-
     public static final Logger log = LoggerFactory.getLogger(ReservasController.class);
 
     @PostMapping("/vecinos")
-public ResponseEntity<String> createVecino(@RequestBody VecinoDTO vecinoDTO) {
-    try {
-        Comunidad comunidad = comunidadRepository.findById(vecinoDTO.getIdComunidad()).orElseThrow(
-                () -> new RuntimeException("Comunidad no encontrada con id: " + vecinoDTO.getIdComunidad()));
+    public ResponseEntity<Map<String, String>> createVecino(@RequestBody VecinoDTO vecinoDTO) {
+        try {
+            Comunidad comunidad = comunidadRepository.findById(vecinoDTO.getIdComunidad()).orElseThrow(
+                    () -> new RuntimeException("Comunidad no encontrada con id: " + vecinoDTO.getIdComunidad()));
 
-        Vecino vecino = new Vecino();
-        vecino.setNombre(vecinoDTO.getNombre());
-        vecino.setApellidos(vecinoDTO.getApellidos());
-        vecino.setEmail(vecinoDTO.getEmail());
-        vecino.setNombredeusuario(vecinoDTO.getNombredeusuario());
-        vecino.setContraseña(vecinoDTO.getContraseña());
-        vecino.setGestor(vecinoDTO.getGestor());
-        vecino.setComunidad(comunidad);
-        
-        vecinoRepository.save(vecino);
-        
-        return ResponseEntity.ok().body("Se ha creado correctamente el vecino");
-    } catch (Exception e) {
-        log.error("Error al crear el vecino", e);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear el vecino: " + e.getMessage());
+            Vecino vecino = new Vecino();
+            vecino.setNombre(vecinoDTO.getNombre());
+            vecino.setApellidos(vecinoDTO.getApellidos());
+            vecino.setEmail(vecinoDTO.getEmail());
+            vecino.setNombredeusuario(vecinoDTO.getNombredeusuario());
+            vecino.setContraseña(vecinoDTO.getContraseña());
+            vecino.setGestor(vecinoDTO.getGestor());
+            vecino.setComunidad(comunidad);
+
+            vecinoRepository.save(vecino);
+
+<<<<<<< HEAD
+
+
+=======
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Se ha creado correctamente el vecino");
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            log.error("Error al crear el vecino", e);
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Error al crear el vecino: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
     }
-}
 
-
-
-
+    /**
+     * @PostMapping("/api/login")
+     * public ResponseEntity<String> iniciarSesion(@RequestBody Vecino vecino) {
+     * // Obtener el vecino de la base de datos por nombre de usuario
+     * Vecino vecinoExistente =
+     * vecinoRepository.findByNombredeusuario(vecino.getNombredeusuario());
+     * 
+     * // Verificar si el vecino existe y si la contraseña coincide
+     * if (vecinoExistente != null &&
+     * vecinoExistente.getContraseña().equals(vecino.getContraseña())) {
+     * // Si las credenciales son correctas, retornar un mensaje de éxito y código
+     * 200
+     * return ResponseEntity.ok().body("Inicio de sesión exitoso");
+     * } else {
+     * // Si las credenciales son incorrectas, retornar un mensaje de error y código
+     * 401 (No autorizado)
+     * return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales
+     * incorrectas");
+     * }
+     * }
+     */
+>>>>>>> ffa5c40fd9db253d47f6e491aa0fafdfafa05260
     /**
      * @param idVecino
      * @return
      */
 
-     @GetMapping("/vecino/comunidad")
-     public ComunidadDTO obtenerComunidadDeVecino(@RequestParam Long idVecino) {
-         Comunidad comunidad = comunidadRepository.findByVecinosContainsId(idVecino);
-         
-     
-         ComunidadDTO comunidadDTO = new ComunidadDTO();
-         comunidadDTO.setIdcomunidad(comunidad.getIdcomunidad());
-         comunidadDTO.setNombre(comunidad.getNombre());
-         comunidadDTO.setCodpostal(comunidad.getCodpostal());
-     
-         return comunidadDTO;
-     }
-     @GetMapping("/vecino")
+    @GetMapping("/vecino/comunidad")
+    public ComunidadDTO obtenerComunidadDeVecino(@RequestParam Long idVecino) {
+        Comunidad comunidad = comunidadRepository.findByVecinosContainsId(idVecino);
+
+        ComunidadDTO comunidadDTO = new ComunidadDTO();
+        comunidadDTO.setIdcomunidad(comunidad.getIdcomunidad());
+        comunidadDTO.setNombre(comunidad.getNombre());
+        comunidadDTO.setCodpostal(comunidad.getCodpostal());
+
+        return comunidadDTO;
+    }
+
+    @GetMapping("/vecino")
     public VecinoDTO obtenerVecinoPorUsuarioYContraseña(@RequestParam String usuario, @RequestParam String contraseña) {
-    Optional<Vecino> vecinoOpt = vecinoRepository.findByUsernameAndPassword(usuario, contraseña);
-    if (vecinoOpt.isPresent()) {
-        Vecino vecino = vecinoOpt.get();
-        VecinoDTO vecinoDTO = new VecinoDTO();
-        vecinoDTO.setIdvecino(vecino.getIdvecino());
-        vecinoDTO.setNombre(vecino.getNombre());
-        vecinoDTO.setApellidos(vecino.getApellidos());
-        vecinoDTO.setEmail(vecino.getEmail());
-        vecinoDTO.setNombredeusuario(vecino.getNombredeusuario());
-        vecinoDTO.setContraseña(vecino.getContraseña()); // Considera no retornar la contraseña
-        vecinoDTO.setGestor(vecino.getGestor());
-        vecinoDTO.setIdComunidad(vecino.getComunidad().getIdcomunidad()); // Asegúrate de que Comunidad tenga getIdcomunidad() o ajusta según tu modelo
-        return vecinoDTO;
+        Optional<Vecino> vecinoOpt = vecinoRepository.findByUsernameAndPassword(usuario, contraseña);
+        if (vecinoOpt.isPresent()) {
+            Vecino vecino = vecinoOpt.get();
+            VecinoDTO vecinoDTO = new VecinoDTO();
+            vecinoDTO.setIdvecino(vecino.getIdvecino());
+            vecinoDTO.setNombre(vecino.getNombre());
+            vecinoDTO.setApellidos(vecino.getApellidos());
+            vecinoDTO.setEmail(vecino.getEmail());
+            vecinoDTO.setNombredeusuario(vecino.getNombredeusuario());
+            vecinoDTO.setContraseña(vecino.getContraseña()); // Considera no retornar la contraseña
+            vecinoDTO.setGestor(vecino.getGestor());
+            vecinoDTO.setIdComunidad(vecino.getComunidad().getIdcomunidad()); // Asegúrate de que Comunidad tenga
+                                                                              // getIdcomunidad() o ajusta según tu
+                                                                              // modelo
+            return vecinoDTO;
         } else {
             throw new RuntimeException("Vecino no encontrado");
         }
 
-
-    
-     
     }
 
     @PostMapping("/cambioContrasena")
     public ResponseEntity<?> cambiarContrasena(@RequestBody CambioContrasenaRequest cambioContrasenaRequest) {
-    String newPasswordEncoded = cambioContrasenaRequest.getContraseña();
-    int updatedCount = vecinoRepository.updateContraseñaByNombredeusuario(newPasswordEncoded,cambioContrasenaRequest.getNombredeusuario());
-    
-    if (updatedCount > 0) {
-        return ResponseEntity.ok().body("Contraseña actualizada correctamente.");
-    } else {
-        return ResponseEntity.badRequest().body("Error: El nombre de usuario no existe.");
-    }
-}
+        String newPasswordEncoded = cambioContrasenaRequest.getContraseña();
+        int updatedCount = vecinoRepository.updateContraseñaByNombredeusuario(newPasswordEncoded,
+                cambioContrasenaRequest.getNombredeusuario());
 
+        if (updatedCount > 0) {
+            return ResponseEntity.ok().body("Contraseña actualizada correctamente.");
+        } else {
+            return ResponseEntity.badRequest().body("Error: El nombre de usuario no existe.");
+        }
+    }
 
     //
-
-
-   
-
-
 
 }

@@ -23,8 +23,9 @@ public class Comunidad {
     @OneToMany(mappedBy = "comunidad")
     private List<Vecino> vecinos;
     @OneToMany(mappedBy = "comunidad")
-    private List<Areacomun> area;
-    
+    private List<Areacomun> areas;
+    @OneToMany(mappedBy = "comunidad")
+    private List<Informacion> informacions;
 
 
 
@@ -46,8 +47,8 @@ public class Comunidad {
     public void setVecinos(List<Vecino> vecinos) {
         this.vecinos = vecinos;
     }
-    public void setArea(List<Areacomun> area) {
-        this.area = area;
+    public void setArea(List<Areacomun> areas) {
+        this.areas = areas;
     }
     
     public List<Vecino> getVecinos() {
@@ -55,7 +56,7 @@ public class Comunidad {
     }
 
     public List<Areacomun> getArea() {
-        return  area;
+        return  areas;
     }
 
     public Integer getCodpostal() {
