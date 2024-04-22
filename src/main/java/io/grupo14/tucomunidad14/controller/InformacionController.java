@@ -66,7 +66,7 @@ public class InformacionController {
             
         } else {
             // Opcional: manejar el caso en que los vecinos no se encuentran
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,
                     "No se encontraron vecinos con el ID: " + informacionDTO.getIdvecino());
         }
         
