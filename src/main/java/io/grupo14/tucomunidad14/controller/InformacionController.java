@@ -1,9 +1,6 @@
 package io.grupo14.tucomunidad14.controller;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import io.grupo14.tucomunidad14.model.Informacion;
 import io.grupo14.tucomunidad14.model.InformacionDTO;
-import io.grupo14.tucomunidad14.repository.AreacomunRepository;
-import io.grupo14.tucomunidad14.repository.ComunidadRepository;
+
 import io.grupo14.tucomunidad14.repository.InformacionRepository;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,7 +52,7 @@ public class InformacionController {
     public List<InformacionDTO> getMethodName(@RequestParam Long idcomunidad) {
         
 
-        return new String();
+        return informacionRepository.findByComunidadId(idcomunidad);
     }
     
     
