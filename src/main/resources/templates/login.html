@@ -6,6 +6,43 @@
     <title>TuComunidad</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" href="../static/css/pag1.css" />
+    <script>
+          document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
+          e.preventDefault();
+          var username = document.getElementById("username").value;
+          var password = document.getElementById("password").value;
+          
+          // Realizar la solicitud fetch a la API
+          fetch(`http://localhost:8080/api/vecino?usuario=${username}&contraseña=${password}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+              // Si tu API requiere un token de autenticación, deberías añadirlo aquí también
+            }
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            console.log("ha hecho el get")
+            return response.json();
+          })
+          .then(data => {
+            console.log(data);
+            // Aquí manejas la respuesta. Por ejemplo, podrías redirigir al usuario o mostrar algún mensaje.
+            console.log("ha hecho el get")
+            window.location.href = '/sesioniniciada';
+            //<a href="pag7act2.html"></a>
+          })
+          .catch((error) => {
+            console.error('There has been a problem with your fetch operation:', error);
+          });
+        });
+      });
+
+      
+    </script>
     
 </head>
 
@@ -45,6 +82,7 @@
             
           </div>
       <p>¿No tienes cuenta? <a href="/registro">Regístrate aquí</a>.</p>
+      <p>¿Eres el Gestor y quieres crear la comunidad? <a href="/registrogestor"> Regístrate aquí <a></p>
   </div>
 </div>
 </div>
@@ -76,7 +114,7 @@
     </span>
   </div>
 
-  <!--<script>
+  {% comment %} <script>
     document.addEventListener("DOMContentLoaded", function() {
 document.getElementById("loginForm").addEventListener("submit", function(e) {
 e.preventDefault();
@@ -108,11 +146,11 @@ window.location.href = '/comunidad?id=' + data.idComunidad;
 console.error('There has been a problem with your fetch operation:', error);
 });
 });
-});
+}); {% endcomment %}
 
 
 </script>
--->
+
 </body>
 
 </html>

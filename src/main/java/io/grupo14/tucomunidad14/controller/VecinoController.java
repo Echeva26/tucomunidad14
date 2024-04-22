@@ -52,6 +52,8 @@ public class VecinoController {
 
             vecinoRepository.save(vecino);
 
+
+
             Map<String, String> response = new HashMap<>();
             response.put("message", "Se ha creado correctamente el vecino");
             return ResponseEntity.ok().body(response);
