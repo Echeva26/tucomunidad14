@@ -3,8 +3,7 @@ package io.grupo14.tucomunidad14.model;
 
 import java.sql.Date;
 import java.util.List;
-
-
+import java.util.Optional;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +32,7 @@ public class Informacion {
     private List<Vecino> vecinos;
     @ManyToOne
     @JoinColumn(name = "comunidad")
-    private Comunidad comunidad;
+    private Optional<Comunidad> comunidad;
     // Campo para el inicio de la reserva
     
 
@@ -84,10 +83,10 @@ public class Informacion {
     public void setVecino(List<Vecino> vecinos) {
         this.vecinos = vecinos;
     }
-    public Comunidad getComunidad() {
+    public Optional<Comunidad> getComunidad() {
         return comunidad;
     }
-    public void setComunidad(Comunidad comunidad) {
+    public void setComunidad(Optional<Comunidad> comunidad) {
         this.comunidad = comunidad;
     }
     public byte[] getFoto() {
