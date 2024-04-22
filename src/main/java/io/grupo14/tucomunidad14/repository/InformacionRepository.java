@@ -12,11 +12,8 @@ import io.grupo14.tucomunidad14.model.InformacionDTO;
 
 @Repository
 public interface InformacionRepository extends CrudRepository<Informacion, Long> {
-
-    @Query("SELECT new io.grupo14.tucomunidad14.model.InformacionDTO(" +
-           "e.idinformacion, e.titulo, e.fecha, e.imagen, e.descripcion, " +
-           "e.textocompleto, e.idcomunidad, e.idvecino) " +
-           "FROM Entidad e WHERE e.idcomunidad = :idcomunidad")
-    List<InformacionDTO> findByComunidadId(@Param("idcomunidad") Long idcomunidad);
+    //SELECT c FROM Comunidad c JOIN c.vecinos v WHERE v.idvecino = :idVecino
+    @Query("SELECT e FROM INFORMACION e JOIN e.comunidads WHERE e.idcomunidad = :idcomunidad")
+    List<Informacion> findByComunidadId(@Param("idcomunidad") Long idcomunidad);
 
 }
