@@ -3,6 +3,7 @@ package io.grupo14.tucomunidad14.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -86,8 +87,28 @@ public class InformacionController {
     }
 
     @GetMapping("/obtenerinfoporcomunidad")
-    public List<Informacion> obteInformacionporcomunidad(@RequestParam Long idcomunidad) {
-        return informacionRepository.findByComunidadId(idcomunidad);
+    public List<InformacionDTO> obteInformacionporcomunidad(@RequestParam Long idcomunidad) {
+        List<Informacion> info = informacionRepository.findByComunidadId(idcomunidad);
+        
+        // Mapeo de Informacion a InformacionDTO
+        List<InformacionDTO> infoDTOs = info.stream()
+            .map(informacion -> mapToDTO(informacion))
+            .collect(Collectors.toList());
+
+        return infoDTOs;
+    }
+
+    // Método para mapear Informacion a InformacionDTO
+    private InformacionDTO mapToDTO(Informacion informacion) {
+        InformacionDTO informacionDTO = new InformacionDTO();
+        informacionDTO.setIdinformacion(informacion.getIdinformacion());
+        informacionDTO.setTitulo(informacion.getTitulo());
+        informacionDTO.setDescripcion(informacion.getDescripcion());
+        informacionDTO.setFecha(informacion.getFecha());
+        informacionDTO.setFoto(informacion.getFoto());
+        informacionDTO.setTextocompleto(informacion.getTextocompleto());
+        // Aquí mapea otros campos si los hay
+        return informacionDTO;
     }
 
 }
