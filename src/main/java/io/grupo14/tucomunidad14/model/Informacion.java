@@ -31,8 +31,8 @@ public class Informacion {
     private String textocompleto;//Cambios?
     
     @ManyToOne
-    @JoinColumn(name="gestor")
-    private Vecino gestor;
+    @JoinColumn(name="vecino")
+    private Vecino vecino;
     @ManyToOne
     @JoinColumn(name = "comunidad")
     private Comunidad comunidad;
@@ -61,13 +61,6 @@ public class Informacion {
         this.fecha = fecha;
     }
     
-    
-    public Vecino getVecino() {
-        return gestor;
-    }
-    public void setVecino(Vecino gestor) {
-        this.gestor =gestor;
-    }
     public String getDescripcion() {
         return descripcion;
     }
@@ -93,13 +86,13 @@ public class Informacion {
     public void setFoto(String foto) {
         this.foto = foto;
     }
-    public Vecino getGestor() {
-        return gestor;
+    public Vecino getVecino() {
+        return vecino;
     }
-    public void setGestor(Vecino gestor) {
-        this.gestor = gestor;
+    public void setVecino(Vecino vecino) {
+        this.vecino = vecino;
     }
-    
+   
     
     
 

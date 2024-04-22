@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -97,16 +97,16 @@ public class InformacionController {
 
     @GetMapping("/obtenerinfoporcomunidad")
     public List<InformacionDTO> obteInformacionporcomunidad(@RequestParam Long idcomunidad) {
-        List<Informacion> info = informacionRepository.findByComunidadId(idcomunidad);
+        List<InformacionDTO> info = informacionRepository.findByComunidadId(idcomunidad);
 
         // Mapeo de Informacion a InformacionDTO
-        List<InformacionDTO> infoDTOs = info.stream()
-                .map(informacion -> mapToDTO(informacion))
-                .collect(Collectors.toList());
+        //List<InformacionDTO> infoDTOs = info.stream()
+          //      .map(informacion -> mapToDTO(informacion))
+            //    .collect(Collectors.toList());
 
-        return infoDTOs;
+        return info;
     }
-
+    /* 
     private InformacionDTO mapToDTO(Informacion informacion) {
         InformacionDTO informacionDTO = new InformacionDTO();
         informacionDTO.setIdinformacion(informacion.getIdinformacion());
@@ -134,6 +134,6 @@ public class InformacionController {
         informacionDTO.setIdcomunidad(informacion.getComunidad().getIdcomunidad());
 
         return informacionDTO;
-    }
+    }*/
 
 }

@@ -9,7 +9,7 @@ public class InformacionDTO {
     private Long idinformacion;
     private String titulo;
     private Date fecha;
-    private byte[] foto;//Cambios?
+    private String foto;//Cambios?
     private String descripcion;
     @Lob
     private String textocompleto;//Cambios
@@ -60,12 +60,13 @@ public class InformacionDTO {
     public void setIdcomunidad(Long idcomunidad) {
         this.idcomunidad = idcomunidad;
     }
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
+   
 
     
 
