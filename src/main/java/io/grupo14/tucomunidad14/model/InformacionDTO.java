@@ -2,6 +2,8 @@ package io.grupo14.tucomunidad14.model;
 
 import java.sql.Date;
 
+import jakarta.persistence.Lob;
+
 public class InformacionDTO {
 
     private Long idinformacion;
@@ -9,6 +11,7 @@ public class InformacionDTO {
     private Date fecha;
     private byte[] foto;//Cambios?
     private String descripcion;
+    @Lob
     private String textocompleto;//Cambios
     private Long idvecino;
     private Long idcomunidad;
