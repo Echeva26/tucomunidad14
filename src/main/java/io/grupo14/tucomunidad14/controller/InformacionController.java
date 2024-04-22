@@ -49,9 +49,7 @@ public class InformacionController {
     }
 
     @GetMapping("/obtenerinfoporcomunidad")
-    public List<InformacionDTO> getMethodName(@RequestParam Long idcomunidad) {
-        
-
+    public List<InformacionDTO> obteInformacionporcomunidad(@RequestParam Long idcomunidad) {
         return informacionRepository.findByComunidadId(idcomunidad);
     }
     
