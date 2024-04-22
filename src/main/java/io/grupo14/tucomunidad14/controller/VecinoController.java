@@ -52,10 +52,8 @@ public class VecinoController {
 
             vecinoRepository.save(vecino);
 
-<<<<<<< HEAD
 
 
-=======
             Map<String, String> response = new HashMap<>();
             response.put("message", "Se ha creado correctamente el vecino");
             return ResponseEntity.ok().body(response);
@@ -88,7 +86,6 @@ public class VecinoController {
      * }
      * }
      */
->>>>>>> ffa5c40fd9db253d47f6e491aa0fafdfafa05260
     /**
      * @param idVecino
      * @return
