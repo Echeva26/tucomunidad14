@@ -2,15 +2,16 @@ package io.grupo14.tucomunidad14.model;
 
 
 import java.sql.Date;
-import java.util.List;
-import java.util.Optional;
+
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Lob;
+
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -26,13 +27,15 @@ public class Informacion {
     private Date fecha;
     private byte[] foto;//Cambios?
     private String descripcion;
+    @Lob
     private String textocompleto;//Cambios?
     
-    @ManyToMany(mappedBy = "informacions")
-    private List<Vecino> vecinos;
+    @ManyToOne
+    @JoinColumn(name="gestor")
+    private Vecino gestor;
     @ManyToOne
     @JoinColumn(name = "comunidad")
-    private Optional<Comunidad> comunidad;
+    private Comunidad comunidad;
     // Campo para el inicio de la reserva
     
 
@@ -59,11 +62,11 @@ public class Informacion {
     }
     
     
-    public List<Vecino> getVecinos() {
-        return vecinos;
+    public Vecino getVecinos() {
+        return gestor;
     }
-    public void setVecinos(List<Vecino> vecinos) {
-        this.vecinos = vecinos;
+    public void setVecinos(Vecino gestor) {
+        this.gestor =gestor;
     }
     public String getDescripcion() {
         return descripcion;
@@ -77,16 +80,11 @@ public class Informacion {
     public void setTextocompleto(String textocompleto) {
         this.textocompleto = textocompleto;
     }
-    public List<Vecino> getVecino() {
-        return vecinos;
-    }
-    public void setVecino(List<Vecino> vecinos) {
-        this.vecinos = vecinos;
-    }
-    public Optional<Comunidad> getComunidad() {
+    
+    public Comunidad getComunidad() {
         return comunidad;
     }
-    public void setComunidad(Optional<Comunidad> comunidad) {
+    public void setComunidad(Comunidad comunidad) {
         this.comunidad = comunidad;
     }
     public byte[] getFoto() {

@@ -6,8 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -32,11 +30,7 @@ public class Vecino {
     private Comunidad comunidad;
     @OneToMany(mappedBy = "vecino")
     private List<Reserva> reserva;
-    @ManyToMany
-    @JoinTable(
-        name= "vecino-informacion", joinColumns = @JoinColumn(name = "idvecino",referencedColumnName = "idvecino"),
-        inverseJoinColumns = @JoinColumn(name = "idinformacion",referencedColumnName = "idinformacion")
-    )
+    @OneToMany(mappedBy = "vecino")
     private List<Informacion> informacions;
 
     public Vecino() {
