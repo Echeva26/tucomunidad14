@@ -82,6 +82,7 @@
             
           </div>
       <p>¿No tienes cuenta? <a href="/registro">Regístrate aquí</a>.</p>
+      <p>¿Eres el Gestor y quieres crear la comunidad? <a href="/registrogestor"> Regístrate aquí <a></p>
   </div>
 </div>
 </div>
@@ -113,7 +114,7 @@
     </span>
   </div>
 
-  <!--<script>
+  {% comment %} <script>
     document.addEventListener("DOMContentLoaded", function() {
 document.getElementById("loginForm").addEventListener("submit", function(e) {
 e.preventDefault();
@@ -145,11 +146,11 @@ window.location.href = '/comunidad?id=' + data.idComunidad;
 console.error('There has been a problem with your fetch operation:', error);
 });
 });
-});
+}); {% endcomment %}
 
 
 </script>
--->
+
 </body>
 
 </html>

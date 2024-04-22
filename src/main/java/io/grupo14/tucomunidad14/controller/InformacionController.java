@@ -1,6 +1,9 @@
 package io.grupo14.tucomunidad14.controller;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -74,9 +77,18 @@ public class InformacionController {
 
         // Manejo de la carga de la imagen
         if (!imagen.isEmpty()) {
+            Path directorioImagenes = Paths.get("src//main//resources//static/imagesinformation");
+            String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+
             try {
+
+
                 byte[] bytesImg = imagen.getBytes();
-                informacion.setFoto(bytesImg);
+                Path rutaCompleta= Paths.get(rutaAbsoluta + "//"+imagen.getOriginalFilename());
+                Files.write(rutaCompleta, bytesImg);
+                informacion.setFoto(imagen.getOriginalFilename());
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -105,7 +117,7 @@ public class InformacionController {
         informacionDTO.setTitulo(informacion.getTitulo());
         informacionDTO.setDescripcion(informacion.getDescripcion());
         informacionDTO.setFecha(informacion.getFecha());
-        informacionDTO.setFoto(informacion.getFoto());
+        //informacionDTO.setFoto(informacion.getFoto());
         informacionDTO.setTextocompleto(informacion.getTextocompleto());
         // Aquí mapea otros campos si los hay
         return informacionDTO;

@@ -25,7 +25,7 @@ public class Informacion {
     private Long idinformacion;
     private String titulo;
     private Date fecha;
-    private byte[] foto;//Cambios?
+    private String foto;//Cambios?
     private String descripcion;
     @Lob
     private String textocompleto;//Cambios?
@@ -87,11 +87,17 @@ public class Informacion {
     public void setComunidad(Comunidad comunidad) {
         this.comunidad = comunidad;
     }
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
+    }
+    public Vecino getGestor() {
+        return gestor;
+    }
+    public void setGestor(Vecino gestor) {
+        this.gestor = gestor;
     }
     
     
