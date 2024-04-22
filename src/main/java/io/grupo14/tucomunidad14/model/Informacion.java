@@ -1,6 +1,6 @@
 package io.grupo14.tucomunidad14.model;
 
-import java.sql.Blob;
+
 import java.sql.Date;
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class Informacion {
     private Long idinformacion;
     private String titulo;
     private Date fecha;
-    private Blob foto;//Cambios?
+    private byte[] foto;//Cambios?
     private String descripcion;
     private String textocompleto;//Cambios?
     
@@ -58,11 +58,13 @@ public class Informacion {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public Blob getFoto() {
-        return foto;
+    
+    
+    public List<Vecino> getVecinos() {
+        return vecinos;
     }
-    public void setFoto(Blob foto) {
-        this.foto = foto;
+    public void setVecinos(List<Vecino> vecinos) {
+        this.vecinos = vecinos;
     }
     public String getDescripcion() {
         return descripcion;
@@ -87,6 +89,12 @@ public class Informacion {
     }
     public void setComunidad(Comunidad comunidad) {
         this.comunidad = comunidad;
+    }
+    public byte[] getFoto() {
+        return foto;
+    }
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
     
     
