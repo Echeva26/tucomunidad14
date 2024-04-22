@@ -25,14 +25,14 @@ public class Informacion {
     private Long idinformacion;
     private String titulo;
     private Date fecha;
-    private byte[] foto;//Cambios?
+    private String foto;//Cambios?
     private String descripcion;
     @Lob
     private String textocompleto;//Cambios?
     
     @ManyToOne
-    @JoinColumn(name="gestor")
-    private Vecino gestor;
+    @JoinColumn(name="vecino")
+    private Vecino vecino;
     @ManyToOne
     @JoinColumn(name = "comunidad")
     private Comunidad comunidad;
@@ -61,13 +61,6 @@ public class Informacion {
         this.fecha = fecha;
     }
     
-    
-    public Vecino getVecinos() {
-        return gestor;
-    }
-    public void setVecinos(Vecino gestor) {
-        this.gestor =gestor;
-    }
     public String getDescripcion() {
         return descripcion;
     }
@@ -87,13 +80,19 @@ public class Informacion {
     public void setComunidad(Comunidad comunidad) {
         this.comunidad = comunidad;
     }
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
-    
+    public Vecino getVecino() {
+        return vecino;
+    }
+    public void setVecino(Vecino vecino) {
+        this.vecino = vecino;
+    }
+   
     
     
 
