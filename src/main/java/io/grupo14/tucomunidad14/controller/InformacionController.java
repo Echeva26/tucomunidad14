@@ -57,12 +57,19 @@ public class InformacionController {
         // Asignación de vecinos
         Optional<Vecino> gestorOpt = vecinoRepository.findById(informacionDTO.getIdvecino());
         if (gestorOpt.isPresent()) {
-            informacion.setVecinos(gestorOpt.get());
+            if (!gestorOpt.get().getGestor()) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "El vecino " + informacionDTO.getIdvecino()+ " no es gestor");
+            }else{
+                informacion.setVecinos(gestorOpt.get());
+            }
+            
         } else {
             // Opcional: manejar el caso en que los vecinos no se encuentran
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "No se encontraron vecinos con el ID: " + informacionDTO.getIdvecino());
         }
+        
 
         // Manejo de la carga de la imagen
         if (!imagen.isEmpty()) {
