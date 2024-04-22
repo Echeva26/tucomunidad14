@@ -63,17 +63,16 @@ public class InformacionController {
         if (gestorOpt.isPresent()) {
             if (!gestorOpt.get().getGestor()) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                "El vecino " + informacionDTO.getIdvecino()+ " no es gestor");
-            }else{
-                informacion.setVecinos(gestorOpt.get());
+                        "El vecino " + informacionDTO.getIdvecino() + " no es gestor");
+            } else {
+                informacion.setVecino(gestorOpt.get());
             }
-            
+
         } else {
             // Opcional: manejar el caso en que los vecinos no se encuentran
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,
                     "No se encontraron vecinos con el ID: " + informacionDTO.getIdvecino());
         }
-        
 
         // Manejo de la carga de la imagen
         if (!imagen.isEmpty()) {
@@ -82,12 +81,10 @@ public class InformacionController {
 
             try {
 
-
                 byte[] bytesImg = imagen.getBytes();
-                Path rutaCompleta= Paths.get(rutaAbsoluta + "//"+imagen.getOriginalFilename());
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
                 Files.write(rutaCompleta, bytesImg);
-                informacion.setFoto(imagen.getOriginalFilename());
-
+                informacion.setFoto(imagen.getOriginalFilename().toString());
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -101,25 +98,41 @@ public class InformacionController {
     @GetMapping("/obtenerinfoporcomunidad")
     public List<InformacionDTO> obteInformacionporcomunidad(@RequestParam Long idcomunidad) {
         List<Informacion> info = informacionRepository.findByComunidadId(idcomunidad);
-        
+
         // Mapeo de Informacion a InformacionDTO
         List<InformacionDTO> infoDTOs = info.stream()
-            .map(informacion -> mapToDTO(informacion))
-            .collect(Collectors.toList());
+                .map(informacion -> mapToDTO(informacion))
+                .collect(Collectors.toList());
 
         return infoDTOs;
     }
 
-    // Método para mapear Informacion a InformacionDTO
     private InformacionDTO mapToDTO(Informacion informacion) {
         InformacionDTO informacionDTO = new InformacionDTO();
         informacionDTO.setIdinformacion(informacion.getIdinformacion());
         informacionDTO.setTitulo(informacion.getTitulo());
         informacionDTO.setDescripcion(informacion.getDescripcion());
         informacionDTO.setFecha(informacion.getFecha());
-        //informacionDTO.setFoto(informacion.getFoto());
+
+        // Constructing file path
+        Path directorioImagenes = Paths.get("src", "main", "resources", "static", "imagesinformation");
+        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+        Path rutaCompleta = Paths.get(rutaAbsoluta, informacion.getFoto());
+
+        try {
+            // Reading image file
+            byte[] foto = Files.readAllBytes(rutaCompleta);
+            informacionDTO.setFoto(foto);
+        } catch (IOException e) {
+            // Handle file not found or other IO errors
+            e.printStackTrace(); // Consider logging or throwing a custom exception instead
+        }
+
+        // Set other fields
         informacionDTO.setTextocompleto(informacion.getTextocompleto());
-        // Aquí mapea otros campos si los hay
+        informacionDTO.setIdvecino(informacion.getVecino().getIdvecino());
+        informacionDTO.setIdcomunidad(informacion.getComunidad().getIdcomunidad());
+
         return informacionDTO;
     }
 

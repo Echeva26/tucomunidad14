@@ -62,10 +62,10 @@ public class Informacion {
     }
     
     
-    public Vecino getVecinos() {
+    public Vecino getVecino() {
         return gestor;
     }
-    public void setVecinos(Vecino gestor) {
+    public void setVecino(Vecino gestor) {
         this.gestor =gestor;
     }
     public String getDescripcion() {
