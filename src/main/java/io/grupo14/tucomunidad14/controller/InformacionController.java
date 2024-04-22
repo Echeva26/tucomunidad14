@@ -77,7 +77,7 @@ public class InformacionController {
 
         // Manejo de la carga de la imagen
         if (!imagen.isEmpty()) {
-            Path directorioImagenes = Paths.get("src//main//resources//static/images");
+            Path directorioImagenes = Paths.get("src//main//resources//static/imagesinformation");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
 
             try {
