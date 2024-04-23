@@ -105,7 +105,7 @@ public class VecinoController {
     }
 
     @GetMapping("/vecino")
-    public VecinoDTO obtenerVecinoPorUsuarioYContraseña(@RequestParam String usuario, @RequestParam String contraseña) {
+    public String obtenerVecinoPorUsuarioYContraseña(@RequestParam String usuario, @RequestParam String contraseña) {
         Optional<Vecino> vecinoOpt = vecinoRepository.findByUsernameAndPassword(usuario, contraseña);
         if (vecinoOpt.isPresent()) {
             Vecino vecino = vecinoOpt.get();
@@ -120,9 +120,9 @@ public class VecinoController {
             vecinoDTO.setIdComunidad(vecino.getComunidad().getIdcomunidad()); // Asegúrate de que Comunidad tenga
                                                                               // getIdcomunidad() o ajusta según tu
                                                                               // modelo
-            return vecinoDTO;
+            return "El vecino está registrado con ID:"+ vecinoDTO.getIdvecino();
         } else {
-            throw new RuntimeException("Vecino no encontrado");
+            return "El vecino no está registrado" ;
         }
 
     }
