@@ -46,15 +46,21 @@ body {
 
   margin: 20px; /* Espacio uniforme alrededor de los elementos */
   padding-bottom: 10px; 
+  align-items: center; /* Centrar los elementos horizontalmente */
+  overflow: hidden; 
 
 }
 
 
 .elemento img {
   width: 100%; /* Hacer que la imagen llene el ancho del elemento */
-  height: 200px; /* Ajustar la altura automáticamente */
-  border-radius: 10px 10px 0 0; /* Redondear solo las esquinas superiores */
   object-fit: cover;
+
+  width: 100%; /* La imagen ocupa todo el ancho disponible */
+  height: auto; /* La altura de la imagen es automática para mantener la proporción */
+  border-top-left-radius: 10px; /* Redondear las esquinas superiores */
+  border-top-right-radius: 10px; /* Redondear las esquinas superiores */
+  margin-bottom: 10px;
 }
 
 /* Mejoras visuales */
@@ -166,24 +172,26 @@ body {
   overflow-wrap: break-word;
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
-  color: #292525;
-
+  color: hsla(0, 40%, 98%, 0.966);
+  position: relative;
 
 }
 
 .titulo a {
   font-weight: bold; /* Hacer los títulos más destacados */
-  color: #333; /* Un color oscuro para mayor contraste */
+  color: #fcfbfde7; /* Un color oscuro para mayor contraste */
   text-decoration: none; /* Quitar el subrayado de los enlaces */
-
+  position: relative;
   font-size: 18px; /* Tamaño de letra menor para los títulos */
   margin: 0; /* Remover márgenes adicionales */
-  display: block; /* Asegura que el título sea un bloque para controlar mejor el espacio */
   white-space: nowrap; /* Evita que el texto del título se salga del contenedor */
   overflow: hidden; /* Oculta el texto que se desborde del contenedor */
   text-overflow: ellipsis; 
 
-  
+  display: -webkit-box; /* Usar caja de visualización de Webkit para el truncamiento de texto */
+  -webkit-line-clamp: 1; /* Mostrar solo una línea de texto */
+  -webkit-box-orient: vertical; /* Orientar el contenido de la caja verticalmente */
+
 }
 
 .descripcion {
@@ -194,6 +202,11 @@ body {
   height: 3.8em; /* Limita la altura del texto de la descripción para evitar desbordamiento */
   overflow: hidden; /* Oculta el texto que se desborde del contenedor */
   text-overflow: ellipsis; 
+
+  display: -webkit-box; /* Usar caja de visualización de Webkit para el truncamiento de texto */
+  -webkit-line-clamp: 3; /* Limitar a tres líneas de texto */
+  -webkit-box-orient: vertical; /* Orientar el contenido de la caja verticalmente */
+
 }
 
 .reservar-1 {
@@ -218,6 +231,9 @@ body {
 
 .contenido {
   margin-bottom: 70px; /* Ajusta el espacio entre el texto y los botones "Leer más" */
+  width: 100%; /* El contenedor de contenido usa todo el ancho disponible */
+  padding: 0 20px; /* Agregar padding para no pegar el texto a los bordes */
+  box-sizing: border-box;
 }
 
 
