@@ -140,6 +140,18 @@ public class VecinoController {
         }
     }
 
+    @GetMapping("/esgestor")
+    public ResponseEntity<?> esgestor(@RequestParam Long idvecino) {
+        Optional<Vecino> vecino = vecinoRepository.findById(idvecino);
+        if (vecino.isPresent()) {
+            boolean esGestor = vecino.get().getGestor(); // getGestor() devuelve un booleano
+            return ResponseEntity.ok(esGestor); // Devuelve directamente el valor booleano
+        } else {
+            // Retorna un mensaje de error si el vecino no existe
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese vecino");
+        }
+    }
+
     //
 
 }
