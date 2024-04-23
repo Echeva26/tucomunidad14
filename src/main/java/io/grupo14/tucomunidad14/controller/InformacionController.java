@@ -7,6 +7,10 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.PutMapping;
+
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,10 +28,10 @@ import io.grupo14.tucomunidad14.repository.InformacionRepository;
 import io.grupo14.tucomunidad14.repository.VecinoRepository;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
 
 @RestController
 public class InformacionController {
@@ -158,7 +162,7 @@ public class InformacionController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Información no encontrada con el ID: " + idinformacion);
         }
-        if(informacionOpt.get().getComunidad().getIdcomunidad() != vecinoOpt.get().getComunidad().getIdcomunidad() ){
+        if (informacionOpt.get().getComunidad().getIdcomunidad() != vecinoOpt.get().getComunidad().getIdcomunidad()) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN,
                     "El vecino con ID: " + idvecino + " no pertenece a esta comunidad");
 
@@ -177,6 +181,76 @@ public class InformacionController {
         // Borrar la información
         informacionRepository.delete(informacionOpt.get());
         return "La información ha sido eliminada correctamente";
+    }
+
+    @PutMapping("/editarinformacion")
+    public String editarInformacion(@ModelAttribute InformacionDTO informacionDTO,
+            @RequestParam("imagen") MultipartFile imagen) {
+        // Verificar que la información existe
+        Long idInformacion = informacionDTO.getIdinformacion();
+        Optional<Informacion> informacionOpt = informacionRepository.findById(idInformacion);
+        if (!informacionOpt.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Información no encontrada con el ID: " + idInformacion);
+        }
+        
+
+        Informacion informacion = informacionOpt.get();
+
+        // Actualizar datos de la información
+        informacion.setTitulo(informacionDTO.getTitulo());
+        informacion.setFecha(informacionDTO.getFecha());
+        informacion.setDescripcion(informacionDTO.getDescripcion());
+        informacion.setTextocompleto(informacionDTO.getTextocompleto());
+
+        // Verificar si el vecino es gestor
+        Optional<Vecino> gestorOpt = vecinoRepository.findById(informacionDTO.getIdvecino());
+        if (gestorOpt.isPresent() && gestorOpt.get().getGestor()) {
+            informacion.setVecino(gestorOpt.get());
+        } else {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                    "El vecino con ID: " + informacionDTO.getIdvecino() + " no tiene permisos de gestor o no existe");
+        }
+
+        // Actualizar comunidad solo si es necesario y existe
+        if (!informacion.getComunidad().getIdcomunidad().equals(informacionDTO.getIdcomunidad())) {
+            Optional<Comunidad> comunidadOpt = comunidadRepository.findById(informacionDTO.getIdcomunidad());
+            if (comunidadOpt.isPresent()) {
+                informacion.setComunidad(comunidadOpt.get());
+            } else {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Comunidad no encontrada con el ID: " + informacionDTO.getIdcomunidad());
+            }
+        }
+
+        // Actualizar imagen si se incluye una nueva
+        if (!imagen.isEmpty()) {
+            Path directorioImagenes = Paths.get("src//main//resources//static/imagesinformation");
+            String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+
+            // Eliminar la imagen anterior si existe
+            if (informacion.getFoto() != null && !informacion.getFoto().isEmpty()) {
+                Path rutaImagenAnterior = Paths.get(rutaAbsoluta, informacion.getFoto());
+                try {
+                    Files.deleteIfExists(rutaImagenAnterior);
+                } catch (IOException e) {
+                    e.printStackTrace(); // Consider logging or throwing a custom exception instead
+                }
+            }
+
+            try {
+                byte[] bytesImg = imagen.getBytes();
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
+                Files.write(rutaCompleta, bytesImg);
+                informacion.setFoto(imagen.getOriginalFilename());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Guardar los cambios en la base de datos
+        informacionRepository.save(informacion);
+        return "Información actualizada correctamente";
     }
 
 }

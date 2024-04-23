@@ -66,6 +66,7 @@ public class InformacionDTO {
     public void setFoto(String foto) {
         this.foto = foto;
     }
+    
    
 
     
