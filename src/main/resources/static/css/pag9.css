@@ -8,7 +8,7 @@ body {
   }
   
   .pagina {
-    background: rgba(255, 255, 255, 0.8); 
+    background: #E9FBF8; 
     display: flex;
     flex-direction: column;
     justify-content: center; /* Centra verticalmente el contenido */
