@@ -10,7 +10,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   padding-top: 170px; /* Ajuste para dejar espacio para la cabecera */
   padding-bottom: 50px; /* Ajuste para evitar que el contenido se superponga con el pie de página */
   box-sizing: border-box;

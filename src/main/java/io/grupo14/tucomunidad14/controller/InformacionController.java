@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import io.grupo14.tucomunidad14.model.Comunidad;
 import io.grupo14.tucomunidad14.model.Informacion;
 import io.grupo14.tucomunidad14.model.InformacionDTO;
+import io.grupo14.tucomunidad14.model.InformacionDTOdownload;
 import io.grupo14.tucomunidad14.model.Vecino;
 import io.grupo14.tucomunidad14.repository.ComunidadRepository;
 import io.grupo14.tucomunidad14.repository.InformacionRepository;
@@ -96,19 +97,19 @@ public class InformacionController {
     }
 
     @GetMapping("/obtenerinfoporcomunidad")
-    public List<InformacionDTO> obteInformacionporcomunidad(@RequestParam Long idcomunidad) {
-        List<Informacion> info = informacionRepository.findByComunidadId(idcomunidad);
+    public List<InformacionDTOdownload> obteInformacionporcomunidad(@RequestParam Long idcomunidad) {
+        List<InformacionDTO> info = informacionRepository.findByComunidadId(idcomunidad);
 
-        // Mapeo de Informacion a InformacionDTO
-        List<InformacionDTO> infoDTOs = info.stream()
-                .map(informacion -> mapToDTO(informacion))
-                .collect(Collectors.toList());
+         //Mapeo de Informaciondto a InformacionDTOdownload
+        List<InformacionDTOdownload> infoDTOdownloads = info.stream()
+               .map(informacion -> mapToDTO(informacion))
+               .collect(Collectors.toList());
 
-        return infoDTOs;
+        return infoDTOdownloads;
     }
-
-    private InformacionDTO mapToDTO(Informacion informacion) {
-        InformacionDTO informacionDTO = new InformacionDTO();
+    
+    private InformacionDTOdownload mapToDTO(InformacionDTO informacion) {
+        InformacionDTOdownload informacionDTO = new InformacionDTOdownload();
         informacionDTO.setIdinformacion(informacion.getIdinformacion());
         informacionDTO.setTitulo(informacion.getTitulo());
         informacionDTO.setDescripcion(informacion.getDescripcion());
@@ -130,8 +131,8 @@ public class InformacionController {
 
         // Set other fields
         informacionDTO.setTextocompleto(informacion.getTextocompleto());
-        informacionDTO.setIdvecino(informacion.getVecino().getIdvecino());
-        informacionDTO.setIdcomunidad(informacion.getComunidad().getIdcomunidad());
+        informacionDTO.setIdvecino(informacion.getIdvecino());
+        informacionDTO.setIdcomunidad(informacion.getIdcomunidad());
 
         return informacionDTO;
     }

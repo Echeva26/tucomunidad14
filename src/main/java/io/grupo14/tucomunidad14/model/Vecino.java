@@ -30,7 +30,7 @@ public class Vecino {
     private Comunidad comunidad;
     @OneToMany(mappedBy = "vecino")
     private List<Reserva> reserva;
-    @OneToMany(mappedBy = "gestor")
+    @OneToMany(mappedBy = "vecino")
     private List<Informacion> informacions;
 
     public Vecino() {

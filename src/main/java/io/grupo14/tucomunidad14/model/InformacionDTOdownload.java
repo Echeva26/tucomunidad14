@@ -4,12 +4,13 @@ import java.sql.Date;
 
 import jakarta.persistence.Lob;
 
-public class InformacionDTO {
+public class InformacionDTOdownload {
 
     private Long idinformacion;
     private String titulo;
     private Date fecha;
-    private String foto;//Cambios?
+    @Lob
+    private byte[] foto;//Cambios?
     private String descripcion;
     @Lob
     private String textocompleto;//Cambios
@@ -60,12 +61,13 @@ public class InformacionDTO {
     public void setIdcomunidad(Long idcomunidad) {
         this.idcomunidad = idcomunidad;
     }
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
+    
    
 
     
