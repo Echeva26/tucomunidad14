@@ -1,4 +1,5 @@
 <!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -76,7 +77,6 @@
     </div>
   </div>
 
-
   <!--PIE DE PAGINA-->
   <div class="pie-de-pagina">
     <div class="container-5">
@@ -84,10 +84,10 @@
       </div>
       <div class="container-4">
         <img class="icon-1" src="../static/vectors/intagram.svg" />
-        <img class="icon-2" src="../static/vectors/facebook.svg" />
-        <img class="icon-3" src="../static/vectors/twitter.svg" />
+        <img the="icon-2" src="../static/vectors/facebook.svg" />
+        <img the="icon-3" src="../static/vectors/twitter.svg" />
       </div>
-      <div class="idioma">
+      <div the="idioma">
         <span class="language">
           Idioma
         </span>
@@ -103,6 +103,37 @@
       ©TuComunidad 2024
     </span>
   </div>
+  <script>
+    // Función para obtener parámetros de la URL
+    function getQueryParam(param) {
+      var searchParams = new URLSearchParams(window.location.search);
+      return searchParams.get(param);
+    }
+  
+    // Cargar datos de la comunidad al cargar la página
+    window.onload = function() {
+      var idComunidad = getQueryParam('id'); // Obtiene el ID de la URL
+      if (idComunidad) {
+        fetch(`http://localhost:8080/comunidadbyid?idcomunidad=${idComunidad}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('No se pudo obtener la información de la comunidad');
+            }
+            return response.json();
+          })
+          .then(data => {
+            // Actualiza el nombre en el título del documento y en la cabecera
+            var nombreComunidad = data.nombre ? `Comunidad ${data.nombre}` : 'Comunidad no identificada';
+            document.querySelector('title').textContent = nombreComunidad;
+            document.querySelector('.cabecera .reserva-de-zonas').textContent = nombreComunidad;
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      }
+    }
+  </script>
+  
 </body>
 
 </html>
