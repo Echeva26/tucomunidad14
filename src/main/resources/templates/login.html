@@ -20,24 +20,38 @@
             'Content-Type': 'application/json'
           }
         })
-          .then(response => response.json())
-          .then(data => {
-            if (data === "El vecino no está registrado") {
-              const errorMessage = document.getElementById("errorMessage");
-              errorMessage.textContent = "Las credenciales no son correctas. Por favor, intenta de nuevo.";
-              errorMessage.style.display = "block";
+          .then(response => {
+            if (response.ok) {
+              return response.json();  // Si la respuesta es exitosa, procesa el JSON.
+            } else if (response.status === 404) {
+              // Maneja específicamente el estado 404, donde no se encontró el vecino.
+              document.getElementById("errorMessage").textContent = "Las credenciales no son correctas o el usuario no está registrado.";
+              document.getElementById("errorMessage").style.display = "block";
+              return null; // Retorna null para evitar más procesamiento.
             } else {
+              // Lanza un error para otros tipos de respuestas no exitosas.
+              return response.text().then(text => { throw new Error(text) });
+            }
+          })
+          .then(data => {
+            if (data) { // Verifica que data no sea null antes de proceder.
               console.log("Vecino encontrado", data);
-              window.location.href = '/menucomunidad';
+              window.location.href = '/menucomunidad?id=' + data.idvecino;  // Asumiendo que necesitas el ID para redirigir
             }
           })
           .catch((error) => {
             console.error('There has been a problem with your fetch operation:', error);
+            // Asegúrate de que el mensaje de error se maneja aquí si no se hizo antes
+            if (!document.getElementById("errorMessage").textContent) {
+              document.getElementById("errorMessage").textContent = "Error: " + error.message;
+              document.getElementById("errorMessage").style.display = "block";
+            }
           });
       });
     });
-
   </script>
+
+
 
 </head>
 
@@ -112,7 +126,7 @@
   </div>
 
   {% comment %}
-  
+
 
   </body>
 
