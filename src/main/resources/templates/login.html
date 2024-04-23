@@ -1,49 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TuComunidad</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" href="../static/css/pag1.css" />
-    <script>
-          document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("loginForm").addEventListener("submit", function(e) {
-          e.preventDefault();
-          var username = document.getElementById("username").value;
-          var password = document.getElementById("password").value;
-          
-          // Realizar la solicitud fetch a la API
-          fetch(`http://localhost:8080/api/vecino?usuario=${username}&contraseña=${password}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-              // Si tu API requiere un token de autenticación, deberías añadirlo aquí también
-            }
-          })
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TuComunidad</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" href="../static/css/pag1.css" />
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("loginForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        fetch(`http://localhost:8080/api/vecino?usuario=${username}&contraseña=${password}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
           .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
+            if (response.ok) {
+              return response.json();  // Si la respuesta es exitosa, procesa el JSON.
+            } else if (response.status === 404) {
+              // Maneja específicamente el estado 404, donde no se encontró el vecino.
+              document.getElementById("errorMessage").textContent = "Las credenciales no son correctas o el usuario no está registrado.";
+              document.getElementById("errorMessage").style.display = "block";
+              return null; // Retorna null para evitar más procesamiento.
+            } else {
+              // Lanza un error para otros tipos de respuestas no exitosas.
+              return response.text().then(text => { throw new Error(text) });
             }
-            console.log("ha hecho el get")
-            return response.json();
           })
           .then(data => {
-            console.log(data);
-            // Aquí manejas la respuesta. Por ejemplo, podrías redirigir al usuario o mostrar algún mensaje.
-            console.log("ha hecho el get")
-            window.location.href = '/sesioniniciada';
-            //<a href="pag7act2.html"></a>
+            if (data) { // Verifica que data no sea null antes de proceder.
+              console.log("Vecino encontrado", data);
+              window.location.href = '/menucomunidad?id=' + data.idvecino;  // Asumiendo que necesitas el ID para redirigir
+            }
           })
           .catch((error) => {
             console.error('There has been a problem with your fetch operation:', error);
+            // Asegúrate de que el mensaje de error se maneja aquí si no se hizo antes
+            if (!document.getElementById("errorMessage").textContent) {
+              document.getElementById("errorMessage").textContent = "Error: " + error.message;
+              document.getElementById("errorMessage").style.display = "block";
+            }
           });
-        });
       });
+    });
+  </script>
 
-      
-    </script>
-    
+
+
 </head>
 
 <div class="cabecera">
@@ -53,42 +62,44 @@
       TuComunidad
       <img class="icon" />
     </div>
-</div>
-
-<div class="pagina">
-<div class="container">
-  <div class="description">
-    <div class="description-1">
-      <h2>Te ayudamos a gestionar tu comunidad de vecinos</h2>
-    </div>
-  
-      <p>TuComunidad te ayudará a gestionar tu comunidad de vecinos. Está dirigida a usuarios que viven en una comunidad y quieren gestionarla de manera ordenada.</p>
   </div>
 
-  <div class="login-form">
-      <h2>¡Bienvenido de nuevo!
-        Inicia sesión aquí</h2>
-          <form action="/comunidad?id=33" >
-              <label for="username">Nombre de Usuario:</label>
-              <input type="text" id="username" name="username" required>
-              <label for="password">Contraseña:</label>
-              <input type="password" id="password" name="password" required>
-              <input type="submit" value="Iniciar Sesión">
+  <div class="pagina">
+    <div class="container">
+      <div class="description">
+        <div class="description-1">
+          <h2>Te ayudamos a gestionar tu comunidad de vecinos</h2>
+        </div>
+
+        <p>TuComunidad te ayudará a gestionar tu comunidad de vecinos. Está dirigida a usuarios que viven en una
+          comunidad y quieren gestionarla de manera ordenada.</p>
+      </div>
+
+      <div class="login-form">
+        <h2>¡Bienvenido de nuevo! Inicia sesión aquí</h2>
+        <form id="loginForm">
+          <label for="username">Nombre de Usuario:</label>
+          <input type="text" id="username" name="username" required>
+          <label for="password">Contraseña:</label>
+          <input type="password" id="password" name="password" required>
+          <input type="submit" value="Iniciar Sesión">
         </form>
-      
-      
-          <div style="margin-top: 10px;">
-              <a href="/restablecercontrasena2">He olvidado mi contraseña</a>
-            
-          </div>
-      <p>¿No tienes cuenta? <a href="/registro">Regístrate aquí</a>.</p>
-      <p>¿Eres el Gestor y quieres crear la comunidad? <a href="/registrogestor"> Regístrate aquí <a></p>
-  </div>
-</div>
-</div>
+        <p id="errorMessage" style="display:none; background-color:#FFCCCC; padding:10px; border-radius:5px;"></p>
 
-   <!--PIE DE PAGINA-->
-   <div class="pie-de-pagina">
+
+
+        <div style="margin-top: 10px;">
+          <a href="/restablecercontrasena2">He olvidado mi contraseña</a>
+
+        </div>
+        <p>¿No tienes cuenta? <a href="/registro">Regístrate aquí</a>.</p>
+        <p>¿Eres el Gestor y quieres crear la comunidad? <a href="/registrogestor"> Regístrate aquí <a></p>
+      </div>
+    </div>
+  </div>
+
+  <!--PIE DE PAGINA-->
+  <div class="pie-de-pagina">
     <div class="container-5">
       <div class="image-2">
       </div>
@@ -114,43 +125,9 @@
     </span>
   </div>
 
-  {% comment %} <script>
-    document.addEventListener("DOMContentLoaded", function() {
-document.getElementById("loginForm").addEventListener("submit", function(e) {
-e.preventDefault();
-var username = document.getElementById("username").value;
-var password = document.getElementById("password").value;
-
-// Realizar la solicitud fetch a la API
-fetch('http://localhost:8080/api/vecinos', {
-method: 'POST',
-headers: {
-  'Content-Type': 'application/json'
-  // Si tu API requiere un token de autenticación, deberías añadirlo aquí también
-},
-body: JSON.stringify({ usuario: username, contraseña: password })
-})
-.then(response => {
-if (!response.ok) {
-  throw new Error('Network response was not ok');
-  window.location.href = '/comunidad?id=' + data.idComunidad;
-}
-return response.json();
-})
-.then(data => {
-console.log(data);
-// Aquí manejas la respuesta. Por ejemplo, podrías redirigir al usuario o mostrar algún mensaje.
-window.location.href = '/comunidad?id=' + data.idComunidad;
-})
-.catch((error) => {
-console.error('There has been a problem with your fetch operation:', error);
-});
-});
-}); {% endcomment %}
+  {% comment %}
 
 
-</script>
-
-</body>
+  </body>
 
 </html>

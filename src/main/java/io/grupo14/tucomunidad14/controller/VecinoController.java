@@ -105,7 +105,7 @@ public class VecinoController {
     }
 
     @GetMapping("/vecino")
-    public VecinoDTO obtenerVecinoPorUsuarioYContraseña(@RequestParam String usuario, @RequestParam String contraseña) {
+    public ResponseEntity<?> obtenerVecinoPorUsuarioYContraseña(@RequestParam String usuario, @RequestParam String contraseña) {
         Optional<Vecino> vecinoOpt = vecinoRepository.findByUsernameAndPassword(usuario, contraseña);
         if (vecinoOpt.isPresent()) {
             Vecino vecino = vecinoOpt.get();
@@ -115,16 +115,14 @@ public class VecinoController {
             vecinoDTO.setApellidos(vecino.getApellidos());
             vecinoDTO.setEmail(vecino.getEmail());
             vecinoDTO.setNombredeusuario(vecino.getNombredeusuario());
-            vecinoDTO.setContraseña(vecino.getContraseña()); // Considera no retornar la contraseña
+            vecinoDTO.setContraseña(vecino.getContraseña()); // Considera no retornar la contraseña por seguridad
             vecinoDTO.setGestor(vecino.getGestor());
-            vecinoDTO.setIdComunidad(vecino.getComunidad().getIdcomunidad()); // Asegúrate de que Comunidad tenga
-                                                                              // getIdcomunidad() o ajusta según tu
-                                                                              // modelo
-            return vecinoDTO;
+            vecinoDTO.setIdComunidad(vecino.getComunidad().getIdcomunidad());
+            
+            return ResponseEntity.ok(vecinoDTO);  // Devuelve el objeto vecinoDTO como JSON con estado 200 OK
         } else {
-            throw new RuntimeException("Vecino no encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El vecino no está registrado");
         }
-
     }
 
     @PostMapping("/cambioContrasena")
