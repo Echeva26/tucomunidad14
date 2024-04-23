@@ -25,6 +25,7 @@ import io.grupo14.tucomunidad14.repository.VecinoRepository;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -100,14 +101,14 @@ public class InformacionController {
     public List<InformacionDTOdownload> obteInformacionporcomunidad(@RequestParam Long idcomunidad) {
         List<InformacionDTO> info = informacionRepository.findByComunidadId(idcomunidad);
 
-         //Mapeo de Informaciondto a InformacionDTOdownload
+        // Mapeo de Informaciondto a InformacionDTOdownload
         List<InformacionDTOdownload> infoDTOdownloads = info.stream()
-               .map(informacion -> mapToDTO(informacion))
-               .collect(Collectors.toList());
+                .map(informacion -> mapToDTO(informacion))
+                .collect(Collectors.toList());
 
         return infoDTOdownloads;
     }
-    
+
     private InformacionDTOdownload mapToDTO(InformacionDTO informacion) {
         InformacionDTOdownload informacionDTO = new InformacionDTOdownload();
         informacionDTO.setIdinformacion(informacion.getIdinformacion());
@@ -135,6 +136,47 @@ public class InformacionController {
         informacionDTO.setIdcomunidad(informacion.getIdcomunidad());
 
         return informacionDTO;
+    }
+
+    @DeleteMapping("/borrarinformacion")
+    public String borrarInformacion(@RequestParam Long idinformacion, @RequestParam Long idvecino) {
+        // Verificar si el vecino es gestor
+        Optional<Vecino> vecinoOpt = vecinoRepository.findById(idvecino);
+        if (!vecinoOpt.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Vecino no encontrado con el ID: " + idvecino);
+        }
+
+        Vecino vecino = vecinoOpt.get();
+        if (!vecino.getGestor()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                    "El vecino con ID: " + idvecino + " no tiene permisos de gestor");
+        }
+
+        // Buscar la información a eliminar
+        Optional<Informacion> informacionOpt = informacionRepository.findById(idinformacion);
+        if (!informacionOpt.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Información no encontrada con el ID: " + idinformacion);
+        }
+        if(informacionOpt.get().getComunidad().getIdcomunidad() != vecinoOpt.get().getComunidad().getIdcomunidad() ){
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                    "El vecino con ID: " + idvecino + " no pertenece a esta comunidad");
+
+        }
+
+        String foto = informacionOpt.get().getFoto();
+        Path directorioImagenes = Paths.get("src", "main", "resources", "static", "imagesinformation");
+        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+        Path rutaCompleta = Paths.get(rutaAbsoluta, foto);
+        try {
+            Files.deleteIfExists(rutaCompleta);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Borrar la información
+        informacionRepository.delete(informacionOpt.get());
+        return "La información ha sido eliminada correctamente";
     }
 
 }
