@@ -38,9 +38,6 @@ public class VecinoController {
     @PostMapping("/vecinos")
     public ResponseEntity<Map<String, String>> createVecino(@RequestBody VecinoDTO vecinoDTO) {
         try {
-            Comunidad comunidad = comunidadRepository.findById(vecinoDTO.getIdComunidad()).orElseThrow(
-                    () -> new RuntimeException("Comunidad no encontrada con id: " + vecinoDTO.getIdComunidad()));
-
             Vecino vecino = new Vecino();
             vecino.setNombre(vecinoDTO.getNombre());
             vecino.setApellidos(vecinoDTO.getApellidos());
@@ -48,11 +45,15 @@ public class VecinoController {
             vecino.setNombredeusuario(vecinoDTO.getNombredeusuario());
             vecino.setContraseña(vecinoDTO.getContraseña());
             vecino.setGestor(vecinoDTO.getGestor());
-            vecino.setComunidad(comunidad);
+
+            // Si idComunidad es null, no asociar una comunidad al vecino
+            if (vecinoDTO.getIdComunidad() != null) {
+                Comunidad comunidad = comunidadRepository.findById(vecinoDTO.getIdComunidad()).orElseThrow(
+                        () -> new RuntimeException("Comunidad no encontrada con id: " + vecinoDTO.getIdComunidad()));
+                vecino.setComunidad(comunidad);
+            }
 
             vecinoRepository.save(vecino);
-
-
 
             Map<String, String> response = new HashMap<>();
             response.put("message", "Se ha creado correctamente el vecino");
