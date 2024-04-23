@@ -106,14 +106,13 @@ body {
 }
 
 .imagen {
-  width: 100%; /* La imagen se escalará para ocupar el 100% del ancho del contenedor padre */
-  height: auto; /* La altura se ajusta automáticamente para mantener la proporción de la imagen */
-  display: block; /* Esto hará que la imagen se muestre como un bloque, eliminando espacios extra */
-  margin: 0 auto; /* Esto centrará la imagen horizontalmente */
-  border-radius: 10px;
-
-  
-  margin-bottom: 20px;
+  max-width: 170px; /* ajusta el ancho máximo según tus necesidades */
+  max-height: 170px; /* ajusta la altura máxima según tus necesidades */
+  position: absolute; /* posición absoluta para ajustar dentro de la elipse-icono */
+  top: 5px; /* coloca la imagen en la parte superior */
+  left: 50%; /* centra horizontalmente */
+  transform: translateX(-50%); /* ajusta la posición horizontal */
+  width: 100%;
 }
 
 
