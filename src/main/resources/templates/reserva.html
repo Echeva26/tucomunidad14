@@ -22,8 +22,8 @@
         <a href="/comunidad" style="text-decoration: none;">
           <span class="home-sub-30">Home</span>
           <span></span>
-      </a>
-          </p>
+        </a>
+      </p>
       <div class="log-out">
         <span class="our-works">
           <a href="/" style="text-decoration: none;">Log out</a>
@@ -38,53 +38,29 @@
   <!-- PAGINA -->
   <div class="pagina">
     <div class="container-6">
-      <!-- Iterar sobre la lista de áreas comunes -->
-      <div th:each="area : ${areas}" class="elemento">
-        <div class="borde-azul"></div>
-        <div class="elipse-icono">
-          <div class="circulo"></div>
-          <!-- Utilizar condiciones para mostrar el icono correspondiente -->
-          <img class="icono" th:switch="${area}" th:src="@{'/static/vectors/' + ${area.name().toUpperCase()} + '.svg'}" />
-        </div>
-        <!-- Utilizar condiciones para mostrar el título y enlace de reserva -->
-        <div class="titulo" th:text="${area.name()}"></div>
-        <div class="reservar">
-          <a th:href="@{${'/reserva-' + area.name().toLowerCase()}}" style="text-decoration: none;">
-            <span class="reservar-1">Reservar</span>
-            <img class="flecha-reservar" th:src="@{/static/vectors/flecha-reservar.svg}" />
-          </a>
-        </div>
-      </div>
-
+      <!-- Contenedor para las áreas comunes -->
     </div>
-
   </div>
 
   <!-- PIE DE PAGINA -->
   <div class="pie-de-pagina">
     <div class="container-5">
-      <div class="image-2">
-      </div>
+      <div class="image-2"></div>
       <div class="container-4">
-        <img class="icon-1" th:src="@{/static/vectors/intagram.svg}" />
-        <img class="icon-2" th:src="@{/static/vectors/facebook.svg}" />
-        <img class="icon-3" th:src="@{/static/vectors/twitter.svg}" />
+        <img class="icon-1" src="/static/vectors/intagram.svg" />
+        <img class="icon-2" src="/static/vectors/facebook.svg" />
+        <img class="icon-3" src="/static/vectors/twitter.svg" />
       </div>
       <div class="idioma">
-        <span class="language">
-          Idioma
-        </span>
-        <img class="icon-color" th:src="@{/static/vectors/flecha.svg}" />
+        <span class="language">Idioma</span>
+        <img class="icon-color" src="/static/vectors/flecha.svg" />
       </div>
     </div>
     <div class="description">
       Facilitamos la convivencia en tu comunidad
     </div>
-    <div class="line">
-    </div>
-    <span class="tucom">
-      ©TuComunidad 2024
-    </span>
+    <div class="line"></div>
+    <span class="tucom">©TuComunidad 2024</span>
   </div>
 
   <script>
@@ -99,62 +75,40 @@
       window.onload = function () {
         var idvecino = getQueryParam('idvecino'); // Obtiene el ID de la URL
         if (idvecino) {
-          fetch(`http://localhost:8080/vecinoporid?idvecino=${idvecino}`)
+          fetch(`http://localhost:8080/areasporvecino?idvecino=${idvecino}`)
             .then(response => {
               if (!response.ok) {
-                throw new Error('No se pudo obtener la información del vecino');
+                throw new Error('No se pudo obtener la información de las áreas comunes');
               }
               return response.json();
             })
             .then(data => {
-              var gestor = data.gestor; // Obtener el parámetro gestor
-              var usuarioDiv = document.querySelector('.usuario'); // Selección del div de usuario
-              if (gestor) {
-                usuarioDiv.textContent = 'Gestor'; // Cambiar el texto a "Gestor"
-              } else {
-                usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
-              }
-
-              // Segunda consulta a la API para obtener el nombre de la comunidad
-              fetch(`http://localhost:8080/vecino/comunidad?idVecino=${idvecino}`)
-                .then(response => {
-                  if (!response.ok) {
-                    throw new Error('No se pudo obtener la información de la comunidad');
-                  }
-                  return response.json();
-                })
-                .then(data => {
-                  var nombreComunidad = data.nombre; // Obtener el nombre de la comunidad
-                  var reservaDeZonas = document.querySelector('.reserva-de-zonas'); // Selección del span de reserva de zonas
-                  var titleTag = document.querySelector('title'); // Selección del tag de título
-                  reservaDeZonas.textContent = `Comunidad ${nombreComunidad}`; // Cambiar el texto en el span
-                  titleTag.textContent = `Comunidad ${nombreComunidad}`; // Cambiar el texto en el título
-                })
-                .catch(error => {
-                  console.error('Error:', error);
-                });
+              var container = document.querySelector('.container-6'); // Selección del contenedor de áreas comunes
+              data.forEach(area => {
+                var newElement = document.createElement('div');
+                newElement.classList.add('elemento');
+                newElement.innerHTML = `
+                  <div class="borde-azul"></div>
+                  <div class="elipse-icono">
+                    <div class="circulo"></div>
+                    <img class="icono" src="/static/vectors/${area.nombre.toLowerCase()}.svg" />
+                  </div>
+                  <div class="titulo">${area.nombre}</div>
+                  <div class="reservar">
+                    <a href="/reserva-${area.nombre.toLowerCase()}?idvecino=${idvecino}" style="text-decoration: none;">
+                      <span class="reservar-1">Reservar</span>
+                      <img class="flecha-reservar" src="/static/vectors/flecha-reservar.svg" />
+                    </a>
+                  </div>
+                `;
+                container.appendChild(newElement);
+              });
             })
             .catch(error => {
               console.error('Error:', error);
             });
         }
       }
-
-      // Obtener el ID del vecino de la URL
-      var idvecino = getQueryParam('idvecino');
-
-      // Obtener todos los contenedores de reserva de zonas
-      var elementosReserva = document.querySelectorAll('.elemento');
-
-      // Agregar un evento de clic a cada contenedor de reserva de zonas
-      elementosReserva.forEach(function(elemento) {
-        elemento.addEventListener('click', function () {
-          // Obtener el área asociada al contenedor
-          var area = elemento.querySelector('.titulo').textContent;
-          // Redireccionar a la página "panelreservas" con el parámetro "idvecino" y el área seleccionada
-          window.location.href = `/reserva-${area.toLowerCase()}?idvecino=${idvecino}`;
-        });
-      });
     });
   </script>
 
