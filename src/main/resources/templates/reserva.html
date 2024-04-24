@@ -97,6 +97,7 @@
                 var newElement = document.createElement('div');
                 newElement.classList.add('elemento');
                 newElement.innerHTML = `
+                <a href="/reserva-${area.toLowerCase()}?idvecino=${idvecino}" style="text-decoration: none;">
                   <div class="borde-azul"></div>
                   <div class="elipse-icono">
                     <div class="circulo"></div>
@@ -104,11 +105,10 @@
                   </div>
                   <div class="titulo">${area}</div>
                   <div class="reservar">
-                    <a href="/reserva-${area.toLowerCase()}?idvecino=${idvecino}" style="text-decoration: none;">
                       <span class="reservar-1">Reservar</span>
                       <img class="flecha-reservar" src="/static/vectors/flecha-reservar.svg" />
-                    </a>
                   </div>
+                </a>
                 `;
                 container.appendChild(newElement);
               });
