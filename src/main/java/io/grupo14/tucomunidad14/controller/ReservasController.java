@@ -149,7 +149,7 @@ public class ReservasController {
 
         return ResponseEntity.ok(reservas);
     }
-
+    /* 
     @GetMapping("/reserva")
     public String reservaTest(@RequestParam(name = "idvecino") Long idVecino) {
         Optional<Vecino> vecinoOPT = vecinoRepository.findById(idVecino);
@@ -160,6 +160,6 @@ public class ReservasController {
         
         
 
-    }
+    }*/
 
 }
