@@ -45,10 +45,15 @@ public class VecinoController {
             vecino.setGestor(vecinoDTO.getGestor());
 
             // Si idComunidad es null, no asociar una comunidad al vecino
-            if (vecinoDTO.getIdComunidad() != null) {
+            if (vecinoDTO.getIdComunidad() != null & !vecinoDTO.getGestor()) {
                 Comunidad comunidad = comunidadRepository.findById(vecinoDTO.getIdComunidad()).orElseThrow(
                         () -> new RuntimeException("Comunidad no encontrada con id: " + vecinoDTO.getIdComunidad()));
                 vecino.setComunidad(comunidad);
+            }else{
+                Long a = (long) 1;
+                Comunidad comunidad = comunidadRepository.findById(a).orElseThrow(
+                    () -> new RuntimeException("Comunidad no encontrada con id: " + vecinoDTO.getIdComunidad()));;
+                vecino.setComunidad(comunidad);//Comunidad provisonal
             }
 
             vecinoRepository.save(vecino);
