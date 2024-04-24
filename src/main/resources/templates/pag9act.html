@@ -181,12 +181,13 @@ function enviarAreasComunes(idComunidad) {
             </div>
             <div class="form-field" style="width: 30%; display: inline-block;">
               <label for="zonas_comunes" class="form-label">Zonas comunes:</label>
-              <select id="zonas_comunes" name="zonasComunes" class="form-input" multiple style="width: 100%;">
-                <option value="0">Pistas de pádel</option>
-                <option value="1">Local</option>
-                <option value="2">Gimnasio</option>
+              <select id="zonas_comunes" name="zonasComunes" class="form-input" multiple size="3" style="width: 100%;">
+                  <option value="0">Pistas de pádel</option>
+                  <option value="1">Local</option>
+                  <option value="2">Gimnasio</option>
               </select>
-            </div>
+          </div>
+          
           </div>
           <button class="join-button" type="submit" style="display: block; margin-top: 10px;">
             Crear</button>
@@ -223,6 +224,44 @@ function enviarAreasComunes(idComunidad) {
       ©TuComunidad 2024
     </span>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var select = document.getElementById('zonas_comunes');
+        select.addEventListener('mousedown', function(e) {
+            e.preventDefault(); // Evitar que el navegador maneje los clics nativamente.
+            var option = e.target;
+            var wasSelected = option.selected; // Guardar el estado inicial de selección.
+    
+            // Permitir la deselección/reselección al hacer clic.
+            if (wasSelected) {
+                option.selected = false;
+            } else {
+                option.selected = true;
+            }
+    
+            // Esto es necesario para permitir el desplazamiento dentro del select.
+            option.parentElement.focus();
+        }, false);
+    
+        // Permitir la navegación con el teclado sin alterar la selección con el ratón.
+        select.addEventListener('keydown', function(e) {
+            if (e.keyCode === 38 || e.keyCode === 40) {
+                e.preventDefault(); // Prevenir el cambio de selección con las teclas de flecha.
+                var options = Array.from(select.options);
+                var index = options.findIndex(option => option.selected);
+                if (e.keyCode === 38 && index > 0) {
+                    options[index - 1].selected = true;
+                } else if (e.keyCode === 40 && index < options.length - 1) {
+                    options[index + 1].selected = true;
+                }
+            }
+        }, false);
+    });
+    </script>
+    
+
+
 
 </body>
 
