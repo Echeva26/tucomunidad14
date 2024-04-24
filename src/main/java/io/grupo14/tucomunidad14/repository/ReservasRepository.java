@@ -29,7 +29,8 @@ public interface ReservasRepository extends CrudRepository<Reserva,Long> {
         @Query("SELECT new io.grupo14.tucomunidad14.model.ReservaSimpleDTO(r.idreserva as idreserva, r.vecino.id as idvecino, r.areacomun.id as idarea, r.inicioReserva as inicioReserva, r.finReserva as finReserva) FROM Reserva r WHERE r.areacomun.id = :areaComunId AND r.inicioReserva >= :inicioDelDia AND r.finReserva <= :finDelDia")
         List<ReservaSimpleDTO> findReservasByAreaComunIdAndDay(Long areaComunId, Timestamp inicioDelDia, Timestamp finDelDia);
 
-
+        @Query("SELECT r FROM Reserva r WHERE r.areacomun.idarea = :idarea and r.vecino.idvecino = :idvecino")
+        List<Reserva> findByVecinoandArea(@Param("idvecino") Long idvecino,@Param("idarea") Long idarea);
 }
         
 

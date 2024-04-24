@@ -17,13 +17,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import java.util.List;
-
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +44,7 @@ public class ReservasController {
     private AreacomunRepository areaComunRepository;
     @Autowired
     private VecinoRepository vecinoRepository;
-    
+
     public static final Logger log = LoggerFactory.getLogger(ReservasController.class);
 
     public ReservasController(ReservasRepository reservasRepository) {
@@ -135,7 +136,7 @@ public class ReservasController {
     }
 
     @GetMapping("/reservas/porAreaComunYDia/{areaComunId}")
-    public ResponseEntity<List<ReservaSimpleDTO>> obtenerReservasPorAreaComunYDia(@PathVariable Long areaComunId,
+    public ResponseEntity<?> obtenerReservasPorAreaComunYDia(@PathVariable Long areaComunId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
         LocalDateTime inicioDelDia = fecha.atStartOfDay(); // 00:00 del día
         LocalDateTime finDelDia = fecha.atTime(23, 59, 59); // Fin del día
@@ -147,6 +148,28 @@ public class ReservasController {
 
         return ResponseEntity.ok(reservas);
     }
-    
+
+    @GetMapping("/reservasporvecinoyarea")
+    public ResponseEntity<?> reservasporvecinoyarea(@RequestParam Long idvecino, @RequestParam Long idarea) {
+        Optional<Areacomun> area = areaComunRepository.findById(idarea);
+        Optional<Vecino> vecino = vecinoRepository.findById(idvecino);
+        if (vecino.isPresent() & area.isPresent()) {
+            List<Reserva> reservas = reservasRepository.findByVecinoandArea(idvecino, idarea);
+            List<ReservaSimpleDTO> reservasDTO = reservas.stream().map(reserva -> {
+                ReservaSimpleDTO dto = new ReservaSimpleDTO();
+                dto.setIdreserva(reserva.getIdreserva());
+                dto.setIdvecino(reserva.getVecino().getIdvecino());
+                dto.setIdarea(reserva.getAreacomun().getIdarea());
+                dto.setInicioReserva(reserva.getInicioReserva());
+                dto.setFinReserva(reserva.getFinReserva());
+                return dto;
+            }).collect(Collectors.toList());
+
+            return ResponseEntity.ok(reservasDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese area o ese vecino");
+        }
+
+    }
 
 }
