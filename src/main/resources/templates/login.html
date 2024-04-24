@@ -55,79 +55,78 @@
 
 </head>
 
-<div class="cabecera">
+<body>
+    <div class="cabecera">
 
-  <div class="container-2">
-    <div class="tu-comunidad">
-      TuComunidad
-      <img class="icon" />
+      <div class="container-2">
+        <div class="tu-comunidad">
+        TuComunidad
+        <img class="icon" />
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="pagina">
-    <div class="container">
+    <div class="pagina">
+      <div class="container">
+        <div class="description-5">
+          <div class="description-1">
+            <h2>Te ayudamos a gestionar tu comunidad de vecinos</h2>
+            <p>TuComunidad te ayudará a gestionar tu comunidad de vecinos. Está dirigida a usuarios que viven en una
+            comunidad y quieren gestionarla de manera ordenada.</p>
+          </div>
+        </div>
+
+
+        <div class="login-form">
+              <h2>¡Bienvenido de nuevo! Inicia sesión aquí</h2>
+            <form id="loginForm">
+              <label for="username">Nombre de Usuario:</label>
+              <input type="text" id="username" name="username" required>
+              <label for="password">Contraseña:</label>
+              <input type="password" id="password" name="password" required>
+              <input type="submit" value="Iniciar Sesión">
+            </form>
+            <p id="errorMessage" style="display:none; background-color:#FFCCCC; padding:10px; border-radius:5px;"></p>
+
+
+
+          <div style="margin-top: 10px;">
+            <a href="/restablecercontrasena2">He olvidado mi contraseña</a>
+
+          </div>
+            <p>¿No tienes cuenta? <a href="/registro">Regístrate aquí</a>.</p>
+            <p>¿Eres el Gestor y quieres crear la comunidad? <a href="/registrogestor"> Regístrate aquí <a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIE DE PAGINA -->
+    <div class="pie-de-pagina">
+      <div class="container-5">
+        <div class="image-2">
+        </div>
+        <div class="container-4">
+          <img class="icon-1" src="../static/vectors/intagram.svg" />
+          <img class="icon-2" src="../static/vectors/facebook.svg" />
+          <img class="icon-3" src="../static/vectors/twitter.svg" />
+        </div>
+        <div class="idioma">
+          <span class="language">
+            Idioma
+          </span>
+          <img class="icon-color" src="../static/vectors/flecha.svg" />
+        </div>
+      </div>
       <div class="description">
-        <div class="description-1">
-          <h2>Te ayudamos a gestionar tu comunidad de vecinos</h2>
-        </div>
-
-        <p>TuComunidad te ayudará a gestionar tu comunidad de vecinos. Está dirigida a usuarios que viven en una
-          comunidad y quieren gestionarla de manera ordenada.</p>
+        Facilitamos la convivencia en tu comunidad
       </div>
-
-      <div class="login-form">
-        <h2>¡Bienvenido de nuevo! Inicia sesión aquí</h2>
-        <form id="loginForm">
-          <label for="username">Nombre de Usuario:</label>
-          <input type="text" id="username" name="username" required>
-          <label for="password">Contraseña:</label>
-          <input type="password" id="password" name="password" required>
-          <input type="submit" value="Iniciar Sesión">
-        </form>
-        <p id="errorMessage" style="display:none; background-color:#FFCCCC; padding:10px; border-radius:5px;"></p>
-
-
-
-        <div style="margin-top: 10px;">
-          <a href="/restablecercontrasena2">He olvidado mi contraseña</a>
-
-        </div>
-        <p>¿No tienes cuenta? <a href="/registro">Regístrate aquí</a>.</p>
-        <p>¿Eres el Gestor y quieres crear la comunidad? <a href="/registrogestor"> Regístrate aquí <a></p>
+      <div class="line">
       </div>
+      <span class="tucom">
+        ©TuComunidad 2024
+      </span>
     </div>
-  </div>
 
-  <!--PIE DE PAGINA-->
-  <div class="pie-de-pagina">
-    <div class="container-5">
-      <div class="image-2">
-      </div>
-      <div class="container-4">
-        <img class="icon-1" src="../static/vectors/intagram.svg" />
-        <img class="icon-2" src="../static/vectors/facebook.svg" />
-        <img class="icon-3" src="../static/vectors/twitter.svg" />
-      </div>
-      <div class="idioma">
-        <span class="language">
-          Idioma
-        </span>
-        <img class="icon-color" src="../static/vectors/flecha.svg" />
-      </div>
-    </div>
-    <div class="description-2">
-      Facilitamos la convivencia en tu comunidad
-    </div>
-    <div class="line">
-    </div>
-    <span class="tucom">
-      ©TuComunidad 2024
-    </span>
-  </div>
-
-  {% comment %}
-
-
-  </body>
+</body>
 
 </html>

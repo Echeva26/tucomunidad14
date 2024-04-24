@@ -3,24 +3,34 @@ body {
     margin: 0;
     padding: 0;
     background-color: #E9FBF8;
+    background-size: cover;
+    background-attachment: fixed;
 }
 .pagina {
   background: #E9FBF8;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: px; /* Ajuste para dejar espacio para la cabecera */
-  padding-bottom: 50px; /* Ajuste para evitar que el contenido se superponga con el pie de página */
+  padding-top: 90px; /* Asegúrate de que este padding-top empuje el contenido abajo de la cabecera fija */
+  padding-bottom: 100px; /* Este padding-bottom debe ser al menos igual a la altura del pie de página para asegurar que no se solape */
   box-sizing: border-box;
-  width: 100%;
-  height: 100vh;
+
 }
 .container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    flex-direction: row; /* o 'column' si prefieres que estén en una columna */
+    flex-wrap: nowrap; /* Evita que los elementos se envuelvan */
+    padding: 20px 0; /* Agrega relleno arriba y abajo del contenedor */
+
+    gap: 20px; /* Esto añade espacio entre los elementos del contenedor */
     
+
+
     
+
+
 }
 .icon {
   background: url('../images/image2.png') 50% / cover no-repeat;
@@ -29,21 +39,47 @@ body {
   margin-bottom: 0px;
 }
 .description {
-    width: 45%;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(56, 196, 235, 0.1);
+  margin: 0 750px 4px 0;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 2.308;
+  color: var(--black, #292525);
+
 }
+
+.h2{
+  font-size: 30px;
+  text-align: center;
+}
+
+
+
+
 .description-1 {
-    width: 95%;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    font-size: 14px;
+  width: 100%; /* Ajustar según sea necesario */
+  padding: 40px; /* Más relleno para un aspecto más grande */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border: 1px solid #e0e0e0; /* Borde sutil */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 20px; /* Texto más grande para mejorar la legibilidad */
+  color: #333;
+  margin: 0 ; /* Centrar la caja si es necesario */
+  max-width: 600px; /* Ajustar al ancho máximo deseado */
+  text-align: justify; /* Para un texto justificado y ordenado */
+  background-image: linear-gradient(to right, #f8f9fa, #e0e0e0);
+  text-align: center;
+  margin-left: 50px;
+  margin-top: 100px;
+
+  max-width: 400px;
+  
+  
 }
 .login-form {
     width: 45%;
@@ -51,7 +87,43 @@ body {
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-right: 300px;
+    margin-top: 100px;
+    max-width: 600px;
+    box-sizing: border-box;
+
 }
+
+
+.image-container {
+  /* Ajusta según sea necesario */
+  width: 100%; /* O el ancho que desees */
+  flex: 0 0 300px;
+  display: flex;
+  justify-content: center; /* Centra la imagen horizontalmente */
+  align-items: center; /* Centra la imagen verticalmente */
+  margin: 20px 0; /* Agrega un margen arriba y abajo */
+  margin-left: 230px;
+  margin-right: 10px;
+  margin-top: 10px;
+  padding: 0 20px;
+  box-sizing: border-box; /* Asegura que el relleno y el borde se incluyan en el ancho total */
+
+}
+
+.image-container img {
+  max-width: 100%; /* Asegura que la imagen no exceda el ancho de su contenedor */
+  margin-left: 5px;
+  margin-right: 20px;
+  margin-top: 10px;
+
+  width: 100%; /* Hace que la imagen sea tan ancha como su contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    max-height: 300px;
+}
+
+
+
 input[type="text"], input[type="password"], input[type="submit"] {
     width: 90%;
     padding: 8px;
@@ -83,6 +155,7 @@ input[type="submit"]:hover {
     padding: 90px 40px 31px 0;
     width: 100%; 
     box-sizing: border-box;
+    z-index: 1000; 
   }
   .container-2 {
     background: #60E1CB;
@@ -103,9 +176,11 @@ input[type="submit"]:hover {
     overflow-wrap: break-word;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 30px;
     color: #292525;
-    
+    text-align: center;
+    align-items: center;
+    margin-left: 350px;
   }
 
 
@@ -207,7 +282,7 @@ input[type="submit"]:hover {
         width: 100%;
         box-sizing: border-box;
         margin: 0;
-        margin-top: 0;
+        margin-top: auto;
       
       }
       
