@@ -6,9 +6,10 @@ import io.grupo14.tucomunidad14.model.Areacomun;
 import io.grupo14.tucomunidad14.model.AreacomunDTO;
 import io.grupo14.tucomunidad14.model.Comunidad;
 import io.grupo14.tucomunidad14.model.Tipodearea;
-
+import io.grupo14.tucomunidad14.model.Vecino;
 import io.grupo14.tucomunidad14.repository.AreacomunRepository;
 import io.grupo14.tucomunidad14.repository.ComunidadRepository;
+import io.grupo14.tucomunidad14.repository.VecinoRepository;
 
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,9 @@ public class Areacontroller {
     @Autowired
     private ComunidadRepository comunidadRepository;
 
+    @Autowired
+    private VecinoRepository vecinoRepository;
+
     @PostMapping("/creararea")
     public ResponseEntity<?> crearArea(@RequestBody AreacomunDTO areacomunDTO) {
         Comunidad comunidad = comunidadRepository.findById(areacomunDTO.getIdComunidad()).orElseThrow(
@@ -48,6 +52,14 @@ public class Areacontroller {
     @GetMapping("/tipodeareaporcomunidad")
     public List<Tipodearea> getMethodName(@RequestParam Long idcomunidad) {
         List<Tipodearea> areas = areacomunRepository.getListadeAreas(idcomunidad);
+
+        return areas;
+
+    }
+    @GetMapping("/tipodeareaporvecino")
+    public List<Tipodearea> tipodeareaporvecino(@RequestParam Long idvecino) {
+        Vecino vecino = vecinoRepository.findById(idvecino).get();
+        List<Tipodearea> areas = areacomunRepository.getListadeAreas(vecino.getComunidad().getIdcomunidad());
 
         return areas;
 
