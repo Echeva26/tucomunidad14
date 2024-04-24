@@ -96,6 +96,14 @@ body {
   z-index: 2; /* Asegurar que esté por delante del círculo */
 }
 
+.imagen-contenedor {
+  width: 100%; /* Toma todo el ancho del elemento .elemento */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* Espacio antes del título */
+}
+
 .imagen {
   max-width: 170px; /* ajusta el ancho máximo según tus necesidades */
   max-height: 170px; /* ajusta la altura máxima según tus necesidades */
@@ -104,6 +112,7 @@ body {
   left: 50%; /* centra horizontalmente */
   transform: translateX(-50%); /* ajusta la posición horizontal */
   width: 100%;
+  object-fit: cover;
 }
 
 
@@ -119,12 +128,13 @@ body {
   position: relative;
   margin: 120px 23px 13px 23px;
   display: inline-block;
-  align-self: flex-start;
+  
   overflow-wrap: break-word;
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
   color: #292525;
-  margin-top: auto;
+  margin-top: 100px;
+  text-align: center;
 
 
 }
