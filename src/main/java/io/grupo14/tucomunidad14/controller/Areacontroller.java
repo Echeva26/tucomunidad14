@@ -106,4 +106,17 @@ public class Areacontroller {
 
     }
 
+    @GetMapping("/tipodeareaporidarea")
+    public ResponseEntity<?> tipodeareaporidarea(@RequestParam Long idarea) {
+        Areacomun areacomun = areacomunRepository.findById(idarea).get();
+        if (areacomun != null) {
+            return ResponseEntity.ok(areacomun.getTipodearea().getValue());
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+        
+
+    }
+    
+
 }
