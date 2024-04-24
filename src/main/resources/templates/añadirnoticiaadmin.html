@@ -53,10 +53,15 @@
       margin-top: 10px; /* Espaciado superior */
       display: block; /* Para que los botones estén en línea */
       margin: 10px auto; /* Centrar los botones horizontalmente */
+      margin-bottom: 5px; /* Reducir el margen inferior de los botones si es necesario */
+
+      
     }
 
     .eliminar {
       background-color: red;
+      margin-bottom: 5px; /* Reducir el margen inferior de los botones si es necesario */
+
     }
 
     .descripcion-editable {
@@ -65,6 +70,53 @@
       margin-top: 10px;
     }
   </style>
+
+<script>
+  const dropArea = document.getElementById('drop-area');
+const imagePreview = document.getElementById('image-preview');
+
+dropArea.addEventListener('dragover', (e) => {
+  e.preventDefault(); // Evita que se abra la imagen en otra página
+  dropArea.classList.add('active');
+});
+
+dropArea.addEventListener('dragleave', () => {
+  dropArea.classList.remove('active');
+});
+
+dropArea.addEventListener('drop', (e) => {s
+  e.preventDefault();
+  const files = e.dataTransfer.files;
+  if (files.length) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      imagePreview.src = e.target.result;
+      imagePreview.style.display = 'block';
+    };
+    reader.readAsDataURL(files[0]);
+  }
+  dropArea.classList.remove('active');
+});
+
+dropArea.addEventListener('click', () => {
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = 'image/*';
+  fileInput.onchange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      imagePreview.src = e.target.result;
+      imagePreview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  };
+  fileInput.click();
+});
+
+</script>
+
+
 </head>
 
 <body>
@@ -100,7 +152,10 @@
     
       <!-- NOTICIA SELECCIONADA -->
       <div class="elemento">
-        <img class="imagen" src="../static/vectors/noticia1.svg" />
+        <div class="drop-area" id="drop-area">
+          <img id="image-preview" src="../static/vectors/noticia1.svg" alt="Vista previa de la imagen" />
+        </div>
+        
         <div class="contenido">
           <div class=" titulo" contenteditable="true">
             Click para agregar título
@@ -108,7 +163,7 @@
           <div class="descripcion descripcion-editable" contenteditable="true">
             Haz click para agregar una breve descripción y para añadir más información.
           </div>
-          <div>
+          <div class="contenedor-botones" >
             <button class="eliminar">Cancelar</button>
             <button class="editar">Añadir</button>
           </div>
