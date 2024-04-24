@@ -128,12 +128,13 @@ body {
   position: relative;
   margin: 120px 23px 13px 23px;
   display: inline-block;
-  align-self: flex-start;
+  
   overflow-wrap: break-word;
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
   color: #292525;
-
+  margin-top: 100px;
+  text-align: center;
 
 }
 .reservar-1 {
