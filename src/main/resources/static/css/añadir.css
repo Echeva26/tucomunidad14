@@ -13,7 +13,9 @@ body {
   justify-content: center;
   box-sizing: border-box;
   width: 100%;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh; /* Si quieres que al menos tenga el alto de la pantalla */
+  padding-bottom: 70px;
 }
 
 .container-6 {
@@ -31,23 +33,25 @@ body {
   flex-direction: column;
   padding: 20px;
   box-sizing: border-box;
-  margin-bottom: 20px; /* Espacio entre los elementos */
   align-self: flex-start; /* Alinea cada elemento al inicio de su propia columna */
   background-color: #FFFFFF;
   border-radius: 10px; /* Bordes redondeados */
-  
   height: auto;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
-
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
   width: calc(33.333% - 40px);
-
   margin: 20px; /* Espacio uniforme alrededor de los elementos */
-  padding-bottom: 10px; 
+  padding-bottom: 70px; 
   margin-top: 0; /* Eliminar el margen superior */
   align-self: center; 
-
+  margin-bottom: 70px; /* Aumenta el margen inferior para evitar el solapamiento */
 }
 
+
+.contenedor-botones{
+  padding-bottom: 0;
+  margin-bottom: 10px; /* Reduce o elimina el margen inferior para acercar al borde del contenedor */
+
+}
 
 .elemento img {
   width: 100%; /* Hacer que la imagen llene el ancho del elemento */
@@ -137,16 +141,37 @@ body {
 }
 
 .imagen {
-  max-height: 170px; /* ajusta la altura máxima según tus necesidades */
-  position: absolute; /* posición absoluta para ajustar dentro de la elipse-icono */
-  top: 5px; /* coloca la imagen en la parte superior */
-  left: 50%; /* centra horizontalmente */
-  transform: translateX(-50%); /* ajusta la posición horizontal */
-
-  max-width: 100%; /* La imagen usa el máximo ancho disponible */
-  height: auto; /* La altura se ajusta automáticamente para mantener la proporción */
-  border-radius: 10px 10px 0 0;
+  max-width: 100%;
+  max-height: 150px; /* Ajusta la altura máxima según tus necesidades */
+  object-fit: cover; /* Asegúrate de que la imagen cubra el área designada sin distorsionarse */
+  border-radius: 10px 10px 0 0; /* Redondear solo las esquinas superiores */
+  display: block;
+  margin: 0 auto; /* Centrar la imagen si es más pequeña que el ancho del contenedor */
 }
+
+
+.editar,
+    .eliminar {
+      background-color: green;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px; /* Espaciado superior */
+      display: inline-block; /* Los botones se muestran en línea */
+      margin: 10px auto 5px; /* Reduce el margen superior a 10px y el inferior a 5px */
+      margin-bottom: 5px; /* Reducir el margen inferior de los botones si es necesario */
+      width: auto; /* Establece el ancho al contenido del botón */
+
+      
+    }
+
+    .eliminar {
+      background-color: red;
+      margin-bottom: 5px; /* Reducir el margen inferior de los botones si es necesario */
+
+    }
 
 
 .flecha-reservar {
@@ -166,7 +191,8 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
   color: #292525;
-
+  margin-top: 0; /* Reducir o eliminar el margen superior del título y la descripción */
+  padding-top: 0;
 
 }
 
@@ -188,11 +214,12 @@ body {
 .descripcion {
   color: #555; /* Un color un poco más oscuro para la descripción */
   font-size: 14px; /* Tamaño de letra más pequeño para la descripción */
-  margin-top: 5px; /* Menor espacio encima de la descripción */
   line-height: 1.4; /* Espacio entre líneas para mejorar legibilidad */
   height: 3.8em; /* Limita la altura del texto de la descripción para evitar desbordamiento */
   overflow: hidden; /* Oculta el texto que se desborde del contenedor */
   text-overflow: ellipsis; 
+  margin-top: 0; /* Reducir o eliminar el margen superior del título y la descripción */
+  padding-top: 0;
 }
 
 .reservar-1 {
@@ -219,6 +246,25 @@ body {
   margin-bottom: 70px; /* Ajusta el espacio entre el texto y los botones "Leer más" */
 }
 
+#drop-area {
+  border: 2px dashed #ccc;
+  border-radius: 20px;
+  position: relative;
+  width: 100%; /* Ajusta al tamaño de su contenedor */
+  height: 200px; /* O ajusta según tus necesidades */
+  background-color: #f7f7f7;
+  text-align: center;
+  line-height: 150px; /* Esto centra verticalmente el texto si no hay imagen */
+  cursor: pointer;
+  
+}
+
+#image-preview {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 20px; /* Para mantener el estilo de tu diseño */
+  display: none; /* Oculta la imagen hasta que se suba una */
+}
 
 
 
