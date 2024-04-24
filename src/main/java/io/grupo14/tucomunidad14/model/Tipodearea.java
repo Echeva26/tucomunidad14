@@ -13,6 +13,14 @@ public enum Tipodearea {
         this.description = description;
     }
     
+    
+
+    private Tipodearea() {
+        this.value = 0;
+        this.description = "";
+    }
+
+
 
     public int getValue() {
         return value;
