@@ -1,7 +1,7 @@
 package io.grupo14.tucomunidad14.model;
 
 public enum Tipodearea {
-    PADDEL(0, "Pistas de pádel"),
+    PADEL(0, "Pistas de pádel"),
     LOCAL(1, "Local"),
     GIMNASIO(2, "Gimnasio");
 
