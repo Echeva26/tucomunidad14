@@ -55,13 +55,15 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(dataComunidad => {
           console.log('Community created:', dataComunidad);
           enviarAreasComunes(dataComunidad);
-          return cambiarComunidad(dataVecino.idvecino, dataComunidad);
+          cambiarComunidad(dataVecino.idvecino, dataComunidad);
+          return dataVecino;
         });
 
-        window.location.href = '/menucomunidad?idvecino=' + dataVecino.idvecino;
+        
       })
-      .then(dataCambio => {
-        console.log('Community change successful:', dataCambio);
+      .then(dataVecino => {
+        
+        window.location.href = '/menucomunidad?idvecino=' + dataVecino.idvecino;
       })
       .catch((error) => {
         console.error('Error:', error);
