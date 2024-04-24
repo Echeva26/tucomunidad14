@@ -7,22 +7,19 @@ body {
 
 /* Agregar estilos para los cuadrados de reserva */
 .cuadrado-reserva {
-  width: 100px; /* Ajustar el ancho según tus necesidades */
-  height: 50px; /* Ajustar la altura según tus necesidades */
-  border: 1px solid #000;
-  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 80px;
   text-align: center;
-  line-height: 50px; /* Centrar el texto verticalmente */
 }
 
-.reservado {
-  background-color: gray; /* Color para las horas reservadas */
+.reserva-rojo {
+  background-color: red;
 }
 
-.libre {
-  background-color: blue; /* Color para las horas libres */
+.reserva-verde {
+  background-color: green;
 }
-
 
 .pagina {
   background: #E9FBF8;
