@@ -24,7 +24,6 @@ import java.util.Optional;
 import org.slf4j.Logger;
 
 @RestController
-@RequestMapping("/api")
 public class VecinoController {
 
     @Autowired
@@ -149,6 +148,30 @@ public class VecinoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese vecino");
         }
     }
+
+    @GetMapping("/vecinoporid")
+    public ResponseEntity<?> vecinoporid(@RequestParam Long idvecino) {
+        Optional<Vecino> vecinoOpt = vecinoRepository.findById(idvecino);
+        if (vecinoOpt.isPresent()) {
+            Vecino vecino = vecinoOpt.get();
+            VecinoDTO vecinoDTO = new VecinoDTO();
+            vecinoDTO.setIdvecino(vecino.getIdvecino());
+            vecinoDTO.setNombre(vecino.getNombre());
+            vecinoDTO.setApellidos(vecino.getApellidos());
+            vecinoDTO.setEmail(vecino.getEmail());
+            vecinoDTO.setNombredeusuario(vecino.getNombredeusuario());
+            vecinoDTO.setContraseña(vecino.getContraseña()); // Considera no retornar la contraseña por seguridad
+            vecinoDTO.setGestor(vecino.getGestor());
+            vecinoDTO.setIdComunidad(vecino.getComunidad().getIdcomunidad());
+
+            return ResponseEntity.ok(vecinoDTO);
+            
+        } else {
+            // Retorna un mensaje de error si el vecino no existe
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese vecino");
+        }
+    }
+    
 
     //
 
