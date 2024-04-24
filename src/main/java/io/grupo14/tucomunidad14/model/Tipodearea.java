@@ -12,6 +12,20 @@ public enum Tipodearea {
         this.value = value;
         this.description = description;
     }
+    
+    
+
+    private Tipodearea() {
+        this.value = 0;
+        this.description = "";
+    }
+
+
+
+    public int getValue() {
+        return value;
+    }
+
 
     public static Tipodearea fromValue(int value) {
         for (Tipodearea type : values()) {
