@@ -3,12 +3,12 @@ package io.grupo14.tucomunidad14.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.grupo14.tucomunidad14.model.Areacomun;
-import io.grupo14.tucomunidad14.model.Comunidad;
+
 import io.grupo14.tucomunidad14.model.Reserva;
 import io.grupo14.tucomunidad14.model.ReservaSimpleDTO;
 import io.grupo14.tucomunidad14.model.Vecino;
 import io.grupo14.tucomunidad14.repository.AreacomunRepository;
-import io.grupo14.tucomunidad14.repository.ComunidadRepository;
+
 import io.grupo14.tucomunidad14.repository.ReservasRepository;
 import io.grupo14.tucomunidad14.repository.VecinoRepository;
 
@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import java.util.List;
-import java.util.Optional;
+
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -43,9 +43,7 @@ public class ReservasController {
     private AreacomunRepository areaComunRepository;
     @Autowired
     private VecinoRepository vecinoRepository;
-    @Autowired
-    private ComunidadRepository comunidadRepository;
-
+    
     public static final Logger log = LoggerFactory.getLogger(ReservasController.class);
 
     public ReservasController(ReservasRepository reservasRepository) {
@@ -149,17 +147,6 @@ public class ReservasController {
 
         return ResponseEntity.ok(reservas);
     }
-    /* 
-    @GetMapping("/reserva")
-    public String reservaTest(@RequestParam(name = "idvecino") Long idVecino) {
-        Optional<Vecino> vecinoOPT = vecinoRepository.findById(idVecino);
-        Vecino vecino = vecinoOPT.get();
-        Optional<Comunidad> comunidadOPT = comunidadRepository.findById(vecino.getComunidad().getIdcomunidad());
-        Comunidad comunidad = comunidadOPT.get();
-        List<Reserva> reservas = reservasRepository.buscarPorComunidadId(comunidad.getIdcomunidad());
-        
-        
-
-    }*/
+    
 
 }
