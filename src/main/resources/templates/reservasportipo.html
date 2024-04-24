@@ -101,7 +101,7 @@
         var searchParams = new URLSearchParams(window.location.search);
         return searchParams.get(param);
       }
-
+  
       // Cargar datos de las áreas comunes por tipo al cargar la página
       window.onload = function () {
         var idvecino = getQueryParam('idvecino'); // Obtiene el ID de vecino de la URL
@@ -117,7 +117,7 @@
             .then(data => {
               var areas = data; // Obtener las áreas comunes
               var container = document.querySelector('.container-6'); // Selección del contenedor de áreas comunes
-
+  
               areas.forEach(area => {
                 var newElement = document.createElement('div');
                 newElement.classList.add('elemento');
@@ -130,7 +130,7 @@
                   areaImage = 'GIMNASIO';
                 }
                 newElement.innerHTML = `
-                  <a href="/reserva-${area.nombre.toLowerCase()}?idvecino=${idvecino}" style="text-decoration: none;">
+                  <a href="/reserva-horario?idvecino=${idvecino}&idarea=${area.idarea}" style="text-decoration: none;">
                     <div class="borde-azul"></div>
                     <div class="elipse-icono">
                       <div class="circulo"></div>
@@ -153,6 +153,7 @@
       }
     });
   </script>
+  
 
 </body>
 

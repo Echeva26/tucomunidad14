@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ReservaPadelController {
 
-    @GetMapping("/reserva-pistadepadel")
+    @GetMapping("/reserva-horario")
     public String reservaTest() {
-        return "reserva-pistadepadel"; 
+        return "reserva-horario"; 
     }
 }
