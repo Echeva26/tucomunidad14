@@ -51,20 +51,26 @@ body {
 
 /* Estilos para la caja de la clave de nuevos vecinos */
 .caja-clave {
-  margin-top: 30px; /* Espacio por encima de la caja */
-  margin-bottom: 30px; /* Espacio por debajo de la caja */
-  background-color: #FFFFFF; /* Fondo blanco, cambia según tu diseño */
-  padding: 20px; /* Espacio interior */
-  border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  margin-top: 40px; /* Más espacio por encima de la caja */
+  margin-bottom: 40px; /* Más espacio por debajo de la caja */
+  background-color: #f2f2f2; /* Un color de fondo más neutro */
+  background-image: linear-gradient(to right, #60E1CB , #E9FBF8); /* Gradiente suave */
+  padding: 30px; /* Más espacio interior */
+  border-radius: 15px; /* Bordes más redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más definida */
   text-align: center; /* Texto centrado */
-  font-size: 1em; /* Tamaño del texto */
-  color: #292525; /* Color del texto, cambia según tu diseño */
-  width: 80%; /* Ancho de la caja */
-  max-width: 600px; /* Ancho máximo de la caja */
+  font-size: 1.2em; /* Tamaño del texto más grande */
+  color: #292525; /* Color del texto */
+  width: 90%; /* Ancho de la caja más grande */
+  max-width: 700px; /* Ancho máximo de la caja mayor */
   box-sizing: border-box; /* Para que el padding no afecte el ancho */
   margin-left: auto; /* Centrado horizontal */
   margin-right: auto; /* Centrado horizontal */
+  position: relative; /* Para posicionar el icono o imagen */
+  display: flex; /* Para usar flexbox */
+  flex-direction: column; /* Elementos en columna */
+  justify-content: center; /* Centrar contenido verticalmente */
+  align-items: center; /* Centrar contenido horizontalmente */
 }
 
 

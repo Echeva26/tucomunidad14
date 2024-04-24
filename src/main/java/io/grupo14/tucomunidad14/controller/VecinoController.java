@@ -190,7 +190,17 @@ public class VecinoController {
             Optional<Comunidad> comunidad = comunidadRepository.findById(idcomunidad);
             vecino.setComunidad(comunidad.get());
             vecinoRepository.save(vecino);
-            return ResponseEntity.ok(vecino);
+            VecinoDTO vecinoDTO = new VecinoDTO();
+            vecinoDTO.setIdvecino(vecino.getIdvecino());
+            vecinoDTO.setNombre(vecino.getNombre());
+            vecinoDTO.setApellidos(vecino.getApellidos());
+            vecinoDTO.setEmail(vecino.getEmail());
+            vecinoDTO.setNombredeusuario(vecino.getNombredeusuario());
+            vecinoDTO.setContraseña(vecino.getContraseña()); // Considera no retornar la contraseña por seguridad
+            vecinoDTO.setGestor(vecino.getGestor());
+            vecinoDTO.setIdComunidad(vecino.getComunidad().getIdcomunidad());
+
+            return ResponseEntity.ok(vecinoDTO);
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese vecino");
         }
