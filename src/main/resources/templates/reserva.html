@@ -22,8 +22,8 @@
         <a href="/comunidad" style="text-decoration: none;">
           <span class="home-sub-30">Home</span>
           <span></span>
-        </a>
-      </p>
+      </a>
+          </p>
       <div class="log-out">
         <span class="our-works">
           <a href="/" style="text-decoration: none;">Log out</a>
@@ -38,29 +38,36 @@
   <!-- PAGINA -->
   <div class="pagina">
     <div class="container-6">
-      <!-- Contenedor para las áreas comunes -->
+      <!-- Iterar sobre la lista de áreas comunes -->
     </div>
+
   </div>
 
   <!-- PIE DE PAGINA -->
   <div class="pie-de-pagina">
     <div class="container-5">
-      <div class="image-2"></div>
+      <div class="image-2">
+      </div>
       <div class="container-4">
-        <img class="icon-1" src="/static/vectors/intagram.svg" />
-        <img class="icon-2" src="/static/vectors/facebook.svg" />
-        <img class="icon-3" src="/static/vectors/twitter.svg" />
+        <img class="icon-1" th:src="@{/static/vectors/intagram.svg}" />
+        <img class="icon-2" th:src="@{/static/vectors/facebook.svg}" />
+        <img class="icon-3" th:src="@{/static/vectors/twitter.svg}" />
       </div>
       <div class="idioma">
-        <span class="language">Idioma</span>
-        <img class="icon-color" src="/static/vectors/flecha.svg" />
+        <span class="language">
+          Idioma
+        </span>
+        <img class="icon-color" th:src="@{/static/vectors/flecha.svg}" />
       </div>
     </div>
     <div class="description">
       Facilitamos la convivencia en tu comunidad
     </div>
-    <div class="line"></div>
-    <span class="tucom">©TuComunidad 2024</span>
+    <div class="line">
+    </div>
+    <span class="tucom">
+      ©TuComunidad 2024
+    </span>
   </div>
 
   <script>
@@ -75,7 +82,7 @@
       window.onload = function () {
         var idvecino = getQueryParam('idvecino'); // Obtiene el ID de la URL
         if (idvecino) {
-          fetch(`http://localhost:8080/areasporvecino?idvecino=${idvecino}`)
+          fetch(`http://localhost:8080/tipodeareaporvecino?idvecino=${idvecino}`)
             .then(response => {
               if (!response.ok) {
                 throw new Error('No se pudo obtener la información de las áreas comunes');
@@ -83,19 +90,21 @@
               return response.json();
             })
             .then(data => {
+              var areas = data; // Obtener las áreas comunes
               var container = document.querySelector('.container-6'); // Selección del contenedor de áreas comunes
-              data.forEach(area => {
+
+              areas.forEach(area => {
                 var newElement = document.createElement('div');
                 newElement.classList.add('elemento');
                 newElement.innerHTML = `
                   <div class="borde-azul"></div>
                   <div class="elipse-icono">
                     <div class="circulo"></div>
-                    <img class="icono" src="/static/vectors/${area.nombre.toLowerCase()}.svg" />
+                    <img class="icono" src="/static/vectors/${area.toLowerCase()}.svg" />
                   </div>
-                  <div class="titulo">${area.nombre}</div>
+                  <div class="titulo">${area}</div>
                   <div class="reservar">
-                    <a href="/reserva-${area.nombre.toLowerCase()}?idvecino=${idvecino}" style="text-decoration: none;">
+                    <a href="/reserva-${area.toLowerCase()}?idvecino=${idvecino}" style="text-decoration: none;">
                       <span class="reservar-1">Reservar</span>
                       <img class="flecha-reservar" src="/static/vectors/flecha-reservar.svg" />
                     </a>
