@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Reserva</title>
+  <title>Reserva por Tipo de Área</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" th:href="@{/static/css/reserva.css}" />
 </head>
@@ -12,7 +12,7 @@
   <!-- CABECERA -->
   <div class="cabecera">
     <span class="reserva-de-zonas">
-      Reserva de zonas
+      Reserva de zonas por tipo de área
     </span>
     <div class="container">
       <div class="tu-comunidad">
@@ -22,8 +22,8 @@
         <a href="/comunidad" style="text-decoration: none;">
           <span class="home-sub-30">Home</span>
           <span></span>
-      </a>
-          </p>
+        </a>
+      </p>
       <div class="log-out">
         <span class="our-works">
           <a href="/" style="text-decoration: none;">Log out</a>
@@ -38,9 +38,8 @@
   <!-- PAGINA -->
   <div class="pagina">
     <div class="container-6">
-      <!-- Iterar sobre la lista de áreas comunes -->
+      <!-- Contenedores de áreas comunes -->
     </div>
-
   </div>
 
   <!-- PIE DE PAGINA -->
@@ -78,11 +77,12 @@
         return searchParams.get(param);
       }
 
-      // Cargar datos de la comunidad al cargar la página
+      // Cargar datos de las áreas comunes por tipo al cargar la página
       window.onload = function () {
-        var idvecino = getQueryParam('idvecino'); // Obtiene el ID de la URL
-        if (idvecino) {
-          fetch(`http://localhost:8080/tipodeareaporvecino?idvecino=${idvecino}`)
+        var idvecino = getQueryParam('idvecino'); // Obtiene el ID de vecino de la URL
+        var tipodearea = getQueryParam('tipodearea'); // Obtiene el tipo de área de la URL
+        if (idvecino && tipodearea) {
+          fetch(`http://localhost:8080/areasporvecinoytipo?idvecino=${idvecino}&tipodearea=${tipodearea}`)
             .then(response => {
               if (!response.ok) {
                 throw new Error('No se pudo obtener la información de las áreas comunes');
@@ -94,30 +94,21 @@
               var container = document.querySelector('.container-6'); // Selección del contenedor de áreas comunes
 
               areas.forEach(area => {
-                var tipodearea;
-                if (area === 'PADEL') {
-                  tipodearea = 0;
-                } else if (area === 'LOCAL') {
-                  tipodearea = 1;
-                } else if (area === 'GIMNASIO') {
-                  tipodearea = 2;
-                }
-
                 var newElement = document.createElement('div');
                 newElement.classList.add('elemento');
                 newElement.innerHTML = `
-                <a href="/reservasportipo?idvecino=${idvecino}&tipodearea=${tipodearea}" style="text-decoration: none;">
-                  <div class="borde-azul"></div>
-                  <div class="elipse-icono">
-                    <div class="circulo"></div>
-                    <img class="icono" src="/static/vectors/${area.toLowerCase()}.svg" />
-                  </div>
-                  <div class="titulo">${area}</div>
-                  <div class="reservar">
-                      <span class="reservar-1">Reservar</span>
-                      <img class="flecha-reservar" src="/static/vectors/flecha-reservar.svg" />
-                  </div>
-                </a>
+                  <a href="/reserva-${area.nombre.toLowerCase()}?idvecino=${idvecino}" style="text-decoration: none;">
+                    <div class="borde-azul"></div>
+                    <div class="elipse-icono">
+                      <div class="circulo"></div>
+                      <img class="icono" src="/static/vectors/${area.nombre.toLowerCase()}.svg" />
+                    </div>
+                    <div class="titulo">${area.nombre}</div>
+                    <div class="reservar">
+                        <span class="reservar-1">Reservar</span>
+                        <img class="flecha-reservar" src="/static/vectors/flecha-reservar.svg" />
+                    </div>
+                  </a>
                 `;
                 container.appendChild(newElement);
               });
