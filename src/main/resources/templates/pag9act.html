@@ -7,9 +7,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="../static/css/pag9.css" />
 </head>
-
-
 <script>
+  // Función para obtener los parámetros de la URL
+  function obtenerParametrosDeUrl(param) {
+  var vars = {};
+  window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+    vars[key] = value;
+  });
+  return vars[param] ? decodeURIComponent(vars[param].replace(/\+/g, ' ')) : null;
+}
+
+
+
   document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('crearComunidadForm').addEventListener('submit', function (e) {
       e.preventDefault(); // Evita el envío tradicional del formulario
@@ -17,20 +26,32 @@
       // Recolecta los valores ingresados por el usuario
       const nombreComunidad = document.getElementById('nombre_comunidad').value;
       const codigoPostal = document.getElementById('codigo_postal').value;
-      // Prepara los datos para ser enviados
-      const data = {
-        nombre: nombreComunidad,
-        codpostal: codigoPostal, // Asume que el servidor puede manejar las zonas comunes como una cadena separada por comas
-      };
 
-      // Realiza la solicitud POST a crearcomunidad
-      fetch('/crearcomunidad', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data) // Convierte los datos del formulario en una cadena JSON
-      })
+      // Extraer usuario y contraseña desde la URL
+      const usuario = obtenerParametrosDeUrl('usuario');
+      const contraseña = obtenerParametrosDeUrl('contrasena');
+      console.log(usuario);
+      console.log(contraseña);
+
+      // Consulta a la API para obtener el email del vecino
+      fetch(`/vecino?usuario=${usuario}&contraseña=${contraseña}`)
+        .then(response => response.json())
+        .then(dataVecino => {
+          // Una vez obtenido el email, se preparan los datos para ser enviados a crear comunidad
+          const data = {
+            nombre: nombreComunidad,
+            codpostal: codigoPostal,
+            email: dataVecino.email  // Añadir el email al objeto data
+          };
+
+          return fetch('/crearcomunidad', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data) // Convierte los datos del formulario en una cadena JSON
+          });
+        })
         .then(response => {
           if (!response.ok) {
             throw new Error('La solicitud ha fallado con estado: ' + response.status);
@@ -41,15 +62,13 @@
           console.log(data1);
           alert('Comunidad creada con éxito.');
           enviarAreasComunes(data1);
-          
-
         })
         .catch((error) => {
           console.error('Error:', error);
-
         });
     });
   });
+
   function enviarAreasComunes(idComunidad) {
     const areasComunes = document.getElementById('zonas_comunes').selectedOptions;
     const areas = Array.from(areasComunes).map(opt => ({
@@ -73,9 +92,8 @@
         .catch(error => console.error('Error al crear área:', error));
     });
   }
-
-
 </script>
+
 
 
 
