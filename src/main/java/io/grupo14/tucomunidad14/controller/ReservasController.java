@@ -134,17 +134,21 @@ public class ReservasController {
             return dto;
         }).collect(Collectors.toList());
     }
-    @GetMapping("/reservas/porAreaComun/{areaComunId}")
-    public List<ReservaSimpleDTO> obtenerReservasPorAreaComunYDia(@PathVariable Long areaComunId,@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
-        LocalDateTime inicioDelDia = fecha.atStartOfDay(); // 00:00 del día
-        LocalDateTime finDelDia = fecha.atTime(23, 59, 59); // Fin del día
-        
-        Timestamp inicio = Timestamp.valueOf(inicioDelDia);
-        Timestamp fin = Timestamp.valueOf(finDelDia);
+    @GetMapping("/reservas/porAreaComunYDia/{areaComunId}")
+public ResponseEntity<List<ReservaSimpleDTO>> obtenerReservasPorAreaComunYDia(@PathVariable Long areaComunId, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
+    LocalDateTime inicioDelDia = fecha.atStartOfDay(); // 00:00 del día
+    LocalDateTime finDelDia = fecha.atTime(23, 59, 59); // Fin del día
     
-        return reservasRepository.findReservasByAreaComunIdAndDay(areaComunId, inicio, fin);
-    }
+    Timestamp inicio = Timestamp.valueOf(inicioDelDia);
+    Timestamp fin = Timestamp.valueOf(finDelDia);
 
+    List<ReservaSimpleDTO> reservas = reservasRepository.findReservasByAreaComunIdAndDay(areaComunId, inicio, fin);
+
+    return ResponseEntity.ok(reservas);
+}
+
+
+    
     
     
 }

@@ -21,6 +21,9 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
+import org.springframework.web.bind.annotation.PutMapping;
+
+
 
 
 
@@ -178,6 +181,33 @@ public class VecinoController {
         }
     }
 
+    @PutMapping("/cambiarcom")
+    public ResponseEntity<?>  putMethodName(@RequestParam Long idvecino , @RequestParam Long idcomunidad) {
+        Optional<Vecino> vecinoOpt = vecinoRepository.findById(idvecino);
+
+        if (vecinoOpt.isPresent()) {
+            Vecino vecino = vecinoOpt.get();
+            Optional<Comunidad> comunidad = comunidadRepository.findById(idcomunidad);
+            vecino.setComunidad(comunidad.get());
+            vecinoRepository.save(vecino);
+            VecinoDTO vecinoDTO = new VecinoDTO();
+            vecinoDTO.setIdvecino(vecino.getIdvecino());
+            vecinoDTO.setNombre(vecino.getNombre());
+            vecinoDTO.setApellidos(vecino.getApellidos());
+            vecinoDTO.setEmail(vecino.getEmail());
+            vecinoDTO.setNombredeusuario(vecino.getNombredeusuario());
+            vecinoDTO.setContraseña(vecino.getContraseña()); // Considera no retornar la contraseña por seguridad
+            vecinoDTO.setGestor(vecino.getGestor());
+            vecinoDTO.setIdComunidad(vecino.getComunidad().getIdcomunidad());
+
+            return ResponseEntity.ok(vecinoDTO);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese vecino");
+        }
+
+        
+        
+    }
     
     
 
