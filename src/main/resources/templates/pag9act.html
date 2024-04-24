@@ -57,6 +57,8 @@ document.addEventListener('DOMContentLoaded', function () {
           enviarAreasComunes(dataComunidad);
           return cambiarComunidad(dataVecino.idvecino, dataComunidad);
         });
+
+        window.location.href = '/menucomunidad?idvecino=' + dataVecino.idvecino;
       })
       .then(dataCambio => {
         console.log('Community change successful:', dataCambio);
@@ -84,7 +86,6 @@ function cambiarComunidad(idVecino, idComunidad) {
     })
     .then(dataCambio => {
       console.log('Community change:', dataCambio);
-      alert('Community change successful.');
     })
     .catch(error => {
       console.error('Error changing community:', error);
