@@ -39,7 +39,7 @@ body {
   background-color: #FFFFFF;
   border-radius: 10px; /* Bordes redondeados */
   
-  height: 250px; /* Alto mayor */
+  height: auto; /* Alto mayor */
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
 
   width: calc(33.333% - 40px);
@@ -47,7 +47,7 @@ body {
   margin: 20px; /* Espacio uniforme alrededor de los elementos */
   padding-bottom: 10px; 
   align-items: center; /* Centrar los elementos horizontalmente */
-  overflow: hidden; 
+  overflow: visible; 
 
 }
 
@@ -178,35 +178,32 @@ body {
 }
 
 .titulo a {
-  font-weight: bold; /* Hacer los títulos más destacados */
-  color: #fcfbfde7; /* Un color oscuro para mayor contraste */
-  text-decoration: none; /* Quitar el subrayado de los enlaces */
+  font-weight: bold; /* Texto en negrita para mayor énfasis */
+  color: #fcf7f7ee; /* Un color oscuro para mejor contraste */
   position: relative;
-  font-size: 18px; /* Tamaño de letra menor para los títulos */
-  margin: 0; /* Remover márgenes adicionales */
-  white-space: nowrap; /* Evita que el texto del título se salga del contenedor */
-  overflow: hidden; /* Oculta el texto que se desborde del contenedor */
-  text-overflow: ellipsis; 
 
-  display: -webkit-box; /* Usar caja de visualización de Webkit para el truncamiento de texto */
-  -webkit-line-clamp: 1; /* Mostrar solo una línea de texto */
-  -webkit-box-orient: vertical; /* Orientar el contenido de la caja verticalmente */
-
+  text-decoration: none; /* Quitar el subrayado de los enlaces */
+  font-size: 1.2em; /* Aumentar el tamaño del texto */
+  line-height: 1.2; /* Ajustar el espaciado entre líneas */
+  display: block; /* Hacer que el título sea un bloque para ocupar su propio espacio */
+  margin-bottom: 0.5em; /* Espacio debajo del título antes de la descripción */
+  overflow: hidden; /* Evita el desbordamiento de texto */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto es muy largo */
+  white-space: nowrap; /* Impide que el texto se pase a la siguiente línea */
 }
 
+/* Estilos para la descripción de la noticia */
 .descripcion {
-  color: #555; /* Un color un poco más oscuro para la descripción */
-  font-size: 14px; /* Tamaño de letra más pequeño para la descripción */
-  margin-top: 5px; /* Menor espacio encima de la descripción */
-  line-height: 1.4; /* Espacio entre líneas para mejorar legibilidad */
-  height: 3.8em; /* Limita la altura del texto de la descripción para evitar desbordamiento */
-  overflow: hidden; /* Oculta el texto que se desborde del contenedor */
-  text-overflow: ellipsis; 
-
+  color: #555; /* Un color gris oscuro para la descripción para un buen contraste */
+  font-size: 0.9em; /* Tamaño de fuente ligeramente menor para la descripción */
+  line-height: 1.4; /* Aumentar el espaciado entre líneas para mejorar la legibilidad */
+  margin-top: 0; /* Remover margen superior */
+  margin-bottom: 1em; /* Espacio debajo de la descripción */
+  height: auto; /* Altura automática para mostrar todo el texto */
+  overflow: visible; /* Permitir que la descripción se muestre completamente */
   display: -webkit-box; /* Usar caja de visualización de Webkit para el truncamiento de texto */
-  -webkit-line-clamp: 3; /* Limitar a tres líneas de texto */
+  -webkit-line-clamp: 3; /* Mostrar hasta tres líneas de texto */
   -webkit-box-orient: vertical; /* Orientar el contenido de la caja verticalmente */
-
 }
 
 .reservar-1 {
