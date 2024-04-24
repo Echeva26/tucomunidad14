@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class ReservaGimnasioController {
+public class ReservaHorarioController {
 
-    @GetMapping("/reserva-gimnasio")
+    @GetMapping("/reserva-horario")
     public String reservaTest() {
-        return "reserva-gimnasio"; 
+        return "reserva-horario"; 
     }
 }
