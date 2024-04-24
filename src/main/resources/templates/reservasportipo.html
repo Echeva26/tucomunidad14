@@ -12,7 +12,32 @@
   <!-- CABECERA -->
   <div class="cabecera">
     <span class="reserva-de-zonas">
-      Reserva de zonas por tipo de área
+      <!-- Título dinámico según el tipo de área -->
+      <script>
+        // Función para obtener parámetros de la URL
+        function getQueryParam(param) {
+          var searchParams = new URLSearchParams(window.location.search);
+          return searchParams.get(param);
+        }
+
+        // Función para obtener el título según el tipo de área
+        function obtenerTitulo(tipodearea) {
+          if (tipodearea === '0') {
+            return 'Reserva de Pista de Padel';
+          } else if (tipodearea === '1') {
+            return 'Reserva de Local';
+          } else if (tipodearea === '2') {
+            return 'Reserva de Gimnasio';
+          } else {
+            return 'Reserva de Zonas por Tipo de Área';
+          }
+        }
+
+        // Obtener el tipo de área de la URL
+        var tipodearea = getQueryParam('tipodearea');
+        // Establecer el título de la página
+        document.querySelector('.reserva-de-zonas').textContent = obtenerTitulo(tipodearea);
+      </script>
     </span>
     <div class="container">
       <div class="tu-comunidad">
@@ -96,12 +121,20 @@
               areas.forEach(area => {
                 var newElement = document.createElement('div');
                 newElement.classList.add('elemento');
+                var areaImage = ''; // Variable para almacenar la imagen correspondiente
+                if (tipodearea === '0') {
+                  areaImage = 'PADEL';
+                } else if (tipodearea === '1') {
+                  areaImage = 'LOCAL';
+                } else if (tipodearea === '2') {
+                  areaImage = 'GIMNASIO';
+                }
                 newElement.innerHTML = `
                   <a href="/reserva-${area.nombre.toLowerCase()}?idvecino=${idvecino}" style="text-decoration: none;">
                     <div class="borde-azul"></div>
                     <div class="elipse-icono">
                       <div class="circulo"></div>
-                      <img class="icono" src="/static/vectors/${area.nombre.toLowerCase()}.svg" />
+                      <img class="icono" src="/static/vectors/${areaImage.toLowerCase()}.svg" />
                     </div>
                     <div class="titulo">${area.nombre}</div>
                     <div class="reservar">
