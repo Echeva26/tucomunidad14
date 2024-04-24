@@ -4,7 +4,7 @@ body {
     padding: 0;
     background: #E9FBF8;
   }
-  
+   
   .pagina {
     background: #E9FBF8;
     display: flex;
@@ -25,6 +25,7 @@ body {
     align-items: center;
     padding-top: 65px; /* Espacio con la cebecera */
     justify-content: center;
+    margin-bottom: 200px;
   }
   
   .elemento {
@@ -42,11 +43,12 @@ body {
     height: 300px;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
   
-    width: calc(33.333% - 40px);
+    width: 400px;
   
     margin: 20px; /* Espacio uniforme alrededor de los elementos */
     padding-bottom: 10px; 
-    
+    align-items: center;
+    text-align: center;
   }
   
   
@@ -169,10 +171,11 @@ body {
     overflow-wrap: break-word;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
-    position: relative;
 
     font-size: 24px; /* Aumentamos el tamaño de la fuente para el título */
     color: #292525;
+    margin-top: 50px;
+    text-align: center;
   
   }
   
@@ -190,6 +193,7 @@ body {
     -webkit-box-orient: vertical; /* Orientar el contenido de la caja verticalmente */
     font-size: 24px; /* Aumentamos el tamaño de la fuente para el título */
     color: #292525;
+    text-align: center;
   }
   
   .descripcion {
@@ -213,7 +217,9 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 20px; /* Aumentamos el tamaño de la fuente para 'Acceder' */
-    color: #292525;
+    color: #4559c7;
+    margin-top: 120px;
+    text-align: center;
   }
   
   .reservar {
