@@ -97,7 +97,7 @@ public class Areacontroller {
             return ResponseEntity.notFound().build();
         }
 
-        List<Areacomun> areas = areacomunRepository.getAreacomunsbycomunidadandtype(idvecino,
+        List<Areacomun> areas = areacomunRepository.getAreacomunsbycomunidadandtype(comunidad.getIdcomunidad(),
                 Tipodearea.fromValue(tipodearea));
         List<AreacomunDTO> areasDto = areas.stream()
                 .map(this::convertToDto)
