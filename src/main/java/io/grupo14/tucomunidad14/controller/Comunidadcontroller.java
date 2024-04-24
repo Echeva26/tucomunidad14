@@ -38,8 +38,8 @@ public class Comunidadcontroller {
         nuevaComunidad.setNombre(comunidadDTO.getNombre());
         nuevaComunidad.setCodpostal(comunidadDTO.getCodpostal());
         comunidadRepository.save(nuevaComunidad);
-        // String email = comunidadDTO.getEmail();
-        String email = "jeu2604@gmail.com";
+        String email = comunidadDTO.getEmail();
+        //String email = "jeu2604@gmail.com";
         enviarEmail(nuevaComunidad.getIdcomunidad(),email);
 
     

@@ -22,6 +22,8 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 
+
+
 @RestController
 public class VecinoController {
 
@@ -175,6 +177,8 @@ public class VecinoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese vecino");
         }
     }
+
+    
     
 
     //
