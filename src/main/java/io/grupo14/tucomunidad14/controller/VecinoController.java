@@ -39,7 +39,7 @@ public class VecinoController {
     public static final Logger log = LoggerFactory.getLogger(ReservasController.class);
 
     @PostMapping("/vecinos")
-    public ResponseEntity<Map<String, String>> createVecino(@RequestBody VecinoDTO vecinoDTO) {
+    public ResponseEntity<?> createVecino(@RequestBody VecinoDTO vecinoDTO) {
         try {
             Vecino vecino = new Vecino();
             vecino.setNombre(vecinoDTO.getNombre());
@@ -63,9 +63,8 @@ public class VecinoController {
 
             vecinoRepository.save(vecino);
 
-            Map<String, String> response = new HashMap<>();
-            response.put("message", "Se ha creado correctamente el vecino");
-            return ResponseEntity.ok().body(response);
+            
+            return ResponseEntity.ok(vecino.getIdvecino());
         } catch (Exception e) {
             log.error("Error al crear el vecino", e);
             Map<String, String> errorResponse = new HashMap<>();

@@ -107,7 +107,7 @@
   
               console.log("Datos del formulario:", data);
   
-              fetch('/api/vecinos', {
+              fetch('vecinos', {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
@@ -124,7 +124,7 @@
                   })
                   .then(data => {
                       console.log("Datos recibidos:", data.message);
-                      window.location.href = '/sesioniniciada';
+                      window.location.href = '/menucomunidad?idvecino=' + data;
                   })
                   .catch((error) => {
                       console.error('Error:', error);
