@@ -14,7 +14,7 @@
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
 
-        fetch(`http://localhost:8080/api/vecino?usuario=${username}&contraseña=${password}`, {
+        fetch(`http://localhost:8080/vecino?usuario=${username}&contraseña=${password}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -36,7 +36,7 @@
           .then(data => {
             if (data) { // Verifica que data no sea null antes de proceder.
               console.log("Vecino encontrado", data);
-              window.location.href = '/menucomunidad?id=' + data.idComunidad;  // Asumiendo que necesitas el ID para redirigir
+              window.location.href = '/menucomunidad?idvecino=' + data.idvecino;  // Asumiendo que necesitas el ID para redirigir
             }
           })
           .catch((error) => {

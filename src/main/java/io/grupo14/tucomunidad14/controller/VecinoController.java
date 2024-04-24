@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import io.grupo14.tucomunidad14.model.Comunidad;
@@ -22,9 +21,13 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
+import org.springframework.web.bind.annotation.PutMapping;
+
+
+
+
 
 @RestController
-@RequestMapping("/api")
 public class VecinoController {
 
     @Autowired
@@ -47,10 +50,15 @@ public class VecinoController {
             vecino.setGestor(vecinoDTO.getGestor());
 
             // Si idComunidad es null, no asociar una comunidad al vecino
-            if (vecinoDTO.getIdComunidad() != null) {
+            if (vecinoDTO.getIdComunidad() != null & !vecinoDTO.getGestor()) {
                 Comunidad comunidad = comunidadRepository.findById(vecinoDTO.getIdComunidad()).orElseThrow(
                         () -> new RuntimeException("Comunidad no encontrada con id: " + vecinoDTO.getIdComunidad()));
                 vecino.setComunidad(comunidad);
+            }else{
+                Long a = (long) 1;
+                Comunidad comunidad = comunidadRepository.findById(a).orElseThrow(
+                    () -> new RuntimeException("Comunidad no encontrada con id: " + vecinoDTO.getIdComunidad()));;
+                vecino.setComunidad(comunidad);//Comunidad provisonal
             }
 
             vecinoRepository.save(vecino);
@@ -149,6 +157,49 @@ public class VecinoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese vecino");
         }
     }
+
+    @GetMapping("/vecinoporid")
+    public ResponseEntity<?> vecinoporid(@RequestParam Long idvecino) {
+        Optional<Vecino> vecinoOpt = vecinoRepository.findById(idvecino);
+        if (vecinoOpt.isPresent()) {
+            Vecino vecino = vecinoOpt.get();
+            VecinoDTO vecinoDTO = new VecinoDTO();
+            vecinoDTO.setIdvecino(vecino.getIdvecino());
+            vecinoDTO.setNombre(vecino.getNombre());
+            vecinoDTO.setApellidos(vecino.getApellidos());
+            vecinoDTO.setEmail(vecino.getEmail());
+            vecinoDTO.setNombredeusuario(vecino.getNombredeusuario());
+            vecinoDTO.setContraseña(vecino.getContraseña()); // Considera no retornar la contraseña por seguridad
+            vecinoDTO.setGestor(vecino.getGestor());
+            vecinoDTO.setIdComunidad(vecino.getComunidad().getIdcomunidad());
+
+            return ResponseEntity.ok(vecinoDTO);
+            
+        } else {
+            // Retorna un mensaje de error si el vecino no existe
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese vecino");
+        }
+    }
+
+    @PutMapping("/cambiarcom")
+    public ResponseEntity<?>  putMethodName(@RequestParam Long idvecino , @RequestParam Long idcomunidad) {
+        Optional<Vecino> vecinoOpt = vecinoRepository.findById(idvecino);
+
+        if (vecinoOpt.isPresent()) {
+            Vecino vecino = vecinoOpt.get();
+            Optional<Comunidad> comunidad = comunidadRepository.findById(idcomunidad);
+            vecino.setComunidad(comunidad.get());
+            vecinoRepository.save(vecino);
+            return ResponseEntity.ok(vecino);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese vecino");
+        }
+
+        
+        
+    }
+    
+    
 
     //
 

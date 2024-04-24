@@ -104,13 +104,13 @@
         };
 
         // Enviar los datos al backend
-        fetch('/api/vecinos', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-          })
+        fetch('/vecinos', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
           .then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
@@ -119,7 +119,10 @@
           })
           .then(data => {
             alert(data.message); // Mostrar mensaje de éxito
-            window.location.href = '/crearcomunidad'; // Redirigir a crear comunidad
+            // Ejemplo de cómo codificar los parámetros antes de añadirlos a la URL
+            var url = "crearcomunidad?usuario=" + encodeURIComponent(formData.nombredeusuario) + "&contrasena=" + encodeURIComponent(formData.contraseña);
+            window.location.href = url;
+            // Redirigir a crear comunidad
           })
           .catch(error => {
             console.error('Error:', error);

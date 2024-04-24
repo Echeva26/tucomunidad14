@@ -112,20 +112,42 @@
   
     // Cargar datos de la comunidad al cargar la página
     window.onload = function() {
-      var idComunidad = getQueryParam('id'); // Obtiene el ID de la URL
-      if (idComunidad) {
-        fetch(`http://localhost:8080/comunidadbyid?idcomunidad=${idComunidad}`)
+      var idvecino = getQueryParam('idvecino'); // Obtiene el ID de la URL
+      if (idvecino) {
+        fetch(`http://localhost:8080/vecinoporid?idvecino=${idvecino}`)
           .then(response => {
             if (!response.ok) {
-              throw new Error('No se pudo obtener la información de la comunidad');
+              throw new Error('No se pudo obtener la información del vecino');
             }
             return response.json();
           })
           .then(data => {
-            // Actualiza el nombre en el título del documento y en la cabecera
-            var nombreComunidad = data.nombre ? `Comunidad ${data.nombre}` : 'Comunidad no identificada';
-            document.querySelector('title').textContent = nombreComunidad;
-            document.querySelector('.cabecera .reserva-de-zonas').textContent = nombreComunidad;
+            var gestor = data.gestor; // Obtener el parámetro gestor
+            var usuarioDiv = document.querySelector('.usuario'); // Selección del div de usuario
+            if (gestor) {
+              usuarioDiv.textContent = 'Gestor'; // Cambiar el texto a "Gestor"
+            } else {
+              usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
+            }
+  
+            // Segunda consulta a la API para obtener el nombre de la comunidad
+            fetch(`http://localhost:8080/vecino/comunidad?idVecino=${idvecino}`)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('No se pudo obtener la información de la comunidad');
+                }
+                return response.json();
+              })
+              .then(data => {
+                var nombreComunidad = data.nombre; // Obtener el nombre de la comunidad
+                var reservaDeZonas = document.querySelector('.reserva-de-zonas'); // Selección del span de reserva de zonas
+                var titleTag = document.querySelector('title'); // Selección del tag de título
+                reservaDeZonas.textContent = `Comunidad ${nombreComunidad}`; // Cambiar el texto en el span
+                titleTag.textContent = `Comunidad ${nombreComunidad}`; // Cambiar el texto en el título
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });
           })
           .catch(error => {
             console.error('Error:', error);
@@ -133,6 +155,7 @@
       }
     }
   </script>
+  
   
 </body>
 
