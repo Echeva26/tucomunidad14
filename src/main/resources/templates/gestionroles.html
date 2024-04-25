@@ -132,7 +132,8 @@
           })
           .then(vecinos => {
             // Mostrar los vecinos en la página
-            var vecinosContainer = document.getElementById('vecinos-container');
+            var container = document.querySelector('.container-6');
+            //var vecinosContainer = document.getElementById('vecinos-container');
             vecinos.forEach(vecino => {
               var elemento = document.createElement('div');
               elemento.classList.add('elemento');
