@@ -17,15 +17,12 @@ import io.grupo14.tucomunidad14.repository.ComunidadRepository;
 import io.grupo14.tucomunidad14.repository.VecinoRepository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.PutMapping;
-
-
-
-
 
 @RestController
 public class VecinoController {
@@ -54,16 +51,16 @@ public class VecinoController {
                 Comunidad comunidad = comunidadRepository.findById(vecinoDTO.getIdComunidad()).orElseThrow(
                         () -> new RuntimeException("Comunidad no encontrada con id: " + vecinoDTO.getIdComunidad()));
                 vecino.setComunidad(comunidad);
-            }else{
+            } else {
                 Long a = (long) 1;
                 Comunidad comunidad = comunidadRepository.findById(a).orElseThrow(
-                    () -> new RuntimeException("Comunidad no encontrada con id: " + vecinoDTO.getIdComunidad()));;
-                vecino.setComunidad(comunidad);//Comunidad provisonal
+                        () -> new RuntimeException("Comunidad no encontrada con id: " + vecinoDTO.getIdComunidad()));
+                ;
+                vecino.setComunidad(comunidad);// Comunidad provisonal
             }
 
             vecinoRepository.save(vecino);
 
-            
             return ResponseEntity.ok(vecino.getIdvecino());
         } catch (Exception e) {
             log.error("Error al crear el vecino", e);
@@ -112,7 +109,8 @@ public class VecinoController {
     }
 
     @GetMapping("/vecino")
-    public ResponseEntity<?> obtenerVecinoPorUsuarioYContraseña(@RequestParam String usuario, @RequestParam String contraseña) {
+    public ResponseEntity<?> obtenerVecinoPorUsuarioYContraseña(@RequestParam String usuario,
+            @RequestParam String contraseña) {
         Optional<Vecino> vecinoOpt = vecinoRepository.findByUsernameAndPassword(usuario, contraseña);
         if (vecinoOpt.isPresent()) {
             Vecino vecino = vecinoOpt.get();
@@ -125,8 +123,8 @@ public class VecinoController {
             vecinoDTO.setContraseña(vecino.getContraseña()); // Considera no retornar la contraseña por seguridad
             vecinoDTO.setGestor(vecino.getGestor());
             vecinoDTO.setIdComunidad(vecino.getComunidad().getIdcomunidad());
-            
-            return ResponseEntity.ok(vecinoDTO);  // Devuelve el objeto vecinoDTO como JSON con estado 200 OK
+
+            return ResponseEntity.ok(vecinoDTO); // Devuelve el objeto vecinoDTO como JSON con estado 200 OK
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El vecino no está registrado");
         }
@@ -173,7 +171,7 @@ public class VecinoController {
             vecinoDTO.setIdComunidad(vecino.getComunidad().getIdcomunidad());
 
             return ResponseEntity.ok(vecinoDTO);
-            
+
         } else {
             // Retorna un mensaje de error si el vecino no existe
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese vecino");
@@ -181,7 +179,7 @@ public class VecinoController {
     }
 
     @PutMapping("/cambiarcom")
-    public ResponseEntity<?>  putMethodName(@RequestParam Long idvecino , @RequestParam Long idcomunidad) {
+    public ResponseEntity<?> putMethodName(@RequestParam Long idvecino, @RequestParam Long idcomunidad) {
         Optional<Vecino> vecinoOpt = vecinoRepository.findById(idvecino);
 
         if (vecinoOpt.isPresent()) {
@@ -200,16 +198,25 @@ public class VecinoController {
             vecinoDTO.setIdComunidad(vecino.getComunidad().getIdcomunidad());
 
             return ResponseEntity.ok(vecinoDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese vecino");
+        }
+
+    }
+
+    @GetMapping("/listadevecinosporgestor")
+    public ResponseEntity<?> listadevecinosporgestor(@RequestParam Long idvecino) {
+        
+        Vecino vecino = vecinoRepository.findById(idvecino).get();
+        if (vecino != null & vecino.getGestor()) {
+            Comunidad comunidad = comunidadRepository.findById(vecino.getComunidad().getIdcomunidad()).get();
+            List<Vecino> vecinos = comunidad.getVecinos();
+            return ResponseEntity.ok(vecinos);
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese vecino");
         }
 
-        
-        
     }
     
-    
-
-    //
 
 }
