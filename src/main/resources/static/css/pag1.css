@@ -27,10 +27,6 @@ body {
     gap: 20px; /* Esto añade espacio entre los elementos del contenedor */
     
 
-
-    
-
-
 }
 .icon {
   background: url('../images/image2.png') 50% / cover no-repeat;
@@ -54,8 +50,6 @@ body {
   font-size: 30px;
   text-align: center;
 }
-
-
 
 
 .description-1 {
