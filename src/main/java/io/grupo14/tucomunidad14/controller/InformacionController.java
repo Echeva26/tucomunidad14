@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -113,7 +114,7 @@ public class InformacionController {
         return infoDTOdownloads;
     }
     @GetMapping("/obtenerinfoporvecino")
-    public List<InformacionDTOdownload> obteInformacionporvecino(@RequestParam Long idvecino) {
+    public ResponseEntity<?> obteInformacionporvecino(@RequestParam Long idvecino) {
         Vecino vecino = vecinoRepository.findById(idvecino).get();
         List<InformacionDTO> info = informacionRepository.findByComunidadId(vecino.getComunidad().getIdcomunidad());
 
@@ -122,7 +123,7 @@ public class InformacionController {
                 .map(informacion -> mapToDTO(informacion))
                 .collect(Collectors.toList());
 
-        return infoDTOdownloads;
+        return ResponseEntity.ok(infoDTOdownloads);
     }
 
     private InformacionDTOdownload mapToDTO(InformacionDTO informacion) {
