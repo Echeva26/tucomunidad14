@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -206,17 +207,41 @@ public class VecinoController {
 
     @GetMapping("/listadevecinosporgestor")
     public ResponseEntity<?> listadevecinosporgestor(@RequestParam Long idvecino) {
-        
-        Vecino vecino = vecinoRepository.findById(idvecino).get();
-        if (vecino != null & vecino.getGestor()) {
-            Comunidad comunidad = comunidadRepository.findById(vecino.getComunidad().getIdcomunidad()).get();
-            List<Vecino> vecinos = comunidad.getVecinos();
-            return ResponseEntity.ok(vecinos);
-        }else{
+
+        Vecino vecino = vecinoRepository.findById(idvecino).orElse(null);
+
+        if (vecino != null && vecino.getGestor()) {
+            Comunidad comunidad = comunidadRepository.findById(vecino.getComunidad().getIdcomunidad()).orElse(null);
+
+            if (comunidad != null) {
+                List<VecinoDTO> vecinosDTO = comunidad.getVecinos().stream()
+                        .map(this::convertToDto)
+                        .collect(Collectors.toList());
+
+                return ResponseEntity.ok(vecinosDTO);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La comunidad no fue encontrada");
+            }
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese vecino");
         }
 
     }
-    
+
+    private VecinoDTO convertToDto(Vecino vecino) {
+        VecinoDTO vecinoDTO = new VecinoDTO();
+        // Aquí mapea los atributos del Vecino a los del VecinoDTO
+        vecinoDTO.setNombre(vecino.getNombre());
+        vecinoDTO.setIdvecino(vecino.getIdvecino());
+        vecinoDTO.setNombre(vecino.getNombre());
+        vecinoDTO.setApellidos(vecino.getApellidos());
+        vecinoDTO.setEmail(vecino.getEmail());
+        vecinoDTO.setNombredeusuario(vecino.getNombredeusuario());
+        vecinoDTO.setContraseña(vecino.getContraseña()); // Considera no retornar la contraseña por seguridad
+        vecinoDTO.setGestor(vecino.getGestor());
+        vecinoDTO.setIdComunidad(vecino.getComunidad().getIdcomunidad());
+
+        return vecinoDTO;
+    }
 
 }
