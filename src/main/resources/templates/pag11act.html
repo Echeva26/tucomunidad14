@@ -65,7 +65,7 @@
         <div class="titulo">
           <a href="noticias.html">Noticias</a>
         </div>
-        <div class="reservar">
+        <div class="reservar" id="acceder-noticias">
           <span class="reservar-1">
             Acceder
           </span>
@@ -184,13 +184,13 @@
         window.location.href = `/panelreservas?idvecino=${idvecino}`;
       });
 
-      // Obtener el contenedor de gestión de roles
+      
       var gestionRoles = document.getElementById('acceder-gestion-roles');
-
       // Agregar un evento de clic al contenedor de gestión de roles
       gestionRoles.addEventListener('click', function () {
         // Redireccionar a la página "gestionroles.html"
-        window.location.href = '/gestionroles';
+        
+        window.location.href = `/gestionroles?idvecino=${idvecino}`;
       });
       
     });
