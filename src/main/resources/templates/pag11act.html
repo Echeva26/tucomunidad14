@@ -71,6 +71,23 @@
           </span>
         </div>
       </div>
+
+      <div class="elemento" id="gestion-roles" style="display: none;">
+        <div class="borde-azul">
+        </div>
+        <div class="elipse-icono">
+          <div class="circulo"></div>
+          <img class="icono" src="../static/vectors/zonas.svg" />
+        </div>
+        <div class="titulo">
+          Gestión de Roles
+        </div>
+        <div class="reservar" id="acceder-gestion-roles">
+          <span class="reservar-1">
+            Acceder
+          </span>
+        </div>
+      </div>
       
     </div>
   </div>
@@ -125,6 +142,7 @@
               var usuarioDiv = document.querySelector('.usuario'); // Selección del div de usuario
               if (gestor) {
                 usuarioDiv.textContent = 'Gestor'; // Cambiar el texto a "Gestor"
+                document.getElementById('gestion-roles').style.display = 'block'; // Mostrar el elemento de gestión de roles
               } else {
                 usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
               }
@@ -165,6 +183,16 @@
         // Redireccionar a la página "panelreservas" con el parámetro "idvecino"
         window.location.href = `/panelreservas?idvecino=${idvecino}`;
       });
+
+      // Obtener el contenedor de gestión de roles
+      var gestionRoles = document.getElementById('acceder-gestion-roles');
+
+      // Agregar un evento de clic al contenedor de gestión de roles
+      gestionRoles.addEventListener('click', function () {
+        // Redireccionar a la página "gestionroles.html"
+        window.location.href = '/gestionroles';
+      });
+      
     });
   </script>
   
