@@ -112,6 +112,18 @@ public class InformacionController {
 
         return infoDTOdownloads;
     }
+    @GetMapping("/obtenerinfoporvecino")
+    public List<InformacionDTOdownload> obteInformacionporvecino(@RequestParam Long idvecino) {
+        Vecino vecino = vecinoRepository.findById(idvecino).get();
+        List<InformacionDTO> info = informacionRepository.findByComunidadId(vecino.getComunidad().getIdcomunidad());
+
+        // Mapeo de Informaciondto a InformacionDTOdownload
+        List<InformacionDTOdownload> infoDTOdownloads = info.stream()
+                .map(informacion -> mapToDTO(informacion))
+                .collect(Collectors.toList());
+
+        return infoDTOdownloads;
+    }
 
     private InformacionDTOdownload mapToDTO(InformacionDTO informacion) {
         InformacionDTOdownload informacionDTO = new InformacionDTOdownload();
