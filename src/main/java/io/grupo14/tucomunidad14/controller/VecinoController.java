@@ -244,4 +244,16 @@ public class VecinoController {
         return vecinoDTO;
     }
 
+    @GetMapping("/idcomunidadporvecino")
+    public ResponseEntity<?> idcomunidadporvecino(@RequestParam Long idvecino) {
+        Vecino vecino = vecinoRepository.findById(idvecino).get();
+        if (vecino != null) {
+            Long idcomunidad = vecino.getComunidad().getIdcomunidad();
+            return ResponseEntity.ok(idcomunidad);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese vecino");
+        }
+
+    }
+
 }
