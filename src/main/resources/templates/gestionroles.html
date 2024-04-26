@@ -71,7 +71,7 @@
     
     </div>
 
-    
+
     <!--FALTA TERMINARLO-->
     <div class="caja-clave">
       Para agregar un nuevo vecino, comparte el id de la comunidad con él. <strong>Id comunidad: </strong><span id="idComunidad"></span> 
@@ -156,6 +156,21 @@
           .catch(error => {
             console.error('Error:', error);
           });
+
+          fetch(`http://localhost:8080/idcomunidadporvecino?idvecino=${idVecino}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('fallo al obtener la comunidad');
+            }
+            return response.json();
+          })
+          .then(data => {
+            document.getElementById('idComunidad').textContent = data
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+          
         }
 
         //FALTA TERMINARLO CONMETODO DE VECINOCONTROLLER
