@@ -68,15 +68,13 @@
 
       
 
-     
-
-
-      
-
+    
     </div>
 
+    
+    <!--FALTA TERMINARLO-->
     <div class="caja-clave">
-      Para agregar un nuevo vecino, comparte esta clave con él. <strong>Clave: comu1234</strong>
+      Para agregar un nuevo vecino, comparte el id de la comunidad con él. <strong>Id comunidad: </strong><span id="idComunidad"></span> 
     </div>
 
   </div>
@@ -158,6 +156,14 @@
           .catch(error => {
             console.error('Error:', error);
           });
+        }
+
+        //FALTA TERMINARLO CONMETODO DE VECINOCONTROLLER
+        // Obtener el ID de la comunidad del gestor
+        var idComunidad = getQueryParam('idComunidad'); // Obtener el ID de la URL
+        if (idComunidad) {
+          // Actualizar el contenido del elemento span con el ID de la comunidad
+          document.getElementById('idComunidad').textContent = idComunidad;
         }
       }
     });
