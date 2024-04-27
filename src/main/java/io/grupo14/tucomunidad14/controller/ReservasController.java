@@ -172,4 +172,26 @@ public class ReservasController {
 
     }
 
+    @GetMapping("/reservasporidarea")
+    public ResponseEntity<?> getMethodName(@RequestParam Long idarea) {
+        Areacomun area = areaComunRepository.findById(idarea).get();
+        if (area != null) {
+            List<Reserva> reservas = area.getReserva();
+            List<ReservaSimpleDTO> reservasDTO = reservas.stream().map(reserva -> {
+                ReservaSimpleDTO dto = new ReservaSimpleDTO();
+                dto.setIdreserva(reserva.getIdreserva());
+                dto.setIdvecino(reserva.getVecino().getIdvecino());
+                dto.setIdarea(reserva.getAreacomun().getIdarea());
+                dto.setInicioReserva(reserva.getInicioReserva());
+                dto.setFinReserva(reserva.getFinReserva());
+                return dto;
+            }).collect(Collectors.toList());
+
+            return ResponseEntity.ok(reservasDTO);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese area");
+        }
+    }
+    
+
 }
