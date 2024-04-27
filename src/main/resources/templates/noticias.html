@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <title>Comunidad Etsit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="../static/css/ejemplo.css" />
+  <link rel="stylesheet" href="../static/css/noticias.css" />
   <style>
     .titulo a {
       font-size: x-small; /* Tamaño de letra más pequeño para el título de la noticia */
@@ -58,7 +58,7 @@
         </div>
         <div class="contenido">
           <div class="titulo">
-            <a href="noticia5.html">Añadir noticia</a>
+            Añadir noticia
           </div>
           <div class="descripcion">
             Añade una noticia al portal de la comunidad
@@ -195,6 +195,18 @@
   
       // Llama a cargarNoticias cuando la página carga
       cargarNoticias();
+
+
+      // Obtener el ID del vecino de la URL
+      var idvecino = getQueryParam('idvecino');
+      //BOTON añadir noticia
+      var anadirnoticia = document.getElementById('anadir-noticia');
+      // Agregar un evento de clic al contenedor de gestión de roles
+      anadirnoticia.addEventListener('click', function () {
+
+        // Redireccionar a la página "gestionroles"
+        window.location.href = `/anadirnoticia?idvecino=${idvecino}`;
+      });
     });
   </script>
   
