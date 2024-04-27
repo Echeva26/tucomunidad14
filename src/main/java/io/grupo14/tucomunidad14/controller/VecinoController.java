@@ -270,7 +270,7 @@ public class VecinoController {
             vecino.setGestor(true);
             vecinoRepository.save(vecino);
             VecinoDTO vecinofin = convertToDto(vecino);
-            enviarEmail("Se le ha otorgado permisos de gestor de comunidad en la comunidad "+vecino.getComunidad().getNombre(),vecinofin.getEmail());
+            enviarEmail("Otorgacion de permisos","Se le ha otorgado permisos de gestor de comunidad en la comunidad "+vecino.getComunidad().getNombre(),vecinofin.getEmail());
             return ResponseEntity.ok(vecinofin);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ha habido algun problema");
@@ -285,7 +285,7 @@ public class VecinoController {
         if (gestor != null & vecino != null & gestor.getGestor()) {
             vecinoRepository.delete(vecino);
             VecinoDTO vecinofin = convertToDto(vecino);
-            enviarEmail("Se le ha eliminado de la comunidad "+vecino.getComunidad().getNombre(),vecinofin.getEmail());
+            enviarEmail("Eliminación de la comunidad","Se le ha eliminado de la comunidad "+vecino.getComunidad().getNombre(),vecinofin.getEmail());
             return ResponseEntity.ok(vecinofin);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ha habido algun problema");
@@ -293,12 +293,12 @@ public class VecinoController {
 
     }
 
-    private void enviarEmail(String mensaje , String email) {
+    private void enviarEmail(String asunto,String mensaje , String email) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("tucomunidad14.app@gmail.com");
         message.setTo(email);
-        message.setSubject("Nueva Comunidad Creada");
-        message.setText("Se ha creado una nueva comunidad con ID: ");
+        message.setSubject(asunto);
+        message.setText(mensaje);
         mailSender.send(message);
     }
 
