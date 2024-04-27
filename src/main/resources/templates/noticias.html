@@ -195,6 +195,18 @@
   
       // Llama a cargarNoticias cuando la página carga
       cargarNoticias();
+
+
+      // Obtener el ID del vecino de la URL
+      var idvecino = getQueryParam('idvecino');
+      //BOTON añadir noticia
+      var anadirnoticia = document.getElementById('anadir-noticia');
+      // Agregar un evento de clic al contenedor de gestión de roles
+      anadirnoticia.addEventListener('click', function () {
+
+        // Redireccionar a la página "gestionroles"
+        window.location.href = `/anadirnoticia?idvecino=${idvecino}`;
+      });
     });
   </script>
   
