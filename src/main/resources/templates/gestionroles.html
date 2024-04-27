@@ -137,7 +137,7 @@
                     <span>${vecino.nombre}</span> <!-- Nombre y Apellido del vecino -->
                   </div>
                   <div class="reservar">
-                    <button class="btn-otorgar" onclick="otorgarPermisos(${idVecino}, ${vecino.idvecino})">Otorgar permisos</button> <!-- Botón otorgar permisos -->
+                    ${vecino.gestor ? '' : '<button class="btn-otorgar" onclick="otorgarPermisos('+ idVecino +', '+ vecino.id +')">Otorgar permisos</button>'} <!-- Botón otorgar permisos -->
                     <button class="btn-eliminar" onclick="eliminar()">Eliminar</button> <!-- Botón eliminar -->
                   </div>
                 </div>`;
