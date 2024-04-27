@@ -46,7 +46,7 @@
         TuComunidad
       </div>
       <p class="home">
-        <a href="/comunidad" style="text-decoration: none;">
+        <a id="home-link" href="#" style="text-decoration: none;">
           <span class="home-sub-30">Home</span>
           <span></span>
         </a>
@@ -66,23 +66,15 @@
     <h2 class="titulo-vecinos">Vecinos</h2>
     <div class="container-6">
 
-      
-
-    
     </div>
-
 
     <!--FALTA TERMINARLO-->
     <div class="caja-clave">
-      Para agregar un nuevo vecino, comparte el id de la comunidad con él. <strong>Id comunidad: </strong><span id="idComunidad"></span> 
+      Para agregar un nuevo vecino, comparte el id de la comunidad con él. <strong>Id comunidad: </strong><span id="idComunidad"></span>
     </div>
 
   </div>
 
-
-
-
-  
   <!-- PIE DE PAGINA -->
   <div class="pie-de-pagina">
     <div class="container-5">
@@ -115,27 +107,26 @@
         var searchParams = new URLSearchParams(window.location.search);
         return searchParams.get(param);
       }
-      
+
       window.onload = function () {
         // Obtener el ID del vecino de la URL
         var idVecino = getQueryParam('idvecino'); // Obtiene el ID de la URL
-        if(idVecino){
-        // Hacer una solicitud al servidor para obtener la lista de vecinos de la comunidad del gestor
-        fetch(`http://localhost:8080/listadevecinosporgestor?idvecino=${idVecino}`)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('No se pudo obtener la lista de vecinos');
-            }
-            return response.json();
-          })
-          .then(vecinos => {
-            // Mostrar los vecinos en la página
-            var container = document.querySelector('.container-6');
-            //var vecinosContainer = document.getElementById('vecinos-container');
-            vecinos.forEach(vecino => {
-              var elemento = document.createElement('div');
-              elemento.classList.add('elemento');
-              elemento.innerHTML = `
+        if (idVecino) {
+          // Hacer una solicitud al servidor para obtener la lista de vecinos de la comunidad del gestor
+          fetch(`http://localhost:8080/listadevecinosporgestor?idvecino=${idVecino}`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('No se pudo obtener la lista de vecinos');
+              }
+              return response.json();
+            })
+            .then(vecinos => {
+              // Mostrar los vecinos en la página
+              var container = document.querySelector('.container-6');
+              vecinos.forEach(vecino => {
+                var elemento = document.createElement('div');
+                elemento.classList.add('elemento');
+                elemento.innerHTML = `
                 <div class="borde-azul"></div>
                 <div class="elipse-icono">
                   <div class="circulo"></div>
@@ -150,35 +141,29 @@
                     <button class="btn-eliminar" onclick="eliminar()">Eliminar</button> <!-- Botón eliminar -->
                   </div>
                 </div>`;
-              container.appendChild(elemento);
+                container.appendChild(elemento);
+              });
+            })
+            .catch(error => {
+              console.error('Error:', error);
             });
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
 
           fetch(`http://localhost:8080/idcomunidadporvecino?idvecino=${idVecino}`)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('fallo al obtener la comunidad');
-            }
-            return response.json();
-          })
-          .then(data => {
-            document.getElementById('idComunidad').textContent = data
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-          
-        }
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('fallo al obtener la comunidad');
+              }
+              return response.json();
+            })
+            .then(data => {
+              document.getElementById('idComunidad').textContent = data
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
 
-        //FALTA TERMINARLO CONMETODO DE VECINOCONTROLLER
-        // Obtener el ID de la comunidad del gestor
-        var idComunidad = getQueryParam('idComunidad'); // Obtener el ID de la URL
-        if (idComunidad) {
-          // Actualizar el contenido del elemento span con el ID de la comunidad
-          document.getElementById('idComunidad').textContent = idComunidad;
+          // Actualizar el enlace Home con el ID del vecino
+          document.getElementById('home-link').setAttribute('href', `/menucomunidad?idvecino=${idVecino}`);
         }
       }
     });
