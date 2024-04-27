@@ -138,7 +138,7 @@
                   </div>
                   <div class="reservar">
                     ${vecino.gestor ? '' : '<button class="btn-otorgar" onclick="otorgarPermisos('+ idVecino +', '+ vecino.idvecino +')">Otorgar permisos</button>'} <!-- Botón otorgar permisos -->
-                    <button class="btn-eliminar" onclick="eliminar()">Eliminar</button> <!-- Botón eliminar -->
+                    <button class="btn-eliminar" id="eliminar-${vecino.idvecino}" onclick="eliminar(${idVecino}, ${vecino.idvecino})">Eliminar</button> <!-- Botón eliminar -->
                   </div>
                 </div>`;
                 container.appendChild(elemento);
@@ -193,9 +193,29 @@
       });
     }
 
-    function eliminar() {
-      alert("Elemento eliminado");
-      // Aquí puedes agregar la lógica para eliminar el elemento
+    function eliminar(idGestor, idVecino) {
+      // Realizar la solicitud POST al endpoint /eliminarvecino con los IDs correspondientes
+      fetch('http://localhost:8080/eliminarvecino', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `idgestor=${idGestor}&idvecino=${idVecino}`
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('No se pudo eliminar el vecino');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        location.reload();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Error al eliminar el vecino');
+      });
     }
   </script>
 </body>

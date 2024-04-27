@@ -278,7 +278,8 @@ public class VecinoController {
         Vecino vecino = vecinoRepository.findById(idvecino).get();
         if (gestor != null & vecino != null & gestor.getGestor()) {
             vecinoRepository.delete(vecino);
-            return ResponseEntity.ok("Vecino eliminado");
+            VecinoDTO vecinofin = convertToDto(vecino);
+            return ResponseEntity.ok(vecinofin);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ha habido algun problema");
         }
