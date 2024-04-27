@@ -184,7 +184,8 @@
         return response.json();
       })
       .then(data => {
-        alert(data); // Muestra el mensaje de éxito
+        console.log(data);
+        location.reload();
       })
       .catch(error => {
         console.error('Error:', error);
