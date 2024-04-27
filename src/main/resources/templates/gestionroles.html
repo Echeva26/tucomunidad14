@@ -124,9 +124,10 @@
               // Mostrar los vecinos en la página
               var container = document.querySelector('.container-6');
               vecinos.forEach(vecino => {
-                var elemento = document.createElement('div');
-                elemento.classList.add('elemento');
-                elemento.innerHTML = `
+                if (vecino.idvecino !== parseInt(idVecino)) { // Verificar si el ID del vecino actual es diferente al ID recibido por parámetro
+                  var elemento = document.createElement('div');
+                  elemento.classList.add('elemento');
+                  elemento.innerHTML = `
                 <div class="borde-azul"></div>
                 <div class="elipse-icono">
                   <div class="circulo"></div>
@@ -141,7 +142,8 @@
                     <button class="btn-eliminar" id="eliminar-${vecino.idvecino}" onclick="eliminar(${idVecino}, ${vecino.idvecino})">Eliminar</button> <!-- Botón eliminar -->
                   </div>
                 </div>`;
-                container.appendChild(elemento);
+                  container.appendChild(elemento);
+                }
               });
             })
             .catch(error => {
