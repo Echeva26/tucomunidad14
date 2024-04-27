@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <title>Comunidad Etsit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="../static/css/ejemplo.css" />
+  <link rel="stylesheet" href="../static/css/noticias.css" />
   <style>
     .titulo a {
       font-size: x-small; /* Tamaño de letra más pequeño para el título de la noticia */
@@ -58,13 +58,13 @@
         </div>
         <div class="contenido">
           <div class="titulo">
-            <a href="noticia5.html">Añadir noticia</a>
+            Añadir noticia
           </div>
           <div class="descripcion">
             Añade una noticia al portal de la comunidad
           </div>
-          <div class="reservar">
-            <span class="reservar-1">
+          <div class="reservar" id="anadir-noticia">
+            <span class="reservar-1"  >
               Añadir
             </span>
             <img class="flecha-reservar" src="../static/vectors/flecha-reservar.svg" />
@@ -164,44 +164,45 @@
               if (gestionRoles) {
                 gestionRoles.style.display = 'block'; // Mostrar el elemento de gestión de roles
               } else {
-                console.error('Elemento de gestión de roles no encontrado');
+                usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
               }
-            } else {
-              usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
-            }
-          })
-          .catch(error => console.error('Error al obtener información del vecino:', error));
+              fetch(`http://localhost:8080/vecino/comunidad?idVecino=${idvecino}`)
+                .then(response => {
+                  if (!response.ok) {
+                    throw new Error('No se pudo obtener la información de la comunidad');
+                  }
+                  return response.json();
+                })
+                .then(data => {
+                  var nombreComunidad = data.nombre; // Obtener el nombre de la comunidad
+                  var idcomunidad = data.idcomunidad;
+                  fetch(`/obtenerinfoporcomunidad?idcomunidad=${idcomunidad}`)
+                    .then(response => {
+                      if (!response.ok) {
+                        throw new Error('No se pudieron obtener las noticias de la comunidad');
+                      }
+                      return response.json();
+                    })
+                    .then(data => {
+                      // Renderizar las noticias
+                      renderizarNoticias(data);
+                    })
+                    .catch(error => {
+                      console.error('Error al obtener noticias:', error);
+                    });
+                    
+                  // Cambiar el texto en el título
+                })
+                .catch(error => {
+                  console.error('Error:', error);
+                });
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+        }
+      };
 
-        // Obtener la comunidad del vecino
-        fetch(`http://localhost:8080/vecino/comunidad?idVecino=${idVecino}`)
-          .then(response => response.json())
-          .then(data => {
-            // Asumiendo que el endpoint devuelve un objeto con idComunidad
-            var idComunidad = data.idcomunidad;
-            // Obtener noticias por comunidad
-            fetch(`/obtenerinfoporcomunidad?idcomunidad=${idComunidad}`)
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error('Error al obtener las noticias de la comunidad');
-                }
-                return response.json();
-              })
-              .then(noticias => {
-                // Verificar si noticias es un array
-                if (Array.isArray(noticias)) {
-                  // Renderizar las noticias
-                  renderizarNoticias(noticias);
-                } else {
-                  console.error('Error: La respuesta no es un array de noticias');
-                }
-              })
-              .catch(error => console.error('Error al obtener noticias:', error));
-          })
-          .catch(error => console.error('Error al obtener datos de la comunidad:', error));
-      }
-
-      // Llama a cargarNoticias cuando la página carga
-      cargarNoticias();
     });
   </script>
 </body>
