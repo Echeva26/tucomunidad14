@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class anadirnoticia {
 
     @GetMapping("/anadirnoticia")
-    public String anadirnoticia() {
+    public String noesuncontructor() {
         return "añadirnoticiaadmin"; 
     }  
 }
