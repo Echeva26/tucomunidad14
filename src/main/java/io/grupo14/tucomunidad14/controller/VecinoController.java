@@ -4,6 +4,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +35,9 @@ public class VecinoController {
 
     @Autowired
     private ComunidadRepository comunidadRepository;
+
+    @Autowired
+    private JavaMailSender mailSender;
 
     public static final Logger log = LoggerFactory.getLogger(ReservasController.class);
 
@@ -265,6 +270,7 @@ public class VecinoController {
             vecino.setGestor(true);
             vecinoRepository.save(vecino);
             VecinoDTO vecinofin = convertToDto(vecino);
+            enviarEmail("Se le ha otorgado permisos de gestor de comunidad en la comunidad "+vecino.getComunidad().getNombre(),vecinofin.getEmail());
             return ResponseEntity.ok(vecinofin);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ha habido algun problema");
@@ -279,11 +285,21 @@ public class VecinoController {
         if (gestor != null & vecino != null & gestor.getGestor()) {
             vecinoRepository.delete(vecino);
             VecinoDTO vecinofin = convertToDto(vecino);
+            enviarEmail("Se le ha eliminado de la comunidad "+vecino.getComunidad().getNombre(),vecinofin.getEmail());
             return ResponseEntity.ok(vecinofin);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ha habido algun problema");
         }
 
+    }
+
+    private void enviarEmail(String mensaje , String email) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("tucomunidad14.app@gmail.com");
+        message.setTo(email);
+        message.setSubject("Nueva Comunidad Creada");
+        message.setText("Se ha creado una nueva comunidad con ID: ");
+        mailSender.send(message);
     }
 
 }
