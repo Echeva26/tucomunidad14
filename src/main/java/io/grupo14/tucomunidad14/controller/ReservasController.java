@@ -135,8 +135,9 @@ public class ReservasController {
         }).collect(Collectors.toList());
     }
 
-    @GetMapping("/reservas/porAreaComunYDia/{areaComunId}")
-    public ResponseEntity<?> obtenerReservasPorAreaComunYDia(@PathVariable Long areaComunId,
+    @GetMapping("/reservas/porAreaComunYDia")
+    public ResponseEntity<?> obtenerReservasPorAreaComunYDia(
+            @RequestParam Long areaComunId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
         LocalDateTime inicioDelDia = fecha.atStartOfDay(); // 00:00 del día
         LocalDateTime finDelDia = fecha.atTime(23, 59, 59); // Fin del día
