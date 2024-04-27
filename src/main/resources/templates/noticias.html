@@ -23,7 +23,6 @@
   <div class="cabecera">
     <span class="reserva-de-zonas">
       Noticias
-     
     </span>
     <div class="container">
       <div class="tu-comunidad">
@@ -49,15 +48,13 @@
   <div class="pagina">
     <div class="container-6">
     
-      <div class="pagina">
-        <div class="container-6" id="noticias-container"></div>
-      </div>
+      <div class="container-6" id="noticias-container"></div>
 
       <div class="elemento">
         <div class="borde-azul"></div>
         <div class="elipse-icono">
           <div class="circulo"></div>
-          <img class="icono" src="../static/vectors/noticia5.svg" />
+          <img class="icono" src="../static/vectors/intagram.svg" />
         </div>
         <div class="contenido">
           <div class="titulo">
@@ -109,9 +106,36 @@
         var searchParams = new URLSearchParams(window.location.search);
         return searchParams.get(param);
       }
-      
-window.onload = function () {
-  var idvecino = getQueryParam('idvecino'); // Obtiene el ID de la URL
+
+      // Función para renderizar las noticias en el HTML
+      function renderizarNoticias(noticias) {
+        var noticiasContainer = document.getElementById('noticias-container');
+        noticiasContainer.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevas noticias
+        noticias.forEach(noticia => {
+          var elementoNoticia = `
+            <div class="elemento">
+              <div class="borde-azul"></div>
+              <img class="imagen" src="${noticia.foto ? noticia.foto : '../static/vectors/twitter.svg'}" alt="${noticia.titulo}" />
+              <div class="contenido">
+                <h2 class="titulo">
+                  <a href="#">${noticia.titulo}</a>
+                </h2>
+                <p class="descripcion">
+                  ${noticia.descripcion}
+                </p>
+                <div class="leer-mas">
+                  <a href="#" class="reservar-1">Leer más</a>
+                </div>
+              </div>
+            </div>
+          `;
+          noticiasContainer.innerHTML += elementoNoticia;
+        });
+      }
+
+      // Cargar datos de la comunidad al cargar la página
+      window.onload = function () {
+        var idvecino = getQueryParam('idvecino'); // Obtiene el ID de la URL
         if (idvecino) {
           fetch(`http://localhost:8080/vecinoporid?idvecino=${idvecino}`)
             .then(response => {
@@ -128,84 +152,46 @@ window.onload = function () {
                 document.getElementById('gestion-roles').style.display = 'block'; // Mostrar el elemento de gestión de roles
               } else {
                 usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
-              })
-            }
-            fetch(`http://localhost:8080/vecino/comunidad?idVecino=${idvecino}`)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('No se pudo obtener la información de la comunidad');
               }
-              return response.json();
-            })
-            .then(data => {
-              var nombreComunidad = data.nombre; // Obtener el nombre de la comunidad
-              var idcomunidad= data.idcomunidad;
-              var reservaDeZonas = document.querySelector('.reserva-de-zonas'); // Selección del span de reserva de zonas
-              var titleTag = document.querySelector('title'); // Selección del tag de título
-              reservaDeZonas.textContent = `Comunidad ${nombreComunidad}`; // Cambiar el texto en el span
-              titleTag.textContent = `Comunidad ${nombreComunidad}`; // Cambiar el texto en el título
+              fetch(`http://localhost:8080/vecino/comunidad?idVecino=${idvecino}`)
+                .then(response => {
+                  if (!response.ok) {
+                    throw new Error('No se pudo obtener la información de la comunidad');
+                  }
+                  return response.json();
+                })
+                .then(data => {
+                  var nombreComunidad = data.nombre; // Obtener el nombre de la comunidad
+                  var idcomunidad = data.idcomunidad;
+                  fetch(`/obtenerinfoporcomunidad?idcomunidad=${idcomunidad}`)
+                    .then(response => {
+                      if (!response.ok) {
+                        throw new Error('No se pudieron obtener las noticias de la comunidad');
+                      }
+                      return response.json();
+                    })
+                    .then(data => {
+                      // Renderizar las noticias
+                      renderizarNoticias(data);
+                    })
+                    .catch(error => {
+                      console.error('Error al obtener noticias:', error);
+                    });
+                    
+                  // Cambiar el texto en el título
+                })
+                .catch(error => {
+                  console.error('Error:', error);
+                });
             })
             .catch(error => {
               console.error('Error:', error);
             });
-        })   
-        
-            
- 
-  function obtenerNoticiasPorComunidad(idcomunidad) {
-    fetch(`/obtenerinfoporcomunidad?idcomunidad=${idcomunidad}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('No se pudieron obtener las noticias de la comunidad');
         }
-        return response.json();
-      })
-      .then(data => {
-        // Renderizar las noticias
-        renderizarNoticias(data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  }
+      };
 
-  // Función para renderizar las noticias en el HTML
-  function renderizarNoticias(noticias) {
-    var noticiasContainer = document.getElementById('noticias-container');
-    noticias.forEach(noticia => {
-      var elementoNoticia = `
-        <div class="elemento">
-          <div class="borde-azul"></div>
-          <img class="imagen" src="${noticia.foto ? noticia.foto : '../static/vectors/twitter.svg'}" alt="${noticia.titulo}" />
-          <div class="contenido">
-            <h2 class="titulo">
-              <a href="#">${noticia.titulo}</a>
-            </h2>
-            <p class="descripcion">
-              ${noticia.descripcion}
-            </p>
-            <div class="leer-mas">
-              <a href="#" class="reservar-1">Leer más</a>
-            </div>
-          </div>
-        </div>
-      `;
-      noticiasContainer.innerHTML += elementoNoticia;
     });
-  }
-
-  // Obtener ID de la comunidad de la URL
-  var idComunidad = new URLSearchParams(window.location.search).get('idcomunidad');
-  if (idComunidad) {
-    obtenerNoticiasPorComunidad(idComunidad);
-  } else {
-    console.error('No se proporcionó el ID de la comunidad');
-  }
-};
-</script>
+  </script>
 </body>
-
-</html>
-
 
 </html>
