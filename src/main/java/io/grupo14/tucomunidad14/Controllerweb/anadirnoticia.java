@@ -8,6 +8,6 @@ public class anadirnoticia {
 
     @GetMapping("/anadirnoticia")
     public String anadirnoticia() {
-        return "añadirnoticiaadmin"; 
-    }  
+        return "añadirnoticiaadmin";
+    }
 }
