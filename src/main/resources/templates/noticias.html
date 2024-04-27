@@ -111,6 +111,7 @@
       function renderizarNoticias(noticias) {
         var noticiasContainer = document.getElementById('noticias-container');
         noticiasContainer.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevas noticias
+        
         noticias.forEach(noticia => {
           var elementoNoticia = `
             <div class="elemento">
