@@ -19,11 +19,11 @@
         TuComunidad
       </div>
       <p class="home">
-        <a href="/comunidad" style="text-decoration: none;">
+        <a id="home-link" href="#" style="text-decoration: none;">
           <span class="home-sub-30">Home</span>
           <span></span>
-      </a>
-          </p>
+        </a>
+      </p>
       <div class="log-out">
         <span class="our-works">
           <a href="/" style="text-decoration: none;">Log out</a>
@@ -121,6 +121,32 @@
                 `;
                 container.appendChild(newElement);
               });
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+
+          // Actualizar el enlace Home con el ID del vecino
+          document.getElementById('home-link').setAttribute('href', `/menucomunidad?idvecino=${idvecino}`);
+
+          // Consultar si el vecino es un gestor
+          fetch(`http://localhost:8080/vecinoporid?idvecino=${idvecino}`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('No se pudo obtener la información del vecino');
+              }
+              return response.json();
+            })
+            .then(data => {
+              var gestor = data.gestor; // Obtener el parámetro gestor
+
+              // Cambiar el texto en el elemento usuario dependiendo del parámetro gestor
+              var usuarioElement = document.querySelector('.usuario');
+              if (gestor) {
+                usuarioElement.textContent = 'Gestor de Comunidad';
+              } else {
+                usuarioElement.textContent = 'Vecino';
+              }
             })
             .catch(error => {
               console.error('Error:', error);

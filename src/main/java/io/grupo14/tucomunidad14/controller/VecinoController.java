@@ -256,4 +256,34 @@ public class VecinoController {
 
     }
 
+    @PostMapping("/otorgarpermisos")
+    public ResponseEntity<?> otorgarpermisos(@RequestParam Long idgestor, @RequestParam Long idvecino) {
+        Vecino gestor = vecinoRepository.findById(idgestor).get();
+        Vecino vecino = vecinoRepository.findById(idvecino).get();
+
+        if (gestor != null & vecino != null & gestor.getGestor()) {
+            vecino.setGestor(true);
+            vecinoRepository.save(vecino);
+            VecinoDTO vecinofin = convertToDto(vecino);
+            return ResponseEntity.ok(vecinofin);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ha habido algun problema");
+        }
+
+    }
+
+    @PostMapping("/eliminarvecino")
+    public ResponseEntity<?> eliminarvecino(@RequestParam Long idgestor, @RequestParam Long idvecino) {
+        Vecino gestor = vecinoRepository.findById(idgestor).get();
+        Vecino vecino = vecinoRepository.findById(idvecino).get();
+        if (gestor != null & vecino != null & gestor.getGestor()) {
+            vecinoRepository.delete(vecino);
+            VecinoDTO vecinofin = convertToDto(vecino);
+            return ResponseEntity.ok(vecinofin);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ha habido algun problema");
+        }
+
+    }
+
 }
