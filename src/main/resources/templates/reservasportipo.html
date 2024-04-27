@@ -44,7 +44,7 @@
         TuComunidad
       </div>
       <p class="home">
-        <a href="/comunidad" style="text-decoration: none;">
+        <a id="home-link" href="#" style="text-decoration: none;">
           <span class="home-sub-30">Home</span>
           <span></span>
         </a>
@@ -101,7 +101,7 @@
         var searchParams = new URLSearchParams(window.location.search);
         return searchParams.get(param);
       }
-  
+
       // Cargar datos de las áreas comunes por tipo al cargar la página
       window.onload = function () {
         var idvecino = getQueryParam('idvecino'); // Obtiene el ID de vecino de la URL
@@ -117,7 +117,7 @@
             .then(data => {
               var areas = data; // Obtener las áreas comunes
               var container = document.querySelector('.container-6'); // Selección del contenedor de áreas comunes
-  
+
               areas.forEach(area => {
                 var newElement = document.createElement('div');
                 newElement.classList.add('elemento');
@@ -150,10 +150,36 @@
               console.error('Error:', error);
             });
         }
+
+        document.getElementById('home-link').setAttribute('href', `/menucomunidad?idvecino=${idvecino}`);
+
+        // Consultar si el vecino es un gestor
+        fetch(`http://localhost:8080/vecinoporid?idvecino=${idvecino}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('No se pudo obtener la información del vecino');
+            }
+            return response.json();
+          })
+          .then(data => {
+            var gestor = data.gestor; // Obtener el parámetro gestor
+
+            // Cambiar el texto en el elemento usuario dependiendo del parámetro gestor
+            var usuarioElement = document.querySelector('.usuario');
+            if (gestor) {
+              usuarioElement.textContent = 'Gestor de Comunidad';
+            } else {
+              usuarioElement.textContent = 'Vecino';
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+
       }
     });
   </script>
-  
+
 
 </body>
 
