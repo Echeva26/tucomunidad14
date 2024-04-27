@@ -103,8 +103,55 @@
     </span>
   </div>
   <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Función para obtener parámetros de la URL
+      function getQueryParam(param) {
+        var searchParams = new URLSearchParams(window.location.search);
+        return searchParams.get(param);
+      }
+      
 window.onload = function () {
-  // Función para obtener noticias por comunidad
+  var idvecino = getQueryParam('idvecino'); // Obtiene el ID de la URL
+        if (idvecino) {
+          fetch(`http://localhost:8080/vecinoporid?idvecino=${idvecino}`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('No se pudo obtener la información del vecino');
+              }
+              return response.json();
+            })
+            .then(data => {
+              var gestor = data.gestor; // Obtener el parámetro gestor
+              var usuarioDiv = document.querySelector('.usuario'); // Selección del div de usuario
+              if (gestor) {
+                usuarioDiv.textContent = 'Gestor de comunidad'; // Cambiar el texto a "Gestor"
+                document.getElementById('gestion-roles').style.display = 'block'; // Mostrar el elemento de gestión de roles
+              } else {
+                usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
+              })
+            }
+            fetch(`http://localhost:8080/vecino/comunidad?idVecino=${idvecino}`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('No se pudo obtener la información de la comunidad');
+              }
+              return response.json();
+            })
+            .then(data => {
+              var nombreComunidad = data.nombre; // Obtener el nombre de la comunidad
+              var idcomunidad= data.idcomunidad;
+              var reservaDeZonas = document.querySelector('.reserva-de-zonas'); // Selección del span de reserva de zonas
+              var titleTag = document.querySelector('title'); // Selección del tag de título
+              reservaDeZonas.textContent = `Comunidad ${nombreComunidad}`; // Cambiar el texto en el span
+              titleTag.textContent = `Comunidad ${nombreComunidad}`; // Cambiar el texto en el título
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+        })   
+        
+            
+ 
   function obtenerNoticiasPorComunidad(idcomunidad) {
     fetch(`/obtenerinfoporcomunidad?idcomunidad=${idcomunidad}`)
       .then(response => {
