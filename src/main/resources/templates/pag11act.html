@@ -163,7 +163,7 @@
                   reservaDeZonas.textContent = `Comunidad ${nombreComunidad}`; // Cambiar el texto en el span
                   titleTag.textContent = `Comunidad ${nombreComunidad}`; // Cambiar el texto en el título
                   var noticiasLink = document.querySelector('.elemento:nth-child(2) a'); // Obtener el enlace de noticias
-                  noticiasLink.href = `/noticias?idcomunidad=${idcomunidad}?idvecino=${idvecino}`;
+                  noticiasLink.href = `/noticias?idcomunidad=${idcomunidad}`;
                 })
                 .catch(error => {
                   console.error('Error:', error);
