@@ -6,17 +6,24 @@
   <title>Comunidad Etsit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="../static/css/ejemplo.css" />
+  <style>
+    .titulo a {
+      font-size: x-small; /* Tamaño de letra más pequeño para el título de la noticia */
+    }
+
+    .descripcion {
+      font-size: 10px; /* Tamaño de letra más pequeño para la descripción de la noticia */
+      color: #666; /* Color de letra más claro para la descripción */
+    }
+  </style>
 </head>
 
 <body>
   <!-- CABECERA -->
   <div class="cabecera">
-    <span class="reserva-de-zonas" style="text-align: center;">
+    <span class="reserva-de-zonas">
       Noticias
-      <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Buscar noticias...">
-        <button onclick="searchNews()">Buscar</button>
-      </div>
+     
     </span>
     <div class="container">
       <div class="tu-comunidad">
@@ -34,13 +41,41 @@
         </span>
       </div>
       <div class="usuario">
-        Vecino
+        Gestor de comunidad
       </div>
     </div>
   </div>
 
   <div class="pagina">
-    <div class="container-6" id="noticias-container"></div>
+    <div class="container-6">
+    
+      <div class="pagina">
+        <div class="container-6" id="noticias-container"></div>
+      </div>
+
+      <div class="elemento">
+        <div class="borde-azul"></div>
+        <div class="elipse-icono">
+          <div class="circulo"></div>
+          <img class="icono" src="../static/vectors/noticia5.svg" />
+        </div>
+        <div class="contenido">
+          <div class="titulo">
+            <a href="noticia5.html">Añadir noticia</a>
+          </div>
+          <div class="descripcion">
+            Añade una noticia al portal de la comunidad
+          </div>
+          <div class="reservar">
+            <span class="reservar-1">
+              Añadir
+            </span>
+            <img class="flecha-reservar" src="../static/vectors/flecha-reservar.svg" />
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- PIE DE PAGINA -->
@@ -67,61 +102,63 @@
       ©TuComunidad 2024
     </span>
   </div>
-
   <script>
-    window.onload = function () {
-      // Función para obtener noticias por comunidad
-      function obtenerNoticiasPorComunidad(idcomunidad) {
-        fetch(`/obtenerinfoporcomunidad?idcomunidad=${idcomunidad}`)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('No se pudieron obtener las noticias de la comunidad');
-            }
-            return response.json();
-          })
-          .then(data => {
-            // Renderizar las noticias
-            renderizarNoticias(data);
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-      }
+window.onload = function () {
+  // Función para obtener noticias por comunidad
+  function obtenerNoticiasPorComunidad(idcomunidad) {
+    fetch(`/obtenerinfoporcomunidad?idcomunidad=${idcomunidad}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('No se pudieron obtener las noticias de la comunidad');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Renderizar las noticias
+        renderizarNoticias(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
 
-      // Función para renderizar las noticias en el HTML
-      function renderizarNoticias(noticias) {
-        var noticiasContainer = document.getElementById('noticias-container');
-        noticias.forEach(noticia => {
-          var elementoNoticia = `
-            <div class="elemento">
-              <div class="borde-azul"></div>
-              <img class="imagen" src="${noticia.foto ? noticia.foto : '../static/vectors/twitter.svg'}" alt="${noticia.titulo}" />
-              <div class="contenido">
-                <h2 class="titulo">
-                  <a href="#">${noticia.titulo}</a>
-                </h2>
-                <p class="descripcion">
-                  ${noticia.descripcion}
-                </p>
-                <div class="leer-mas">
-                  <a href="#" class="reservar-1">Leer más</a>
-                </div>
-              </div>
+  // Función para renderizar las noticias en el HTML
+  function renderizarNoticias(noticias) {
+    var noticiasContainer = document.getElementById('noticias-container');
+    noticias.forEach(noticia => {
+      var elementoNoticia = `
+        <div class="elemento">
+          <div class="borde-azul"></div>
+          <img class="imagen" src="${noticia.foto ? noticia.foto : '../static/vectors/twitter.svg'}" alt="${noticia.titulo}" />
+          <div class="contenido">
+            <h2 class="titulo">
+              <a href="#">${noticia.titulo}</a>
+            </h2>
+            <p class="descripcion">
+              ${noticia.descripcion}
+            </p>
+            <div class="leer-mas">
+              <a href="#" class="reservar-1">Leer más</a>
             </div>
-          `;
-          noticiasContainer.innerHTML += elementoNoticia;
-        });
-      }
+          </div>
+        </div>
+      `;
+      noticiasContainer.innerHTML += elementoNoticia;
+    });
+  }
 
-      // Obtener ID de la comunidad de la URL
-      var idComunidad = new URLSearchParams(window.location.search).get('idcomunidad');
-      if (idComunidad) {
-        obtenerNoticiasPorComunidad(idComunidad);
-      } else {
-        console.error('No se proporcionó el ID de la comunidad');
-      }
-    };
-  </script>
+  // Obtener ID de la comunidad de la URL
+  var idComunidad = new URLSearchParams(window.location.search).get('idcomunidad');
+  if (idComunidad) {
+    obtenerNoticiasPorComunidad(idComunidad);
+  } else {
+    console.error('No se proporcionó el ID de la comunidad');
+  }
+};
+</script>
 </body>
+
+</html>
+
 
 </html>
