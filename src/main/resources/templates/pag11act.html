@@ -63,7 +63,7 @@
           <img class="icono" src="../static/vectors/zonas.svg" />
         </div>
         <div class="titulo">
-          <a href="/noticias?idcomunidad=<%= idcomunidad %>">Noticias</a>
+          Noticias
         </div>
         <div class="reservar" id="acceder-noticias">
           <span class="reservar-1">
@@ -193,7 +193,7 @@
       // Agregar un evento de clic al contenedor de noticias
       noticias.addEventListener('click', function () {
         // Redireccionar a la página de noticias con el ID de la comunidad como parámetro
-        window.location.href = `/noticias?idcomunidad=${idcomunidad}`;
+        window.location.href = `/noticias?idvecino=${idvecino}`;
       });
       
 
