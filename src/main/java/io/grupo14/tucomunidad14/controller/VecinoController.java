@@ -264,7 +264,8 @@ public class VecinoController {
         if (gestor != null & vecino != null & gestor.getGestor()) {
             vecino.setGestor(true);
             vecinoRepository.save(vecino);
-            return ResponseEntity.ok("Permisos otorgados");
+            VecinoDTO vecinofin = convertToDto(vecino);
+            return ResponseEntity.ok(vecinofin);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ha habido algun problema");
         }

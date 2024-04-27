@@ -137,7 +137,7 @@
                     <span>${vecino.nombre}</span> <!-- Nombre y Apellido del vecino -->
                   </div>
                   <div class="reservar">
-                    <button class="btn-otorgar" onclick="otorgarPermisos()">Otorgar permisos</button> <!-- Botón otorgar permisos -->
+                    <button class="btn-otorgar" onclick="otorgarPermisos(${idVecino}, ${vecino.idvecino})">Otorgar permisos</button> <!-- Botón otorgar permisos -->
                     <button class="btn-eliminar" onclick="eliminar()">Eliminar</button> <!-- Botón eliminar -->
                   </div>
                 </div>`;
@@ -168,9 +168,28 @@
       }
     });
 
-    function otorgarPermisos() {
-      alert("Permisos otorgados");
-      // Aquí puedes agregar la lógica para otorgar permisos
+    function otorgarPermisos(idGestor, idVecino) {
+      // Realizar la solicitud POST al endpoint /otorgarpermisos con los IDs correspondientes
+      fetch('http://localhost:8080/otorgarpermisos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `idgestor=${idGestor}&idvecino=${idVecino}`
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('No se pudo otorgar permisos');
+        }
+        return response.json();
+      })
+      .then(data => {
+        alert(data); // Muestra el mensaje de éxito
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Error al otorgar permisos');
+      });
     }
 
     function eliminar() {
