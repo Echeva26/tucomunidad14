@@ -111,33 +111,75 @@
       function renderizarNoticias(noticias) {
         var noticiasContainer = document.getElementById('noticias-container');
         noticiasContainer.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevas noticias
-        
+      
         // Verificar si noticias es un array
         if (Array.isArray(noticias)) {
           noticias.forEach(noticia => {
-            var elementoNoticia = `
-              <div class="elemento">
-                <div class="borde-azul"></div>
-                <img class="imagen" src="${noticia.foto ? noticia.foto : '../static/vectors/twitter.svg'}"  />
-                <div class="contenido">
-                  <h2 class="titulo">
-                    <a href="#">${noticia.titulo}</a>
-                  </h2>
-                  <p class="descripcion">
-                    ${noticia.descripcion}
-                  </p>
-                  <div class="leer-mas">
-                    <a href="#" class="reservar-1">Leer más</a>
+            if (noticia.foto) {
+              // Convertir la imagen base64 a JPEG
+              const base64String = noticia.foto.split(',')[1];
+              base64ToJPEG(base64String, function (jpegDataURL) {
+                // Crear el elemento de noticia con la imagen convertida a JPEG
+                var elementoNoticia = `
+                  <div class="elemento">
+                    <div class="borde-azul"></div>
+                    <img class="imagen" src="${jpegDataURL}" alt="${noticia.titulo}" />
+                    <div class="contenido">
+                      <h2 class="titulo">
+                        <a href="#">${noticia.titulo}</a>
+                      </h2>
+                      <p class="descripcion">
+                        ${noticia.descripcion}
+                      </p>
+                      <div class="leer-mas">
+                        <a href="#" class="reservar-1">Leer más</a>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            `;
-            noticiasContainer.innerHTML += elementoNoticia;
+                `;
+                noticiasContainer.innerHTML += elementoNoticia;
+              });
+            }
           });
         } else {
           console.error('Error: La respuesta no es un array de noticias');
         }
       }
+      
+      function base64ToJPEG(base64String, callback) {
+        // Convertir la cadena base64 en un array de bytes
+        const byteCharacters = atob(base64String);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+      
+        // Crear un objeto Blob con los bytes de la imagen
+        const blob = new Blob([byteArray], { type: 'image/jpeg' });
+      
+        // Crear un objeto FileReader para leer el Blob
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+      
+        // Utilizar el FileReader para convertir el Blob en un objeto Image
+        reader.onloadend = function () {
+          const img = new Image();
+          img.src = reader.result;
+      
+          // Utilizar un elemento canvas para convertir la imagen en formato JPEG
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          const jpegDataURL = canvas.toDataURL('image/jpeg');
+      
+          // Llamar a la función de devolución de llamada con la URL de la imagen JPEG
+          callback(jpegDataURL);
+        };
+      }
+      
   
       // Esta función carga las noticias de la comunidad del usuario logueado
       function cargarNoticias() {
