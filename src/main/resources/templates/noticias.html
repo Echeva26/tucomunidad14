@@ -29,7 +29,7 @@
         TuComunidad
       </div>
       <p class="home">
-        <a href="/comunidad" style="text-decoration: none;">
+        <a href="/menucomunidad" style="text-decoration: none;">
           <span class="home-sub-30">Home</span>
           <span></span>
         </a>
@@ -100,111 +100,106 @@
     </span>
   </div>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Función para obtener parámetros de la URL
+    document.addEventListener("DOMContentLoaded", function() {
+      // Esta función obtiene parámetros de la URL
       function getQueryParam(param) {
         var searchParams = new URLSearchParams(window.location.search);
         return searchParams.get(param);
       }
-
+  
       // Función para renderizar las noticias en el HTML
       function renderizarNoticias(noticias) {
         var noticiasContainer = document.getElementById('noticias-container');
         noticiasContainer.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevas noticias
         
-        noticias.forEach(noticia => {
-          var elementoNoticia = `
-            <div class="elemento">
-              <div class="borde-azul"></div>
-              <img class="imagen" src="${noticia.foto ? noticia.foto : '../static/vectors/twitter.svg'}" alt="${noticia.titulo}" />
-              <div class="contenido">
-                <h2 class="titulo">
-                  <a href="#">${noticia.titulo}</a>
-                </h2>
-                <p class="descripcion">
-                  ${noticia.descripcion}
-                </p>
-                <div class="leer-mas">
-                  <a href="#" class="reservar-1">Leer más</a>
+        // Verificar si noticias es un array
+        if (Array.isArray(noticias)) {
+          noticias.forEach(noticia => {
+            var elementoNoticia = `
+              <div class="elemento">
+                <div class="borde-azul"></div>
+                <img class="imagen" src="${noticia.foto ? noticia.foto : '../static/vectors/twitter.svg'}" alt="${noticia.titulo}" />
+                <div class="contenido">
+                  <h2 class="titulo">
+                    <a href="#">${noticia.titulo}</a>
+                  </h2>
+                  <p class="descripcion">
+                    ${noticia.descripcion}
+                  </p>
+                  <div class="leer-mas">
+                    <a href="#" class="reservar-1">Leer más</a>
+                  </div>
                 </div>
               </div>
-            </div>
-          `;
-          noticiasContainer.innerHTML += elementoNoticia;
-        });
-      }
-
-      // Cargar datos de la comunidad al cargar la página
-      window.onload = function () {
-        var idvecino = getQueryParam('idvecino'); // Obtiene el ID de la URL
-        if (idvecino) {
-          fetch(`http://localhost:8080/vecinoporid?idvecino=${idvecino}`)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('No se pudo obtener la información del vecino');
-              }
-              return response.json();
-            })
-            .then(data => {
-              var gestor = data.gestor; // Obtener el parámetro gestor
-              var usuarioDiv = document.querySelector('.usuario'); // Selección del div de usuario
-              if (gestor) {
-                usuarioDiv.textContent = 'Gestor de comunidad'; // Cambiar el texto a "Gestor"
-                document.getElementById('gestion-roles').style.display = 'block'; // Mostrar el elemento de gestión de roles
-              } else {
-                usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
-              }
-              fetch(`http://localhost:8080/vecino/comunidad?idVecino=${idvecino}`)
-                .then(response => {
-                  if (!response.ok) {
-                    throw new Error('No se pudo obtener la información de la comunidad');
-                  }
-                  return response.json();
-                })
-                .then(data => {
-                  var nombreComunidad = data.nombre; // Obtener el nombre de la comunidad
-                  var idcomunidad = data.idcomunidad;
-                  fetch(`/obtenerinfoporcomunidad?idcomunidad=${idcomunidad}`)
-                    .then(response => {
-                      if (!response.ok) {
-                        throw new Error('No se pudieron obtener las noticias de la comunidad');
-                      }
-                      return response.json();
-                    })
-                    .then(data => {
-                      // Renderizar las noticias
-                      renderizarNoticias(data);
-                    })
-                    .catch(error => {
-                      console.error('Error al obtener noticias:', error);
-                    });
-                    
-                  // Cambiar el texto en el título
-                })
-                .catch(error => {
-                  console.error('Error:', error);
-                });
-            })
-            .catch(error => {
-              console.error('Error:', error);
-            });
+            `;
+            noticiasContainer.innerHTML += elementoNoticia;
+          });
+        } else {
+          console.error('Error: La respuesta no es un array de noticias');
         }
-      };
-
-
-
-      // Obtener el ID del vecino de la URL
-      var idvecino = getQueryParam('idvecino');
-      //BOTON añadir noticia
-      var anadirnoticia = document.getElementById('anadir-noticia');
-      // Agregar un evento de clic al contenedor de gestión de roles
-      anadirnoticia.addEventListener('click', function () {
-
-        // Redireccionar a la página "gestionroles"
-        window.location.href = `/anadirnoticia?idvecino=${idvecino}`;
-      });
+      }
+  
+      // Esta función carga las noticias de la comunidad del usuario logueado
+      function cargarNoticias() {
+        var idVecino = getQueryParam('idvecino'); // Obtiene el ID del vecino de la URL
+        if (!idVecino) {
+          console.error('ID de vecino no proporcionado');
+          return;
+        }
+  
+        fetch(`http://localhost:8080/vecinoporid?idvecino=${idVecino}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('No se pudo obtener la información del vecino');
+            }
+            return response.json();
+          })
+          .then(data => {
+            var gestor = data.gestor; // Obtener el parámetro gestor
+            var usuarioDiv = document.querySelector('.usuario'); // Selección del div de usuario
+            if (gestor) {
+              usuarioDiv.textContent = 'Gestor de comunidad'; // Cambiar el texto a "Gestor"
+            } else {
+              usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
+            }
+          })
+          .catch(error => console.error('Error al obtener información del vecino:', error));
+  
+        // Obtener la comunidad del vecino
+        fetch(`http://localhost:8080/vecino/comunidad?idVecino=${idVecino}`)
+          .then(response => response.json())
+          .then(data => {
+            // Asumiendo que el endpoint devuelve un objeto con idComunidad
+            var idcomunidad = data.idcomunidad;
+            // Obtener noticias por comunidad
+            fetch(`/obtenerinfoporcomunidad?idcomunidad=${idcomunidad}`)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('Error al obtener las noticias de la comunidad');
+                }
+                return response.json();
+              })
+              .then(noticias => {
+                // Verificar si noticias es un array
+                if (Array.isArray(noticias)) {
+                  // Renderizar las noticias
+                  renderizarNoticias(noticias);
+                } else {
+                  console.error('Error: La respuesta no es un array de noticias');
+                }
+              })
+              .catch(error => console.error('Error al obtener noticias:', error));
+          })
+          .catch(error => console.error('Error al obtener datos de la comunidad:', error));
+      }
+  
+      // Llama a cargarNoticias cuando la página carga
+      cargarNoticias();
     });
   </script>
+  
+
+  
 </body>
 
 </html>
