@@ -70,18 +70,9 @@
 
   <script>
     window.onload = function () {
-      // Función para obtener parámetros de la URL
-      function getQueryParam(param) {
-        var searchParams = new URLSearchParams(window.location.search);
-        return searchParams.get(param);
-      }
-
-      // Obtener ID de la comunidad de la URL
-      var idComunidad = getQueryParam('idcomunidad');
-
       // Función para obtener noticias por comunidad
-      function obtenerNoticiasPorComunidad() {
-        fetch(`/obtenerinfoporcomunidad?idcomunidad=${idComunidad}`)
+      function obtenerNoticiasPorComunidad(idcomunidad) {
+        fetch(`/obtenerinfoporcomunidad?idcomunidad=${idcomunidad}`)
           .then(response => {
             if (!response.ok) {
               throw new Error('No se pudieron obtener las noticias de la comunidad');
@@ -104,7 +95,7 @@
           var elementoNoticia = `
             <div class="elemento">
               <div class="borde-azul"></div>
-              <img class="imagen" src="${noticia.foto}" alt="${noticia.titulo}" />
+              <img class="imagen" src="${noticia.foto ? noticia.foto : 'placeholder.jpg'}" alt="${noticia.titulo}" />
               <div class="contenido">
                 <h2 class="titulo">
                   <a href="#">${noticia.titulo}</a>
@@ -122,7 +113,13 @@
         });
       }
 
-      obtenerNoticiasPorComunidad();
+      // Obtener ID de la comunidad de la URL
+      var idComunidad = new URLSearchParams(window.location.search).get('idcomunidad');
+      if (idComunidad) {
+        obtenerNoticiasPorComunidad(idComunidad);
+      } else {
+        console.error('No se proporcionó el ID de la comunidad');
+      }
     };
   </script>
 </body>
