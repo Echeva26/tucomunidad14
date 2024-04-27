@@ -1,7 +1,5 @@
 package io.grupo14.tucomunidad14.model;
 
-
-
 public class VecinoDTO {
 
     private Long idvecino; // Usado para actualización, puede ser null para creación
@@ -14,7 +12,8 @@ public class VecinoDTO {
     private Long idComunidad; // Este es el ID de la comunidad asociada
 
     // Constructor sin argumentos
-    public VecinoDTO() {}
+    public VecinoDTO() {
+    }
 
     // Getters y setters
     public Long getIdvecino() {

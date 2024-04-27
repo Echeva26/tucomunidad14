@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 @RestController
 public class InformacionController {
 
@@ -113,6 +112,7 @@ public class InformacionController {
 
         return infoDTOdownloads;
     }
+
     @GetMapping("/obtenerinfoporvecino")
     public ResponseEntity<?> obteInformacionporvecino(@RequestParam Long idvecino) {
         Vecino vecino = vecinoRepository.findById(idvecino).get();
@@ -206,7 +206,6 @@ public class InformacionController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Información no encontrada con el ID: " + idInformacion);
         }
-        
 
         Informacion informacion = informacionOpt.get();
 

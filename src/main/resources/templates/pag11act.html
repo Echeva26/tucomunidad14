@@ -63,7 +63,7 @@
           <img class="icono" src="../static/vectors/zonas.svg" />
         </div>
         <div class="titulo">
-          <a href="noticias.html">Noticias</a>
+          <a href="/noticias?idcomunidad=<%= idcomunidad %>">Noticias</a>
         </div>
         <div class="reservar" id="acceder-noticias">
           <span class="reservar-1">
@@ -157,10 +157,13 @@
                 })
                 .then(data => {
                   var nombreComunidad = data.nombre; // Obtener el nombre de la comunidad
+                  var idcomunidad= data.idcomunidad;
                   var reservaDeZonas = document.querySelector('.reserva-de-zonas'); // Selección del span de reserva de zonas
                   var titleTag = document.querySelector('title'); // Selección del tag de título
                   reservaDeZonas.textContent = `Comunidad ${nombreComunidad}`; // Cambiar el texto en el span
                   titleTag.textContent = `Comunidad ${nombreComunidad}`; // Cambiar el texto en el título
+                  var noticiasLink = document.querySelector('.elemento:nth-child(2) a'); // Obtener el enlace de noticias
+                  noticiasLink.href = `/noticias?idcomunidad=${idcomunidad}?idvecino=${idvecino}`;
                 })
                 .catch(error => {
                   console.error('Error:', error);
@@ -174,6 +177,7 @@
   
       // Obtener el ID del vecino de la URL
       var idvecino = getQueryParam('idvecino');
+      
   
       // ACCEDER RESERVA DE ZONAS Obtener el contenedor de reserva de zonas
       var reservaDeZonas = document.querySelector('.elemento:nth-child(1)');
@@ -188,8 +192,8 @@
       var noticias = document.getElementById('acceder-noticias');
       // Agregar un evento de clic al contenedor de noticias
       noticias.addEventListener('click', function () {
-
-        window.location.href = `/noticias`;
+        // Redireccionar a la página de noticias con el ID de la comunidad como parámetro
+        window.location.href = `/noticias?idcomunidad=${idcomunidad}`;
       });
       
 

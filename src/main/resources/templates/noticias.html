@@ -6,7 +6,6 @@
   <title>Comunidad Etsit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="../static/css/ejemplo.css" />
-
 </head>
 
 <body>
@@ -18,43 +17,6 @@
         <input type="text" id="searchInput" placeholder="Buscar noticias...">
         <button onclick="searchNews()">Buscar</button>
       </div>
-      
-      <style>
-        .search-bar {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-top: 20px;
-        }
-      
-        #searchInput {
-          padding: 10px;
-          border-radius: 5px 0 0 5px;
-          border: 1px solid #ccc;
-          width: 300px;
-          font-size: 16px;
-        }
-      
-        #searchInput:focus {
-          outline: none;
-          border-color: #66afe9;
-        }
-      
-        button {
-          padding: 10px 20px;
-          border: none;
-          background-color: #007bff;
-          color: white;
-          border-radius: 0 5px 5px 0;
-          cursor: pointer;
-          font-size: 16px;
-        }
-      
-        button:hover {
-          background-color: #0056b3;
-        }
-      </style>
-      
     </span>
     <div class="container">
       <div class="tu-comunidad">
@@ -78,88 +40,7 @@
   </div>
 
   <div class="pagina">
-    <div class="container-6">
-    
-      
-
-      <!-- RESERVA DE ZONAS -->
-      <div class="elemento">
-        <div class="borde-azul"></div>
-          <img class="imagen" src="../static/images/garaje2.jpg" alt="Imagen de garaje" />
-        <div class="contenido">
-          <h2 class="titulo">
-            <a href="noticia1.html">Limpieza de garaje 5 y 6 de mayo</a>
-          </h2>
-          <p class="descripcion">
-            Limpieza programada para los días 5 y 6 de mayo en los garajes de la comunidad.
-          </p>
-          <div class="leer-mas">
-            <a href="noticia1.html" class="reservar-1">Leer más</a>
-            
-          </div>
-        </div>
-      </div>
-      
-
-      <div class="elemento">
-        <div class="borde-azul"></div>
-       
-          
-          <img class="imagen" src="../static/images/mochila.avif" alt="Ícono de noticia" />
-       
-        <div class="contenido">
-          <h2 class="titulo">
-            <a href="noticia2.html">Mochila perdida</a>
-          </h2>
-          <p class="descripcion">
-            Se ha encontrado una mochila en el portal principal. Si es tuya, por favor, reclámala en la oficina del administrador.
-          </p>
-          <div class="leer-mas">
-            <a href="noticia2.html" class="reservar-1">Leer más</a>
-          </div>
-        </div>
-      </div>
-      
-
-      <div class="elemento">
-        <div class="borde-azul"></div>
-       
-          <img class="imagen" src="../static/images/bicicleta.jpg" alt="Ícono de noticia" />
-      
-        <div class="contenido">
-          <h2 class="titulo">
-            <a href="noticia3.html">Cambio de llaves puerta de bicicletas</a>
-          </h2>
-          <p class="descripcion">
-            Se ha cambiado la cerradura de la puerta del cuarto de bicicletas. Recoge tu nueva llave en la oficina del administrador.
-          </p>
-          <div class="leer-mas">
-            <a href="noticia3.html" class="reservar-1">Leer más</a>
-          </div>
-        </div>
-      </div>
-      
-
-      <div class="elemento">
-        <div class="borde-azul"></div>
-       
-          <img class="imagen" src="../static/images/puerta.jpg" alt="Ícono de noticia" />
-       
-        <div class="contenido">
-          <h2 class="titulo">
-            <a href="noticia4.html">Puerta del portal D arreglada</a>
-          </h2>
-          <p class="descripcion">
-            La puerta del portal D ha sido arreglada y ya funciona correctamente. Disculpen las molestias.
-          </p>
-          <div class="leer-mas">
-            <a href="noticia4.html" class="reservar-1">Leer más</a>
-          </div>
-        </div>
-      </div>
-      
-
-    </div>
+    <div class="container-6" id="noticias-container"></div>
   </div>
 
   <!-- PIE DE PAGINA -->
@@ -186,6 +67,64 @@
       ©TuComunidad 2024
     </span>
   </div>
+
+  <script>
+    window.onload = function () {
+      // Función para obtener parámetros de la URL
+      function getQueryParam(param) {
+        var searchParams = new URLSearchParams(window.location.search);
+        return searchParams.get(param);
+      }
+
+      // Obtener ID de la comunidad de la URL
+      var idComunidad = getQueryParam('idcomunidad');
+
+      // Función para obtener noticias por comunidad
+      function obtenerNoticiasPorComunidad() {
+        fetch(`/obtenerinfoporcomunidad?idcomunidad=${idComunidad}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('No se pudieron obtener las noticias de la comunidad');
+            }
+            return response.json();
+          })
+          .then(data => {
+            // Renderizar las noticias
+            renderizarNoticias(data);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      }
+
+      // Función para renderizar las noticias en el HTML
+      function renderizarNoticias(noticias) {
+        var noticiasContainer = document.getElementById('noticias-container');
+        noticias.forEach(noticia => {
+          var elementoNoticia = `
+            <div class="elemento">
+              <div class="borde-azul"></div>
+              <img class="imagen" src="${noticia.foto}" alt="${noticia.titulo}" />
+              <div class="contenido">
+                <h2 class="titulo">
+                  <a href="#">${noticia.titulo}</a>
+                </h2>
+                <p class="descripcion">
+                  ${noticia.descripcion}
+                </p>
+                <div class="leer-mas">
+                  <a href="#" class="reservar-1">Leer más</a>
+                </div>
+              </div>
+            </div>
+          `;
+          noticiasContainer.innerHTML += elementoNoticia;
+        });
+      }
+
+      obtenerNoticiasPorComunidad();
+    };
+  </script>
 </body>
 
 </html>

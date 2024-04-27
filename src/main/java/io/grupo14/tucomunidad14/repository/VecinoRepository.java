@@ -23,6 +23,8 @@ public interface VecinoRepository extends CrudRepository<Vecino,Long> {
     @Modifying
     @Query("UPDATE Vecino v SET v.contraseña = :contraseña WHERE v.nombredeusuario = :nombredeusuario")
     int updateContraseñaByNombredeusuario(String contraseña, String nombredeusuario);
+
+    
 }
 
 
