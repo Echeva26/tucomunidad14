@@ -5,6 +5,12 @@ body {
   background: #E9FBF8;
 }
 
+/* Agregar efecto de presionar el botón */
+.boton-cancelar.pressed {
+  transform: translateY(2px);
+}
+
+
 /* Agregar estilos para los cuadrados de reserva */
 .columnas-horas {
   display: grid;

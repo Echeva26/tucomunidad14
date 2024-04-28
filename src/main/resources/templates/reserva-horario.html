@@ -6,6 +6,12 @@
   <title>Selección de horario</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" th:href="@{/static/css/reserva-padel.css}" />
+  <style>
+    /* Agregar efecto de presionar el botón */
+    .boton-cancelar.pressed {
+      transform: translateY(2px);
+    }
+  </style>
 </head>
 
 <body>
@@ -65,7 +71,7 @@
     <div class="container-botones">
 
       <!-- BOTÓN CANCELAR RESERVA -->
-      <div class="boton-cancelar">
+      <div class="boton-cancelar" onclick="cancelarReserva()">
         <span class="texto-boton">Cancelar reserva</span>
       </div>
 
@@ -132,6 +138,34 @@
       var regex = new RegExp('[\\?&]' + nombre + '=([^&#]*)');
       var resultados = regex.exec(location.search);
       return resultados === null ? '' : decodeURIComponent(resultados[1].replace(/\+/g, ' '));
+    }
+
+    // Función para cancelar una reserva y redirigir a la misma página
+    function cancelarReserva() {
+      var vecinoId = obtenerParametroURL("idvecino");
+      var areaId = obtenerParametroURL("idarea");
+
+      // Agregar animación de presionar el botón
+      var botonCancelar = document.querySelector(".boton-cancelar");
+      botonCancelar.classList.add("pressed");
+
+      fetch(`/reservas/eliminarPorVecino/${vecinoId}`, {
+          method: 'DELETE'
+        })
+        .then(response => {
+          // Remover animación después de un breve retraso
+          setTimeout(function() {
+            botonCancelar.classList.remove("pressed");
+            // Redirigir a la misma página con los parámetros idvecino e idarea
+            window.location.href = `/reserva-horario?idvecino=${vecinoId}&idarea=${areaId}`;
+          }, 300); // 300 milisegundos (ajusta según sea necesario)
+          return response.text();
+        })
+        .then(message => {
+          alert(message);
+          // Aquí puedes añadir lógica adicional después de eliminar la reserva, como actualizar la visualización de las reservas
+        })
+        .catch(error => console.error('Error al cancelar la reserva:', error));
     }
   </script>
 

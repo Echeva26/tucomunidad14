@@ -112,11 +112,11 @@ public class ReservasController {
         // Encuentra y elimina las reservas asociadas al vecino
         List<Reserva> reservas = reservasRepository.findByVecinoId(vecinoId);
         if (reservas.isEmpty()) {
-            return "No se encontraron reservas para el vecino con ID " + vecinoId;
+            return "No tienes ninguna reserva activa";
         }
 
         reservasRepository.deleteAll(reservas);
-        return "Reservas eliminadas correctamente para el vecino con ID " + vecinoId;
+        return "Has cancelado correctamente tu reserva ";
     }
 
     @GetMapping("/reservas/porAreaComun2/{areaComunId}")
