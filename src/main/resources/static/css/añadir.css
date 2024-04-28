@@ -246,7 +246,7 @@ body {
   margin-bottom: 70px; /* Ajusta el espacio entre el texto y los botones "Leer más" */
 }
 
-#drop-area {
+#cuadradoimagen {
   border: 2px dashed #ccc;
   border-radius: 20px;
   position: relative;

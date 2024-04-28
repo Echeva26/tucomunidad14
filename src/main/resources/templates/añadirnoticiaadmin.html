@@ -7,12 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="../static/css/añadir.css" />
   <style>
-    .titulo {
-      font-size: xx-large;
-      font-weight: bold;
-      pointer-events: none;
-    }
-
+ 
     .descripcion {
       font-size: 14px;
       color: #333;
@@ -101,13 +96,14 @@
       <!-- FORMULARIO -->
       <form id="infoForm" action="/crearinformacion" method="post" enctype="multipart/form-data">
         <div class="elemento">
-          <div class="drop-area" id="drop-area">
-            <img id="image-preview" src="../static/vectors/noticia1.svg" alt="Vista previa de la imagen" />
+          <div class="cuadradoimagen" id="cuadradoimagen">
+           
           </div>
+          <input type="file" name="file" id="imagen">
 
           <div class="contenido">
-            <div class="titulo" contenteditable="true">
-              <input type="text" id="titulo" name="titulo" placeholder="Título" required>
+            <div class="titulo">
+              <input type="text" id="titulonoticia" name="titulonoticia" placeholder="Título">
             </div>
             <div class="descripcion descripcion-editable" contenteditable="true">
               <textarea id="descripcion" name="descripcion" placeholder="Descripción"></textarea>
@@ -117,9 +113,7 @@
             </div>
             <input type="file" id="imagen" name="imagen" style="display: none;" accept="image/*">
 
-            <!-- Campos ocultos -->
-            <input type="hidden" id="idcomunidad" name="idcomunidad" value="1"> <!-- Supongamos que la comunidad tiene ID 1 -->
-            <input type="hidden" id="idvecino" name="idvecino" value="1"> <!-- Supongamos que el vecino gestor tiene ID 1 -->
+            
 
             <div class="contenedor-botones">
               <button type="button" class="eliminar">Cancelar</button>
@@ -169,20 +163,7 @@
     const idcomunidadInput = document.getElementById('idcomunidad');
     const idvecinoInput = document.getElementById('idvecino');
 
-    dropArea.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      dropArea.classList.add('active');
-    });
-
-    dropArea.addEventListener('dragleave', () => {
-      dropArea.classList.remove('active');
-    });
-
-    dropArea.addEventListener('drop', (e) => {
-      e.preventDefault();
-      const file = e.dataTransfer.files[0];
-      showImage(file);
-    });
+  
 
     imagenInput.addEventListener('change', () => {
       const file = imagenInput.files[0];
