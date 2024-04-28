@@ -8,38 +8,38 @@
   <link rel="stylesheet" href="../static/css/añadir.css" />
   <style>
     .titulo {
-      font-size: xx-large; /* Tamaño de letra más grande para el título de la noticia */
-      font-weight: bold; /* Texto en negrita */
-      pointer-events: none; /* Hacer que el título no sea clicable */
+      font-size: xx-large;
+      font-weight: bold;
+      pointer-events: none;
     }
 
     .descripcion {
-      font-size: 14px; /* Tamaño de letra para la descripción de la noticia */
-      color: #333; /* Color de letra para la descripción */
+      font-size: 14px;
+      color: #333;
     }
 
     .elemento {
-      width: 90%; /* Anchura de la caja de la noticia */
-      margin: 0 auto; /* Centrar la caja horizontalmente */
-      padding: 30px; /* Espaciado interior de la caja */
-      background-color: #f7f7f7; /* Color de fondo de la caja */
-      border: 2px solid #ccc; /* Borde de la caja */
-      border-radius: 20px; /* Borde redondeado */
-      margin-top: 50px; /* Espaciado superior */
-      height: auto; /* Altura automática */
-      text-align: center; /* Centrar el contenido dentro de la caja */
-      position: relative; /* Permitir posicionar la imagen */
+      width: 90%;
+      margin: 0 auto;
+      padding: 30px;
+      background-color: #f7f7f7;
+      border: 2px solid #ccc;
+      border-radius: 20px;
+      margin-top: 50px;
+      height: auto;
+      text-align: center;
+      position: relative;
     }
 
     .imagen {
-      width: 100%; /* Ancho completo */
-      height: auto; /* Altura automática para mantener la proporción */
-      border-top-left-radius: 20px; /* Esquina redondeada superior izquierda */
-      border-top-right-radius: 20px; /* Esquina redondeada superior derecha */
+      width: 100%;
+      height: auto;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
     }
 
     .contenido {
-      margin-top: 20px; /* Espaciado superior */
+      margin-top: 20px;
     }
 
     .editar,
@@ -50,18 +50,15 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      margin-top: 10px; /* Espaciado superior */
-      display: block; /* Para que los botones estén en línea */
-      margin: 10px auto; /* Centrar los botones horizontalmente */
-      margin-bottom: 5px; /* Reducir el margen inferior de los botones si es necesario */
-
-      
+      margin-top: 10px;
+      display: block;
+      margin: 10px auto;
+      margin-bottom: 5px;
     }
 
     .eliminar {
       background-color: red;
-      margin-bottom: 5px; /* Reducir el margen inferior de los botones si es necesario */
-
+      margin-bottom: 5px;
     }
 
     .descripcion-editable {
@@ -70,53 +67,6 @@
       margin-top: 10px;
     }
   </style>
-
-<script>
-  const dropArea = document.getElementById('drop-area');
-const imagePreview = document.getElementById('image-preview');
-
-dropArea.addEventListener('dragover', (e) => {
-  e.preventDefault(); // Evita que se abra la imagen en otra página
-  dropArea.classList.add('active');
-});
-
-dropArea.addEventListener('dragleave', () => {
-  dropArea.classList.remove('active');
-});
-
-dropArea.addEventListener('drop', (e) => {s
-  e.preventDefault();
-  const files = e.dataTransfer.files;
-  if (files.length) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      imagePreview.src = e.target.result;
-      imagePreview.style.display = 'block';
-    };
-    reader.readAsDataURL(files[0]);
-  }
-  dropArea.classList.remove('active');
-});
-
-dropArea.addEventListener('click', () => {
-  const fileInput = document.createElement('input');
-  fileInput.type = 'file';
-  fileInput.accept = 'image/*';
-  fileInput.onchange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      imagePreview.src = e.target.result;
-      imagePreview.style.display = 'block';
-    };
-    reader.readAsDataURL(file);
-  };
-  fileInput.click();
-});
-
-</script>
-
-
 </head>
 
 <body>
@@ -124,7 +74,6 @@ dropArea.addEventListener('click', () => {
   <div class="cabecera">
     <span class="reserva-de-zonas">
       Añadir una noticia
-      
     </span>
     <div class="container">
       <div class="tu-comunidad">
@@ -149,27 +98,36 @@ dropArea.addEventListener('click', () => {
 
   <div class="pagina">
     <div class="container-6">
-    
-      <!-- NOTICIA SELECCIONADA -->
-      <div class="elemento">
-        <div class="drop-area" id="drop-area">
-          <img id="image-preview" src="../static/vectors/noticia1.svg" alt="Vista previa de la imagen" />
-        </div>
-        
-        <div class="contenido">
-          <div class=" titulo" contenteditable="true">
-            Click para agregar título
+      <!-- FORMULARIO -->
+      <form id="infoForm" action="/crearinformacion" method="post" enctype="multipart/form-data">
+        <div class="elemento">
+          <div class="drop-area" id="drop-area">
+            <img id="image-preview" src="../static/vectors/noticia1.svg" alt="Vista previa de la imagen" />
           </div>
-          <div class="descripcion descripcion-editable" contenteditable="true">
-            Haz click para agregar una breve descripción y para añadir más información.
-          </div>
-          <div class="contenedor-botones" >
-            <button class="eliminar">Cancelar</button>
-            <button class="editar">Añadir</button>
-          </div>
-        </div>
-      </div>
 
+          <div class="contenido">
+            <div class="titulo" contenteditable="true">
+              <input type="text" id="titulo" name="titulo" placeholder="Título" required>
+            </div>
+            <div class="descripcion descripcion-editable" contenteditable="true">
+              <textarea id="descripcion" name="descripcion" placeholder="Descripción"></textarea>
+            </div>
+            <div class="contenido-completo">
+              <textarea id="textocompleto" name="textocompleto" placeholder="Contenido completo"></textarea>
+            </div>
+            <input type="file" id="imagen" name="imagen" style="display: none;" accept="image/*">
+
+            <!-- Campos ocultos -->
+            <input type="hidden" id="idcomunidad" name="idcomunidad" value="1"> <!-- Supongamos que la comunidad tiene ID 1 -->
+            <input type="hidden" id="idvecino" name="idvecino" value="1"> <!-- Supongamos que el vecino gestor tiene ID 1 -->
+
+            <div class="contenedor-botones">
+              <button type="button" class="eliminar">Cancelar</button>
+              <button type="button" class="editar">Añadir</button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -197,6 +155,94 @@ dropArea.addEventListener('click', () => {
       ©TuComunidad 2024
     </span>
   </div>
+
+  <!-- Scripts JS aquí -->
+  <script>
+    // Script para la vista previa de la imagen
+
+    const dropArea = document.getElementById('drop-area');
+    const imagePreview = document.getElementById('image-preview');
+    const tituloInput = document.getElementById('titulo');
+    const descripcionInput = document.getElementById('descripcion');
+    const textocompletoInput = document.getElementById('textocompleto');
+    const imagenInput = document.getElementById('imagen');
+    const idcomunidadInput = document.getElementById('idcomunidad');
+    const idvecinoInput = document.getElementById('idvecino');
+
+    dropArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropArea.classList.add('active');
+    });
+
+    dropArea.addEventListener('dragleave', () => {
+      dropArea.classList.remove('active');
+    });
+
+    dropArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const file = e.dataTransfer.files[0];
+      showImage(file);
+    });
+
+    imagenInput.addEventListener('change', () => {
+      const file = imagenInput.files[0];
+      showImage(file);
+    });
+
+    function showImage(file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    const cancelButton = document.querySelector('.eliminar');
+    cancelButton.addEventListener('click', () => {
+      // Redireccionar o limpiar campos si es necesario
+      window.location.href = "/comunidad"; // Redireccionar a la página de comunidad
+    });
+
+    // Script para enviar el formulario al controlador
+
+    const addButton = document.querySelector('.editar');
+    addButton.addEventListener('click', async () => {
+      const titulo = tituloInput.value;
+      const descripcion = descripcionInput.value;
+      const textocompleto = textocompletoInput.value;
+      const imagen = imagenInput.files[0];
+      const idcomunidad = idcomunidadInput.value;
+      const idvecino = idvecinoInput.value;
+
+      const formData = new FormData();
+      formData.append('titulo', titulo);
+      formData.append('descripcion', descripcion);
+      formData.append('textocompleto', textocompleto);
+      formData.append('imagen', imagen);
+      formData.append('idcomunidad', idcomunidad);
+      formData.append('idvecino', idvecino);
+
+      try {
+        const response = await fetch('/crearinformacion', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (response.ok) {
+          const message = await response.text();
+          alert(message); // Mostrar mensaje de éxito
+          // Redireccionar o hacer alguna acción adicional si es necesario
+        } else {
+          throw new Error('Error al enviar el formulario');
+        }
+      } catch (error) {
+        console.error(error);
+        alert('Hubo un error al enviar el formulario');
+      }
+    });
+
+  </script>
 </body>
 
 </html>
