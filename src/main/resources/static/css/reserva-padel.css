@@ -6,12 +6,18 @@ body {
 }
 
 /* Agregar estilos para los cuadrados de reserva */
+.columnas-horas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Distribución automática en columnas de al menos 80px de ancho */
+  gap: 5px; /* Espacio entre los elementos */
+}
+
 .cuadrado-reserva {
   border: 1px solid #ccc;
   padding: 5px;
-  width: 80px;
   text-align: center;
 }
+
 
 .reserva-rojo {
   background-color: red;
@@ -21,6 +27,7 @@ body {
   background-color: green;
 }
 
+/* Estilos para la página */
 .pagina {
   background: #E9FBF8;
   display: flex;
@@ -33,22 +40,26 @@ body {
   height: 100vh;
 }
 
+/* Contenedor de los cuadrados de reserva */
 .container-6 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-top: 40px; /* Espacio con la cebecera */
+  justify-content: center;
+  padding-top: 40px; /* Espacio con la cabecera */
 }
 
+/* Contenedor de los botones */
 .container-botones {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-top: 5px; /* Espacio con la cebecera */
+  padding-top: 5px; /* Espacio con la cabecera */
   gap: 50px; /* Espacio entre los elementos */
   margin-right: 50px;
 }
 
+/* Botón Cancelar Reserva */
 .boton-cancelar {
   border-radius: 1000px;
   background: #c52a1f;
@@ -64,6 +75,7 @@ body {
   box-sizing: border-box;
 }
 
+/* Botón Reservar */
 .boton-reservar {
   border-radius: 1000px;
   background: #60E1CB;
@@ -79,6 +91,7 @@ body {
   box-sizing: border-box;
 }
 
+/* Estilos para los botones */
 .texto-boton {
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
@@ -90,8 +103,7 @@ body {
   line-height: 1; /* Centra verticalmente el texto */
 }
 
-
-
+/* Estilos para los elementos */
 .elemento {
   position: relative;
   margin-right: 50px; /* Incrementar el margen derecho para hacer más ancho el elemento */
@@ -108,6 +120,7 @@ body {
   height: 200px; /* Alto mayor */
 }
 
+/* Estilos para el borde azul */
 .borde-azul {
   position: absolute; /* Posicionamiento absoluto */
   top: 0; /* Se coloca en la parte superior de su contenedor */
@@ -119,16 +132,7 @@ body {
   border-top-right-radius: 10px; /* Bordes redondeados */
 }
 
-.local {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 10.8px;
-  box-sizing: border-box;
-  margin-bottom: 20px; /* Espacio entre los elementos */
-  align-self: flex-start; /* Alinea cada elemento al inicio de su propia columna */
-}
-
+/* Estilos para el contenedor del icono */
 .elipse-icono {
   position: absolute; /* Cambiar a posición absoluta */
   bottom: 105px; /* Ajustar la posición vertical */
@@ -137,6 +141,8 @@ body {
   width: 71.1px;
   height: 63.5px;
 }
+
+/* Estilos para el círculo */
 .circulo {
   position: absolute; /* Cambiar a posición absoluta */
   top: 0;
@@ -147,6 +153,7 @@ body {
   border-radius: 50%; /* Para hacerlo circular */
 }
 
+/* Estilos para el icono */
 .icono {
   position: absolute; /* Cambiar a posición absoluta */
   top: 50%;
@@ -154,13 +161,8 @@ body {
   transform: translate(-50%, -50%); /* Centrar vertical y horizontalmente */
   z-index: 2; /* Asegurar que esté por delante del círculo */
 }
-.flecha-reservar {
-    margin-left: 0px; /* Espacio entre el texto y la flecha */
-    width: 30px; /* Ancho mayor de la flecha */
-    height: auto; /* Altura ajustable para mantener la proporción */
-    fill: var(--secondary, #7BC0E3); 
-  }
-  
+
+/* Estilos para el título */
 .titulo {
   position: relative;
   margin: 20px 23px 13px 23px;
@@ -172,6 +174,8 @@ body {
   font-size: 20px;
   color: #292525;
 }
+
+/* Estilos para el texto "Reservar" */
 .reservar-1 {
   margin-right: 9.2px;
   overflow-wrap: break-word;
@@ -181,6 +185,7 @@ body {
   color: var(--secondary, #7BC0E3);
 }
 
+/* Estilos para el contenedor "Reservar" */
 .reservar {
   position: relative;
   margin: 0 23px;
@@ -191,8 +196,7 @@ body {
   box-sizing: border-box;
 }
 
-/* CABECERA */
-
+/* Estilos para la cabecera */
 .reserva-de-zonas {
   position: relative;
   overflow-wrap: break-word;
@@ -201,6 +205,7 @@ body {
   font-size: 32px;
   color: #292525;
 }
+
 .tu-comunidad {
   margin: 1.2px 15.5px 0 0;
   display: inline-block;
@@ -211,6 +216,7 @@ body {
   font-size: 24px;
   color: #000000;
 }
+
 .home {
   margin: 4.7px 0 4.5px 0;
   overflow-wrap: break-word;
@@ -219,6 +225,7 @@ body {
   font-size: 18px;
   color: var(--secondary, #60E1CB);
 }
+
 .home-sub30 {
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
@@ -226,6 +233,7 @@ body {
   line-height: 1.333;
   color: #000000;
 }
+
 .our-works {
   overflow-wrap: break-word;
   font-family: 'Roboto', sans-serif;
@@ -234,6 +242,7 @@ body {
   line-height: 1.5;
   color: #FFFFFF;
 }
+
 .log-out {
   border-radius: 1000px;
   background: #60E1CB;
@@ -247,6 +256,7 @@ body {
   height: fit-content;
   box-sizing: border-box;
 }
+
 .usuario {
   margin: 5.7px 0 3.5px 0;
   display: inline-block;
@@ -256,6 +266,7 @@ body {
   font-size: 18px;
   color: #000000;
 }
+
 .cabecera {
   background: #60E1CB;
   position: fixed;
@@ -268,6 +279,7 @@ body {
   width: 100%; 
   box-sizing: border-box;
 }
+
 .container {
   background: #FFFFFF;
   position: absolute;
@@ -281,28 +293,32 @@ body {
   box-sizing: border-box;
 }
 
-/* PIE DE PÁGINA */
+/* Estilos para el pie de página */
 .image-2 {
   background: url('../images/image2.png') 50% / cover no-repeat;
   width: 110.3px;
   height: 76px;
   margin-bottom: 10px;
 }
+
 .icon-1 {
   margin-bottom: 0.3px;
   width: 29px;
   height: 23px;
 }
+
 .icon-2 {
   margin-top: 0.6px;
   width: 32px;
   height: 23px;
 }
+
 .icon-3 {
   margin-top: 0.6px;
   width: 35px;
   height: 23px;
 }
+
 .container-4 {
   margin: 21px 0 31.5px 500px;
   display: flex;
@@ -318,6 +334,7 @@ body {
   width: 10.4px;
   height: 4.9px;
 }
+
 .idioma {
   margin: 23.3px 0 10.8px 0;
   display: flex;
@@ -333,6 +350,7 @@ body {
   font-size: 19px;
   color: var(--black, #292525);
 }
+
 .container-5 {
   margin: 0 15.7px -20px 0;
   display: flex;
@@ -341,6 +359,7 @@ body {
   width: 975.4px;
   box-sizing: border-box;
 }
+
 .description {
   margin: 0 750px 4px 0;
   display: inline-block;
@@ -351,6 +370,7 @@ body {
   line-height: 2.308;
   color: var(--black, #292525);
 }
+
 .line {
   opacity: 0.6;
   background: #FFFFFF;
@@ -358,6 +378,7 @@ body {
   width: 1010.3px;
   height: 0.5px;
 }
+
 .tucom {
   margin-right: 842.9px;
   overflow-wrap: break-word;
@@ -366,6 +387,8 @@ body {
   font-size: 14px;
   color: var(--black, #292525);
 }
+
+/* Estilos para el pie de página */
 .pie-de-pagina {
   position: fixed;
   bottom: 0;
@@ -379,5 +402,4 @@ body {
   box-sizing: border-box;
   margin: 0;
   margin-top: 0;
-
 }

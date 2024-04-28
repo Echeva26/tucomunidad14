@@ -3,15 +3,15 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title >Reserva pista de padel</title>
+  <title>Selección de horario</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" th:href="@{/static/css/reserva-padel.css}" />
 </head>
 
 <body>
-  <!--CABECERA-->
+  <!-- CABECERA -->
   <div class="cabecera">
-    <span class="reserva-de-zonas" >
+    <span class="reserva-de-zonas">
       Selección de horario
     </span>
     <div class="container">
@@ -35,45 +35,48 @@
     </div>
   </div>
 
-  <!--PAGINA-->
+  <!-- PAGINA -->
   <div class="pagina">
     <div class="container-6">
-      <!--PADEL-->
+      <!-- PADEL -->
       <div class="elemento">
         <div class="borde-azul"></div>
-        <div class="titulo" >Zona Común</div>
+        <div class="titulo">Zona Común</div>
         <!-- Agregar un campo de entrada para seleccionar el día -->
-<div class="container-select-dia">
-  <label for="input-dia">Seleccionar día:</label>
-  <input type="date" id="input-dia" onchange="cargarReservasPorDia()">
-</div>
+        <div class="container-select-dia">
+          <label for="input-dia">Seleccionar día:</label>
+          <input type="date" id="input-dia" onchange="cargarReservasPorDia()">
+        </div>
 
-<!-- Elemento para mostrar el horario de reservas -->
-<div class="horario-reservas">
-  <!-- Generar cuadrados por cada hora desde las 10:00:00 hasta las 22:00:00 -->
-  <div th:each="hora : ${#numbers.sequence(10, 22)}" class="cuadrado-reserva">
-    <span th:text="${hora + ':00:00'}"></span>
-  </div>
-</div>
+        <!-- Elemento para mostrar el horario de reservas -->
+        <div class="horario-reservas">
+          <!-- Generar filas -->
+          <div class="columnas-horas">
+            <!-- Generar cuadrados por cada hora desde las 10:00:00 hasta las 22:00:00 -->
+            <div th:each="hora : ${#numbers.sequence(10, 22)}" class="cuadrado-reserva">
+              <span th:text="${hora + ':00:00'}"></span>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
 
     <div class="container-botones">
 
-      <!--BOTÓN CANCELAR RESERVA-->
+      <!-- BOTÓN CANCELAR RESERVA -->
       <div class="boton-cancelar">
-        <span class="texto-boton" >Cancelar reserva</span>
+        <span class="texto-boton">Cancelar reserva</span>
       </div>
 
-      <!--BOTÓN RESERVAR-->
+      <!-- BOTÓN RESERVAR -->
       <div class="boton-reservar">
-        <span class="texto-boton" >Reservar</span>
+        <span class="texto-boton">Reservar</span>
       </div>
     </div>
   </div>
 
-  <!--PIE DE PAGINA-->
+  <!-- PIE DE PAGINA -->
   <div class="pie-de-pagina">
     <div class="container-5">
       <div class="image-2"></div>
@@ -93,39 +96,47 @@
     <div class="line"></div>
     <span class="tucom">©TuComunidad 2024</span>
   </div>
+
+  <!-- Script para cargar las reservas por día -->
   <script>
     function cargarReservasPorDia() {
-        var fechaSeleccionada = document.getElementById("input-dia").value;
-        var areaComunId = obtenerParametroURL("area");
+      var fechaSeleccionada = document.getElementById("input-dia").value;
+      var areaComunId = obtenerParametroURL("idarea");
 
-        // Realizar la petición al servidor para obtener las reservas para el área común y día especificados
-        fetch(`/reservas/porAreaComunYDia/${areaComunId}?fecha=${fechaSeleccionada}`)
-            .then(response => response.json())
-            .then(reservas => {
-                var cuadrados = document.querySelectorAll(".cuadrado-reserva");
-                cuadrados.forEach(cuadrado => {
-                    var horaReserva = cuadrado.innerText.trim();
-                    var reserva = reservas.find(reserva => reserva.inicioReserva.includes(horaReserva));
+      // Realizar la petición al servidor para obtener las reservas para el área común y día especificados
+      fetch(`/reservasporidarea?idarea=${areaComunId}`)
+        .then(response => response.json())
+        .then(reservas => {
+          var cuadrados = document.querySelectorAll(".cuadrado-reserva");
+          cuadrados.forEach(cuadrado => {
+            var horaReserva = cuadrado.innerText.trim();
+            var horaReservaDate = new Date(fechaSeleccionada + 'T' + horaReserva + ':00');
 
-                    if (reserva) {
-                        if (reserva.idvecino == obtenerParametroURL("vecino")) {
-                            cuadrado.classList.add("reserva-verde");
-                        } else {
-                            cuadrado.classList.add("reserva-rojo");
-                        }
-                    }
-                });
-            })
-            .catch(error => console.error('Error al cargar las reservas:', error));
+            var reserva = reservas.find(reserva => {
+              var inicioReservaDate = new Date(reserva.inicioReserva);
+              var finReservaDate = new Date(reserva.finReserva);
+              return horaReservaDate >= inicioReservaDate && horaReservaDate < finReservaDate;
+            });
+
+            if (reserva) {
+              cuadrado.classList.add("reserva-rojo");
+            }
+          });
+        })
+        .catch(error => console.error('Error al cargar las reservas:', error));
     }
 
     // Función para obtener parámetros de la URL
     function obtenerParametroURL(nombre) {
-        nombre = nombre.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-        var regex = new RegExp('[\\?&]' + nombre + '=([^&#]*)');
-        var resultados = regex.exec(location.search);
-        return resultados === null ? '' : decodeURIComponent(resultados[1].replace(/\+/g, ' '));
+      nombre = nombre.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + nombre + '=([^&#]*)');
+      var resultados = regex.exec(location.search);
+      return resultados === null ? '' : decodeURIComponent(resultados[1].replace(/\+/g, ' '));
     }
+  </script>
+
+  <!-- Script para cambiar el texto del usuario -->
+  <script>
     document.addEventListener("DOMContentLoaded", function () {
       function getQueryParam(param) {
         var searchParams = new URLSearchParams(window.location.search);
@@ -161,19 +172,10 @@
           .catch(error => {
             console.error('Error:', error);
           });
-
-
-
-
       }
-
-
-
     });
-</script>
+  </script>
 
 </body>
-<script src="/js/reservas.js"></script>
-
 
 </html>
