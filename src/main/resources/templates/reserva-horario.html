@@ -6,12 +6,6 @@
   <title>Selección de horario</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" th:href="@{/static/css/reserva-padel.css}" />
-  <style>
-    /* Agregar efecto de presionar el botón */
-    .boton-cancelar.pressed {
-      transform: translateY(2px);
-    }
-  </style>
 </head>
 
 <body>
@@ -106,31 +100,51 @@
   <!-- Script para cargar las reservas por día -->
   <script>
     function cargarReservasPorDia() {
-      var fechaSeleccionada = document.getElementById("input-dia").value;
+      var fechaSeleccionada = new Date(document.getElementById("input-dia").value);
       var areaComunId = obtenerParametroURL("idarea");
+      var vecinoId = obtenerParametroURL("idvecino"); // Obtener el id del vecino de la URL
+
+      // Obtener la fecha seleccionada en forma de timestamp
+      var fechaSeleccionadaTimestamp = fechaSeleccionada.getTime();
 
       // Realizar la petición al servidor para obtener las reservas para el área común y día especificados
       fetch(`/reservasporidarea?idarea=${areaComunId}`)
         .then(response => response.json())
         .then(reservas => {
           var cuadrados = document.querySelectorAll(".cuadrado-reserva");
+
+          // Limpiar las clases de reserva de todos los cuadrados
+          cuadrados.forEach(cuadrado => {
+            cuadrado.classList.remove("reserva-rojo");
+            cuadrado.classList.remove("reserva-verde"); // Limpiar clases de reserva verde 
+          });
+
           cuadrados.forEach(cuadrado => {
             var horaReserva = cuadrado.innerText.trim();
-            var horaReservaDate = new Date(fechaSeleccionada + 'T' + horaReserva + ':00');
 
+            // Obtener la hora de reserva en forma de timestamp
+            var horaReservaTimestamp = new Date(fechaSeleccionada.getFullYear(), fechaSeleccionada.getMonth(), fechaSeleccionada.getDate(), horaReserva.split(":")[0], horaReserva.split(":")[1], horaReserva.split(":")[2]).getTime();
+
+            // Verificar si hay alguna reserva que coincida con la fecha y hora seleccionadas
             var reserva = reservas.find(reserva => {
-              var inicioReservaDate = new Date(reserva.inicioReserva);
-              var finReservaDate = new Date(reserva.finReserva);
-              return horaReservaDate >= inicioReservaDate && horaReservaDate < finReservaDate;
+              var inicioReservaTimestamp = new Date(reserva.inicioReserva).getTime();
+              var finReservaTimestamp = new Date(reserva.finReserva).getTime();
+              return horaReservaTimestamp >= inicioReservaTimestamp && horaReservaTimestamp < finReservaTimestamp;
             });
 
             if (reserva) {
-              cuadrado.classList.add("reserva-rojo");
+              // Verificar si la reserva pertenece al vecino actual
+              if (reserva.idvecino == vecinoId) { // Cambiado a "==" para comparar valores sin tener en cuenta el tipo
+                cuadrado.classList.add("reserva-verde"); // Agregar clase de reserva verde 
+              } else {
+                cuadrado.classList.add("reserva-rojo");
+              }
             }
           });
         })
         .catch(error => console.error('Error al cargar las reservas:', error));
     }
+
 
     // Función para obtener parámetros de la URL
     function obtenerParametroURL(nombre) {
