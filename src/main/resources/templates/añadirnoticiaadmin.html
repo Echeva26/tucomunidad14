@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,7 +7,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="../static/css/añadir.css" />
   <style>
- 
+    .titulo {
+      font-size: xx-large;
+      font-weight: bold;
+    }
+
     .descripcion {
       font-size: 14px;
       color: #333;
@@ -75,7 +79,7 @@
         TuComunidad
       </div>
       <p class="home">
-        <a href="/comunidad" style="text-decoration: none;">
+        <a  style="text-decoration: none;">
           <span class="home-sub-30">Home</span>
           <span></span>
         </a>
@@ -97,24 +101,22 @@
       <form id="infoForm" action="/crearinformacion" method="post" enctype="multipart/form-data">
         <div class="elemento">
           <div class="cuadradoimagen" id="cuadradoimagen">
-           
           </div>
-          <input type="file" name="file" id="imagen">
-
+          <input type="file" name="imagen" id="imagen" accept="image/*" style="display: none;">
+          <label for="imagen" class="añadir">Cargar Imagen</label>
           <div class="contenido">
             <div class="titulo">
-              <input type="text" id="titulonoticia" name="titulonoticia" placeholder="Título">
+              <input type="text" id="titulo" name="titulo" placeholder="Título">
             </div>
-            <div class="descripcion descripcion-editable" contenteditable="true">
+            <div class="descripcion descripcion-editable">
               <textarea id="descripcion" name="descripcion" placeholder="Descripción"></textarea>
             </div>
             <div class="contenido-completo">
               <textarea id="textocompleto" name="textocompleto" placeholder="Contenido completo"></textarea>
             </div>
-            <input type="file" id="imagen" name="imagen" style="display: none;" accept="image/*">
-
-            
-
+            <!-- Inputs ocultos para el ID de la comunidad y el ID del vecino -->
+            <input type="hidden" id="idcomunidad" name="idcomunidad">
+            <input type="hidden" id="idvecino" name="idvecino">
             <div class="contenedor-botones">
               <button type="button" class="eliminar">Cancelar</button>
               <button type="button" class="editar">Añadir</button>
@@ -152,18 +154,30 @@
 
   <!-- Scripts JS aquí -->
   <script>
-    // Script para la vista previa de la imagen
+    // Obtener el ID del vecino de los parámetros de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const idVecino = urlParams.get('idvecino');
 
-    const dropArea = document.getElementById('drop-area');
-    const imagePreview = document.getElementById('image-preview');
-    const tituloInput = document.getElementById('titulo');
-    const descripcionInput = document.getElementById('descripcion');
-    const textocompletoInput = document.getElementById('textocompleto');
+    // Fetch para obtener el ID de la comunidad
+    fetch(`http://localhost:8080/vecino/comunidad?idVecino=${idVecino}`)
+      .then(response => response.json())
+      .then(data => {
+        // Asumiendo que el endpoint devuelve un objeto con idComunidad
+        const idcomunidad = data.idcomunidad;
+
+        // Asignar el ID de la comunidad al input oculto en el formulario
+        document.getElementById('idcomunidad').value = idcomunidad;
+
+        // Asignar el ID del vecino al input oculto en el formulario
+        document.getElementById('idvecino').value = idVecino;
+      })
+      .catch(error => {
+        console.error('Error al obtener el ID de la comunidad:', error);
+      });
+
+    // Vista previa de la imagen
     const imagenInput = document.getElementById('imagen');
-    const idcomunidadInput = document.getElementById('idcomunidad');
-    const idvecinoInput = document.getElementById('idvecino');
-
-  
+    const imagePreview = document.getElementById('cuadradoimagen');
 
     imagenInput.addEventListener('change', () => {
       const file = imagenInput.files[0];
@@ -173,28 +187,29 @@
     function showImage(file) {
       const reader = new FileReader();
       reader.onload = function(e) {
-        imagePreview.src = e.target.result;
-        imagePreview.style.display = 'block';
+        imagePreview.style.backgroundImage = `url(${e.target.result})`;
+        imagePreview.style.backgroundSize = 'cover';
       };
       reader.readAsDataURL(file);
     }
 
+    // Botón cancelar
     const cancelButton = document.querySelector('.eliminar');
     cancelButton.addEventListener('click', () => {
       // Redireccionar o limpiar campos si es necesario
-      window.location.href = "/comunidad"; // Redireccionar a la página de comunidad
+      window.location.href = `/noticias?idvecino=${idVecino}`; // Redireccionar a la página de comunidad
     });
 
-    // Script para enviar el formulario al controlador
 
+    // Enviar formulario al controlador
     const addButton = document.querySelector('.editar');
     addButton.addEventListener('click', async () => {
-      const titulo = tituloInput.value;
-      const descripcion = descripcionInput.value;
-      const textocompleto = textocompletoInput.value;
+      const titulo = document.getElementById('titulo').value;
+      const descripcion = document.getElementById('descripcion').value;
+      const textocompleto = document.getElementById('textocompleto').value;
       const imagen = imagenInput.files[0];
-      const idcomunidad = idcomunidadInput.value;
-      const idvecino = idvecinoInput.value;
+      const idcomunidad = document.getElementById('idcomunidad').value;
+      const idvecino = document.getElementById('idvecino').value;
 
       const formData = new FormData();
       formData.append('titulo', titulo);
@@ -203,6 +218,7 @@
       formData.append('imagen', imagen);
       formData.append('idcomunidad', idcomunidad);
       formData.append('idvecino', idvecino);
+      
 
       try {
         const response = await fetch('/crearinformacion', {
@@ -222,7 +238,6 @@
         alert('Hubo un error al enviar el formulario');
       }
     });
-
   </script>
 </body>
 
