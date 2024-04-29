@@ -106,7 +106,25 @@
         var searchParams = new URLSearchParams(window.location.search);
         return searchParams.get(param);
       }
-  
+
+      // Obtener el ID del vecino de la URL
+      var idvecino = getQueryParam('idvecino');
+
+      // Obtener el enlace "Home"
+      var homeLink = document.querySelector('.home a');
+
+      // Agregar un evento de clic al enlace "Home"
+      homeLink.addEventListener('click', function(event) {
+        // Evitar el comportamiento predeterminado del enlace
+        event.preventDefault();
+        
+        // Construir la URL de destino con el ID del vecino
+        var destinationURL = '/menucomunidad?idvecino=' + idvecino;
+        
+        // Redirigir al usuario a la página de destino
+        window.location.href = destinationURL;
+      });
+
       // Función para renderizar las noticias en el HTML
       function renderizarNoticias(noticias) {
         var noticiasContainer = document.getElementById('noticias-container');
@@ -239,11 +257,11 @@
       cargarNoticias();
 
 
-      // Obtener el ID del vecino de la URL
-      var idvecino = getQueryParam('idvecino');
       //BOTON añadir noticia
       var anadirnoticia = document.getElementById('anadir-noticia');
       // Agregar un evento de clic al contenedor de gestión de roles
+
+      
       anadirnoticia.addEventListener('click', function () {
 
         // Redireccionar a la página "gestionroles"
@@ -251,9 +269,6 @@
       });
     });
   </script>
-  
-
-  
 </body>
 
 </html>
