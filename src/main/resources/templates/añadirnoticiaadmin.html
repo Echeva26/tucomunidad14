@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="../static/css/añadir.css" />
   <style>
- 
     .descripcion {
       font-size: 14px;
       color: #333;
@@ -97,7 +96,7 @@
       <form id="infoForm" action="/crearinformacion" method="post" enctype="multipart/form-data">
         <div class="elemento">
           <div class="cuadradoimagen" id="cuadradoimagen">
-           
+
           </div>
           <input type="file" name="file" id="imagen">
 
@@ -113,7 +112,7 @@
             </div>
             <input type="file" id="imagen" name="imagen" style="display: none;" accept="image/*">
 
-            
+
 
             <div class="contenedor-botones">
               <button type="button" class="eliminar">Cancelar</button>
@@ -163,7 +162,7 @@
     const idcomunidadInput = document.getElementById('idcomunidad');
     const idvecinoInput = document.getElementById('idvecino');
 
-  
+
 
     imagenInput.addEventListener('change', () => {
       const file = imagenInput.files[0];
@@ -172,7 +171,7 @@
 
     function showImage(file) {
       const reader = new FileReader();
-      reader.onload = function(e) {
+      reader.onload = function (e) {
         imagePreview.src = e.target.result;
         imagePreview.style.display = 'block';
       };
@@ -222,6 +221,28 @@
         alert('Hubo un error al enviar el formulario');
       }
     });
+
+    // Función para obtener el valor de un parámetro de la URL por su nombre
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // Obtener el valor de idvecino de la URL
+    const idvecino = getParameterByName('idvecino');
+
+    // Redireccionar al pulsar el botón home
+    const homeLink = document.querySelector('.home a');
+    homeLink.addEventListener('click', (event) => {
+      event.preventDefault(); // Prevenir la acción por defecto del enlace
+      window.location.href = `/menucomunidad?idvecino=${idvecino}`;
+    });
+
 
   </script>
 </body>
