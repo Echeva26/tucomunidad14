@@ -96,7 +96,7 @@
         var searchParams = new URLSearchParams(window.location.search);
         return searchParams.get(param);
       }
-
+  
       // Función para renderizar las noticias en el HTML
       function renderizarNoticias(noticias) {
         var noticiasContainer = document.getElementById('noticias-container');
@@ -229,11 +229,11 @@
       cargarNoticias();
 
 
-      // Obtener el ID del vecino de la URL
-      var idvecino = getQueryParam('idvecino');
       //BOTON añadir noticia
       var anadirnoticia = document.getElementById('anadir-noticia');
       // Agregar un evento de clic al contenedor de gestión de roles
+
+      
       anadirnoticia.addEventListener('click', function () {
 
         // Redireccionar a la página "gestionroles"

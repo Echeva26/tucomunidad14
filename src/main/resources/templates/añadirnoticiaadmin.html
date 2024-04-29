@@ -7,11 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="../static/css/añadir.css" />
   <style>
-    .titulo {
-      font-size: xx-large;
-      font-weight: bold;
-    }
-
+ 
     .descripcion {
       font-size: 14px;
       color: #333;
@@ -101,6 +97,7 @@
       <form id="infoForm" action="/crearinformacion" method="post" enctype="multipart/form-data">
         <div class="elemento">
           <div class="cuadradoimagen" id="cuadradoimagen">
+           
           </div>
           <input type="file" name="imagen" id="imagen" accept="image/*" style="display: none;">
           <label for="imagen" class="añadir">Cargar Imagen</label>
@@ -114,9 +111,10 @@
             <div class="contenido-completo">
               <textarea id="textocompleto" name="textocompleto" placeholder="Contenido completo"></textarea>
             </div>
-            <!-- Inputs ocultos para el ID de la comunidad y el ID del vecino -->
-            <input type="hidden" id="idcomunidad" name="idcomunidad">
-            <input type="hidden" id="idvecino" name="idvecino">
+            <input type="file" id="imagen" name="imagen" style="display: none;" accept="image/*">
+
+            
+
             <div class="contenedor-botones">
               <button type="button" class="eliminar">Cancelar</button>
               <button type="button" class="editar">Añadir</button>
@@ -177,7 +175,10 @@
 
     // Vista previa de la imagen
     const imagenInput = document.getElementById('imagen');
-    const imagePreview = document.getElementById('cuadradoimagen');
+    const idcomunidadInput = document.getElementById('idcomunidad');
+    const idvecinoInput = document.getElementById('idvecino');
+
+  
 
     imagenInput.addEventListener('change', () => {
       const file = imagenInput.files[0];
@@ -187,8 +188,8 @@
     function showImage(file) {
       const reader = new FileReader();
       reader.onload = function(e) {
-        imagePreview.style.backgroundImage = `url(${e.target.result})`;
-        imagePreview.style.backgroundSize = 'cover';
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = 'block';
       };
       reader.readAsDataURL(file);
     }
@@ -238,6 +239,7 @@
         alert('Hubo un error al enviar el formulario');
       }
     });
+
   </script>
 </body>
 
