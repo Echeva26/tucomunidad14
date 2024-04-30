@@ -17,6 +17,13 @@ body {
   height: 100vh;
 }
 
+.contenido {
+  flex-grow: 1; /* Hacer que este div ocupe todo el espacio disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Alinear al final */
+}
+
 .container-6 {
   display: flex;
   flex-direction: row;
@@ -36,8 +43,8 @@ body {
   background-color: #FFFFFF;
   border-radius: 10px; /* Bordes redondeados */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra abajo */
-  width: 250px; /* Ancho mayor */
-  height: 200px; /* Alto mayor */
+  width: 350px; /* Ancho mayor */
+  height: 300px; /* Alto mayor */
 }
 
 .borde-azul {
@@ -87,22 +94,22 @@ body {
   z-index: 2; /* Asegurar que esté por delante del círculo */
 }
 .flecha-reservar {
-    margin-left: 0px; /* Espacio entre el texto y la flecha */
-    width: 30px; /* Ancho mayor de la flecha */
-    height: auto; /* Altura ajustable para mantener la proporción */
-    fill: var(--secondary, #7BC0E3); 
-  }
+  margin-left: 0px; /* Espacio entre el texto y la flecha */
+  width: 30px; /* Ancho mayor de la flecha */
+  height: auto; /* Altura ajustable para mantener la proporción */
+  fill: var(--secondary, #7BC0E3); 
+}
   
 .titulo {
   position: relative;
-  margin: 120px 23px 13px 23px;
+  margin: 10px 23px 0 23px; /* Mover el título arriba */
   display: inline-block;
-  align-self: flex-start;
   overflow-wrap: break-word;
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
   font-size: 20px;
   color: #292525;
+  text-align: center;
 }
 .reservar-1 {
   margin-right: 9.2px;
@@ -115,10 +122,12 @@ body {
 
 .reservar {
   position: relative;
-  margin: 0 23px;
+  margin: 10px 23px 20px 23px; /* Mover el acceso con la flecha abajo */
+  text-align: center;
+
   display: flex;
   flex-direction: row;
-  align-self: flex-start;
+  align-self: flex-end; /* Alinear al final */
   width: fit-content;
   box-sizing: border-box;
 }

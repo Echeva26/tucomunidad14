@@ -107,12 +107,14 @@
                 newElement.classList.add('elemento');
                 newElement.innerHTML = `
                 <a href="/reservasportipo?idvecino=${idvecino}&tipodearea=${tipodearea}" style="text-decoration: none;">
+                  <div class="titulo">${area}</div>
+                  <div class="contenido">
                   <div class="borde-azul"></div>
                   <div class="elipse-icono">
                     <div class="circulo"></div>
                     <img class="icono" src="/static/vectors/${area.toLowerCase()}.svg" />
                   </div>
-                  <div class="titulo">${area}</div>
+                  </div>
                   <div class="reservar">
                       <span class="reservar-1">Reservar</span>
                       <img class="flecha-reservar" src="/static/vectors/flecha-reservar.svg" />
