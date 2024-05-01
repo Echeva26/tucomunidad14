@@ -14,18 +14,25 @@
       background-color: #fff;
       border-radius: 20px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: 5px;
+      display: flex; /* Cambiamos a flexbox */
+    flex-wrap: wrap; /* Permitimos que los elementos se envuelvan en múltiples líneas */
   }
+
+.registroForm{
+  grid-template-columns: repeat(2, 1fr);
+      grid-gap: 10px;
+}
+
   .column {
-      grid-column: span 0,5;
-  }
+    flex: 1; /* Cada columna ocupará el mismo espacio */
+    padding: 0 10px; /* Espacio interno */
+    box-sizing: border-box; 
+    }
   input[type="text"], input[type="email"], input[type="password"], input[type="submit"] {
       width: 100%;
       padding: 6px;
       margin: 8px 0;
-      display: inline-block;
+      display: block;
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box;
@@ -46,8 +53,8 @@
     background-color: #38a89d; /* Color al pasar el mouse */
   }
   h2 {
-      grid-column: span 3;
-  }
+    width: 100%;
+    text-align: center; /* Centrar el título */  }
 
 
 
