@@ -45,6 +45,7 @@ body {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra abajo */
   width: 350px; /* Ancho mayor */
   height: 300px; /* Alto mayor */
+  margin-top: 70px;
 }
 
 .borde-azul {
@@ -91,7 +92,7 @@ body {
   position: absolute; /* Cambiar a posición absoluta */
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1.7); /* Incrementar el tamaño del icono */
+  transform: translate(-50%, -50%) ; /* Incrementar el tamaño del icono */
   z-index: 2; /* Asegurar que esté por delante del círculo */
 }
 .flecha-reservar {

@@ -45,7 +45,7 @@ body {
   width: 350px; /* Ancho mayor */
   height: 250px; /* Alto mayor */
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
-
+margin-top: 40px;
 }
 
 .elemento:hover {
@@ -60,13 +60,13 @@ body {
   margin-bottom: 40px; /* Más espacio por debajo de la caja */
   background-color: #f2f2f2; /* Un color de fondo más neutro */
   background-image: linear-gradient(to right, #49df87 , #E9FBF8); /* Gradiente suave */
-  padding: 30px; /* Más espacio interior */
+  padding: 20px; /* Más espacio interior */
   border-radius: 15px; /* Bordes más redondeados */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más definida */
   text-align: center; /* Texto centrado */
-  font-size: 1.2em; /* Tamaño del texto más grande */
+  font-size: 1em; /* Tamaño del texto más grande */
   color: #292525; /* Color del texto */
-  width: 90%; /* Ancho de la caja más grande */
+  width: 70%; /* Ancho de la caja más grande */
   max-width: 700px; /* Ancho máximo de la caja mayor */
   box-sizing: border-box; /* Para que el padding no afecte el ancho */
   margin-left: auto; /* Centrado horizontal */
