@@ -84,13 +84,14 @@ body {
   height: 100%;
   background-color: rgba(96, 225, 203, 0.5); /* Color con poca opacidad */
   border-radius: 50%; /* Para hacerlo circular */
+  
 }
 
 .icono {
   position: absolute; /* Cambiar a posición absoluta */
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centrar vertical y horizontalmente */
+  transform: translate(-50%, -50%) scale(1.7); /* Incrementar el tamaño del icono */
   z-index: 2; /* Asegurar que esté por delante del círculo */
 }
 .flecha-reservar {
@@ -101,15 +102,14 @@ body {
 }
   
 .titulo {
+  margin-top: 40px;
   position: relative;
-  margin: 10px 23px 0 23px; /* Mover el título arriba */
-  display: inline-block;
   overflow-wrap: break-word;
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 24px;
   color: #292525;
-  text-align: center;
+  text-align: center; /* Alinear el texto al centro */
 }
 .reservar-1 {
   margin-right: 9.2px;
@@ -121,15 +121,15 @@ body {
 }
 
 .reservar {
-  position: relative;
-  margin: 10px 23px 20px 23px; /* Mover el acceso con la flecha abajo */
-  text-align: center;
-
-  display: flex;
-  flex-direction: row;
-  align-self: flex-end; /* Alinear al final */
-  width: fit-content;
+  position: absolute; /* Cambiar a posición absoluta */
+  bottom: 10px; /* Ajustar la posición vertical */
+  left: 0; /* Alinear al borde izquierdo */
+  width: 100%; /* Ocupar todo el ancho de la caja */
   box-sizing: border-box;
+  text-align: center; 
+  margin-bottom: 20px;
+
+ 
 }
 
 /* CABECERA */
