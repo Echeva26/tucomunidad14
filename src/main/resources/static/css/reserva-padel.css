@@ -4,6 +4,14 @@ body {
   padding: 0;
   background: #E9FBF8;
 }
+/* Estilo para resaltar los recuadros seleccionados */
+.seleccionado {
+  background-color: lightblue;
+}
+.disponible {
+  background-color: white;
+}
+
 
 /* Agregar efecto de presionar el botón */
 .boton-cancelar.pressed {

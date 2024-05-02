@@ -15,7 +15,7 @@ import io.grupo14.tucomunidad14.repository.VecinoRepository;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class ReservasController {
@@ -193,6 +195,36 @@ public class ReservasController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese area");
         }
     }
+    @GetMapping("/reservas/id")
+    public ResponseEntity<List<Long>> obtenerIdsDeReservas() {
+        List<Long> idsReservas = ((Collection<Reserva>) reservasRepository.findAll()).stream()
+            .map(Reserva::getIdreserva) // Mapea la lista de reservas a una lista de IDs de reservas
+            .collect(Collectors.toList());
+        return ResponseEntity.ok(idsReservas);
+    }
+    
+    @PostMapping("/reservas/agregar")
+public ResponseEntity<?> agregarReserva(@RequestBody ReservaSimpleDTO reservaDTO) {
+    try {
+        Areacomun areaComun = areaComunRepository.findById(reservaDTO.getIdarea())
+                .orElseThrow(() -> new RuntimeException("Área común no encontrada"));
+        Vecino vecino = vecinoRepository.findById(reservaDTO.getIdvecino())
+                .orElseThrow(() -> new RuntimeException("Vecino no encontrado"));
+
+        Reserva nuevaReserva = new Reserva();
+        nuevaReserva.setAreacomun(areaComun);
+        nuevaReserva.setVecino(vecino);
+        nuevaReserva.setInicioReserva(reservaDTO.getInicioReserva());
+        nuevaReserva.setFinReserva(reservaDTO.getFinReserva());
+
+        Reserva reservaGuardada = reservasRepository.save(nuevaReserva);
+
+        return ResponseEntity.ok(reservaGuardada);
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al agregar la reserva: " + e.getMessage());
+    }
+}
+
     
 
 }
