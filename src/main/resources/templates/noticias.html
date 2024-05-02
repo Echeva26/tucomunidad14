@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -6,7 +6,16 @@
   <title>Comunidad Etsit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="../static/css/noticias.css" />
+  <style>
+    .titulo a {
+      font-size: x-small; /* Tamaño de letra más pequeño para el título de la noticia */
+    }
 
+    .descripcion {
+      font-size: 10px; /* Tamaño de letra más pequeño para la descripción de la noticia */
+      color: #666; /* Color de letra más claro para la descripción */
+    }
+  </style>
 </head>
 
 <body>
@@ -38,7 +47,7 @@
 
   <div class="pagina">
     <div class="container-6">
-
+    
       <div class="container-6" id="noticias-container"></div>
 
       <div class="elemento">
@@ -55,7 +64,9 @@
             Añade una noticia al portal de la comunidad
           </div>
           <div class="reservar" id="anadir-noticia">
-            <span class="reservar-1">Añadir</span>
+            <span class="reservar-1"  >
+              Añadir
+            </span>
             <img class="flecha-reservar" src="../static/vectors/flecha-reservar.svg" />
           </div>
         </div>
@@ -89,158 +100,107 @@
     </span>
   </div>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
 
-      // Esta función obtiene parámetros de la URL
       function getQueryParam(param) {
-        var searchParams = new URLSearchParams(window.location.search);
-        return searchParams.get(param);
+          var searchParams = new URLSearchParams(window.location.search);
+          return searchParams.get(param);
       }
-  
-      // Función para renderizar las noticias en el HTML
-      function renderizarNoticias(noticias) {
-        var noticiasContainer = document.getElementById('noticias-container');
-        noticiasContainer.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevas noticias
 
-        // Verificar si noticias es un array
-        if (Array.isArray(noticias)) {
-          noticias.forEach(noticia => {
-            if (noticia.foto) {
-              // Convertir la imagen base64 a JPEG
-              const base64String = noticia.foto.split(',')[1];
-              base64ToJPEG(base64String, function (jpegDataURL) {
-                // Crear el elemento de noticia con la imagen convertida a JPEG
-                var elementoNoticia = `
-                  <div class="elemento">
-                    <div class="borde-azul"></div>
-                    <img class="imagen" src="${jpegDataURL}" alt="${noticia.titulo}" />
-                    <div class="contenido">
-                      <h2 class="titulo">
-                        <a href="#">${noticia.titulo}</a>
-                      </h2>
-                      <p class="descripcion">
-                        ${noticia.descripcion}
-                      </p>
-                      <div class="leer-mas">
-                        <a href="#" class="reservar-1">Leer más</a>
+      async function base64ToBlobUrl(base64) {
+          try {
+              var byteString = atob(base64.split(',')[1]);
+              var mimeString = base64.split(',')[0].split(':')[1].split(';')[0];
+
+              var ab = new ArrayBuffer(byteString.length);
+              var ia = new Uint8Array(ab);
+
+              for (var i = 0; i < byteString.length; i++) {
+                  ia[i] = byteString.charCodeAt(i);
+              }
+
+              var blob = new Blob([ab], { type: mimeString });
+              return URL.createObjectURL(blob);
+          } catch (error) {
+              console.error('Error al convertir la imagen base64:', error);
+              return null;
+          }
+      }
+
+      async function renderizarNoticias(noticias) {
+          var noticiasContainer = document.getElementById('noticias-container');
+          noticiasContainer.innerHTML = '';
+
+          for (const noticia of noticias) {
+              try {
+                  const blobUrl = await base64ToBlobUrl(noticia.foto);
+                  if (blobUrl) {
+                      var elementoNoticia = `
+                      <div class="elemento">
+                          <div class="borde-azul"></div>
+                          <img class="imagen" src="${blobUrl}" alt="${noticia.titulo}" />
+                          <div class="contenido">
+                              <h2 class="titulo">
+                                  <a href="#">${noticia.titulo}</a>
+                              </h2>
+                              <p class="descripcion">
+                                  ${noticia.descripcion}
+                              </p>
+                              <div class="leer-mas">
+                                  <a href="#" class="reservar-1">Leer más</a>
+                              </div>
+                          </div>
                       </div>
-                    </div>
-                  </div>
-                `;
-                noticiasContainer.innerHTML += elementoNoticia;
-              });
-            }
-          });
-        } else {
-          console.error('Error: La respuesta no es un array de noticias');
-        }
+                      `;
+                      noticiasContainer.innerHTML += elementoNoticia;
+                  }
+              } catch (error) {
+                  console.error('Error al renderizar la noticia:', error);
+              }
+          }
       }
 
-      function base64ToJPEG(base64String, callback) {
-        // Convertir la cadena base64 en un array de bytes
-        const byteCharacters = atob(base64String);
-        const byteNumbers = new Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) {
-          byteNumbers[i] = byteCharacters.charCodeAt(i);
-        }
-        const byteArray = new Uint8Array(byteNumbers);
-
-        // Crear un objeto Blob con los bytes de la imagen
-        const blob = new Blob([byteArray], { type: 'image/jpeg' });
-
-        // Crear un objeto FileReader para leer el Blob
-        const reader = new FileReader();
-        reader.readAsDataURL(blob);
-
-        // Utilizar el FileReader para convertir el Blob en un objeto Image
-        reader.onloadend = function () {
-          const img = new Image();
-          img.src = reader.result;
-
-          // Utilizar un elemento canvas para convertir la imagen en formato JPEG
-          const canvas = document.createElement('canvas');
-          canvas.width = img.width;
-          canvas.height = img.height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0);
-          const jpegDataURL = canvas.toDataURL('image/jpeg');
-
-          // Llamar a la función de devolución de llamada con la URL de la imagen JPEG
-          callback(jpegDataURL);
-        };
-      }
-
-
-      // Esta función carga las noticias de la comunidad del usuario logueado
       function cargarNoticias() {
-        var idVecino = getQueryParam('idvecino'); // Obtiene el ID del vecino de la URL
-        if (!idVecino) {
-          console.error('ID de vecino no proporcionado');
-          return;
-        }
+          var idVecino = getQueryParam('idvecino');
+          if (!idVecino) {
+              console.error('ID de vecino no proporcionado');
+              return;
+          }
 
-        fetch(`http://localhost:8080/vecinoporid?idvecino=${idVecino}`)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('No se pudo obtener la información del vecino');
-            }
-            return response.json();
-          })
-          .then(data => {
-            var gestor = data.gestor; // Obtener el parámetro gestor
-            var usuarioDiv = document.querySelector('.usuario'); // Selección del div de usuario
-            if (gestor) {
-              usuarioDiv.textContent = 'Gestor de comunidad'; // Cambiar el texto a "Gestor"
-            } else {
-              usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
-            }
-          })
-          .catch(error => console.error('Error al obtener información del vecino:', error));
-
-        // Obtener la comunidad del vecino
-        fetch(`http://localhost:8080/vecino/comunidad?idVecino=${idVecino}`)
-          .then(response => response.json())
-          .then(data => {
-            // Asumiendo que el endpoint devuelve un objeto con idComunidad
-            var idcomunidad = data.idcomunidad;
-            // Obtener noticias por comunidad
-            fetch(`/obtenerinfoporcomunidad?idcomunidad=${idcomunidad}`)
+          fetch(`http://localhost:8080/vecino/comunidad?idVecino=${idVecino}`)
               .then(response => {
-                if (!response.ok) {
-                  throw new Error('Error al obtener las noticias de la comunidad');
-                }
-                return response.json();
+                  if (!response.ok) {
+                      throw new Error('No se pudo obtener la información del vecino');
+                  }
+                  return response.json();
               })
-              .then(noticias => {
-                // Verificar si noticias es un array
-                if (Array.isArray(noticias)) {
-                  // Renderizar las noticias
-                  renderizarNoticias(noticias);
-                } else {
-                  console.error('Error: La respuesta no es un array de noticias');
-                }
+              .then(data => {
+                  var idComunidad = data.idcomunidad;
+                  fetch(`http://localhost:8080/obtenerinfoporcomunidad?idcomunidad=${idComunidad}`)
+                      .then(response => {
+                          if (!response.ok) {
+                              throw new Error('Error al obtener las noticias de la comunidad');
+                          }
+                          return response.json();
+                      })
+                      .then(noticias => {
+                          renderizarNoticias(noticias);
+                      })
+                      .catch(error => console.error('Error al obtener noticias:', error));
               })
-              .catch(error => console.error('Error al obtener noticias:', error));
-          })
-          .catch(error => console.error('Error al obtener datos de la comunidad:', error));
+              .catch(error => console.error('Error al obtener información del vecino:', error));
       }
 
-      // Llama a cargarNoticias cuando la página carga
       cargarNoticias();
 
-
-      //BOTON añadir noticia
       var anadirnoticia = document.getElementById('anadir-noticia');
-      // Agregar un evento de clic al contenedor de gestión de roles
-
-      
       anadirnoticia.addEventListener('click', function () {
-
-        // Redireccionar a la página "gestionroles"
-        window.location.href = `/anadirnoticia?idvecino=${idvecino}`;
+          var idvecino = getQueryParam('idvecino');
+          window.location.href = `/anadirnoticia?idvecino=${idvecino}`;
       });
-    });
-  </script>
-</body>
-
+  });
+</script>
+   
+   
+              
 </html>
