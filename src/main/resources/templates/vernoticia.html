@@ -31,6 +31,8 @@
       margin-top: 50px; /* Espaciado superior */
       height: auto; /* Altura automática */
     }
+
+    /* Agregar cualquier otro estilo que necesites aquí */
   </style>
 </head>
 
@@ -66,13 +68,12 @@
       <div class="elemento">
         
         <div class="borde-azul"></div>
-    
-      <!-- NOTICIA SELECCIONADA -->
       <div class="elemento" id="noticia">
         <!-- Aquí se insertará la noticia -->
       </div>
-      <button class="editar">Editar</button>
-      <button  id="eliminarBtn" class="eliminar">Eliminar</button>
+      <!-- Botones de editar y eliminar -->
+      <button class="editar" style="display: none;">Editar</button>
+      <button id="eliminarBtn" class="eliminar" style="display: none;">Eliminar</button>
     </div>
   </div>
 
@@ -138,7 +139,7 @@
       var homeLink = document.querySelector('.home a');
       homeLink.href = `/menucomunidad?idvecino=${idvecino}`;
 
-      // Realizar la solicitud al controlador
+      // Realizar la solicitud al controlador para obtener la información de la noticia
       fetch(`/idnoticiapornoticia?idnoticia=${idnoticia}`)
         .then(response => {
           if (!response.ok) {
@@ -155,7 +156,7 @@
           const descripcion = document.createElement('div');
           descripcion.classList.add('descripcion');
           descripcion.textContent = data.descripcion;
-          
+
           // Convertir la imagen base64 a URL de Blob
           const imagenUrl = await base64ToBlobUrl(data.foto);
           const imagen = document.createElement('img');
@@ -169,21 +170,27 @@
         .catch(error => {
           console.error('Error:', error);
         });
-        fetch(`http://localhost:8080/vecinoporid?idvecino=${idvecino}`)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('No se pudo obtener la información del vecino');
-              }
-              return response.json();
-            })
-            .then(data => {
-              var gestor = data.gestor; // Obtener el parámetro gestor
-              var usuarioDiv = document.querySelector('.usuario'); // Selección del div de usuario
-              if (gestor) {
-                usuarioDiv.textContent = 'Gestor de comunidad'; // Cambiar el texto a "Gestor"
-              } else {
-                usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
-              }});
+
+      // Realizar la solicitud al controlador para obtener información sobre el vecino
+      fetch(`http://localhost:8080/vecinoporid?idvecino=${idvecino}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('No se pudo obtener la información del vecino');
+          }
+          return response.json();
+        })
+        .then(data => {
+          var gestor = data.gestor; // Obtener el parámetro gestor
+          var usuarioDiv = document.querySelector('.usuario'); // Selección del div de usuario
+          if (gestor) {
+            usuarioDiv.textContent = 'Gestor de comunidad'; // Cambiar el texto a "Gestor"
+            // Mostrar botones de editar y eliminar
+            document.querySelector('.editar').style.display = 'block';
+            document.querySelector('.eliminar').style.display = 'block';
+          } else {
+            usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
+          }
+        });
     };
   </script>
 </body>
