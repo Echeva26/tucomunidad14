@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="../static/css/vernoticiaadmin.css" />
   <style>
     .titulo {
-      font-size: larger; /* Tamaño de letra más grande para el título de la noticia */
+      font-size: larger;
+      /* Tamaño de letra más grande para el título de la noticia */
       font-family: 'Roboto', sans-serif;
       font-weight: 700;
       color: #292525;
@@ -16,20 +17,31 @@
     }
 
     .descripcion {
-      font-size: 14px; /* Tamaño de letra para la descripción de la noticia */
-      color: #333; /* Color de letra para la descripción */
+      font-size: 14px;
+      /* Tamaño de letra para la descripción de la noticia */
+      color: #333;
+      /* Color de letra para la descripción */
     }
 
     .elemento {
-      position: relative; /* Agregar posición relativa para posicionar los botones */
-      width: 90%; /* Anchura de la caja de la noticia */
-      margin: 0 auto; /* Centrar la caja horizontalmente */
-      padding: 30px; /* Espaciado interior de la caja */
-      background-color: #f7f7f7; /* Color de fondo de la caja */
-      border: 2px solid #ccc; /* Borde de la caja */
-      border-radius: 20px; /* Borde redondeado */
-      margin-top: 50px; /* Espaciado superior */
-      height: auto; /* Altura automática */
+      position: relative;
+      /* Agregar posición relativa para posicionar los botones */
+      width: 90%;
+      /* Anchura de la caja de la noticia */
+      margin: 0 auto;
+      /* Centrar la caja horizontalmente */
+      padding: 30px;
+      /* Espaciado interior de la caja */
+      background-color: #f7f7f7;
+      /* Color de fondo de la caja */
+      border: 2px solid #ccc;
+      /* Borde de la caja */
+      border-radius: 20px;
+      /* Borde redondeado */
+      margin-top: 50px;
+      /* Espaciado superior */
+      height: auto;
+      /* Altura automática */
     }
 
     /* Agregar cualquier otro estilo que necesites aquí */
@@ -66,45 +78,45 @@
   <div class="pagina">
     <div class="container-6">
       <div class="elemento">
-        
+
         <div class="borde-azul"></div>
-      <div class="elemento" id="noticia">
-        <!-- Aquí se insertará la noticia -->
+        <div class="elemento" id="noticia">
+          <!-- Aquí se insertará la noticia -->
+        </div>
+        <!-- Botones de editar y eliminar -->
+        <button class="editar" style="display: none;">Editar</button>
+        <button id="eliminarBtn" class="eliminar" style="display: none;">Eliminar</button>
       </div>
-      <!-- Botones de editar y eliminar -->
-      <button class="editar" style="display: none;">Editar</button>
-      <button id="eliminarBtn" class="eliminar" style="display: none;">Eliminar</button>
     </div>
-  </div>
 
-  <!-- PIE DE PAGINA -->
-  <div class="pie-de-pagina">
-    <div class="container-5">
-      <div class="image-2"></div>
-      <div class="container-4">
-        <img class="icon-1" src="../static/vectors/intagram.svg" />
-        <img class="icon-2" src="../static/vectors/facebook.svg" />
-        <img class="icon-3" src="../static/vectors/twitter.svg" />
+    <!-- PIE DE PAGINA -->
+    <div class="pie-de-pagina">
+      <div class="container-5">
+        <div class="image-2"></div>
+        <div class="container-4">
+          <img class="icon-1" src="../static/vectors/intagram.svg" />
+          <img class="icon-2" src="../static/vectors/facebook.svg" />
+          <img class="icon-3" src="../static/vectors/twitter.svg" />
+        </div>
+        <div class="idioma">
+          <span class="language">
+            Idioma
+          </span>
+          <img class="icon-color" src="../static/vectors/flecha.svg" />
+        </div>
       </div>
-      <div class="idioma">
-        <span class="language">
-          Idioma
-        </span>
-        <img class="icon-color" src="../static/vectors/flecha.svg" />
+      <div class="description">
+        Facilitamos la convivencia en tu comunidad
       </div>
+      <div class="line"></div>
+      <span class="tucom">
+        ©TuComunidad 2024
+      </span>
     </div>
-    <div class="description">
-      Facilitamos la convivencia en tu comunidad
-    </div>
-    <div class="line"></div>
-    <span class="tucom">
-      ©TuComunidad 2024
-    </span>
-  </div>
 
-  <script>
-    async function base64ToBlobUrl(base64) {
-      try {
+    <script>
+      async function base64ToBlobUrl(base64) {
+        try {
           // Eliminar el tipo de datos del prefijo base64 si está presente
           var base64WithoutPrefix = base64.replace(/^data:image\/(png|jpeg);base64,/, '');
 
@@ -115,7 +127,7 @@
           var ab = new ArrayBuffer(byteString.length);
           var ia = new Uint8Array(ab);
           for (var i = 0; i < byteString.length; i++) {
-              ia[i] = byteString.charCodeAt(i);
+            ia[i] = byteString.charCodeAt(i);
           }
 
           // Determinar el tipo MIME de la imagen
@@ -125,74 +137,98 @@
           // Crear un Blob y obtener la URL del objeto Blob
           var blob = new Blob([ab], { type: mimeType });
           return URL.createObjectURL(blob);
-      } catch (error) {
+        } catch (error) {
           console.error('Error al convertir la imagen base64:', error);
           return null;
+        }
       }
-    }
 
-    window.onload = async function() {
-      // Obtener el ID de la noticia de los query parameters
-      const urlParams = new URLSearchParams(window.location.search);
-      const idnoticia = urlParams.get('idinformacion');
-      const idvecino = urlParams.get('idvecino');
-      var homeLink = document.querySelector('.home a');
-      homeLink.href = `/menucomunidad?idvecino=${idvecino}`;
+      window.onload = async function () {
+        // Obtener el ID de la noticia de los query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const idnoticia = urlParams.get('idinformacion');
+        const idvecino = urlParams.get('idvecino');
+        var homeLink = document.querySelector('.home a');
+        homeLink.href = `/menucomunidad?idvecino=${idvecino}`;
 
-      // Realizar la solicitud al controlador para obtener la información de la noticia
-      fetch(`/idnoticiapornoticia?idnoticia=${idnoticia}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('La red no ha respondido correctamente');
+        // Realizar la solicitud al controlador para obtener la información de la noticia
+        fetch(`/idnoticiapornoticia?idnoticia=${idnoticia}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('La red no ha respondido correctamente');
+            }
+            return response.json();
+          })
+          .then(async data => {
+            // Manipular el DOM para mostrar la noticia
+            const elementoNoticia = document.getElementById('noticia');
+            const titulo = document.createElement('div');
+            titulo.classList.add('titulo');
+            titulo.textContent = data.titulo;
+            const descripcion = document.createElement('div');
+            descripcion.classList.add('descripcion');
+            descripcion.textContent = data.descripcion;
+
+            // Convertir la imagen base64 a URL de Blob
+            const imagenUrl = await base64ToBlobUrl(data.foto);
+            const imagen = document.createElement('img');
+            imagen.classList.add('imagen');
+            imagen.src = imagenUrl;
+
+            elementoNoticia.appendChild(titulo);
+            elementoNoticia.appendChild(descripcion);
+            elementoNoticia.appendChild(imagen);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+
+        // Realizar la solicitud al controlador para obtener información sobre el vecino
+        fetch(`http://localhost:8080/vecinoporid?idvecino=${idvecino}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('No se pudo obtener la información del vecino');
+            }
+            return response.json();
+          })
+          .then(data => {
+            var gestor = data.gestor; // Obtener el parámetro gestor
+            var usuarioDiv = document.querySelector('.usuario'); // Selección del div de usuario
+            if (gestor) {
+              usuarioDiv.textContent = 'Gestor de comunidad'; // Cambiar el texto a "Gestor"
+              // Mostrar botones de editar y eliminar
+              document.querySelector('.editar').style.display = 'block';
+              document.querySelector('.eliminar').style.display = 'block';
+            } else {
+              usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
+            }
+          });
+
+        document.getElementById('eliminarBtn').addEventListener('click', function () {
+          // Confirmar si el usuario realmente quiere eliminar la noticia
+          if (confirm('¿Estás seguro de que quieres eliminar esta noticia?')) {
+            // Construir la URL para la solicitud DELETE
+            const url = `/borrarinformacion?idinformacion=${idnoticia}&idvecino=${idvecino}`;
+
+            // Enviar la solicitud DELETE
+            fetch(url, {
+              method: 'DELETE'
+            })
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('Error al eliminar la noticia');
+                }
+                // Si la solicitud DELETE es exitosa, redirigir a la página de inicio u otra página relevante
+                window.location.href = `/menucomunidad?idvecino=${idvecino}`; 
+              })
+              .catch(error => {
+                console.error('Error al eliminar la noticia:', error);
+                // Manejar el error adecuadamente, como mostrar un mensaje de error al usuario
+              });
           }
-          return response.json();
-        })
-        .then(async data => {
-          // Manipular el DOM para mostrar la noticia
-          const elementoNoticia = document.getElementById('noticia');
-          const titulo = document.createElement('div');
-          titulo.classList.add('titulo');
-          titulo.textContent = data.titulo;
-          const descripcion = document.createElement('div');
-          descripcion.classList.add('descripcion');
-          descripcion.textContent = data.descripcion;
-
-          // Convertir la imagen base64 a URL de Blob
-          const imagenUrl = await base64ToBlobUrl(data.foto);
-          const imagen = document.createElement('img');
-          imagen.classList.add('imagen');
-          imagen.src = imagenUrl;
-
-          elementoNoticia.appendChild(titulo);
-          elementoNoticia.appendChild(descripcion);
-          elementoNoticia.appendChild(imagen);
-        })
-        .catch(error => {
-          console.error('Error:', error);
         });
-
-      // Realizar la solicitud al controlador para obtener información sobre el vecino
-      fetch(`http://localhost:8080/vecinoporid?idvecino=${idvecino}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('No se pudo obtener la información del vecino');
-          }
-          return response.json();
-        })
-        .then(data => {
-          var gestor = data.gestor; // Obtener el parámetro gestor
-          var usuarioDiv = document.querySelector('.usuario'); // Selección del div de usuario
-          if (gestor) {
-            usuarioDiv.textContent = 'Gestor de comunidad'; // Cambiar el texto a "Gestor"
-            // Mostrar botones de editar y eliminar
-            document.querySelector('.editar').style.display = 'block';
-            document.querySelector('.eliminar').style.display = 'block';
-          } else {
-            usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
-          }
-        });
-    };
-  </script>
+      };
+    </script>
 </body>
 
 </html>
