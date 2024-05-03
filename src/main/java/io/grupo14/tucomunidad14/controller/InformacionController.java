@@ -265,4 +265,37 @@ public class InformacionController {
         return "Información actualizada correctamente";
     }
 
+    @GetMapping("/idnoticiapornoticia")
+    public ResponseEntity<?> idnoticiapornoticia(@RequestParam Long idnoticia) {
+        Informacion info = informacionRepository.findById(idnoticia).get();
+
+        if (info != null) {
+            InformacionDTOdownload infofinal = new InformacionDTOdownload();
+            infofinal.setTitulo(info.getTitulo());
+            infofinal.setDescripcion(info.getDescripcion());
+            infofinal.setFecha(info.getFecha());
+            infofinal.setIdinformacion(info.getIdinformacion());
+            infofinal.setIdcomunidad(info.getComunidad().getIdcomunidad());
+            infofinal.setIdvecino(info.getVecino().getIdvecino());
+            infofinal.setTextocompleto(info.getTextocompleto());
+            Path directorioImagenes = Paths.get("src", "main", "resources", "static", "imagesinformation");
+            String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+            Path rutaCompleta = Paths.get(rutaAbsoluta, info.getFoto());
+
+            try {
+                // Reading image file
+                byte[] foto = Files.readAllBytes(rutaCompleta);
+                infofinal.setFoto(foto);
+            } catch (IOException e) {
+                // Handle file not found or other IO errors
+                e.printStackTrace(); // Consider logging or throwing a custom exception instead
+            }
+
+            return ResponseEntity.ok(infofinal);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta esa informacion");
+        }
+
+    }
+
 }
