@@ -189,12 +189,7 @@
               })
               .then(data => {
                   var idComunidad = data.idcomunidad;
-                  var usuarioDiv = document.querySelector('.usuario'); // Selección del div de usuario
-                  if (data.gestor) {
-                      usuarioDiv.textContent = 'Gestor de comunidad'; // Cambiar el texto a "Gestor"
-                  } else {
-                      usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
-                  }
+                  
   
                   fetch(`http://localhost:8080/obtenerinfoporcomunidad?idcomunidad=${idComunidad}`)
                       .then(response => {
