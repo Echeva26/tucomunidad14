@@ -30,11 +30,14 @@
       position: relative;
     }
 
-    .imagen {
+    .cuadradoimagen {
       width: 100%;
-      height: auto;
+      height: 200px; /* Puedes ajustar la altura según tus necesidades */
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
+      background-size: cover;
+      background-position: center;
+      overflow: hidden; /* Para evitar que la imagen se desborde del contenedor */
     }
 
     .contenido {
@@ -101,8 +104,9 @@
       <form id="infoForm" action="/crearinformacion" method="post" enctype="multipart/form-data">
         <div class="elemento">
           <div class="cuadradoimagen" id="cuadradoimagen">
+            <img id="imagenPreview" src="#" alt="Vista previa de la imagen" style="display: none;">
           </div>
-          <input type="file" name="imagen" id="imagen" accept="image/*" >
+          <input type="file" name="imagen" id="imagen" accept="image/*">
           
           <div class="contenido">
             <div class="titulo">
@@ -117,6 +121,7 @@
             <!-- Inputs ocultos para el ID de la comunidad y el ID del vecino -->
             <input type="hidden" id="idcomunidad" name="idcomunidad">
             <input type="hidden" id="idvecino" name="idvecino">
+            <input type="hidden" id="fecha" name="fecha">
             <div class="contenedor-botones">
               <button type="button" class="eliminar">Cancelar</button>
               <button type="button" class="editar">Añadir</button>
@@ -152,7 +157,7 @@
     </span>
   </div>
 
-  <!-- Scripts JS aquí HOLA -->
+  <!-- Scripts JS aquí -->
   <script>
     // Obtener el ID del vecino de los parámetros de la URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -177,7 +182,7 @@
 
     // Vista previa de la imagen
     const imagenInput = document.getElementById('imagen');
-    const imagePreview = document.getElementById('cuadradoimagen');
+    const imagePreview = document.getElementById('imagenPreview');
 
     imagenInput.addEventListener('change', () => {
       const file = imagenInput.files[0];
@@ -187,8 +192,8 @@
     function showImage(file) {
       const reader = new FileReader();
       reader.onload = function(e) {
-        imagePreview.style.backgroundImage = `url(${e.target.result})`;
-        imagePreview.style.backgroundSize = 'cover';
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = 'block';
       };
       reader.readAsDataURL(file);
     }
@@ -197,7 +202,7 @@
     const cancelButton = document.querySelector('.eliminar');
     cancelButton.addEventListener('click', () => {
       // Redireccionar o limpiar campos si es necesario
-      window.location.href = "/menucomunidad"; // Redireccionar a la página de comunidad
+      window.location.href = `/noticias?idvecino=${idVecino}`; // Redireccionar a la página de comunidad
     });
 
     // Enviar formulario al controlador
@@ -209,6 +214,7 @@
       const imagen = imagenInput.files[0];
       const idcomunidad = document.getElementById('idcomunidad').value;
       const idvecino = document.getElementById('idvecino').value;
+      const fecha = document.getElementById('fecha').value;
 
       const formData = new FormData();
       formData.append('titulo', titulo);
@@ -217,6 +223,7 @@
       formData.append('imagen', imagen);
       formData.append('idcomunidad', idcomunidad);
       formData.append('idvecino', idvecino);
+      formData.append('fecha', fecha);
 
       try {
         const response = await fetch('/crearinformacion', {
@@ -228,6 +235,7 @@
           const message = await response.text();
           alert(message); // Mostrar mensaje de éxito
           // Redireccionar o hacer alguna acción adicional si es necesario
+          window.location.href = `/noticias?idvecino=${idVecino}`
         } else {
           throw new Error('Error al enviar el formulario');
         }
@@ -236,6 +244,25 @@
         alert('Hubo un error al enviar el formulario');
       }
     });
+
+    // Función para obtener la fecha actual en el formato "YYYY-MM-DD"
+    function getCurrentDate() {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const day = String(today.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    // Asignar la fecha actual al input oculto después de cargar el DOM
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('fecha').value = getCurrentDate();
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('home-link').setAttribute('href', `/menucomunidad?idvecino=${idVecino}`);
+
+    });
+    
   </script>
 </body>
 
