@@ -29,8 +29,8 @@
         TuComunidad
       </div>
       <p class="home">
-        <a href="/menucomunidad" style="text-decoration: none;">
-          <span class="home-sub-30">Home</span>
+        <a id="home" href="/menucomunidad" style="text-decoration: none;">
+          <span class="home-sub-30" >Home</span>
           <span></span>
         </a>
       </p>
@@ -100,52 +100,64 @@
     </span>
   </div>
   <script>
-  document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
 
       function getQueryParam(param) {
           var searchParams = new URLSearchParams(window.location.search);
           return searchParams.get(param);
       }
-
+  
       async function base64ToBlobUrl(base64) {
           try {
-              var byteString = atob(base64.split(',')[1]);
-              var mimeString = base64.split(',')[0].split(':')[1].split(';')[0];
-
+              // Eliminar el tipo de datos del prefijo base64 si está presente
+              var base64WithoutPrefix = base64.replace(/^data:image\/(png|jpeg);base64,/, '');
+  
+              // Decodificar la cadena base64
+              var byteString = atob(base64WithoutPrefix);
+  
+              // Convertir la cadena decodificada a un ArrayBuffer
               var ab = new ArrayBuffer(byteString.length);
               var ia = new Uint8Array(ab);
-
               for (var i = 0; i < byteString.length; i++) {
                   ia[i] = byteString.charCodeAt(i);
               }
-
-              var blob = new Blob([ab], { type: mimeString });
+  
+              // Determinar el tipo MIME de la imagen
+              var type = base64.match(/^data:image\/(png|jpeg);base64,/);
+              var mimeType = type ? `image/${type[1]}` : 'image/png'; // Default to PNG if MIME type not found
+  
+              // Crear un Blob y obtener la URL del objeto Blob
+              var blob = new Blob([ab], { type: mimeType });
               return URL.createObjectURL(blob);
           } catch (error) {
               console.error('Error al convertir la imagen base64:', error);
               return null;
           }
       }
-
+  
       async function renderizarNoticias(noticias) {
           var noticiasContainer = document.getElementById('noticias-container');
           noticiasContainer.innerHTML = '';
-
+  
           for (const noticia of noticias) {
               try {
-                  const blobUrl = await base64ToBlobUrl(noticia.foto);
+                  const blobUrl = await base64ToBlobUrl(noticia.foto); // Cambio aquí
                   if (blobUrl) {
                       var elementoNoticia = `
                       <div class="elemento">
                           <div class="borde-azul"></div>
-                          <img class="imagen" src="${blobUrl}" alt="${noticia.titulo}" />
+                         
                           <div class="contenido">
-                              <h2 class="titulo">
-                                  <a href="#">${noticia.titulo}</a>
-                              </h2>
-                              <p class="descripcion">
-                                  ${noticia.descripcion}
-                              </p>
+                            <img class="imagen" src="${blobUrl}"  />
+                              <p>
+                                <div class="texto">
+                                  <h2 class="titulo">
+                                      <a href="#">${noticia.titulo}</a>
+                                  </h2>
+                                  <p class="descripcion">
+                                      ${noticia.descripcion}
+                                  </p>
+                              </div>
                               <div class="leer-mas">
                                   <a href="#" class="reservar-1">Leer más</a>
                               </div>
@@ -159,14 +171,14 @@
               }
           }
       }
-
+  
       function cargarNoticias() {
           var idVecino = getQueryParam('idvecino');
           if (!idVecino) {
               console.error('ID de vecino no proporcionado');
               return;
           }
-
+  
           fetch(`http://localhost:8080/vecino/comunidad?idVecino=${idVecino}`)
               .then(response => {
                   if (!response.ok) {
@@ -190,15 +202,20 @@
               })
               .catch(error => console.error('Error al obtener información del vecino:', error));
       }
-
+  
       cargarNoticias();
-
+      var homeLink = document.querySelector('.home a');
+      var idvecino = getQueryParam('idvecino');
+      homeLink.href = `/menucomunidad?idvecino=${idvecino}`;
+  
       var anadirnoticia = document.getElementById('anadir-noticia');
       anadirnoticia.addEventListener('click', function () {
           var idvecino = getQueryParam('idvecino');
           window.location.href = `/anadirnoticia?idvecino=${idvecino}`;
       });
+   
   });
+  
 </script>
    
    

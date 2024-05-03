@@ -82,7 +82,7 @@
         TuComunidad
       </div>
       <p class="home">
-        <a href="/comunidad" style="text-decoration: none;">
+        <a href="" style="text-decoration: none;">
           <span class="home-sub-30">Home</span>
           <span></span>
         </a>
@@ -159,6 +159,7 @@
 
   <!-- Scripts JS aquí -->
   <script>
+  
     // Obtener el ID del vecino de los parámetros de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const idVecino = urlParams.get('idvecino');
@@ -258,10 +259,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('fecha').value = getCurrentDate();
     });
-    document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('home-link').setAttribute('href', `/menucomunidad?idvecino=${idVecino}`);
-
-    });
+  
     
   </script>
 </body>
