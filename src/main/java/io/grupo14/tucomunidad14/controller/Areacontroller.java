@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 //hola
@@ -116,6 +117,17 @@ public class Areacontroller {
         }
         
 
+    }
+    @GetMapping("/nombreArea/{idArea}")
+    public ResponseEntity<String> obtenerNombreArea(@PathVariable Long idArea) {
+        Areacomun area = areacomunRepository.findById(idArea)
+                .orElse(null); // Busca el área por su ID
+
+        if (area != null) {
+            return ResponseEntity.ok(area.getNombre()); // Devuelve el nombre del área si se encuentra
+        } else {
+            return ResponseEntity.notFound().build(); // Retorna 404 si el área no se encuentra
+        }
     }
     
 

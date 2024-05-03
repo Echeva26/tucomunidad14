@@ -141,7 +141,8 @@
   
           for (const noticia of noticias) {
               try {
-                  const blobUrl = await base64ToBlobUrl(noticia.foto); // Cambio aquí
+                  const blobUrl = await base64ToBlobUrl(noticia.foto);
+                  var idVecino = getQueryParam('idvecino')
                   if (blobUrl) {
                       var elementoNoticia = `
                       <div class="elemento">
@@ -159,7 +160,7 @@
                                   </p>
                               </div>
                               <div class="leer-mas">
-                                  <a href="#" class="reservar-1">Leer más</a>
+                                  <a href="/vernoticia?idvecino=${idVecino}&idinformacion=${noticia.idinformacion}" class="reservar-1">Leer más</a>
                               </div>
                           </div>
                       </div>

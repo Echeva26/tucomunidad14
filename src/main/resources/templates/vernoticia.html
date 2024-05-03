@@ -5,11 +5,14 @@
   <meta charset="UTF-8" />
   <title>Comunidad Etsit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="../static/css/vernoticia.css" />
+  <link rel="stylesheet" href="../static/css/vernoticiaadmin.css" />
   <style>
     .titulo {
       font-size: larger; /* Tamaño de letra más grande para el título de la noticia */
-      pointer-events: none; /* Hacer que el título no sea clicable */
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
+      color: #292525;
+      pointer-events: none;
     }
 
     .descripcion {
@@ -18,6 +21,7 @@
     }
 
     .elemento {
+      position: relative; /* Agregar posición relativa para posicionar los botones */
       width: 90%; /* Anchura de la caja de la noticia */
       margin: 0 auto; /* Centrar la caja horizontalmente */
       padding: 30px; /* Espaciado interior de la caja */
@@ -35,7 +39,6 @@
   <div class="cabecera">
     <span class="reserva-de-zonas">
       Noticias
-      
     </span>
     <div class="container">
       <div class="tu-comunidad">
@@ -53,31 +56,21 @@
         </span>
       </div>
       <div class="usuario">
-        Vecino
+        Gestor de comunidad
       </div>
     </div>
   </div>
 
   <div class="pagina">
     <div class="container-6">
+      <div class="elemento">
+        <button class="editar">Editar</button>
+        <button  id="eliminarBtn" class="eliminar">Eliminar</button>
+        <div class="borde-azul"></div>
     
       <!-- NOTICIA SELECCIONADA -->
-      <div class="elemento">
-        
-        <div class="borde-azul"></div>
-        <img class="imagen" src="../static/images/garaje2.jpg" />
-        <div class="elipse-icono">
-      
-    
-        </div>
-        <div class="contenido">
-          <div class="titulo">
-            Limpieza de garaje 5 y 6 de mayo
-          </div>
-          <div class="descripcion">
-            Por razones de mantenimiento, se informa a todos los residentes que el garaje estará cerrado temporalmente los días 5 y 6 de mayo. Pedimos disculpas por cualquier inconveniente que esto pueda causar y agradecemos su comprensión.
-          </div>
-        </div>
+      <div class="elemento" id="noticia">
+        <!-- Aquí se insertará la noticia -->
       </div>
 
     </div>
@@ -107,6 +100,74 @@
       ©TuComunidad 2024
     </span>
   </div>
+
+  <script>
+    async function base64ToBlobUrl(base64) {
+      try {
+          // Eliminar el tipo de datos del prefijo base64 si está presente
+          var base64WithoutPrefix = base64.replace(/^data:image\/(png|jpeg);base64,/, '');
+
+          // Decodificar la cadena base64
+          var byteString = atob(base64WithoutPrefix);
+
+          // Convertir la cadena decodificada a un ArrayBuffer
+          var ab = new ArrayBuffer(byteString.length);
+          var ia = new Uint8Array(ab);
+          for (var i = 0; i < byteString.length; i++) {
+              ia[i] = byteString.charCodeAt(i);
+          }
+
+          // Determinar el tipo MIME de la imagen
+          var type = base64.match(/^data:image\/(png|jpeg);base64,/);
+          var mimeType = type ? `image/${type[1]}` : 'image/png'; // Default to PNG if MIME type not found
+
+          // Crear un Blob y obtener la URL del objeto Blob
+          var blob = new Blob([ab], { type: mimeType });
+          return URL.createObjectURL(blob);
+      } catch (error) {
+          console.error('Error al convertir la imagen base64:', error);
+          return null;
+      }
+    }
+
+    window.onload = async function() {
+      // Obtener el ID de la noticia de los query parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const idnoticia = urlParams.get('idinformacion');
+
+      // Realizar la solicitud al controlador
+      fetch(`/idnoticiapornoticia?idnoticia=${idnoticia}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('La red no ha respondido correctamente');
+          }
+          return response.json();
+        })
+        .then(async data => {
+          // Manipular el DOM para mostrar la noticia
+          const elementoNoticia = document.getElementById('noticia');
+          const titulo = document.createElement('div');
+          titulo.classList.add('titulo');
+          titulo.textContent = data.titulo;
+          const descripcion = document.createElement('div');
+          descripcion.classList.add('descripcion');
+          descripcion.textContent = data.descripcion;
+          
+          // Convertir la imagen base64 a URL de Blob
+          const imagenUrl = await base64ToBlobUrl(data.foto);
+          const imagen = document.createElement('img');
+          imagen.classList.add('imagen');
+          imagen.src = imagenUrl;
+
+          elementoNoticia.appendChild(titulo);
+          elementoNoticia.appendChild(descripcion);
+          elementoNoticia.appendChild(imagen);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    };
+  </script>
 </body>
 
 </html>
