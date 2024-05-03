@@ -15,35 +15,26 @@ body {
   width: 100%;
   height: auto;
   min-height: 100vh; /* Si quieres que al menos tenga el alto de la pantalla */
-  padding-bottom: 70px;
+  padding-bottom: 100px;
 }
 
 .container-6 {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding-top: 65px; /* Espacio con la cebecera */
-  justify-content: center;
+  flex-direction: column;
+  align-items: center; /* Centra el contenido horizontalmente */
+  padding-top: 120px;
 }
 
 .elemento {
-  position: relative;
-  margin-right: 50px; /* Incrementar el margen derecho para hacer más ancho el elemento */
-  display: flex;
-  flex-direction: column;
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto; /* Ajustado para centrar verticalmente */
   padding: 20px;
-  box-sizing: border-box;
-  align-self: flex-start; /* Alinea cada elemento al inicio de su propia columna */
   background-color: #FFFFFF;
-  border-radius: 10px; /* Bordes redondeados */
-  height: auto;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
-  width: calc(33.333% - 40px);
-  margin: 20px; /* Espacio uniforme alrededor de los elementos */
-  padding-bottom: 70px; 
-  margin-top: 0; /* Eliminar el margen superior */
-  align-self: center; 
-  margin-bottom: 70px; /* Aumenta el margen inferior para evitar el solapamiento */
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-bottom: 20px; /* Reducido el margen inferior */
 }
 
 
@@ -54,8 +45,8 @@ body {
 }
 
 .elemento img {
-  width: 100%; /* Hacer que la imagen llene el ancho del elemento */
-  height: 200px; /* Ajustar la altura automáticamente */
+  width: 20px; /* Hacer que la imagen llene el ancho del elemento */
+  height: 20px; /* Ajustar la altura automáticamente */
   border-radius: 10px 10px 0 0; /* Redondear solo las esquinas superiores */
   object-fit: cover;
 }
