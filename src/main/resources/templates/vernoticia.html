@@ -134,6 +134,9 @@
       // Obtener el ID de la noticia de los query parameters
       const urlParams = new URLSearchParams(window.location.search);
       const idnoticia = urlParams.get('idinformacion');
+      const idvecino = urlParams.get('idvecino');
+      var homeLink = document.querySelector('.home a');
+      homeLink.href = `/menucomunidad?idvecino=${idvecino}`;
 
       // Realizar la solicitud al controlador
       fetch(`/idnoticiapornoticia?idnoticia=${idnoticia}`)
