@@ -9,7 +9,10 @@
   <style>
     .titulo {
       font-size: larger; /* Tamaño de letra más grande para el título de la noticia */
-      pointer-events: none; /* Hacer que el título no sea clicable */
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
+      color: #292525;
+      pointer-events: none;
     }
 
     .descripcion {
@@ -25,7 +28,6 @@
       border: 2px solid #ccc; /* Borde de la caja */
       border-radius: 20px; /* Borde redondeado */
       height: auto; /* Altura automática */
-      text-align: center; /* Centrar el contenido dentro de la caja */
       position: relative; /* Permitir posicionar la imagen */
     }
 
@@ -40,26 +42,32 @@
       margin-top: 20px; /* Espaciado superior */
     }
 
-    .editar, .eliminar {
+    .editar,
+    .eliminar {
+      position: absolute;
       background-color: green;
       color: white;
       padding: 5px 10px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      margin-top: 10px; /* Espaciado superior */
-      display: block; /* Para que los botones estén en línea */
-      margin: 10px auto; /* Centrar los botones horizontalmente */
     }
 
     .eliminar {
+      right: 10px;
       background-color: red;
+    }
+
+    .editar {
+      right: 90px;
     }
 
     .descripcion-editable {
       border: 1px solid #ccc;
       padding: 5px;
       margin-top: 10px;
+      width: calc(100% - 20px);
+      height: 100px;
     }
   </style>
 </head>
@@ -69,7 +77,6 @@
   <div class="cabecera">
     <span class="reserva-de-zonas">
       Editar noticia
-      
     </span>
     <div class="container">
       <div class="tu-comunidad">
@@ -96,20 +103,8 @@
     <div class="container-6">
     
       <!-- NOTICIA SELECCIONADA -->
-      <div class="elemento">
-        <img class="imagen" src="../static/images/garaje2.jpg" />
-        <div class="contenido">
-          <div class="titulo">
-            Limpieza de garaje 5 y 6 de mayo
-          </div>
-          <div class="descripcion descripcion-editable" contenteditable="true">
-            Por razones de mantenimiento, se informa a todos los residentes que el garaje estará cerrado temporalmente los días 5 y 6 de mayo. Pedimos disculpas por cualquier inconveniente que esto pueda causar y agradecemos su comprensión.
-          </div>
-          <div>
-            <button class="eliminar">Cancelar</button>
-            <button class="editar">Guardar cambios</button>
-          </div>
-        </div>
+      <div class="elemento" id="noticia">
+        <!-- Aquí se insertará la noticia -->
       </div>
 
     </div>
@@ -139,6 +134,128 @@
       ©TuComunidad 2024
     </span>
   </div>
+
+  <script>
+    async function base64ToBlobUrl(base64) {
+      try {
+        // Eliminar el tipo de datos del prefijo base64 si está presente
+        var base64WithoutPrefix = base64.replace(/^data:image\/(png|jpeg);base64,/, '');
+
+        // Decodificar la cadena base64
+        var byteString = atob(base64WithoutPrefix);
+
+        // Convertir la cadena decodificada a un ArrayBuffer
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+
+        // Determinar el tipo MIME de la imagen
+        var type = base64.match(/^data:image\/(png|jpeg);base64,/);
+        var mimeType = type ? `image/${type[1]}` : 'image/png'; // Default to PNG if MIME type not found
+
+        // Crear un Blob y obtener la URL del objeto Blob
+        var blob = new Blob([ab], {
+          type: mimeType
+        });
+        return URL.createObjectURL(blob);
+      } catch (error) {
+        console.error('Error al convertir la imagen base64:', error);
+        return null;
+      }
+    }
+
+    window.onload = async function() {
+      // Obtener el ID de la noticia de los query parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const idnoticia = urlParams.get('idnoticia');
+
+      // Realizar la solicitud al controlador para obtener la información de la noticia
+      fetch(`/idnoticiapornoticia?idnoticia=${idnoticia}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('La red no ha respondido correctamente');
+          }
+          return response.json();
+        })
+        .then(async data => {
+          // Manipular el DOM para mostrar la noticia
+          const elementoNoticia = document.getElementById('noticia');
+          const titulo = document.createElement('div');
+          titulo.classList.add('titulo');
+          titulo.contentEditable = true; // Hacer el título editable
+          titulo.textContent = data.titulo;
+          const descripcion = document.createElement('div');
+          descripcion.classList.add('descripcion', 'descripcion-editable');
+          descripcion.contentEditable = true; // Hacer la descripción editable
+          descripcion.textContent = data.descripcion;
+
+          // Convertir la imagen base64 a URL de Blob
+          const imagenUrl = await base64ToBlobUrl(data.foto);
+          const imagen = document.createElement('img');
+          imagen.classList.add('imagen');
+          imagen.src = imagenUrl;
+
+          elementoNoticia.appendChild(imagen);
+          elementoNoticia.appendChild(titulo);
+          elementoNoticia.appendChild(descripcion);
+
+          // Botones para editar y cancelar
+          const botonEditar = document.createElement('button');
+          botonEditar.textContent = 'Editar';
+          botonEditar.classList.add('editar');
+          elementoNoticia.appendChild(botonEditar);
+
+          const botonCancelar = document.createElement('button');
+          botonCancelar.textContent = 'Cancelar';
+          botonCancelar.classList.add('eliminar');
+          elementoNoticia.appendChild(botonCancelar);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+
+      // Evento para guardar los cambios al hacer clic en el botón "Editar"
+      document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('editar')) {
+          const titulo = document.querySelector('.titulo').textContent;
+          const descripcion = document.querySelector('.descripcion').textContent;
+
+          // Realizar la solicitud al controlador para guardar los cambios
+          fetch(`/editarnoticia?idnoticia=${idnoticia}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              titulo: titulo,
+              descripcion: descripcion
+            })
+          })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Error al guardar los cambios');
+              }
+              // Si la solicitud es exitosa, redirigir a la página de visualización de la noticia
+              window.location.href = `/vernoticia?idnoticia=${idnoticia}`;
+            })
+            .catch(error => {
+              console.error('Error al guardar los cambios:', error);
+              // Manejar el error adecuadamente, como mostrar un mensaje de error al usuario
+            });
+        }
+      });
+
+      // Evento para cancelar la edición al hacer clic en el botón "Cancelar"
+      document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('eliminar')) {
+          // Redirigir a la página de visualización de la noticia sin guardar cambios
+          window.location.href = `/vernoticia?idnoticia=${idnoticia}`;
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>

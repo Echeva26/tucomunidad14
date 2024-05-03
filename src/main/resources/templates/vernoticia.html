@@ -84,7 +84,7 @@
           <!-- Aquí se insertará la noticia -->
         </div>
         <!-- Botones de editar y eliminar -->
-        <button class="editar" style="display: none;">Editar</button>
+        <button class="editar" id="editarBtn" style="display: none;">Editar</button>
         <button id="eliminarBtn" class="eliminar" style="display: none;">Eliminar</button>
       </div>
     </div>
@@ -150,6 +150,7 @@
         const idvecino = urlParams.get('idvecino');
         var homeLink = document.querySelector('.home a');
         homeLink.href = `/menucomunidad?idvecino=${idvecino}`;
+        
 
         // Realizar la solicitud al controlador para obtener la información de la noticia
         fetch(`/idnoticiapornoticia?idnoticia=${idnoticia}`)
@@ -167,7 +168,7 @@
             titulo.textContent = data.titulo;
             const descripcion = document.createElement('div');
             descripcion.classList.add('descripcion');
-            descripcion.textContent = data.descripcion;
+            descripcion.textContent = data.textocompleto;
 
             // Convertir la imagen base64 a URL de Blob
             const imagenUrl = await base64ToBlobUrl(data.foto);
@@ -199,6 +200,12 @@
               // Mostrar botones de editar y eliminar
               document.querySelector('.editar').style.display = 'block';
               document.querySelector('.eliminar').style.display = 'block';
+              var editarBtn = document.getElementById('editarBtn');
+              editarBtn.addEventListener('click', function() {
+                window.location.href = `/editarnoticia?idnoticia=${idnoticia}`;
+              });
+             
+             
             } else {
               usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
             }
@@ -226,8 +233,11 @@
                 // Manejar el error adecuadamente, como mostrar un mensaje de error al usuario
               });
           }
-        });
-      };
+        }); 
+     
+  
+      }
+      
     </script>
 </body>
 
