@@ -45,7 +45,7 @@
     </div>
   </div>
 
-  <div class="pagina">
+  <div class="pagina" id="bloque-añadir">
     <div class="container-6">
     
       <div class="container-6" id="noticias-container"></div>
@@ -210,12 +210,32 @@
       var homeLink = document.querySelector('.home a');
       var idvecino = getQueryParam('idvecino');
       homeLink.href = `/menucomunidad?idvecino=${idvecino}`;
-  
+      
+      var contenedorNoticias = document.getElementById('bloque-añadir');
+
       var anadirnoticia = document.getElementById('anadir-noticia');
       anadirnoticia.addEventListener('click', function () {
           var idvecino = getQueryParam('idvecino');
           window.location.href = `/anadirnoticia?idvecino=${idvecino}`;
       });
+      fetch(`http://localhost:8080/vecinoporid?idvecino=${idvecino}`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('No se pudo obtener la información del vecino');
+              }
+              return response.json();
+            })
+            .then(data => {
+              var gestor = data.gestor; // Obtener el parámetro gestor
+              var usuarioDiv = document.querySelector('.usuario'); // Selección del div de usuario
+              if (gestor) {
+                usuarioDiv.textContent = 'Gestor de comunidad'; // Cambiar el texto a "Gestor"
+                contenedorNoticias.style.display = 'block';
+              } else {
+                usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
+                contenedorNoticias.style.display = 'none';
+              }});
+      
    
   });
   
