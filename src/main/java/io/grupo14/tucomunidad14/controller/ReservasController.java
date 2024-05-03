@@ -176,25 +176,26 @@ public class ReservasController {
     }
 
     @GetMapping("/reservasporidarea")
-    public ResponseEntity<?> getMethodName(@RequestParam Long idarea) {
-        Areacomun area = areaComunRepository.findById(idarea).get();
-        if (area != null) {
-            List<Reserva> reservas = area.getReserva();
-            List<ReservaSimpleDTO> reservasDTO = reservas.stream().map(reserva -> {
-                ReservaSimpleDTO dto = new ReservaSimpleDTO();
-                dto.setIdreserva(reserva.getIdreserva());
-                dto.setIdvecino(reserva.getVecino().getIdvecino());
-                dto.setIdarea(reserva.getAreacomun().getIdarea());
-                dto.setInicioReserva(reserva.getInicioReserva());
-                dto.setFinReserva(reserva.getFinReserva());
-                return dto;
-            }).collect(Collectors.toList());
+public ResponseEntity<?> getMethodName(@RequestParam Long idarea) {
+    Areacomun area = areaComunRepository.findById(idarea).orElse(null);
+    if (area != null) {
+        List<Reserva> reservas = area.getReserva();
+        List<ReservaSimpleDTO> reservasDTO = reservas.stream().map(reserva -> {
+            ReservaSimpleDTO dto = new ReservaSimpleDTO();
+            dto.setIdreserva(reserva.getIdreserva());
+            dto.setIdvecino(reserva.getVecino().getIdvecino());
+            dto.setIdarea(reserva.getAreacomun().getIdarea());
+            dto.setInicioReserva(reserva.getInicioReserva());
+            dto.setFinReserva(reserva.getFinReserva());
+            return dto;
+        }).collect(Collectors.toList());
 
-            return ResponseEntity.ok(reservasDTO);
-        }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta ese area");
-        }
+        return ResponseEntity.ok(reservasDTO);
+    } else {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el área");
     }
+}
+
     @GetMapping("/reservas/id")
     public ResponseEntity<List<Long>> obtenerIdsDeReservas() {
         List<Long> idsReservas = ((Collection<Reserva>) reservasRepository.findAll()).stream()
@@ -202,7 +203,7 @@ public class ReservasController {
             .collect(Collectors.toList());
         return ResponseEntity.ok(idsReservas);
     }
-    
+
     @PostMapping("/reservas/agregar")
 public ResponseEntity<?> agregarReserva(@RequestBody ReservaSimpleDTO reservaDTO) {
     try {
