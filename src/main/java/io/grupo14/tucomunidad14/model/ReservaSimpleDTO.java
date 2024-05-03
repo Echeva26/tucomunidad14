@@ -1,32 +1,32 @@
 package io.grupo14.tucomunidad14.model;
 
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class ReservaSimpleDTO {
     private Long idreserva;
     private Long idvecino;
     private Long idarea;
     // Campo para el inicio de la reserva
-    private Timestamp inicioReserva;
+    private LocalDateTime inicioReserva;
 
     // Campo para el fin de la reserva
-    private Timestamp finReserva;
+    private LocalDateTime finReserva;
     
     
     
     public ReservaSimpleDTO() {
     }
-    public Timestamp getInicioReserva() {
+    public LocalDateTime getInicioReserva() {
         return inicioReserva;
     }
-    public void setInicioReserva(Timestamp inicioReserva) {
+    public void setInicioReserva(LocalDateTime inicioReserva) {
         this.inicioReserva = inicioReserva;
     }
-    public Timestamp getFinReserva() {
+    public LocalDateTime getFinReserva() {
         return finReserva;
     }
-    public void setFinReserva(Timestamp finReserva) {
+    public void setFinReserva(LocalDateTime finReserva) {
         this.finReserva = finReserva;
     }
     public Long getIdreserva() {

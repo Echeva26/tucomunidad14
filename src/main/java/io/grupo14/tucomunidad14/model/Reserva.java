@@ -1,6 +1,5 @@
 package io.grupo14.tucomunidad14.model;
 
-import java.sql.Timestamp;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,6 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "RESERVA")
@@ -29,10 +29,10 @@ public class Reserva {
     private Areacomun areacomun;
 
     @NotNull(message = "La fecha y hora de inicio de reserva no pueden ser nulas")
-    private Timestamp inicioReserva;
+    private LocalDateTime inicioReserva;
 
     @NotNull(message = "La fecha y hora de fin de reserva no pueden ser nulas")
-    private Timestamp finReserva;
+    private LocalDateTime finReserva;
 
     public Reserva() {
     }
@@ -61,19 +61,19 @@ public class Reserva {
         this.areacomun = areacomun;
     }
 
-    public Timestamp getInicioReserva() {
+    public LocalDateTime getInicioReserva() {
         return inicioReserva;
     }
 
-    public void setInicioReserva(Timestamp inicioReserva) {
+    public void setInicioReserva(LocalDateTime inicioReserva) {
         this.inicioReserva = inicioReserva;
     }
 
-    public Timestamp getFinReserva() {
+    public LocalDateTime getFinReserva() {
         return finReserva;
     }
 
-    public void setFinReserva(Timestamp finReserva) {
+    public void setFinReserva(LocalDateTime finReserva) {
         this.finReserva = finReserva;
     }
 }
