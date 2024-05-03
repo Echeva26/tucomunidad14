@@ -104,7 +104,7 @@
       <form id="infoForm" action="/crearinformacion" method="post" enctype="multipart/form-data">
         <div class="elemento">
           <div class="cuadradoimagen" id="cuadradoimagen">
-            <img id="imagenPreview" src="#" alt="Vista previa de la imagen" style="display: none;">
+            <!-- La imagen se mostrará como fondo del contenedor -->
           </div>
           <input type="file" name="imagen" id="imagen" accept="image/*">
           
@@ -183,7 +183,7 @@
 
     // Vista previa de la imagen
     const imagenInput = document.getElementById('imagen');
-    const imagePreview = document.getElementById('imagenPreview');
+    const cuadradoimagen = document.getElementById('cuadradoimagen');
 
     imagenInput.addEventListener('change', () => {
       const file = imagenInput.files[0];
@@ -193,8 +193,8 @@
     function showImage(file) {
       const reader = new FileReader();
       reader.onload = function(e) {
-        imagePreview.src = e.target.result;
-        imagePreview.style.display = 'block';
+        cuadradoimagen.style.backgroundImage = `url('${e.target.result}')`;
+        cuadradoimagen.style.display = 'block';
       };
       reader.readAsDataURL(file);
     }
@@ -261,8 +261,6 @@
     });
     var homeLink = document.querySelector('.home a');
     homeLink.href = `/menucomunidad?idvecino=${idVecino}`;
-  
-    
   </script>
 </body>
 
