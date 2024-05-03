@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Comunidad Etsit</title>
+  <title>Añadir Noticia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="../static/css/añadir.css" />
   <style>
@@ -82,7 +82,7 @@
         TuComunidad
       </div>
       <p class="home">
-        <a href="" style="text-decoration: none;">
+        <a id="home" href="/menucomunidad"  style="text-decoration: none;">
           <span class="home-sub-30">Home</span>
           <span></span>
         </a>
@@ -259,6 +259,8 @@
     document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('fecha').value = getCurrentDate();
     });
+    var homeLink = document.querySelector('.home a');
+    homeLink.href = `/menucomunidad?idvecino=${idVecino}`;
   
     
   </script>
