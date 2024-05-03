@@ -45,12 +45,12 @@
     </div>
   </div>
 
-  <div class="pagina" id="bloque-añadir">
+  <div class="pagina" >
     <div class="container-6">
     
       <div class="container-6" id="noticias-container"></div>
 
-      <div class="elemento">
+      <div class="elemento"id="bloque-añadir">
         <div class="borde-azul"></div>
         <div class="elipse-icono">
           <div class="circulo"></div>
@@ -200,6 +200,7 @@
                       })
                       .then(noticias => {
                           renderizarNoticias(noticias);
+                          
                       })
                       .catch(error => console.error('Error al obtener noticias:', error));
               })
