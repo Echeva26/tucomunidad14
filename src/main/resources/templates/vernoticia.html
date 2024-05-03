@@ -169,6 +169,21 @@
         .catch(error => {
           console.error('Error:', error);
         });
+        fetch(`http://localhost:8080/vecinoporid?idvecino=${idvecino}`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('No se pudo obtener la información del vecino');
+              }
+              return response.json();
+            })
+            .then(data => {
+              var gestor = data.gestor; // Obtener el parámetro gestor
+              var usuarioDiv = document.querySelector('.usuario'); // Selección del div de usuario
+              if (gestor) {
+                usuarioDiv.textContent = 'Gestor de comunidad'; // Cambiar el texto a "Gestor"
+              } else {
+                usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
+              }});
     };
   </script>
 </body>
