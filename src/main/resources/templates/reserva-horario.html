@@ -123,6 +123,8 @@
     var horasSeleccionadas = []; // Array para almacenar las horas seleccionadas
 
     function cargarReservasPorDia() {
+      // Limpiar las reservas pintadas al cambiar de día
+  limpiarReservasPintadas();
   var fechaSeleccionada = new Date(document.getElementById("input-dia").value);
   var areaComunId = obtenerParametroURL("idarea");
   var idVecino = obtenerParametroURL("idvecino");
@@ -174,10 +176,18 @@
 
 
 
+// Función para limpiar las reservas pintadas al cambiar de día
+function limpiarReservasPintadas() {
+  var cuadrados = document.querySelectorAll(".cuadrado-reserva");
 
+  // Iterar sobre todos los cuadrados de reserva y eliminar las clases asociadas a las reservas
+  cuadrados.forEach(cuadrado => {
+    cuadrado.classList.remove("reserva-vecino");
+    cuadrado.classList.remove("reserva-otro-vecino");
+    cuadrado.classList.remove("disponible");
+  });
+}
 
-
-    // Función para seleccionar una hora
     // Función para seleccionar una hora
     function seleccionarHora(cuadrado) {
       if (!cuadrado.classList.contains("reserva-rojo")) {
