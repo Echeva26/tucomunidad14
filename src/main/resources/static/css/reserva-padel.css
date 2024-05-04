@@ -8,15 +8,32 @@ body {
   margin-left: 20px; /* Ajusta el valor según sea necesario */
 }
 
-
-
-/* Estilos para el contenedor de las horas */
 .columnas-horas {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
   gap: 5px;
-  margin: 0 50px; /* Ajuste el margen según sea necesario */
+  margin: 20px 50px 0 50px; /* Ajusta el margen superior según sea necesario */
 }
+
+
+/* Estilos para los elementos */
+.elemento {
+  position: relative;
+  margin-right: 50px;
+  margin-left: 20px; /* Nuevo margen izquierdo */
+  margin-bottom: 40px; /* Ajusta el margen inferior según sea necesario */
+  display: flex;
+  flex-direction: column;
+  padding: 0.1px 0 9.8px 0;
+  box-sizing: border-box;
+  align-self: flex-start;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 700px;
+  height: 200px;
+}
+
 
 /* Estilos para los cuadrados de reserva */
 .cuadrado-reserva {
@@ -52,7 +69,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 170px; /* Ajuste para dejar espacio para la cabecera */
+  padding-top: 210px; /* Ajuste para dejar espacio para la cabecera ---------------*/
   padding-bottom: 50px; /* Ajuste para evitar que el contenido se superponga con el pie de página */
   box-sizing: border-box;
   width: 100%;
@@ -117,24 +134,6 @@ body {
   margin: 0; /* Elimina el margen por defecto */
   padding: 0; /* Elimina el padding por defecto */
   line-height: 1; /* Centra verticalmente el texto */
-}
-
-/* Estilos para los elementos */
-.elemento {
-  position: relative;
-  margin-right: 50px;
-  margin-left: 20px; /* Nuevo margen izquierdo */
-  display: flex;
-  flex-direction: column;
-  padding: 0.1px 0 9.8px 0;
-  box-sizing: border-box;
-  margin-bottom: 20px;
-  align-self: flex-start;
-  background-color: #FFFFFF;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  width: 700px;
-  height: 200px;
 }
 
 /* Estilos para el borde azul */
