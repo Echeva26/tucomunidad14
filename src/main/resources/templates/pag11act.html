@@ -1,5 +1,4 @@
-<!doctype html>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,7 +9,7 @@
 </head>
 
 <body>
-  <!--CABECERA-->
+  <!-- CABECERA -->
   <div class="cabecera">
     <span class="reserva-de-zonas">
       Comunidad Etsit
@@ -39,8 +38,8 @@
   <div class="pagina">
     <div class="container-6">
 
-      <!--RESERVA DE ZONAS-->
-      <div class="elemento">
+      <!-- RESERVA DE ZONAS -->
+      <div class="elemento" id="acceder-reserva-zonas">
         <div class="borde-azul"></div>
         <div class="elipse-icono">
           <div class="circulo"></div>
@@ -55,7 +54,8 @@
         </div>
       </div>
 
-      <div class="elemento">
+      <!-- NOTICIAS -->
+      <div class="elemento" id="acceder-noticias">
         <div class="borde-azul"></div>
         <div class="elipse-icono">
           <div class="circulo"></div>
@@ -70,7 +70,8 @@
         </div>
       </div>
 
-      <div class="elemento" id="gestion-roles" style="display: none;">
+      <!-- GESTIÓN DE ROLES -->
+      <div class="elemento" id="acceder-gestion-roles" style="display: none;">
         <div class="borde-azul">
         </div>
         <div class="elipse-icono">
@@ -89,7 +90,7 @@
     </div>
   </div>
 
-  <!--PIE DE PAGINA-->
+  <!-- PIE DE PÁGINA -->
   <div class="pie-de-pagina">
     <div class="container-5">
       <div class="image-2">
@@ -115,6 +116,7 @@
       ©TuComunidad 2024
     </span>
   </div>
+
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       // Función para obtener parámetros de la URL
@@ -139,7 +141,7 @@
               var usuarioDiv = document.querySelector('.usuario'); // Selección del div de usuario
               if (gestor) {
                 usuarioDiv.textContent = 'Gestor de comunidad'; // Cambiar el texto a "Gestor"
-                document.getElementById('gestion-roles').style.display = 'block'; // Mostrar el elemento de gestión de roles
+                document.getElementById('acceder-gestion-roles').style.display = 'block'; // Mostrar el elemento de gestión de roles
               } else {
                 usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
               }
@@ -154,7 +156,6 @@
                 })
                 .then(data => {
                   var nombreComunidad = data.nombre; // Obtener el nombre de la comunidad
-                  var idcomunidad = data.idcomunidad;
                   var reservaDeZonas = document.querySelector('.reserva-de-zonas'); // Selección del span de reserva de zonas
                   var titleTag = document.querySelector('title'); // Selección del tag de título
                   reservaDeZonas.textContent = `Comunidad ${nombreComunidad}`; // Cambiar el texto en el span
@@ -173,9 +174,8 @@
       // Obtener el ID del vecino de la URL
       var idvecino = getQueryParam('idvecino');
 
-
       // ACCEDER RESERVA DE ZONAS Obtener el contenedor de reserva de zonas
-      var reservaDeZonas = document.querySelector('.elemento:nth-child(1)');
+      var reservaDeZonas = document.querySelector('#acceder-reserva-zonas');
 
       // Agregar un evento de clic al contenedor de reserva de zonas
       reservaDeZonas.addEventListener('click', function () {
@@ -183,28 +183,24 @@
         window.location.href = `/panelreservas?idvecino=${idvecino}`;
       });
 
-      //ACCEDER CONTENEDOR NOTICIAS
+      // ACCEDER NOTICIAS
       var noticias = document.getElementById('acceder-noticias');
       // Agregar un evento de clic al contenedor de noticias
       noticias.addEventListener('click', function () {
-        // Redireccionar a la página de noticias con el ID de la comunidad como parámetro
+        // Redireccionar a la página de noticias con el ID del vecino como parámetro
         window.location.href = `/noticias?idvecino=${idvecino}`;
       });
 
-
-      //ACCEDER GESTION ROLES
+      // ACCEDER GESTION ROLES
       var gestionRoles = document.getElementById('acceder-gestion-roles');
       // Agregar un evento de clic al contenedor de gestión de roles
       gestionRoles.addEventListener('click', function () {
-
-        // Redireccionar a la página "gestionroles"
+        // Redireccionar a la página de gestión de roles con el ID del vecino como parámetro
         window.location.href = `/gestionroles?idvecino=${idvecino}`;
       });
 
     });
   </script>
-
-
 
 </body>
 
