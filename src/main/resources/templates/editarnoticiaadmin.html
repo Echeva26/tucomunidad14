@@ -1,261 +1,302 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <title>Editar Noticias</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="../static/css/editar.css" />
-  <style>
-    .titulo {
-      font-size: larger; /* Tamaño de letra más grande para el título de la noticia */
-      font-family: 'Roboto', sans-serif;
-      font-weight: 700;
-      color: #292525;
-      pointer-events: none;
-    }
+    <meta charset="UTF-8" />
+    <title>Editar Noticias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="../static/css/editar.css" />
+    <style>
+        .titulo {
+            font-size: larger;
+            pointer-events: none;
+        }
 
-    .descripcion {
-      font-size: 14px; /* Tamaño de letra para la descripción de la noticia */
-      color: #333; /* Color de letra para la descripción */
-    }
+        .descripcion {
+            font-size: 14px;
+            color: #333;
+        }
 
-    .elemento {
-      width: 90%; /* Anchura de la caja de la noticia */
-      margin: 0 auto; /* Centrar la caja horizontalmente */
-      padding: 30px; /* Espaciado interior de la caja */
-      background-color: #f7f7f7; /* Color de fondo de la caja */
-      border: 2px solid #ccc; /* Borde de la caja */
-      border-radius: 20px; /* Borde redondeado */
-      height: auto; /* Altura automática */
-      position: relative; /* Permitir posicionar la imagen */
-    }
+        .elemento {
+            width: 90%;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #f7f7f7;
+            border: 2px solid #ccc;
+            border-radius: 20px;
+            height: auto;
+            text-align: center;
+            position: relative;
+        }
 
-    .imagen {
-      width: auto; /* Ancho completo */
-      height: auto; /* Altura automática para mantener la proporción */
-      border-top-left-radius: 20px; /* Esquina redondeada superior izquierda */
-      border-top-right-radius: 20px; /* Esquina redondeada superior derecha */
-    }
+        .imagen {
+            width: auto;
+            height: auto;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
 
-    .contenido {
-      margin-top: 20px; /* Espaciado superior */
-    }
+        .contenido {
+            margin-top: 20px;
+        }
 
-    .editar,
-    .eliminar {
-      position: absolute;
-      background-color: green;
-      color: white;
-      padding: 5px 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+        .editar,
+        .eliminar {
+            background-color: green;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-block;
+        }
 
-    .eliminar {
-      right: 10px;
-      background-color: red;
-    }
+        .eliminar {
+            background-color: red;
+        }
 
-    .editar {
-      right: 90px;
-    }
-
-    .descripcion-editable {
-      border: 1px solid #ccc;
-      padding: 5px;
-      margin-top: 10px;
-      width: calc(100% - 20px);
-      height: 100px;
-    }
-  </style>
+        .descripcion-editable {
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 
 <body>
-  <!-- CABECERA -->
-  <div class="cabecera">
-    <span class="reserva-de-zonas">
-      Editar noticia
-    </span>
-    <div class="container">
-      <div class="tu-comunidad">
-        TuComunidad
-      </div>
-      <p class="home">
-        <a href="/comunidad" style="text-decoration: none;">
-          <span class="home-sub-30">Home</span>
-          <span></span>
-        </a>
-      </p>
-      <div class="log-out">
-        <span class="our-works">
-          <a href="/" style="text-decoration: none;">Log out</a>
+    <!-- CABECERA -->
+    <div class="cabecera">
+        <span class="reserva-de-zonas">
+            Editar noticia
         </span>
-      </div>
-      <div class="usuario">
-        Gestor de comunidad
-      </div>
+        <div class="container">
+            <div class="tu-comunidad">
+                TuComunidad
+            </div>
+            <p class="home">
+                <a href="/comunidad?idvecino=123&idnoticia=456" style="text-decoration: none;">
+                    <span class="home-sub-30">Home</span>
+                    <span></span>
+                </a>
+            </p>
+            <div class="log-out">
+                <span class="our-works">
+                    <a href="/?idvecino=123&idnoticia=456" style="text-decoration: none;">Log out</a>
+                </span>
+            </div>
+            <div class="usuario">
+                Gestor de comunidad
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div class="pagina">
-    <div class="container-6">
-    
-      <!-- NOTICIA SELECCIONADA -->
-      <div class="elemento" id="noticia">
-        <!-- Aquí se insertará la noticia -->
-      </div>
+    <div class="pagina">
+        <div class="container-6">
+            <!-- NOTICIA SELECCIONADA -->
+            <form id="editarNoticiaForm" enctype="multipart/form-data">
+                <div class="elemento" id="noticia">
+                    <!-- Aquí se insertará la noticia -->
+                </div>
+                <input type="file" name="imagen" id="imagen" accept="image/*" style="display: none;">
+                <label for="imagen" class="editarimagen">Editar imagen</label>
+                <button type="button" class="editar">Guardar cambios</button>
+                <button type="button" class="eliminar">Cancelar</button>
 
+                <!-- Campos ocultos para ID de vecino y noticia -->
+                <input type="hidden" name="idvecino" id="idvecino">
+                <input type="hidden" name="idnoticia" id="idnoticia">
+                <input type="hidden" name="fecha" id="fecha">
+                <input type="hidden" name="idcomunidad" id="idcomunidad">
+            </form>
+        </div>
     </div>
-  </div>
 
-  <!-- PIE DE PAGINA -->
-  <div class="pie-de-pagina">
-    <div class="container-5">
-      <div class="image-2"></div>
-      <div class="container-4">
-        <img class="icon-1" src="../static/vectors/intagram.svg" />
-        <img class="icon-2" src="../static/vectors/facebook.svg" />
-        <img class="icon-3" src="../static/vectors/twitter.svg" />
-      </div>
-      <div class="idioma">
-        <span class="language">
-          Idioma
+    <!-- PIE DE PAGINA -->
+    <div class="pie-de-pagina">
+        <div class="container-5">
+            <div class="image-2"></div>
+            <div class="container-4">
+                <img class="icon-1" src="../static/vectors/intagram.svg" />
+                <img class="icon-2" src="../static/vectors/facebook.svg" />
+                <img class="icon-3" src="../static/vectors/twitter.svg" />
+            </div>
+            <div class="idioma">
+                <span class="language">
+                    Idioma
+                </span>
+                <img class="icon-color" src="../static/vectors/flecha.svg" />
+            </div>
+        </div>
+        <div class="description">
+            Facilitamos la convivencia en tu comunidad
+        </div>
+        <div class="line"></div>
+        <span class="tucom">
+            ©TuComunidad 2024
         </span>
-        <img class="icon-color" src="../static/vectors/flecha.svg" />
-      </div>
     </div>
-    <div class="description">
-      Facilitamos la convivencia en tu comunidad
-    </div>
-    <div class="line"></div>
-    <span class="tucom">
-      ©TuComunidad 2024
-    </span>
-  </div>
-
-  <script>
-    async function base64ToBlobUrl(base64) {
-      try {
-        // Eliminar el tipo de datos del prefijo base64 si está presente
-        var base64WithoutPrefix = base64.replace(/^data:image\/(png|jpeg);base64,/, '');
-
-        // Decodificar la cadena base64
-        var byteString = atob(base64WithoutPrefix);
-
-        // Convertir la cadena decodificada a un ArrayBuffer
-        var ab = new ArrayBuffer(byteString.length);
-        var ia = new Uint8Array(ab);
-        for (var i = 0; i < byteString.length; i++) {
-          ia[i] = byteString.charCodeAt(i);
+    <script>
+        async function base64ToBlobUrl(base64) {
+            try {
+                var base64WithoutPrefix = base64.replace(/^data:image\/(png|jpeg);base64,/, '');
+                var byteString = atob(base64WithoutPrefix);
+                var ab = new ArrayBuffer(byteString.length);
+                var ia = new Uint8Array(ab);
+                for (var i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+                var type = base64.match(/^data:image\/(png|jpeg);base64,/);
+                var mimeType = type ? `image/${type[1]}` : 'image/png';
+                var blob = new Blob([ab], {
+                    type: mimeType
+                });
+                return URL.createObjectURL(blob);
+            } catch (error) {
+                console.error('Error al convertir la imagen base64:', error);
+                return null;
+            }
         }
 
-        // Determinar el tipo MIME de la imagen
-        var type = base64.match(/^data:image\/(png|jpeg);base64,/);
-        var mimeType = type ? `image/${type[1]}` : 'image/png'; // Default to PNG if MIME type not found
+        function getCurrentDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
 
-        // Crear un Blob y obtener la URL del objeto Blob
-        var blob = new Blob([ab], {
-          type: mimeType
-        });
-        return URL.createObjectURL(blob);
-      } catch (error) {
-        console.error('Error al convertir la imagen base64:', error);
-        return null;
-      }
-    }
+        window.onload = async function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const idnoticia = urlParams.get('idnoticia');
+            const idvecino = urlParams.get('idvecino');
 
-    window.onload = async function() {
-      // Obtener el ID de la noticia de los query parameters
-      const urlParams = new URLSearchParams(window.location.search);
-      const idnoticia = urlParams.get('idnoticia');
+            fetch(`/idnoticiapornoticia?idnoticia=${idnoticia}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('La red no ha respondido correctamente');
+                    }
+                    return response.json();
+                })
+                .then(async data => {
+                    const elementoNoticia = document.getElementById('noticia');
+                    const titulo = document.createElement('input');
+                    titulo.classList.add('titulo');
+                    titulo.setAttribute('name', 'titulo');
+                    titulo.setAttribute('value', data.titulo);
+                    const descripcion = document.createElement('textarea');
+                    descripcion.classList.add('descripcion');
+                    descripcion.setAttribute('name', 'descripcion');
+                    descripcion.textContent = data.descripcion;
+                    const textocompleto = document.createElement('textarea');
+                    textocompleto.classList.add('textocompleto');
+                    textocompleto.setAttribute('name', 'textocompleto');
+                    textocompleto.textContent = data.textocompleto;
+                    const imagenUrl = await base64ToBlobUrl(data.foto);
+                    const imagen = document.createElement('img');
+                    imagen.classList.add('imagen');
+                    imagen.src = imagenUrl;
 
-      // Realizar la solicitud al controlador para obtener la información de la noticia
-      fetch(`/idnoticiapornoticia?idnoticia=${idnoticia}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('La red no ha respondido correctamente');
-          }
-          return response.json();
-        })
-        .then(async data => {
-          // Manipular el DOM para mostrar la noticia
-          const elementoNoticia = document.getElementById('noticia');
-          const titulo = document.createElement('div');
-          titulo.classList.add('titulo');
-          titulo.contentEditable = true; // Hacer el título editable
-          titulo.textContent = data.titulo;
-          const descripcion = document.createElement('div');
-          descripcion.classList.add('descripcion', 'descripcion-editable');
-          descripcion.contentEditable = true; // Hacer la descripción editable
-          descripcion.textContent = data.descripcion;
+                    elementoNoticia.appendChild(titulo);
+                    elementoNoticia.appendChild(descripcion);
+                    elementoNoticia.appendChild(textocompleto);
+                    elementoNoticia.appendChild(imagen);
 
-          // Convertir la imagen base64 a URL de Blob
-          const imagenUrl = await base64ToBlobUrl(data.foto);
-          const imagen = document.createElement('img');
-          imagen.classList.add('imagen');
-          imagen.src = imagenUrl;
+                    // Obtener y agregar el ID de la comunidad al campo oculto
+                    fetch(`http://localhost:8080/vecino/comunidad?idVecino=${idvecino}`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('No se pudo obtener la información del vecino');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            var idComunidad = data.idcomunidad;
+                            document.getElementById('idcomunidad').value = idComunidad;
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
 
-          elementoNoticia.appendChild(imagen);
-          elementoNoticia.appendChild(titulo);
-          elementoNoticia.appendChild(descripcion);
+                    // Actualizar los campos ocultos con los IDs y la fecha
+                    document.getElementById('idvecino').value = idvecino;
+                    document.getElementById('idnoticia').value = idnoticia;
+                    document.getElementById('fecha').value = getCurrentDate();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
 
-          // Botones para editar y cancelar
-          const botonEditar = document.createElement('button');
-          botonEditar.textContent = 'Editar';
-          botonEditar.classList.add('editar');
-          elementoNoticia.appendChild(botonEditar);
+            document.getElementById('imagen').addEventListener('input', async function () {
+                const file = this.files[0];
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function () {
+                    const base64 = reader.result;
+                    const imagen = document.querySelector('.imagen');
+                    imagen.src = base64;
+                };
+            });
+            const guardar = document.querySelector('.editar');
+            guardar.addEventListener('click', async () => {
+            
+                const titulo = document.querySelector('.titulo').value;
+                const descripcion = document.querySelector('.descripcion').value;
+                const textocompleto = document.querySelector('.textocompleto').value;
+                const idcomunidad = document.getElementById('idcomunidad').value;
+                const idvecino = document.getElementById('idvecino').value;
+                const fecha = document.getElementById('fecha').value;
+                const idnoticia = document.getElementById('idnoticia').value;
 
-          const botonCancelar = document.createElement('button');
-          botonCancelar.textContent = 'Cancelar';
-          botonCancelar.classList.add('eliminar');
-          elementoNoticia.appendChild(botonCancelar);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
+                const formData = new FormData();
+                formData.append('titulo', titulo);
+                formData.append('descripcion', descripcion);
+                formData.append('textocompleto', textocompleto);
+                formData.append('idcomunidad', idcomunidad);
+                formData.append('idvecino', idvecino);
+                formData.append('fecha', fecha);
+                formData.append('idnoticia', idnoticia);
+                console.log('Datos a enviar al servidor:');
+                console.log('Título:', titulo);
+                console.log('Descripción:', descripcion);
+                console.log('Texto completo:', textocompleto);
+                console.log('ID de comunidad:', idcomunidad);
+                console.log('ID de vecino:', idvecino);
+                console.log('Fecha:', fecha);
+                console.log('ID de noticia:', idnoticia);
 
-      // Evento para guardar los cambios al hacer clic en el botón "Editar"
-      document.addEventListener('click', function(event) {
-        if (event.target.classList.contains('editar')) {
-          const titulo = document.querySelector('.titulo').textContent;
-          const descripcion = document.querySelector('.descripcion').textContent;
+                const imagenInput = document.getElementById('imagen').files[0];
+                if (imagenInput) {
+                    formData.append('imagen', imagenInput);
+                }
 
-          // Realizar la solicitud al controlador para guardar los cambios
-          fetch(`/editarnoticia?idnoticia=${idnoticia}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              titulo: titulo,
-              descripcion: descripcion
-            })
-          })
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('Error al guardar los cambios');
-              }
-              // Si la solicitud es exitosa, redirigir a la página de visualización de la noticia
-              window.location.href = `/vernoticia?idnoticia=${idnoticia}`;
-            })
-            .catch(error => {
-              console.error('Error al guardar los cambios:', error);
-              // Manejar el error adecuadamente, como mostrar un mensaje de error al usuario
+                try {
+                    const response = await fetch('/editarinformacion', {
+                        method: 'PUT',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        const message = await response.text();
+                        alert(message); // Mostrar mensaje de éxito
+                        // Redireccionar o hacer alguna acción adicional si es necesario
+                        window.location.href = `/vernoticia?idvecino=${idvecino}&idnoticia=${idnoticia}`;
+                    } else {
+                        throw new Error('Error editar noticia');
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert('Error al editar noticia');
+                }
+            });
+
+            document.querySelector('.eliminar').addEventListener('click', function () {
+                window.location.href = `/vernoticia?idvecino=${idvecino}&idnoticia=${idnoticia}`;
             });
         }
-      });
+    </script>
 
-      // Evento para cancelar la edición al hacer clic en el botón "Cancelar"
-      document.addEventListener('click', function(event) {
-        if (event.target.classList.contains('eliminar')) {
-          // Redirigir a la página de visualización de la noticia sin guardar cambios
-          window.location.href = `/vernoticia?idnoticia=${idnoticia}`;
-        }
-      });
-    }
-  </script>
+
 </body>
 
 </html>

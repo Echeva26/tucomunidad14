@@ -198,8 +198,10 @@ public class InformacionController {
 
     @PutMapping("/editarinformacion")
     public String editarInformacion(@ModelAttribute InformacionDTO informacionDTO,
-            @RequestParam("imagen") MultipartFile imagen) {
+            @RequestParam(value = "imagen", required = false) MultipartFile imagen) {
         // Verificar que la información existe
+        System.out.println("InformacionDTO recibido: " + informacionDTO.toString());
+
         Long idInformacion = informacionDTO.getIdinformacion();
         Optional<Informacion> informacionOpt = informacionRepository.findById(idInformacion);
         if (!informacionOpt.isPresent()) {
@@ -236,7 +238,7 @@ public class InformacionController {
         }
 
         // Actualizar imagen si se incluye una nueva
-        if (!imagen.isEmpty()) {
+        if (imagen != null && !imagen.isEmpty()) {
             Path directorioImagenes = Paths.get("src//main//resources//static/imagesinformation");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
 
