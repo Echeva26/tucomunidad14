@@ -288,6 +288,8 @@
             document.querySelector('.eliminar').addEventListener('click', function () {
                 window.location.href = `/vernoticia?idvecino=${idvecino}&idinformacion=${idnoticia}`;
             });
+            var homeLink = document.querySelector('.home a');
+             homeLink.href = `/menucomunidad?idvecino=${idvecino}`;
         }
     </script>
 
