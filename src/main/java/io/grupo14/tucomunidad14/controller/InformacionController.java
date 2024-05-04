@@ -292,7 +292,7 @@ public class InformacionController {
             }
 
             return ResponseEntity.ok(infofinal);
-        }else{
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No consta esa informacion");
         }
 

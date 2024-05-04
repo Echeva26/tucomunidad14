@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class vernoticia {
-
-    @GetMapping("/vernoticia")
+public class editarnoticia {
+    @GetMapping("/editarnoticia")
     public String menucomunidad() {
-        return "vernoticia";
+        return "editarnoticiaadmin";
     }
+
 }
