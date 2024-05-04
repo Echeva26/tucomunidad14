@@ -19,12 +19,12 @@
       <div class="tu-comunidad">
         TuComunidad
       </div>
-      <p class="home" >
+      <p class="home">
         <a href="" style="text-decoration: none;">
           <span class="home-sub-30"></span>
           <span></span>
-      </a>
-     </p>
+        </a>
+      </p>
       <div class="log-out">
         <span class="our-works">
           <a href="/" style="text-decoration: none;">Log out</a>
@@ -50,9 +50,8 @@
           Reserva de zonas
         </div>
         <div class="reservar">
-          <span class="reservar-1">
-            Acceder
-          </span>
+          <span class="reservar-1">Acceder</span>
+          <img class="flecha-reservar" src="/static/vectors/flecha-reservar.svg" />
         </div>
       </div>
 
@@ -65,10 +64,9 @@
         <div class="titulo">
           Noticias
         </div>
-        <div class="reservar" id="acceder-noticias">
-          <span class="reservar-1">
-            Acceder
-          </span>
+        <div class="reservar">
+          <span class="reservar-1">Acceder</span>
+          <img class="flecha-reservar" src="/static/vectors/flecha-reservar.svg" />
         </div>
       </div>
 
@@ -77,18 +75,17 @@
         </div>
         <div class="elipse-icono">
           <div class="circulo"></div>
-          <img class="icono" src="../static/vectors/gestionroles.svg" />
+          <img class="icono" src="../static/vectors/gestionderoles.svg" />
         </div>
         <div class="titulo">
           Gestión de Roles
         </div>
-        <div class="reservar" id="acceder-gestion-roles">
-          <span class="reservar-1">
-            Acceder
-          </span>
+        <div class="reservar">
+          <span class="reservar-1">Acceder</span>
+          <img class="flecha-reservar" src="/static/vectors/flecha-reservar.svg" />
         </div>
       </div>
-      
+
     </div>
   </div>
 
@@ -125,7 +122,7 @@
         var searchParams = new URLSearchParams(window.location.search);
         return searchParams.get(param);
       }
-  
+
       // Cargar datos de la comunidad al cargar la página
       window.onload = function () {
         var idvecino = getQueryParam('idvecino'); // Obtiene el ID de la URL
@@ -146,7 +143,7 @@
               } else {
                 usuarioDiv.textContent = 'Vecino'; // Cambiar el texto a "Vecino"
               }
-  
+
               // Segunda consulta a la API para obtener el nombre de la comunidad
               fetch(`http://localhost:8080/vecino/comunidad?idVecino=${idvecino}`)
                 .then(response => {
@@ -157,7 +154,7 @@
                 })
                 .then(data => {
                   var nombreComunidad = data.nombre; // Obtener el nombre de la comunidad
-                  var idcomunidad= data.idcomunidad;
+                  var idcomunidad = data.idcomunidad;
                   var reservaDeZonas = document.querySelector('.reserva-de-zonas'); // Selección del span de reserva de zonas
                   var titleTag = document.querySelector('title'); // Selección del tag de título
                   reservaDeZonas.textContent = `Comunidad ${nombreComunidad}`; // Cambiar el texto en el span
@@ -172,14 +169,14 @@
             });
         }
       }
-  
+
       // Obtener el ID del vecino de la URL
       var idvecino = getQueryParam('idvecino');
-      
-  
+
+
       // ACCEDER RESERVA DE ZONAS Obtener el contenedor de reserva de zonas
       var reservaDeZonas = document.querySelector('.elemento:nth-child(1)');
-  
+
       // Agregar un evento de clic al contenedor de reserva de zonas
       reservaDeZonas.addEventListener('click', function () {
         // Redireccionar a la página "panelreservas" con el parámetro "idvecino"
@@ -193,7 +190,7 @@
         // Redireccionar a la página de noticias con el ID de la comunidad como parámetro
         window.location.href = `/noticias?idvecino=${idvecino}`;
       });
-      
+
 
       //ACCEDER GESTION ROLES
       var gestionRoles = document.getElementById('acceder-gestion-roles');
@@ -203,12 +200,12 @@
         // Redireccionar a la página "gestionroles"
         window.location.href = `/gestionroles?idvecino=${idvecino}`;
       });
-      
+
     });
   </script>
-  
-  
-  
+
+
+
 </body>
 
 </html>
