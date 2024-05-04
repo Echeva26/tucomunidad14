@@ -58,10 +58,6 @@ body {
   background-color: red;
 }
 
-/* Agregar efecto de presionar el botón */
-.boton-cancelar.pressed {
-  transform: translateY(2px);
-}
 
 /* Estilos para la página */
 .pagina {
@@ -100,7 +96,7 @@ body {
   margin-right: 50px;
 }
 
-/* Botón Cancelar Reserva */
+/* Estilos para los botones */
 .boton-cancelar,
 .boton-reservar {
   border-radius: 1000px;
@@ -114,7 +110,23 @@ body {
   width: auto; /* Ancho ajustado automáticamente según el contenido */
   height: auto; /* Altura ajustada automáticamente según el contenido */
   box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave para el efecto de transformación y sombra */
 }
+
+/* Efecto de presionar el botón */
+.boton-cancelar:active,
+.boton-reservar:active {
+  transform: translateY(2px); /* Cambia la posición hacia abajo al presionar */
+}
+
+/* Efecto hover */
+.boton-cancelar:hover,
+.boton-reservar:hover {
+  transform: translateY(-5px); /* Eleva el botón al pasar el cursor */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada para resaltar */
+}
+
+
 
 .boton-cancelar {
   background: #c52a1f;
