@@ -41,7 +41,7 @@
         }
 
         .editar,
-        .eliminar {
+        .eliminar,.editarimagen {
             background-color: green;
             color: white;
             padding: 5px 10px;
@@ -183,8 +183,9 @@
                     const titulo = document.createElement('input');
                     titulo.classList.add('titulo');
                     titulo.setAttribute('name', 'titulo');
-                    titulo.setAttribute('value', data.titulo);
                     titulo.setAttribute('contenteditable','true')
+                    titulo.setAttribute('value', data.titulo);
+                    
                     const descripcion = document.createElement('textarea');
                     descripcion.classList.add('descripcion');
                     descripcion.setAttribute('name', 'descripcion');
@@ -240,13 +241,13 @@
             });
             const guardar = document.querySelector('.editar');
             guardar.addEventListener('click', async () => {
-                const titulo = document.querySelector('.titulo').innerText;
+                const titulo = document.querySelector('.titulo').value;
                 const descripcion = document.querySelector('.descripcion').value;
                 const textocompleto = document.querySelector('.textocompleto').value;
                 const idcomunidad = document.getElementById('idcomunidad').value;
                 const idvecino = document.getElementById('idvecino').value;
                 const fecha = document.getElementById('fecha').value;
-                const idnoticia = document.getElementById('idnoticia').value;
+                const idinformacion = document.getElementById('idnoticia').value;
             
                 const formData = new FormData();
                 formData.append('titulo', titulo);
@@ -255,7 +256,7 @@
                 formData.append('idcomunidad', idcomunidad);
                 formData.append('idvecino', idvecino);
                 formData.append('fecha', fecha);
-                formData.append('idnoticia', idnoticia);
+                formData.append('idinformacion', idinformacion);
             
                 const imagenInput = document.getElementById('imagen').files[0];
                 if (imagenInput) {
@@ -272,7 +273,7 @@
                         const message = await response.text();
                         alert(message); // Mostrar mensaje de éxito
                         // Redireccionar o hacer alguna acción adicional si es necesario
-                        window.location.href = `/vernoticia?idvecino=${idvecino}&idnoticia=${idnoticia}`;
+                        window.location.href = `/vernoticia?idvecino=${idvecino}&idinformacion=${idnoticia}`;
                     } else {
                         throw new Error('Error editar noticia');
                     }
@@ -285,7 +286,7 @@
      
 
             document.querySelector('.eliminar').addEventListener('click', function () {
-                window.location.href = `/vernoticia?idvecino=${idvecino}&idnoticia=${idnoticia}`;
+                window.location.href = `/vernoticia?idvecino=${idvecino}&idinformacion=${idnoticia}`;
             });
         }
     </script>
