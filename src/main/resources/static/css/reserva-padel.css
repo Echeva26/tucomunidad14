@@ -4,42 +4,46 @@ body {
   padding: 0;
   background: #E9FBF8;
 }
-/* Estilo para resaltar los recuadros seleccionados */
-.seleccionado {
-  background-color: lightblue;
-}
-.disponible {
-  background-color: white;
-}
-
-
-/* Agregar efecto de presionar el botón */
-.boton-cancelar.pressed {
-  transform: translateY(2px);
+.container-select-dia {
+  margin-left: 20px; /* Ajusta el valor según sea necesario */
 }
 
 
 
-/* Agregar estilos para los cuadrados de reserva */
+/* Estilos para el contenedor de las horas */
 .columnas-horas {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Distribución automática en columnas de al menos 80px de ancho */
-  gap: 5px; /* Espacio entre los elementos */
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 5px;
+  margin: 0 50px; /* Ajuste el margen según sea necesario */
 }
 
+/* Estilos para los cuadrados de reserva */
 .cuadrado-reserva {
   border: 1px solid #ccc;
   padding: 5px;
   text-align: center;
+  background-color: white; /* Cambio: fondo por defecto */
 }
 
+/* Estilo para resaltar los recuadros seleccionados */
+.seleccionado {
+  background-color: lightblue;
+}
 
-.reserva-rojo {
+/* Estilo para resaltar las reservas del vecino actual */
+.reserva-vecino {
+  background-color: green;
+}
+
+/* Estilo para resaltar las reservas de otros vecinos */
+.reserva-otro-vecino {
   background-color: red;
 }
 
-.reserva-verde {
-  background-color: green;
+/* Agregar efecto de presionar el botón */
+.boton-cancelar.pressed {
+  transform: translateY(2px);
 }
 
 /* Estilos para la página */
@@ -55,13 +59,18 @@ body {
   height: 100vh;
 }
 
-/* Contenedor de los cuadrados de reserva */
-.container-6 {
+/* Contenedor de los elementos */
+.container {
+  background: #FFFFFF;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding-top: 40px; /* Espacio con la cabecera */
+  justify-content: space-between;
+  padding: 18.1px 57.3px 16.1px 135.8px;
+  box-sizing: border-box;
 }
 
 /* Contenedor de los botones */
@@ -75,9 +84,9 @@ body {
 }
 
 /* Botón Cancelar Reserva */
-.boton-cancelar {
+.boton-cancelar,
+.boton-reservar {
   border-radius: 1000px;
-  background: #c52a1f;
   position: relative;
   margin-top: -10px; /* Cambia este valor según tus necesidades */
   margin-bottom: 2px;
@@ -90,20 +99,12 @@ body {
   box-sizing: border-box;
 }
 
-/* Botón Reservar */
+.boton-cancelar {
+  background: #c52a1f;
+}
+
 .boton-reservar {
-  border-radius: 1000px;
   background: #60E1CB;
-  position: relative;
-  margin-top: -10px; /* Cambia este valor según tus necesidades */
-  margin-bottom: 2px;
-  display: flex;
-  align-items: center; /* Centra verticalmente el contenido */
-  justify-content: center;
-  padding: 10px 20px; /* Ajusta el padding según tus necesidades */
-  width: auto; /* Ancho ajustado automáticamente según el contenido */
-  height: auto; /* Altura ajustada automáticamente según el contenido */
-  box-sizing: border-box;
 }
 
 /* Estilos para los botones */
@@ -121,18 +122,19 @@ body {
 /* Estilos para los elementos */
 .elemento {
   position: relative;
-  margin-right: 50px; /* Incrementar el margen derecho para hacer más ancho el elemento */
+  margin-right: 50px;
+  margin-left: 20px; /* Nuevo margen izquierdo */
   display: flex;
   flex-direction: column;
   padding: 0.1px 0 9.8px 0;
   box-sizing: border-box;
-  margin-bottom: 20px; /* Espacio entre los elementos */
-  align-self: flex-start; /* Alinea cada elemento al inicio de su propia columna */
+  margin-bottom: 20px;
+  align-self: flex-start;
   background-color: #FFFFFF;
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra abajo */
-  width: 700px; /* Ancho mayor */
-  height: 200px; /* Alto mayor */
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 700px;
+  height: 200px;
 }
 
 /* Estilos para el borde azul */
@@ -292,19 +294,6 @@ body {
   justify-content: center;
   padding: 102px 46px 31px 0;
   width: 100%; 
-  box-sizing: border-box;
-}
-
-.container {
-  background: #FFFFFF;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 18.1px 57.3px 16.1px 135.8px;
   box-sizing: border-box;
 }
 

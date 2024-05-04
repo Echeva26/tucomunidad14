@@ -62,7 +62,7 @@
       <!-- PADEL -->
       <div class="elemento">
         <div class="borde-azul"></div>
-        <div class="titulo">Zona Común</div>
+        <div class="titulo"></div> <!-- Mostrar el nombre del área común -->
         <!-- Agregar un campo de entrada para seleccionar el día -->
         <div class="container-select-dia">
           <label for="input-dia">Seleccionar día:</label>
@@ -73,8 +73,8 @@
         <div class="horario-reservas">
           <!-- Generar filas -->
           <div class="columnas-horas">
-            <!-- Generar cuadrados por cada hora desde las 10:00:00 hasta las 22:00:00 -->
-            <div th:each="hora : ${#numbers.sequence(10, 22)}" class="cuadrado-reserva" onclick="seleccionarHora(this)">
+            <!-- Generar cuadrados por cada hora desde las 9:00:00 hasta las 23:00:00 -->
+            <div th:each="hora : ${#numbers.sequence(9, 23)}" class="cuadrado-reserva" onclick="seleccionarHora(this)">
               <span th:text="${hora + ':00:00'}"></span>
             </div>
           </div>
@@ -124,88 +124,99 @@
 
     function cargarReservasPorDia() {
       // Limpiar las reservas pintadas al cambiar de día
-  limpiarReservasPintadas();
-  var fechaSeleccionada = new Date(document.getElementById("input-dia").value);
-  var areaComunId = obtenerParametroURL("idarea");
-  var idVecino = obtenerParametroURL("idvecino");
+      limpiarReservasPintadas();
+      var fechaSeleccionada = new Date(document.getElementById("input-dia").value);
+      var areaComunId = obtenerParametroURL("idarea");
+      var idVecino = obtenerParametroURL("idvecino");
 
-  // Realizar la petición al servidor para obtener las reservas para el área común y día especificados
-  fetch(`/reservasporidarea?idarea=${areaComunId}`)
-    .then(response => response.json())
-    .then(reservas => {
+      // Realizar la petición al servidor para obtener las reservas para el área común y día especificados
+      fetch(`/reservasporidarea?idarea=${areaComunId}`)
+        .then(response => response.json())
+        .then(reservas => {
+          var cuadrados = document.querySelectorAll(".cuadrado-reserva");
+
+          // Limpiar las clases de reserva de todos los cuadrados
+          cuadrados.forEach(cuadrado => {
+            cuadrado.classList.remove("reserva-rojo");
+            cuadrado.classList.remove("reserva-verde"); // Limpiar clases de reserva
+          });
+
+          cuadrados.forEach(cuadrado => {
+            var horaReserva = cuadrado.innerText.trim();
+
+            // Obtener la hora de reserva en forma de timestamp
+            var horaReservaTimestamp = new Date(fechaSeleccionada.getFullYear(), fechaSeleccionada.getMonth(), fechaSeleccionada.getDate(), horaReserva.split(":")[0], horaReserva.split(":")[1], horaReserva.split(":")[2]).getTime();
+
+            // Verificar si hay alguna reserva que coincida con la fecha y hora seleccionadas
+            var reserva = reservas.find(reserva => {
+              var inicioReservaTimestamp = new Date(reserva.inicioReserva).getTime();
+              var finReservaTimestamp = new Date(reserva.finReserva).getTime();
+              return horaReservaTimestamp >= inicioReservaTimestamp && horaReservaTimestamp < finReservaTimestamp;
+            });
+
+            if (reserva) {
+              if (reserva.idvecino === parseInt(idVecino)) {
+                // Verificar si la reserva es del vecino actual y si está dentro del rango de horas
+                var inicioReservaHora = new Date(reserva.inicioReserva).getHours();
+                var finReservaHora = new Date(reserva.finReserva).getHours();
+                var horaSeleccionada = parseInt(horaReserva.split(":")[0]);
+                if (horaSeleccionada >= inicioReservaHora && horaSeleccionada < finReservaHora) {
+                  cuadrado.classList.add("reserva-vecino"); // Agregar clase de reserva del vecino actual
+                }
+              } else {
+                cuadrado.classList.add("reserva-otro-vecino"); // Agregar clase de reserva de otro vecino
+              }
+            } else {
+              cuadrado.classList.add("disponible"); // Marcar como libre si no hay reserva
+            }
+          });
+        })
+        .catch(error => console.error('Error al cargar las reservas:', error));
+    }
+
+    // Función para limpiar las reservas pintadas al cambiar de día
+    function limpiarReservasPintadas() {
       var cuadrados = document.querySelectorAll(".cuadrado-reserva");
 
-      // Limpiar las clases de reserva de todos los cuadrados
+      // Iterar sobre todos los cuadrados de reserva y eliminar las clases asociadas a las reservas
       cuadrados.forEach(cuadrado => {
-        cuadrado.classList.remove("reserva-rojo");
-        cuadrado.classList.remove("reserva-verde"); // Limpiar clases de reserva
+        cuadrado.classList.remove("reserva-vecino");
+        cuadrado.classList.remove("reserva-otro-vecino");
+        cuadrado.classList.remove("disponible");
       });
-
-      cuadrados.forEach(cuadrado => {
-        var horaReserva = cuadrado.innerText.trim();
-
-        // Obtener la hora de reserva en forma de timestamp
-        var horaReservaTimestamp = new Date(fechaSeleccionada.getFullYear(), fechaSeleccionada.getMonth(), fechaSeleccionada.getDate(), horaReserva.split(":")[0], horaReserva.split(":")[1], horaReserva.split(":")[2]).getTime();
-
-        // Verificar si hay alguna reserva que coincida con la fecha y hora seleccionadas
-        var reserva = reservas.find(reserva => {
-          var inicioReservaTimestamp = new Date(reserva.inicioReserva).getTime();
-          var finReservaTimestamp = new Date(reserva.finReserva).getTime();
-          return horaReservaTimestamp >= inicioReservaTimestamp && horaReservaTimestamp < finReservaTimestamp;
-        });
-
-        if (reserva) {
-          if (reserva.idvecino === parseInt(idVecino)) {
-            // Verificar si la reserva es del vecino actual y si está dentro del rango de horas
-            var inicioReservaHora = new Date(reserva.inicioReserva).getHours();
-            var finReservaHora = new Date(reserva.finReserva).getHours();
-            var horaSeleccionada = parseInt(horaReserva.split(":")[0]);
-            if (horaSeleccionada >= inicioReservaHora && horaSeleccionada < finReservaHora) {
-              cuadrado.classList.add("reserva-vecino"); // Agregar clase de reserva del vecino actual
-            }
-          } else {
-            cuadrado.classList.add("reserva-otro-vecino"); // Agregar clase de reserva de otro vecino
-          }
-        } else {
-          cuadrado.classList.add("disponible"); // Marcar como libre si no hay reserva
-        }
-      });
-    })
-    .catch(error => console.error('Error al cargar las reservas:', error));
-}
-
-
-
-// Función para limpiar las reservas pintadas al cambiar de día
-function limpiarReservasPintadas() {
-  var cuadrados = document.querySelectorAll(".cuadrado-reserva");
-
-  // Iterar sobre todos los cuadrados de reserva y eliminar las clases asociadas a las reservas
-  cuadrados.forEach(cuadrado => {
-    cuadrado.classList.remove("reserva-vecino");
-    cuadrado.classList.remove("reserva-otro-vecino");
-    cuadrado.classList.remove("disponible");
-  });
-}
+    }
 
     // Función para seleccionar una hora
-    function seleccionarHora(cuadrado) {
-      if (!cuadrado.classList.contains("reserva-rojo")) {
-        if (cuadrado.classList.contains("seleccionado")) {
-          cuadrado.classList.remove("seleccionado"); // Desmarcar la hora si ya estaba seleccionada
-          actualizarHorasSeleccionadas();
-        } else {
-          if (horasSeleccionadas.length < 2 || (horasSeleccionadas.length === 2 && sonConsecutivas(cuadrado))) {
-            cuadrado.classList.add("seleccionado"); // Marcar la hora si no estaba seleccionada y se cumplen las condiciones
+ // Función para seleccionar una hora
+function seleccionarHora(cuadrado) {
+  if (!cuadrado.classList.contains("reserva-rojo")) {
+    if (cuadrado.classList.contains("seleccionado")) {
+      cuadrado.classList.remove("seleccionado"); // Desmarcar la hora si ya estaba seleccionada
+      actualizarHorasSeleccionadas();
+    } else {
+      if (horasSeleccionadas.length < 2) {
+        if (horasSeleccionadas.length === 1) {
+          var horaSeleccionada = parseInt(cuadrado.innerText.trim().split(":")[0]);
+          var horaAnterior = parseInt(horasSeleccionadas[0].innerText.trim().split(":")[0]);
+          if (Math.abs(horaSeleccionada - horaAnterior) === 1) {
+            cuadrado.classList.add("seleccionado"); // Marcar la hora si no estaba seleccionada y es consecutiva a la hora anterior
             actualizarHorasSeleccionadas();
           } else {
-            alert("Solo puedes seleccionar un máximo de 2 horas consecutivas sin reserva.");
+            alert("Debes seleccionar horas consecutivas.");
           }
+        } else {
+          cuadrado.classList.add("seleccionado"); // Marcar la hora si no estaba seleccionada
+          actualizarHorasSeleccionadas();
         }
       } else {
-        alert("Esta hora tiene una reserva y no se puede seleccionar.");
+        alert("Solo puedes seleccionar un máximo de 2 horas consecutivas sin reserva.");
       }
     }
+  } else {
+    alert("Esta hora tiene una reserva y no se puede seleccionar.");
+  }
+}
+
 
     // Función para verificar si las horas seleccionadas son consecutivas
     function sonConsecutivas(cuadrado) {
@@ -213,7 +224,6 @@ function limpiarReservasPintadas() {
       var horaAnterior = parseInt(horasSeleccionadas[0].innerText.trim().split(":")[0]);
       return Math.abs(horaSeleccionada - horaAnterior) === 1;
     }
-
 
     // Función para actualizar el array de horas seleccionadas
     function actualizarHorasSeleccionadas() {
@@ -224,68 +234,106 @@ function limpiarReservasPintadas() {
       });
     }
 
-    // Función para reservar las horas seleccionadas
-    // Función para reservar las horas seleccionadas
-    function reservar() {
-      var idVecino = obtenerParametroURL("idvecino");
-      var idArea = obtenerParametroURL("idarea");
+    // Función para deseleccionar todas las horas seleccionadas
+function deseleccionarHoras() {
+  var cuadradosSeleccionados = document.querySelectorAll(".seleccionado");
+  cuadradosSeleccionados.forEach(cuadrado => {
+    cuadrado.classList.remove("seleccionado");
+  });
+}
 
-      if (horasSeleccionadas.length > 0) {
-        // Realizar la petición al servidor para obtener los idreservas ya utilizados
-        fetch(`http://localhost:8080/reservas/id`)
-          .then(response => response.json())
-          .then(data => {
-            var idReservasUtilizados = data;
-            var idReserva = obtenerIdReservaDisponible(idReservasUtilizados);
+function reservar() {
+  var idVecino = obtenerParametroURL("idvecino");
+  var idArea = obtenerParametroURL("idarea");
 
-            // Obtener la fecha seleccionada
-            var fechaSeleccionada = new Date(document.getElementById("input-dia").value);
-            var year = fechaSeleccionada.getFullYear();
-            var month = fechaSeleccionada.getMonth() + 1;
-            var day = fechaSeleccionada.getDate();
-
-            // Obtener las horas seleccionadas
-            var horaInicio = horasSeleccionadas[0].innerText.trim();
-            var horaFin = horasSeleccionadas.length === 2 ? horasSeleccionadas[1].innerText.trim() : horaInicio;
-
-            // Formatear la hora de inicio y fin de reserva
-            var inicioReserva = new Date(Date.UTC(year, month - 1, day, parseInt(horaInicio), 0, 0)).toISOString();
-            var finReserva = new Date(Date.UTC(year, month - 1, day, parseInt(horaFin) + 1, 0, 0)).toISOString();
-
-            // Crear objeto de reserva
-            var reserva = {
-              idreserva: idReserva,
-              idvecino: parseInt(idVecino),
-              idarea: parseInt(idArea),
-              inicioReserva: inicioReserva,
-              finReserva: finReserva
-            };
-
-            // Realizar la petición para agregar la reserva a la base de datos
-            fetch(`/reservas/agregar`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(reserva)
-            })
-              .then(response => response.json())
-              .then(data => {
-                alert("Reserva realizada exitosamente.");
-                // Limpiar selección de horas después de reservar
-                horasSeleccionadas.forEach(cuadrado => {
-                  cuadrado.classList.remove("seleccionado");
-                });
-                // Actualizar las reservas en la página
-                cargarReservasPorDia();
-              })
-              .catch(error => console.error('Error al reservar:', error));
-          })
-          .catch(error => console.error('Error al obtener idreservas utilizados:', error));
-      } else {
-        alert("Debes seleccionar al menos una hora para realizar la reserva.");
-      }
+  if (horasSeleccionadas.length > 0) {
+    var horasConsecutivas = true;
+    if (horasSeleccionadas.length === 2) {
+      horasConsecutivas = sonConsecutivas(horasSeleccionadas[0], horasSeleccionadas[1]);
     }
+    if (!horasConsecutivas) {
+      alert("Debes seleccionar horas consecutivas.");
+      return;
+    }
+
+    // Realizar la petición al servidor para obtener las reservas del vecino
+    fetch(`/reservas/id`)
+      .then(response => response.json())
+      .then(reservas => {
+        // Verificar si el idVecino está en la lista de reservas
+        if (reservas.includes(parseInt(idVecino))) {
+          // Si el vecino ya tiene una reserva activa, mostrar mensaje de alerta
+          alert("Ya tienes una reserva activa.");
+          // Deseleccionar todas las horas seleccionadas
+          deseleccionarHoras();
+          // Recargar las reservas para el mismo día
+          cargarReservasPorDia();
+        } else {
+          // Si el vecino no tiene una reserva activa, continuar con la lógica de reserva
+          var idReservasUtilizados = [];
+
+          // Realizar la petición al servidor para obtener las reservas para el área común
+          fetch(`/reservasporidarea?idarea=${idArea}`)
+            .then(response => response.json())
+            .then(reservas => {
+              // Obtener los ID de reserva utilizados por otros vecinos
+              idReservasUtilizados = reservas.map(reserva => reserva.idvecino);
+
+              // Verificar si el ID del vecino está en la lista de reservas
+              if (idReservasUtilizados.includes(parseInt(idVecino))) {
+                alert("Ya tienes una reserva activa.");
+              } else {
+                var idReserva = obtenerIdReservaDisponible(idReservasUtilizados);
+
+                var fechaSeleccionada = new Date(document.getElementById("input-dia").value);
+                var horaInicio = horasSeleccionadas[0].innerText.trim();
+                var horaFin = horasSeleccionadas.length === 2 ? horasSeleccionadas[1].innerText.trim() : horaInicio;
+
+                var inicioReserva = new Date(Date.UTC(fechaSeleccionada.getFullYear(), fechaSeleccionada.getMonth(), fechaSeleccionada.getDate(), parseInt(horaInicio), 0, 0)).toISOString();
+                var finReserva = new Date(Date.UTC(fechaSeleccionada.getFullYear(), fechaSeleccionada.getMonth(), fechaSeleccionada.getDate(), parseInt(horaFin) + 1, 0, 0)).toISOString();
+
+                var reserva = {
+                  idreserva: idReserva,
+                  idvecino: parseInt(idVecino),
+                  idarea: parseInt(idArea),
+                  inicioReserva: inicioReserva,
+                  finReserva: finReserva
+                };
+
+                fetch(`/reservas/agregar`, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(reserva)
+                })
+                  .then(response => {
+                    if (!response.ok) {
+                      throw new Error('Error al realizar la reserva.');
+                    }
+                    return response.json();
+                  })
+                  .then(data => {
+                    alert("Reserva realizada exitosamente.");
+                    // Deseleccionar todas las horas seleccionadas
+                    deseleccionarHoras();
+                    // Recargar las reservas para el mismo día
+                    cargarReservasPorDia();
+                  })
+                  .catch(error => console.error('Error al reservar:', error.message));
+              }
+            })
+            .catch(error => console.error('Error al cargar las reservas:', error));
+        }
+      })
+      .catch(error => console.error('Error al verificar la reserva activa:', error));
+  } else {
+    alert("Debes seleccionar al menos una hora para realizar la reserva.");
+  }
+}
+
+
+
 
 
 
@@ -347,6 +395,7 @@ function limpiarReservasPintadas() {
       window.onload = function () {
         var idvecino = getQueryParam('idvecino'); // Obtiene el ID de vecino de la URL
         var tipodearea = getQueryParam('tipodearea'); // Obtiene el tipo de área de la URL
+        var idarea = getQueryParam('idarea'); // Obtiene el ID de área de la URL
 
         document.getElementById('home-link').setAttribute('href', `/menucomunidad?idvecino=${idvecino}`);
 
@@ -372,7 +421,15 @@ function limpiarReservasPintadas() {
           .catch(error => {
             console.error('Error:', error);
           });
-      }
+
+        // Obtener y mostrar el nombre del área común
+        fetch(`/nombreArea/${idarea}`)
+          .then(response => response.text())
+          .then(nombreArea => {
+            document.querySelector('.titulo').textContent = nombreArea;
+          })
+          .catch(error => console.error('Error al obtener el nombre del área común:', error));
+      };
     });
   </script>
 
