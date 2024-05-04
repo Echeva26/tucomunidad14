@@ -184,6 +184,7 @@
                     titulo.classList.add('titulo');
                     titulo.setAttribute('name', 'titulo');
                     titulo.setAttribute('value', data.titulo);
+                    titulo.setAttribute('contenteditable','true')
                     const descripcion = document.createElement('textarea');
                     descripcion.classList.add('descripcion');
                     descripcion.setAttribute('name', 'descripcion');
@@ -239,15 +240,14 @@
             });
             const guardar = document.querySelector('.editar');
             guardar.addEventListener('click', async () => {
-            
-                const titulo = document.querySelector('.titulo').value;
+                const titulo = document.querySelector('.titulo').innerText;
                 const descripcion = document.querySelector('.descripcion').value;
                 const textocompleto = document.querySelector('.textocompleto').value;
                 const idcomunidad = document.getElementById('idcomunidad').value;
                 const idvecino = document.getElementById('idvecino').value;
                 const fecha = document.getElementById('fecha').value;
                 const idnoticia = document.getElementById('idnoticia').value;
-
+            
                 const formData = new FormData();
                 formData.append('titulo', titulo);
                 formData.append('descripcion', descripcion);
@@ -256,26 +256,18 @@
                 formData.append('idvecino', idvecino);
                 formData.append('fecha', fecha);
                 formData.append('idnoticia', idnoticia);
-                console.log('Datos a enviar al servidor:');
-                console.log('Título:', titulo);
-                console.log('Descripción:', descripcion);
-                console.log('Texto completo:', textocompleto);
-                console.log('ID de comunidad:', idcomunidad);
-                console.log('ID de vecino:', idvecino);
-                console.log('Fecha:', fecha);
-                console.log('ID de noticia:', idnoticia);
-
+            
                 const imagenInput = document.getElementById('imagen').files[0];
                 if (imagenInput) {
                     formData.append('imagen', imagenInput);
                 }
-
+            
                 try {
                     const response = await fetch('/editarinformacion', {
                         method: 'PUT',
                         body: formData
                     });
-
+            
                     if (response.ok) {
                         const message = await response.text();
                         alert(message); // Mostrar mensaje de éxito
@@ -289,6 +281,8 @@
                     alert('Error al editar noticia');
                 }
             });
+            
+     
 
             document.querySelector('.eliminar').addEventListener('click', function () {
                 window.location.href = `/vernoticia?idvecino=${idvecino}&idnoticia=${idnoticia}`;
