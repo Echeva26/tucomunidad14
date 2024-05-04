@@ -111,7 +111,7 @@ body {
   
   .elipse-icono {
     position: absolute; /* Cambiar a posición absoluta */
-    bottom: 105px; /* Ajustar la posición vertical */
+    bottom: 180px; /* Ajustar la posición vertical */
     left: 50%; /* Centrar horizontalmente */
     transform: translateX(-50%); /* Ajustar para centrar horizontalmente */
     width: 71.1px;
@@ -174,14 +174,13 @@ body {
     color: #333; /* Un color oscuro para mayor contraste */
     text-decoration: none; /* Quitar el subrayado de los enlaces */
   
-    font-size: 18px; /* Tamaño de letra menor para los títulos */
+    font-size: 10px; /* Tamaño de letra menor para los títulos */
     margin: 0; /* Remover márgenes adicionales */
     display: block; /* Asegura que el título sea un bloque para controlar mejor el espacio */
     white-space: nowrap; /* Evita que el texto del título se salga del contenedor */
     overflow: hidden; /* Oculta el texto que se desborde del contenedor */
     text-overflow: ellipsis; 
   
-    font-size: 18px; /* Reduce el tamaño de la fuente para títulos */
     line-height: 1.2; /* Ajuste del interlineado para títulos */
     display: block; /* Hace que el título ocupe su propio bloque */
     margin-bottom: 10px; /* Espacio entre el título y la descripción */
@@ -191,7 +190,7 @@ body {
   
   .descripcion {
     color: #555; /* Un color un poco más oscuro para la descripción */
-    font-size: 14px; /* Tamaño de letra más pequeño para la descripción */
+    font-size: 20px; /* Tamaño de letra más pequeño para la descripción */
     margin-top: 5px; /* Menor espacio encima de la descripción */
     line-height: 1.4; /* Espacio entre líneas para mejorar legibilidad */
     height: 3.8em; /* Limita la altura del texto de la descripción para evitar desbordamiento */
