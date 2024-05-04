@@ -36,17 +36,29 @@ body {
   margin-right: 50px; /* Incrementar el margen derecho para hacer más ancho el elemento */
   display: flex;
   flex-direction: column;
-  padding: 0.1px 0 9.8px 0;
+  padding: 20px;
   box-sizing: border-box;
   margin-bottom: 20px; /* Espacio entre los elementos */
   align-self: flex-start; /* Alinea cada elemento al inicio de su propia columna */
   background-color: #FFFFFF;
   border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra abajo */
-  width: 350px; /* Ancho mayor */
-  height: 300px; /* Alto mayor */
-  margin-top: 70px;
+  height: 300px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
+  width: 400px;
+  margin: 20px; /* Espacio uniforme alrededor de los elementos */
+  padding-bottom: 10px; 
+  align-items: center;
+  text-align: center;
+
+  /* Animaciones */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave para el efecto de transformación y sombra */
 }
+
+.elemento:hover {
+  transform: translateY(-5px); /* Eleva el elemento al pasar el cursor */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada para resaltar */
+}
+
 
 .borde-azul {
   position: absolute; /* Posicionamiento absoluto */
