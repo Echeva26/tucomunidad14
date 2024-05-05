@@ -8,12 +8,16 @@
   <link rel="stylesheet" href="../static/css/vernoticiaadmin.css" />
   <style>
     .titulo {
-      font-size: larger;
-      /* Tamaño de letra más grande para el título de la noticia */
-      font-family: 'Roboto', sans-serif;
-      font-weight: 700;
-      color: #292525;
-      pointer-events: none;
+      font-size: 20px;
+  position: relative;
+  margin: 100px 23px 23px 23px; /* Añadido margen inferior para crear espacio entre el título y la foto */
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  color: #292525;
+  text-align: center;
+  margin-top: 130px;
     }
 
     .descripcion {
@@ -21,6 +25,7 @@
       /* Tamaño de letra para la descripción de la noticia */
       color: #333;
       /* Color de letra para la descripción */
+      text-align: center;
     }
 
     .elemento {
@@ -38,12 +43,40 @@
       /* Borde de la caja */
       border-radius: 20px;
       /* Borde redondeado */
-      margin-top: 50px;
+      margin-top: 30px;
       /* Espaciado superior */
       height: auto;
       /* Altura automática */
+      align-items: center;
     }
 
+    .editar {
+  background-color: #4CAF50; /* Verde */
+  color: white; /* Texto blanco */
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100px; /* Ancho fijo para ambos botones */
+  margin-top: 30px;
+
+}
+
+.eliminar {
+  background-color: #f44336; /* Rojo */
+  color: white; /* Texto blanco */
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100px; /* Ancho fijo para ambos botones */
+  margin-top: 20px;
+
+}
     /* Agregar cualquier otro estilo que necesites aquí */
   </style>
 </head>
