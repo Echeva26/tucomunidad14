@@ -28,7 +28,7 @@ body {
 #editarNoticiaForm input,
 #editarNoticiaForm textarea {
   width: 90%; /* Ajusta el ancho de los inputs y textareas */
-  margin: 10px auto; /* Centra los elementos horizontalmente y agrega espaciado vertical */
+  margin: 20px auto 10px; /* Ajustar el margen superior a 20px y el margen inferior a 10px */
   text-align: center; /* Centra el texto dentro de los inputs y textareas */
 }
 
@@ -38,9 +38,9 @@ body {
   margin-right: 50px; /* Incrementar el margen derecho para hacer más ancho el elemento */
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 30px;
   box-sizing: border-box;
-  margin-bottom: 20px; /* Espacio entre los elementos */
+  margin-bottom: 30px; /* Espacio entre los elementos */
   background-color: #FFFFFF;
   border-radius: 10px; /* Bordes redondeados */
   
@@ -49,7 +49,7 @@ body {
 
   width: calc(33.333% - 40px);
 
-  margin: 20px; /* Espacio uniforme alrededor de los elementos */
+  margin: 10px; /* Espacio uniforme alrededor de los elementos */
   padding-bottom: 10px; 
   margin-top: 0; /* Eliminar el margen superior */
   align-self: center; 
@@ -64,8 +64,8 @@ body {
 }
 
 .elemento img {
-  width: 100%; /* Hacer que la imagen llene el ancho del elemento */
-  height: 200px; /* Ajustar la altura automáticamente */
+  width: 70px; /* Hacer que la imagen llene el ancho del elemento */
+  height: 60px; /* Ajustar la altura automáticamente */
   border-radius: 10px 10px 0 0; /* Redondear solo las esquinas superiores */
   object-fit: cover;
 }
@@ -151,14 +151,14 @@ body {
 }
 
 .imagen {
-  max-height: 170px; /* ajusta la altura máxima según tus necesidades */
+  max-height: 80px; /* ajusta la altura máxima según tus necesidades */
   position: absolute; /* posición absoluta para ajustar dentro de la elipse-icono */
   top: 5px; /* coloca la imagen en la parte superior */
   left: 50%; /* centra horizontalmente */
   transform: translateX(-50%); /* ajusta la posición horizontal */
-
-  max-width: 100%; /* La imagen usa el máximo ancho disponible */
-  height: auto; /* La altura se ajusta automáticamente para mantener la proporción */
+width: 80px;
+  max-width: 70px; /* La imagen usa el máximo ancho disponible */
+  height: 70px; /* La altura se ajusta automáticamente para mantener la proporción */
   border-radius: 10px 10px 0 0;
 }
 
