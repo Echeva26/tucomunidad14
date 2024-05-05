@@ -118,7 +118,7 @@
             return response.json();
           })
           .then(data => {
-            alert(data.message); // Mostrar mensaje de éxito
+             // Mostrar mensaje de éxito
             // Ejemplo de cómo codificar los parámetros antes de añadirlos a la URL
             var url = "crearcomunidad?usuario=" + encodeURIComponent(formData.nombredeusuario) + "&contrasena=" + encodeURIComponent(formData.contraseña);
             window.location.href = url;
