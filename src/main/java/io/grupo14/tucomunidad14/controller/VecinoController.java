@@ -16,6 +16,7 @@ import io.grupo14.tucomunidad14.model.ComunidadDTO;
 import io.grupo14.tucomunidad14.model.Vecino;
 import io.grupo14.tucomunidad14.model.VecinoDTO;
 import io.grupo14.tucomunidad14.repository.ComunidadRepository;
+import io.grupo14.tucomunidad14.repository.ReservasRepository;
 import io.grupo14.tucomunidad14.repository.VecinoRepository;
 
 import java.util.HashMap;
@@ -35,6 +36,9 @@ public class VecinoController {
 
     @Autowired
     private ComunidadRepository comunidadRepository;
+
+    @Autowired
+    private ReservasRepository reservasRepository;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -283,6 +287,7 @@ public class VecinoController {
         Vecino gestor = vecinoRepository.findById(idgestor).get();
         Vecino vecino = vecinoRepository.findById(idvecino).get();
         if (gestor != null & vecino != null & gestor.getGestor()) {
+            reservasRepository.deleteAll(vecino.getReserva());
             vecinoRepository.delete(vecino);
             VecinoDTO vecinofin = convertToDto(vecino);
             enviarEmail("Eliminación de la comunidad","Se le ha eliminado de la comunidad "+vecino.getComunidad().getNombre(),vecinofin.getEmail());
