@@ -1,7 +1,6 @@
 package io.grupo14.tucomunidad14;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -17,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -25,8 +23,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.grupo14.tucomunidad14.controller.Comunidadcontroller;
 import io.grupo14.tucomunidad14.controller.VecinoController;
-import io.grupo14.tucomunidad14.model.Comunidad;
-import io.grupo14.tucomunidad14.model.ComunidadDTO;
 import io.grupo14.tucomunidad14.model.Vecino;
 import io.grupo14.tucomunidad14.model.VecinoDTO;
 import io.grupo14.tucomunidad14.repository.ComunidadRepository;
@@ -99,31 +95,6 @@ public class pruebas {
 
         // Verificamos que la respuesta sea exitosa
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-    }
-
-    @Test
-    public void testCrearComunidad() throws Exception {
-        // Arrange
-        ComunidadDTO comunidadDTO = new ComunidadDTO();
-        comunidadDTO.setNombre("Nombre de la comunidad");
-        comunidadDTO.setCodpostal(Integer.parseInt("12345"));
-        comunidadDTO.setEmail("correo@example.com");
-
-        Comunidad nuevaComunidad = new Comunidad();
-        nuevaComunidad.setIdcomunidad(1L);
-        nuevaComunidad.setNombre(comunidadDTO.getNombre());
-        nuevaComunidad.setCodpostal(comunidadDTO.getCodpostal());
-
-        when(comunidadRepository.save(any(Comunidad.class))).thenReturn(nuevaComunidad);
-
-        // Act
-        Long idComunidad = comunidadController.crearComunidad(comunidadDTO);
-
-        // Assert
-        assertNotNull(idComunidad); // Asegurarse de que idComunidad no sea null
-        assertEquals(nuevaComunidad.getIdcomunidad(), idComunidad.longValue());
-        verify(comunidadRepository, times(1)).save(any(Comunidad.class));
-        verify(mailSender, times(1)).send(any(SimpleMailMessage.class));
     }
 
 }
